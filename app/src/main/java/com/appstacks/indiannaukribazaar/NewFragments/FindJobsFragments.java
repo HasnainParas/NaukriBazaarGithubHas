@@ -63,24 +63,6 @@ public class FindJobsFragments extends Fragment {
         binding.recycerviewFindJobs.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
        binding.recycerviewFindJobs.setAdapter(adapter);
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         return binding.getRoot();
     }
 

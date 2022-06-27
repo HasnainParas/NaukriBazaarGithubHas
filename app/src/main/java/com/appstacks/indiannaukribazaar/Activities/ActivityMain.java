@@ -9,6 +9,7 @@ import com.appstacks.indiannaukribazaar.NewActivities.KycPaidJobs.KycStartBrowsi
 import com.appstacks.indiannaukribazaar.NewActivities.SpinWheelActivity;
 
 import com.appstacks.indiannaukribazaar.NewFragments.FindJobsFragments;
+import com.appstacks.indiannaukribazaar.NewFragments.JobButtonsFragment;
 import com.appstacks.indiannaukribazaar.NewFragments.ProfileFragment;
 import com.appstacks.indiannaukribazaar.R;
 import com.appstacks.indiannaukribazaar.Slider.SliderAdapter;
@@ -177,6 +178,8 @@ public class ActivityMain extends AppCompatActivity {
                     break;
 
                 case R.id.paidJobs:
+//                    loadFragment(new JobButtonsFragment());
+
                     allUserRef.child("verification").addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {

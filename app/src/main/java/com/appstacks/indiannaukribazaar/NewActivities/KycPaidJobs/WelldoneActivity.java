@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.appstacks.indiannaukribazaar.NewActivities.SpinWheelActivity;
 import com.appstacks.indiannaukribazaar.NewFragments.FindJobsFragments;
 import com.appstacks.indiannaukribazaar.R;
 
@@ -25,16 +26,16 @@ public class WelldoneActivity extends AppCompatActivity {
         Button goBackBTn = findViewById(R.id.goBackBtn);
 
 
-//        goBackBTn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                loadFragment(new FindJobsFragments());
-//                welldoneContainer.setVisibility(View.INVISIBLE);
-//
-//
-//
-//            }
-//        });
+//        goBackBTn.setOnClickListener();
+
+
+        goBackBTn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(WelldoneActivity.this,SpinWheelActivity.class));
+                finishAffinity();
+            }
+        });
     }
 
 
@@ -48,4 +49,10 @@ public class WelldoneActivity extends AppCompatActivity {
 //
 //
 //    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
+    }
 }
