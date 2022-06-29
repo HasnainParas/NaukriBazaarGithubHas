@@ -149,7 +149,7 @@ public class ScanBackActivity extends AppCompatActivity {
                     task.addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void unused) {
-                            userRef.child("verification").setValue(true);
+                            userRef.child("verification").setValue(false);
                             loadingDialog.dismiss();
                             Toast.makeText(ScanBackActivity.this, "Submitted Successfully", Toast.LENGTH_SHORT).show();
                             startActivity(new Intent(ScanBackActivity.this, WelldoneActivity.class));

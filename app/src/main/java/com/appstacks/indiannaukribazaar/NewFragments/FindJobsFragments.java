@@ -3,6 +3,7 @@ package com.appstacks.indiannaukribazaar.NewFragments;
 import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -15,9 +16,19 @@ import android.widget.Toast;
 
 import com.appstacks.indiannaukribazaar.FirebaseAdapters.FindjobAdapter;
 import com.appstacks.indiannaukribazaar.FirebaseModels.FindJobModel;
+import com.appstacks.indiannaukribazaar.FirebaseModels.PersonalInformationModel;
+import com.appstacks.indiannaukribazaar.NewActivities.AddJobsActivity;
+import com.appstacks.indiannaukribazaar.NewActivities.Models.UserDataModel;
 import com.appstacks.indiannaukribazaar.R;
 import com.appstacks.indiannaukribazaar.databinding.FragmentFindJobsFragmentsBinding;
 import com.appstacks.indiannaukribazaar.databinding.FragmentJobBinding;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
@@ -25,6 +36,8 @@ import java.util.ArrayList;
 public class FindJobsFragments extends Fragment {
 
     FragmentFindJobsFragmentsBinding binding;
+
+
 
 
 
@@ -37,10 +50,25 @@ public class FindJobsFragments extends Fragment {
         // Inflate the layout for this fragment
 
 
+
+
+
+
+
+
+        binding.addjobBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getContext(), "hhhhh", Toast.LENGTH_SHORT).show();
+            }
+        });
+
         binding.paidJobs.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 loadFragment(new JobFragment());
+
+
 
 
             }

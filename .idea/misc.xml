@@ -17,6 +17,17 @@
         <entry key="..\:/NaukriBazaarGithubClone/app/src/main/res/layout/fragment_find_jobs_fragments.xml" value="0.17297297297297298" />
         <entry key="..\:/NaukriBazaarGithubClone/app/src/main/res/layout/fragment_job_buttons.xml" value="0.25" />
         <entry key="..\:/NaukriBazaarGithubClone/app/src/main/res/layout/handloading_dialog_layout.xml" value="0.17297297297297298" />
+        <entry key="..\:/Users/Faisal/Downloads/Compressed/New folder/NaukriBazaarGithubHas/app/src/main/res/drawable/descbg.xml" value="0.113" />
+        <entry key="..\:/Users/Faisal/Downloads/Compressed/New folder/NaukriBazaarGithubHas/app/src/main/res/drawable/postbg.xml" value="0.113" />
+        <entry key="..\:/Users/Faisal/Downloads/Compressed/New folder/NaukriBazaarGithubHas/app/src/main/res/layout-v21/activity_main.xml" value="0.2" />
+        <entry key="..\:/Users/Faisal/Downloads/Compressed/New folder/NaukriBazaarGithubHas/app/src/main/res/layout/activity_add_jobs.xml" value="0.25" />
+        <entry key="..\:/Users/Faisal/Downloads/Compressed/New folder/NaukriBazaarGithubHas/app/src/main/res/layout/activity_find_jobs.xml" value="0.2" />
+        <entry key="..\:/Users/Faisal/Downloads/Compressed/New folder/NaukriBazaarGithubHas/app/src/main/res/layout/activity_main.xml" value="0.2" />
+        <entry key="..\:/Users/Faisal/Downloads/Compressed/New folder/NaukriBazaarGithubHas/app/src/main/res/layout/activity_personal_information.xml" value="0.2" />
+        <entry key="..\:/Users/Faisal/Downloads/Compressed/New folder/NaukriBazaarGithubHas/app/src/main/res/layout/activity_user_profile.xml" value="0.2" />
+        <entry key="..\:/Users/Faisal/Downloads/Compressed/New folder/NaukriBazaarGithubHas/app/src/main/res/layout/dialog_about.xml" value="0.2" />
+        <entry key="..\:/Users/Faisal/Downloads/Compressed/New folder/NaukriBazaarGithubHas/app/src/main/res/layout/fragment_find_jobs_fragments.xml" value="0.25" />
+        <entry key="..\:/Users/Faisal/Downloads/Compressed/New folder/NaukriBazaarGithubHas/app/src/main/res/layout/fragment_job.xml" value="0.2" />
         <entry key="..\:/Users/Faisal/OneDrive/Documents/Downloads/Naukri Bazaar india/Naukri Bazaar india/app/src/main/res/drawable-v21/ic_bg1.xml" value="0.1425" />
         <entry key="..\:/Users/Faisal/OneDrive/Documents/Downloads/Naukri Bazaar india/Naukri Bazaar india/app/src/main/res/drawable-v21/ic_check.xml" value="0.1425" />
         <entry key="..\:/Users/Faisal/OneDrive/Documents/Downloads/Naukri Bazaar india/Naukri Bazaar india/app/src/main/res/drawable-v21/ic_dropdown.xml" value="0.1425" />
@@ -74,5 +85,12 @@
   </component>
   <component name="ProjectType">
     <option name="id" value="Android" />
+  </component>
+  <component name="VisualizationToolProject">
+    <option name="state">
+      <ProjectState>
+        <option name="scale" value="0.1" />
+      </ProjectState>
+    </option>
   </component>
 </project>

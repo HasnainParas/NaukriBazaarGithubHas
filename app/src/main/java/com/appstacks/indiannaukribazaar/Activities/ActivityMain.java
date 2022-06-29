@@ -6,6 +6,7 @@ import android.net.Uri;
 import android.os.Bundle;
 
 import com.appstacks.indiannaukribazaar.NewActivities.KycPaidJobs.KycStartBrowsingActivity;
+import com.appstacks.indiannaukribazaar.NewActivities.KycPaidJobs.WelldoneActivity;
 import com.appstacks.indiannaukribazaar.NewActivities.SpinWheelActivity;
 
 import com.appstacks.indiannaukribazaar.NewFragments.FindJobsFragments;
@@ -175,6 +176,7 @@ public class ActivityMain extends AppCompatActivity {
 //                    break;
                 case R.id.profile:
                     loadFragment(new ProfileFragment());
+
                     break;
 
                 case R.id.paidJobs:
@@ -189,7 +191,7 @@ public class ActivityMain extends AppCompatActivity {
                                     loadFragment(new FindJobsFragments());
 
                                 } else {
-                                    Intent intent = new Intent(ActivityMain.this, KycStartBrowsingActivity.class);
+                                    Intent intent = new Intent(ActivityMain.this, WelldoneActivity.class);
                                     intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
                                     startActivity(intent);
                                 }
