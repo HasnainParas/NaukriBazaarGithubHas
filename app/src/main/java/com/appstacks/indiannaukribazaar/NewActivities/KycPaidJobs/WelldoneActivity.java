@@ -12,7 +12,6 @@ import android.widget.Button;
 
 import com.appstacks.indiannaukribazaar.Activities.ActivityMain;
 import com.appstacks.indiannaukribazaar.NewActivities.SpinWheelActivity;
-import com.appstacks.indiannaukribazaar.NewFragments.FindJobsFragments;
 import com.appstacks.indiannaukribazaar.R;
 
 public class WelldoneActivity extends AppCompatActivity {

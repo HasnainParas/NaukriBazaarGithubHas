@@ -16,7 +16,6 @@ import com.appstacks.indiannaukribazaar.Activities.ActivityMain;
 import com.appstacks.indiannaukribazaar.NewActivities.KycPaidJobs.KycStartBrowsingActivity;
 import com.appstacks.indiannaukribazaar.NewActivities.KycPaidJobs.WelldoneActivity;
 import com.appstacks.indiannaukribazaar.R;
-import com.appstacks.indiannaukribazaar.databinding.FragmentJobBinding;
 import com.appstacks.indiannaukribazaar.databinding.FragmentJobButtonsBinding;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;

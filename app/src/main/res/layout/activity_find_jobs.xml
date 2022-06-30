@@ -1,14 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".NewFragments.FindJobsFragments">
-
+    android:id="@+id/scrollview"
+    tools:context=".NewActivities.FindJobsActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
 
+        android:id="@+id/containerFjobs"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -118,7 +120,7 @@
             app:layout_constraintTop_toBottomOf="@+id/textView49">
 
             <LinearLayout
-                android:id="@+id/l1"
+                android:id="@+id/paidJob"
                 android:layout_width="160dp"
                 android:layout_height="170dp"
                 android:layout_marginStart="10dp"
@@ -130,7 +132,6 @@
                 android:padding="5dp">
 
                 <ImageView
-                    android:id="@+id/paidJobs"
                     android:layout_width="60dp"
                     android:layout_height="60dp"
                     android:layout_gravity="center"
@@ -168,7 +169,7 @@
                 android:layout_alignParentEnd="true"
                 android:layout_marginStart="8dp"
                 android:layout_marginEnd="5dp"
-                android:layout_toEndOf="@+id/l1"
+                android:layout_toEndOf="@+id/paidJob"
                 android:orientation="horizontal">
 
                 <LinearLayout
@@ -266,5 +267,6 @@
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 
 </ScrollView>

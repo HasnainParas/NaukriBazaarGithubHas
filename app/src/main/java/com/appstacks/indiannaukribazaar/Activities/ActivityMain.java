@@ -5,12 +5,11 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 
-import com.appstacks.indiannaukribazaar.NewActivities.KycPaidJobs.KycStartBrowsingActivity;
+import com.appstacks.indiannaukribazaar.NewActivities.FindJobsActivity;
 import com.appstacks.indiannaukribazaar.NewActivities.KycPaidJobs.WelldoneActivity;
 import com.appstacks.indiannaukribazaar.NewActivities.SpinWheelActivity;
 
-import com.appstacks.indiannaukribazaar.NewFragments.FindJobsFragments;
-import com.appstacks.indiannaukribazaar.NewFragments.JobButtonsFragment;
+
 import com.appstacks.indiannaukribazaar.NewFragments.ProfileFragment;
 import com.appstacks.indiannaukribazaar.R;
 import com.appstacks.indiannaukribazaar.Slider.SliderAdapter;
@@ -79,7 +78,6 @@ public class ActivityMain extends AppCompatActivity {
 
     private DatabaseReference allUserRef;
     private FirebaseAuth auth;
-
     private ActionBar actionBar;
     private Toolbar toolbar;
     private DrawerLayout drawer;
@@ -171,15 +169,15 @@ public class ActivityMain extends AppCompatActivity {
                 case R.id.homeMain:
                     loadFragment(new FragmentHome());
                     break;
-//                case R.id.findJobs:
-//                    loadFragment(new JobFragment());
-//                    break;
+                case R.id.invest:
+                    Toast.makeText(getApplicationContext(), "coming soon", Toast.LENGTH_SHORT).show();
+                    break;
                 case R.id.profile:
                     loadFragment(new ProfileFragment());
 
                     break;
 
-                case R.id.paidJobs:
+                case R.id.find_job:
 //                    loadFragment(new JobButtonsFragment());
 
                     allUserRef.child("verification").addValueEventListener(new ValueEventListener() {
@@ -188,7 +186,7 @@ public class ActivityMain extends AppCompatActivity {
                             if (snapshot.exists()) {
                                 boolean istrue = snapshot.getValue(Boolean.class);
                                 if (istrue) {
-                                    loadFragment(new FindJobsFragments());
+                                    startActivity(new Intent(ActivityMain.this, FindJobsActivity.class));
 
                                 } else {
                                     Intent intent = new Intent(ActivityMain.this, WelldoneActivity.class);

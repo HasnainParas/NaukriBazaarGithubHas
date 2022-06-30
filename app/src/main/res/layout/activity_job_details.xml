@@ -201,25 +201,23 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
-                        android:fontFamily="@font/poppins"
                         android:text="$64k - $80k/yearly"
                         android:textColor="@color/darkblc"
-                        android:textSize="12sp"
+                        android:textSize="14sp"
                         app:layout_constraintStart_toStartOf="@+id/textView39"
                         app:layout_constraintTop_toBottomOf="@+id/textView39" />
 
                     <TextView
                         android:id="@+id/locationJob"
-                        android:layout_width="0dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/poppins"
                         android:gravity="center"
                         android:text="Work from any where"
                         android:textColor="@color/darkblc"
-                        android:textSize="12sp"
+                        android:textSize="14sp"
                         app:layout_constraintBottom_toBottomOf="@+id/salaryRange"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toEndOf="@+id/salaryRange"
+                        app:layout_constraintEnd_toEndOf="@+id/textView40"
+                        app:layout_constraintStart_toEndOf="@+id/textView39"
                         app:layout_constraintTop_toTopOf="@+id/salaryRange" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.cardview.widget.CardView>

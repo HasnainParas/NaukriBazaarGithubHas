@@ -71,6 +71,7 @@ public class JobAdapter extends RecyclerView.Adapter<JobAdapter.viewHolder> {
                 intent.putExtra("imageurl",model.getJobImg());
                 intent.putExtra("location",model.getJobLocation());
                 intent.putExtra("getRules", model.getRolesAndRESPONSIBILITIES());
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 context.startActivity(intent);
 
 

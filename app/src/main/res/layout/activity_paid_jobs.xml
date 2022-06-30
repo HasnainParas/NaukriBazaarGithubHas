@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".NewFragments.JobFragment">
-
+    tools:context=".NewActivities.PaidJobsActivity">
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/imageView8"
@@ -56,16 +55,16 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/jobsFound" />
 
-<!--    <ImageView-->
-<!--        android:id="@+id/imageView19"-->
-<!--        android:layout_width="0dp"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginEnd="8dp"-->
-<!--        android:src="@drawable/ic_dropdown"-->
-<!--        android:visibility="invisible"-->
-<!--        app:layout_constraintBottom_toBottomOf="@+id/allRevelence"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintTop_toTopOf="@+id/allRevelence" />-->
+    <!--    <ImageView-->
+    <!--        android:id="@+id/imageView19"-->
+    <!--        android:layout_width="0dp"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_marginEnd="8dp"-->
+    <!--        android:src="@drawable/ic_dropdown"-->
+    <!--        android:visibility="invisible"-->
+    <!--        app:layout_constraintBottom_toBottomOf="@+id/allRevelence"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent"-->
+    <!--        app:layout_constraintTop_toTopOf="@+id/allRevelence" />-->
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/jobRecyclerView"
@@ -83,14 +82,14 @@
 
 
     <!--    <androidx.recyclerview.widget.RecyclerView-->
-<!--        android:id="@+id/jobRecyclerView"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="match_parent"-->
-<!--        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toTopOf="parent"-->
-<!--&lt;!&ndash;        tools:listitem="@layout/job_list_layout" />&ndash;&gt;-->
+    <!--        android:id="@+id/jobRecyclerView"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="match_parent"-->
+    <!--        app:layout_constraintBottom_toBottomOf="parent"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent"-->
+    <!--        app:layout_constraintStart_toStartOf="parent"-->
+    <!--        app:layout_constraintTop_toTopOf="parent"-->
+    <!--&lt;!&ndash;        tools:listitem="@layout/job_list_layout" />&ndash;&gt;-->
 
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/loadingid"

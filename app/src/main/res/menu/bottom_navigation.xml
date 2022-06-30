@@ -8,14 +8,14 @@
         android:icon="@drawable/ic_home_svg"
         android:title="@string/home" />
     <item
-        android:id="@+id/paidJobs"
-        android:icon="@drawable/ic_job_svg"
-        android:title="@string/paidjobs" />
-
-    <item
-        android:id="@+id/findJobs"
+        android:id="@+id/find_job"
         android:icon="@drawable/search_png"
         android:title="@string/find_jobs" />
+
+    <item
+        android:id="@+id/invest"
+        android:icon="@drawable/ic_investment"
+        android:title="@string/invest" />
 <!--    <item-->
 <!--        android:id="@+id/orderHistory"-->
 <!--        android:title="@string/orderhistory"-->

@@ -250,8 +250,8 @@
     <string name="symbol"><![CDATA[@]]></string>
     <string name="cointext">coins</string>
     <string name="home">Home</string>
-    <string name="paidjobs">PaidJobs</string>
     <string name="find_jobs">Find Jobs</string>
+    <string name="invest">Invest</string>
     <string name="orderhistory">OrderHistory</string>
     <string name="profile">Profile</string>
     <!-- TODO: Remove or change this placeholder text -->

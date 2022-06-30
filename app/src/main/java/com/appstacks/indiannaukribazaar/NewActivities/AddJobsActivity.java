@@ -2,15 +2,33 @@ package com.appstacks.indiannaukribazaar.NewActivities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 
 import com.appstacks.indiannaukribazaar.R;
+import com.appstacks.indiannaukribazaar.databinding.ActivityAddJobsBinding;
 
 public class AddJobsActivity extends AppCompatActivity {
+
+    ActivityAddJobsBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_jobs);
+
+        binding = ActivityAddJobsBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+
+
+        binding.icBck.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                finish();
+            }
+
+        });
+
     }
 }

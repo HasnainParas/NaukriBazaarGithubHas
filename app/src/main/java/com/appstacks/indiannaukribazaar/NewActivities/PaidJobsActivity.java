@@ -1,24 +1,17 @@
-package com.appstacks.indiannaukribazaar.NewFragments;
-
-import android.os.Bundle;
+package com.appstacks.indiannaukribazaar.NewActivities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
-import android.view.LayoutInflater;
+import android.os.Bundle;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
 import com.appstacks.indiannaukribazaar.FirebaseAdapters.JobAdapter;
 import com.appstacks.indiannaukribazaar.FirebaseModels.JobModel;
-import com.appstacks.indiannaukribazaar.NewActivities.RegistrationActivity;
 import com.appstacks.indiannaukribazaar.R;
-import com.appstacks.indiannaukribazaar.databinding.FragmentJobBinding;
+import com.appstacks.indiannaukribazaar.databinding.ActivityPaidJobsBinding;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -27,26 +20,25 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-public class JobFragment extends Fragment {
+public class PaidJobsActivity extends AppCompatActivity {
 
-    public JobFragment() {
-        // Required empty public constructor
-    }
-
-    FragmentJobBinding binding;
+    ActivityPaidJobsBinding binding;
 
     DatabaseReference jobRef;
     ArrayList<JobModel> jobList;
     JobAdapter jobAdapter;
 
-
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        binding = ActivityPaidJobsBinding.inflate(getLayoutInflater());
+
+        setContentView(binding.getRoot());
 
 
-        binding = FragmentJobBinding.inflate(inflater, container, false);
+
+
 
         jobRef = FirebaseDatabase.getInstance().getReference("AdminPanel").child("job");
 
@@ -64,11 +56,11 @@ public class JobFragment extends Fragment {
                         binding.loadingid.setVisibility(View.GONE);
                         binding.jobsFound.setVisibility(View.VISIBLE);
                         jobList.add(data);
-                        jobAdapter = new JobAdapter(jobList, getContext());
+                        jobAdapter = new JobAdapter(jobList, getApplicationContext());
 
                         binding.jobRecyclerView.setAdapter(jobAdapter);
 
-                        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
+                        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getApplicationContext());
                         binding.jobRecyclerView.setLayoutManager(linearLayoutManager);
 //                        binding.loadingFragment.setVisibility(View.GONE);
 
@@ -78,7 +70,8 @@ public class JobFragment extends Fragment {
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(getContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(PaidJobsActivity.this, error.getMessage(), Toast.LENGTH_SHORT).show();
+
             }
         });
 
@@ -102,21 +95,7 @@ public class JobFragment extends Fragment {
 //            }
 
 
-        return binding.getRoot();
+
+
     }
-
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        ((AppCompatActivity) getActivity()).getSupportActionBar().hide();
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
-        ((AppCompatActivity) getActivity()).getSupportActionBar().show();
-    }
-
-
 }
