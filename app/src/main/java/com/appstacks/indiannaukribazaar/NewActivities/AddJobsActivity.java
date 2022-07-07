@@ -9,6 +9,7 @@ import android.view.View;
 import com.appstacks.indiannaukribazaar.R;
 import com.appstacks.indiannaukribazaar.databinding.ActivityAddJobsBinding;
 
+
 public class AddJobsActivity extends AppCompatActivity {
 
     ActivityAddJobsBinding binding;
@@ -19,16 +20,6 @@ public class AddJobsActivity extends AppCompatActivity {
 
         binding = ActivityAddJobsBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-
-
-        binding.icBck.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                finish();
-            }
-
-        });
 
     }
 }

@@ -33,7 +33,7 @@ public class FindJobsActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                startActivity(new Intent(FindJobsActivity.this,AddJobsActivity.class));
+                startActivity(new Intent(FindJobsActivity.this,AddPostsActivity.class));
 
             }
         });
