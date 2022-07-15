@@ -21,5 +21,12 @@ public class AddJobsActivity extends AppCompatActivity {
         binding = ActivityAddJobsBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        binding.jobPosition.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getApplicationContext(),JobPosition.class));
+            }
+        });
+
     }
 }

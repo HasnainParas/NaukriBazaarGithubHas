@@ -66,7 +66,7 @@ public class FindjobAdapter extends RecyclerView.Adapter<FindjobAdapter.viewHold
 
         jobimg2 = itemView.findViewById(R.id.jobimg2);
         jobTitle2= itemView.findViewById(R.id.jobTitle2);
-        address = itemView.findViewById(R.id.address);
+        address = itemView.findViewById(R.id.txt_workplace);
         salary2 = itemView.findViewById(R.id.salary2);
         jobType2 = itemView.findViewById(R.id.jobtype2);
         time2 =  itemView.findViewById(R.id.time2);

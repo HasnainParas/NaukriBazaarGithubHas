@@ -25,6 +25,9 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".NewActivities.JobPosition"
+            android:exported="false" />
+        <activity
             android:name=".NewActivities.AddPostsActivity"
             android:exported="false" />
         <activity

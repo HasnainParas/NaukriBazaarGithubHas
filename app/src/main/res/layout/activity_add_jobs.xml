@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -9,11 +10,11 @@
 
 
     <ImageView
-        android:id="@+id/imageView21"
+        android:id="@+id/cancel_Btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="32dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_remove" />
@@ -22,7 +23,7 @@
         android:id="@+id/postBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="32dp"
         android:layout_marginEnd="8dp"
         android:fontFamily="@font/dm_sans"
         android:text="Post"
@@ -40,15 +41,15 @@
         android:text="Add a job"
         android:textColor="@color/black"
         android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="@+id/imageView21"
-        app:layout_constraintTop_toBottomOf="@+id/imageView21" />
+        app:layout_constraintStart_toStartOf="@+id/cancel_Btn"
+        app:layout_constraintTop_toBottomOf="@+id/cancel_Btn" />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/job_position"
         android:layout_width="match_parent"
-        android:layout_height="80dp"
+        android:layout_height="90dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:clickable="true"
         android:foreground="?android:attr/selectableItemBackground"
@@ -60,37 +61,80 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:gravity="center"
-            android:orientation="horizontal">
+            android:orientation="vertical"
+            android:paddingTop="15dp"
+            android:paddingBottom="15dp">
 
-            <TextView
-
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:layout_weight="1"
-                android:fontFamily="@font/dm_sans"
-                android:text="Job Position"
-                android:textColor="@color/black"
-                android:textSize="16sp" />
+                android:orientation="horizontal">
 
-            <ImageView
 
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="10dp"
-                android:layout_weight="0"
-                app:srcCompat="@drawable/ic_add" />
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="6dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/dm_sans"
+                        android:text="Job position"
+                        android:textColor="@color/black"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/txt_positon"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/dm_sans"
+                        android:text="Text view"
+                        android:textColor="#524B6B"
+                        android:textSize="14sp" />
+
+                </LinearLayout>
+
+
+                <ImageView
+                    android:id="@+id/btnAdd1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center|end"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="-22dp"
+                    android:visibility="invisible"
+                    app:srcCompat="@drawable/ic_edit" />
+
+                <ImageView
+                    android:id="@+id/btnEdit1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center|end"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="10dp"
+                    android:visibility="visible"
+                    app:srcCompat="@drawable/ic_add" />
+
+
+            </LinearLayout>
         </LinearLayout>
+
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/workplace_type"
+        android:id="@+id/btn_workplace_type"
         android:layout_width="0dp"
-        android:layout_height="80dp"
-        android:foreground="?android:attr/selectableItemBackground"
-        android:clickable="true"
+        android:layout_height="90dp"
         android:layout_marginTop="8dp"
+        android:clickable="true"
+        android:foreground="?android:attr/selectableItemBackground"
         app:cardCornerRadius="10dp"
         app:layout_constraintEnd_toEndOf="@+id/job_position"
         app:layout_constraintStart_toStartOf="@+id/job_position"
@@ -99,174 +143,402 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:gravity="center"
-            android:orientation="horizontal">
+            android:orientation="vertical"
+            android:paddingTop="15dp"
+            android:paddingBottom="15dp">
 
-            <TextView
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:layout_weight="1"
-                android:fontFamily="@font/dm_sans"
-                android:text="Type of workplace"
-                android:textColor="@color/black"
-                android:textSize="16sp" />
+                android:orientation="horizontal">
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="10dp"
-                app:srcCompat="@drawable/ic_add" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="6dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/dm_sans"
+                        android:text="Type of workplace"
+                        android:textColor="@color/black"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/txt_workplace"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/dm_sans"
+                        android:text="Text view"
+                        android:textColor="#524B6B"
+                        android:textSize="14sp" />
+
+                </LinearLayout>
+
+
+                <ImageView
+                    android:id="@+id/btnEdit2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center|end"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="-22dp"
+                    android:visibility="invisible"
+                    app:srcCompat="@drawable/ic_edit" />
+
+                <ImageView
+                    android:id="@+id/btnAdd2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center|end"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="10dp"
+                    android:visibility="visible"
+                    app:srcCompat="@drawable/ic_add" />
+
+
+            </LinearLayout>
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/location"
+        android:id="@+id/locationBtn"
         android:layout_width="0dp"
-        android:layout_height="80dp"
+        android:layout_height="90dp"
         android:layout_marginTop="8dp"
-        android:foreground="?android:attr/selectableItemBackground"
         android:clickable="true"
+        android:foreground="?android:attr/selectableItemBackground"
         app:cardCornerRadius="10dp"
-        app:layout_constraintEnd_toEndOf="@+id/workplace_type"
-        app:layout_constraintStart_toStartOf="@+id/workplace_type"
-        app:layout_constraintTop_toBottomOf="@+id/workplace_type">
+        app:layout_constraintEnd_toEndOf="@+id/btn_workplace_type"
+        app:layout_constraintStart_toStartOf="@+id/btn_workplace_type"
+        app:layout_constraintTop_toBottomOf="@+id/btn_workplace_type">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:gravity="center"
-            android:orientation="horizontal">
+            android:orientation="vertical"
+            android:paddingTop="15dp"
+            android:paddingBottom="15dp">
 
-            <TextView
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:layout_weight="1"
-                android:fontFamily="@font/dm_sans"
-                android:text="Job location"
-                android:textColor="@color/black"
-                android:textSize="16sp" />
+                android:orientation="horizontal">
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="10dp"
-                app:srcCompat="@drawable/ic_add" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="6dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/dm_sans"
+                        android:text="Job location "
+                        android:textColor="@color/black"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/txt_location"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/dm_sans"
+                        android:text="Text view"
+                        android:textColor="#524B6B"
+                        android:textSize="14sp" />
+
+                </LinearLayout>
+
+
+                <ImageView
+                    android:id="@+id/btnEdit3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center|end"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="-22dp"
+                    android:visibility="invisible"
+                    app:srcCompat="@drawable/ic_edit" />
+
+                <ImageView
+                    android:id="@+id/btnAdd3"
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center|end"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="10dp"
+                    android:visibility="visible"
+                    app:srcCompat="@drawable/ic_add" />
+
+
+            </LinearLayout>
         </LinearLayout>
+
+
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/company"
+        android:id="@+id/companyBtn"
         android:layout_width="0dp"
-        android:layout_height="80dp"
-        android:foreground="?android:attr/selectableItemBackground"
-        android:clickable="true"
+        android:layout_height="90dp"
         android:layout_marginTop="8dp"
+        android:clickable="true"
+        android:foreground="?android:attr/selectableItemBackground"
         app:cardCornerRadius="10dp"
-        app:layout_constraintEnd_toEndOf="@+id/location"
-        app:layout_constraintStart_toStartOf="@+id/location"
-        app:layout_constraintTop_toBottomOf="@+id/location">
+        app:layout_constraintEnd_toEndOf="@+id/locationBtn"
+        app:layout_constraintStart_toStartOf="@+id/locationBtn"
+        app:layout_constraintTop_toBottomOf="@+id/locationBtn">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:gravity="center"
-            android:orientation="horizontal">
+            android:orientation="vertical"
+            android:paddingTop="15dp"
+            android:paddingBottom="15dp">
 
-            <TextView
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:layout_weight="1"
-                android:fontFamily="@font/dm_sans"
-                android:text="Company"
-                android:textColor="@color/black"
-                android:textSize="16sp" />
+                android:orientation="horizontal">
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="10dp"
-                app:srcCompat="@drawable/ic_add" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="6dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/dm_sans"
+                        android:text="Company"
+                        android:textColor="@color/black"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/txt_company"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/dm_sans"
+                        android:text="Text view"
+                        android:textColor="#524B6B"
+                        android:textSize="14sp" />
+
+                </LinearLayout>
+
+
+                <ImageView
+                    android:id="@+id/btnEdit4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center|end"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="-22dp"
+                    android:visibility="invisible"
+                    app:srcCompat="@drawable/ic_edit" />
+
+                <ImageView
+                    android:id="@+id/btnAdd4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center|end"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="10dp"
+                    android:visibility="visible"
+                    app:srcCompat="@drawable/ic_add" />
+
+
+            </LinearLayout>
         </LinearLayout>
+
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/employ_type"
+        android:id="@+id/BtnEmploy_type"
         android:layout_width="0dp"
-        android:layout_height="80dp"
+        android:layout_height="90dp"
         android:layout_marginTop="8dp"
-        android:foreground="?android:attr/selectableItemBackground"
         android:clickable="true"
+        android:foreground="?android:attr/selectableItemBackground"
         app:cardCornerRadius="10dp"
-        app:layout_constraintEnd_toEndOf="@+id/company"
-        app:layout_constraintStart_toStartOf="@+id/company"
-        app:layout_constraintTop_toBottomOf="@+id/company">
+        app:layout_constraintEnd_toEndOf="@+id/companyBtn"
+        app:layout_constraintStart_toStartOf="@+id/companyBtn"
+        app:layout_constraintTop_toBottomOf="@+id/companyBtn">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:gravity="center"
-            android:orientation="horizontal">
+            android:orientation="vertical"
+            android:paddingTop="15dp"
+            android:paddingBottom="15dp">
 
-            <TextView
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:layout_weight="1"
-                android:fontFamily="@font/dm_sans"
-                android:text="Employment Type"
-                android:textColor="@color/black"
-                android:textSize="16sp" />
+                android:orientation="horizontal">
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="10dp"
-                app:srcCompat="@drawable/ic_add" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="6dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/dm_sans"
+                        android:text="Employment type"
+                        android:textColor="@color/black"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/txt_EmployType"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/dm_sans"
+                        android:text="Text view"
+                        android:textColor="#524B6B"
+                        android:textSize="14sp" />
+
+                </LinearLayout>
+
+
+                <ImageView
+                    android:id="@+id/btnEdit5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center|end"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="-22dp"
+                    android:visibility="invisible"
+                    app:srcCompat="@drawable/ic_edit" />
+
+                <ImageView
+                    android:id="@+id/btnAdd5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center|end"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="10dp"
+                    android:visibility="visible"
+                    app:srcCompat="@drawable/ic_add" />
+
+
+            </LinearLayout>
         </LinearLayout>
+
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/description"
+        android:id="@+id/Btn_description"
         android:layout_width="0dp"
-        android:layout_height="80dp"
-        android:foreground="?android:attr/selectableItemBackground"
-        android:clickable="true"
+        android:layout_height="90dp"
         android:layout_marginTop="8dp"
+        android:clickable="true"
+        android:foreground="?android:attr/selectableItemBackground"
         app:cardCornerRadius="10dp"
-        app:layout_constraintEnd_toEndOf="@+id/employ_type"
-        app:layout_constraintStart_toStartOf="@+id/employ_type"
-        app:layout_constraintTop_toBottomOf="@+id/employ_type">
+        app:layout_constraintEnd_toEndOf="@+id/BtnEmploy_type"
+        app:layout_constraintStart_toStartOf="@+id/BtnEmploy_type"
+        app:layout_constraintTop_toBottomOf="@+id/BtnEmploy_type">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:gravity="center"
-            android:orientation="horizontal">
+            android:orientation="vertical"
+            android:paddingTop="15dp"
+            android:paddingBottom="15dp">
 
-            <TextView
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:layout_weight="1"
-                android:fontFamily="@font/dm_sans"
-                android:text="Description"
-                android:textColor="@color/black"
-                android:textSize="16sp" />
+                android:orientation="horizontal">
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="10dp"
-                app:srcCompat="@drawable/ic_add" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="6dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/dm_sans"
+                        android:text="Description"
+                        android:textColor="@color/black"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/txt_description"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/dm_sans"
+                        android:text="Text view"
+                        android:textColor="#524B6B"
+                        android:textSize="14sp" />
+
+                </LinearLayout>
+
+
+                <ImageView
+                    android:id="@+id/btnEdit6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center|end"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="-22dp"
+                    android:visibility="invisible"
+                    app:srcCompat="@drawable/ic_edit" />
+
+                <ImageView
+                    android:id="@+id/btnAdd6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center|end"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="10dp"
+                    android:visibility="visible"
+                    app:srcCompat="@drawable/ic_add" />
+
+
+            </LinearLayout>
         </LinearLayout>
+
     </androidx.cardview.widget.CardView>
-
-
-
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
