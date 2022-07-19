@@ -2,6 +2,7 @@ package com.appstacks.indiannaukribazaar.NewActivities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -62,6 +63,17 @@ public class JobPosition extends AppCompatActivity {
         binding.listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+                int index = i;
+
+                Intent intent = new Intent(getApplicationContext(),AddJobsActivity.class);
+                String tv = list.get(index).toString();
+                intent.putExtra("mcg",tv);
+                startActivity(intent);
+
+
+//                Toast.makeText(getApplicationContext(), "Selected Contact "+list.get(index), Toast.LENGTH_SHORT).show();
+
 
 
             }
