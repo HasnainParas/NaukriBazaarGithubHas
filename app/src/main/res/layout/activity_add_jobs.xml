@@ -177,7 +177,7 @@
                         android:layout_marginTop="8dp"
                         android:layout_weight="1"
                         android:fontFamily="@font/dm_sans"
-                        android:text="Text view"
+                        android:text=""
                         android:textColor="#524B6B"
                         android:textSize="14sp" />
 
@@ -538,6 +538,7 @@
         </LinearLayout>
 
     </androidx.cardview.widget.CardView>
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
