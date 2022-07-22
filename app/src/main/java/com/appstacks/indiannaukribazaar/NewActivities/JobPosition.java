@@ -20,14 +20,15 @@ public class JobPosition extends AppCompatActivity {
     ActivityJobPositionBinding binding;
 
     ArrayList<String> list;
-    ArrayAdapter<String>adapter;
+    ArrayAdapter<String> adapter;
+    SharedPrefe sharedPrefe;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding  = ActivityJobPositionBinding.inflate(getLayoutInflater());
+        binding = ActivityJobPositionBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-
+        sharedPrefe = new SharedPrefe(JobPosition.this);
         list = new ArrayList<String>();
 
         list.add("Assistant");
@@ -41,7 +42,7 @@ public class JobPosition extends AppCompatActivity {
         list.add("Sales Advocate");
         list.add("Analyst");
 
-        adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1,list);
+        adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, list);
 
         binding.listView.setAdapter(adapter);
 
@@ -65,21 +66,14 @@ public class JobPosition extends AppCompatActivity {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
                 int index = i;
-
-                Intent intent = new Intent(getApplicationContext(),AddJobsActivity.class);
+                Intent intent = new Intent(getApplicationContext(), AddJobsActivity.class);
                 String tv = list.get(index).toString();
-                intent.putExtra("mcg",tv);
+                sharedPrefe.saveJoPosition(tv);
                 startActivity(intent);
-
-
-//                Toast.makeText(getApplicationContext(), "Selected Contact "+list.get(index), Toast.LENGTH_SHORT).show();
-
 
 
             }
         });
-
-
 
 
     }

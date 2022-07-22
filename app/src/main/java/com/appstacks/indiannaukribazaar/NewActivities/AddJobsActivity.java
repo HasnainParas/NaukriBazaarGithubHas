@@ -20,21 +20,25 @@ import com.google.android.material.bottomsheet.BottomSheetDialog;
 
 
 public class AddJobsActivity extends AppCompatActivity {
-
+    SharedPrefe sharedPrefe;
     ActivityAddJobsBinding binding;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        sharedPrefe = new SharedPrefe(this);
         binding = ActivityAddJobsBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
 
         Intent i = getIntent();
-        String mcg = i.getStringExtra("mcg");
-        binding.txtPositon.setText(mcg);
+        //job position
+        binding.txtPositon.setText(sharedPrefe.fetchJobPosition());
+        //job location
+
+        binding.txtLocation.setText(sharedPrefe.fetchJobLocation());
+
 
         iconChange();
 
@@ -66,9 +70,10 @@ public class AddJobsActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View view) {
                         String onSitTxt = onsite.getText().toString();
+
                         binding.txtWorkplace.setText(onSitTxt);
-                        binding.btnAdd2.setVisibility(View.INVISIBLE);
-                        binding.btnEdit2.setVisibility(View.VISIBLE);
+                        binding.btnAdd5.setVisibility(View.INVISIBLE);
+                        binding.btnEdit5.setVisibility(View.VISIBLE);
 
 
                     }
@@ -78,8 +83,12 @@ public class AddJobsActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View view) {
 
+
                         String hybridTxt = hybrid.getText().toString();
                         binding.txtWorkplace.setText(hybridTxt);
+                        binding.btnAdd5.setVisibility(View.INVISIBLE);
+                        binding.btnEdit5.setVisibility(View.VISIBLE);
+
 
                     }
                 });
@@ -89,10 +98,21 @@ public class AddJobsActivity extends AppCompatActivity {
                     public void onClick(View view) {
                         String remoteTxt = remote.getText().toString();
                         binding.txtWorkplace.setText(remoteTxt);
+                        binding.btnAdd5.setVisibility(View.INVISIBLE);
+                        binding.btnEdit5.setVisibility(View.VISIBLE);
+
                         dialog.dismiss();
                     }
                 });
 
+
+            }
+        });
+
+        binding.locationBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getApplicationContext(), JobLocationActivity.class));
 
             }
         });
