@@ -39,6 +39,12 @@ public class AddJobsActivity extends AppCompatActivity {
 
         binding.txtLocation.setText(sharedPrefe.fetchJobLocation());
 
+        String title = i.getStringExtra("title");
+        binding.txtCompany.setText(title);
+
+
+        binding.txtDescription.setText(sharedPrefe.fetchDescription());
+
 
         iconChange();
 
@@ -117,6 +123,119 @@ public class AddJobsActivity extends AppCompatActivity {
             }
         });
 
+        binding.btnCompany.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+
+                startActivity(new Intent(getApplicationContext(), CompanyActivity.class));
+
+
+            }
+        });
+
+
+        binding.employmentBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+
+                BottomSheetDialog dialog = new BottomSheetDialog(AddJobsActivity.this, R.style.AppBottomSheetDialogTheme);
+
+                View bottomsheetView = LayoutInflater.from(getApplicationContext()).
+                        inflate(R.layout.bottom_sheet_employment, (ConstraintLayout) findViewById(R.id.bottom_sheet_container));
+
+                dialog.setContentView(bottomsheetView);
+                dialog.show();
+
+                RadioButton fullTime = bottomsheetView.findViewById(R.id.fulltime);
+                RadioButton partTime = bottomsheetView.findViewById(R.id.partTime);
+                RadioButton contract = bottomsheetView.findViewById(R.id.contract);
+                RadioButton temporary = bottomsheetView.findViewById(R.id.temporary);
+                RadioButton volunteer = bottomsheetView.findViewById(R.id.volunteer);
+                RadioButton apprenticeship = bottomsheetView.findViewById(R.id.apprenticeship);
+
+                fullTime.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+
+
+                        String fullTimeTxt = fullTime.getText().toString();
+
+                        binding.employmentTxt.setText(fullTimeTxt);
+                        binding.btnAdd4.setVisibility(View.INVISIBLE);
+                        binding.btnEdit4.setVisibility(View.VISIBLE);
+
+                    }
+                });
+                partTime.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+
+
+                        String partTimeTxt = partTime.getText().toString();
+
+                        binding.employmentTxt.setText(partTimeTxt);
+                        binding.btnAdd4.setVisibility(View.INVISIBLE);
+                        binding.btnEdit4.setVisibility(View.VISIBLE);
+
+                    }
+                });
+
+                contract.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        String contractTxt = contract.getText().toString();
+
+                        binding.employmentTxt.setText(contractTxt);
+                        binding.btnAdd4.setVisibility(View.INVISIBLE);
+                        binding.btnEdit4.setVisibility(View.VISIBLE);
+
+                    }
+                });
+
+                temporary.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+
+                        String temporaryTxt = contract.getText().toString();
+
+                        binding.employmentTxt.setText(temporaryTxt);
+                        binding.btnAdd4.setVisibility(View.INVISIBLE);
+                        binding.btnEdit4.setVisibility(View.VISIBLE);
+
+                    }
+                });
+                volunteer.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+
+                        String volunteerTxt = volunteer.getText().toString();
+
+                        binding.employmentTxt.setText(volunteerTxt);
+                        binding.btnAdd4.setVisibility(View.INVISIBLE);
+                        binding.btnEdit4.setVisibility(View.VISIBLE);
+
+                    }
+                });
+
+                apprenticeship.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+
+                        String apprenticeShipTxt = apprenticeship.getText().toString();
+
+                        binding.employmentTxt.setText(apprenticeShipTxt);
+                        binding.btnAdd4.setVisibility(View.INVISIBLE);
+                        binding.btnEdit4.setVisibility(View.VISIBLE);
+
+                    }
+                });
+
+
+            }
+        });
+
 
     }
 
@@ -124,7 +243,8 @@ public class AddJobsActivity extends AppCompatActivity {
     private void iconChange() {
 
 
-        if (binding.txtPositon.length() != 0) {
+        if (binding.txtPositon.length() != 0)
+        {
 
             binding.btnEdit1.setVisibility(View.VISIBLE);
             binding.btnAdd1.setVisibility(View.INVISIBLE);
@@ -134,5 +254,28 @@ public class AddJobsActivity extends AppCompatActivity {
             binding.btnAdd1.setVisibility(View.VISIBLE);
             binding.btnEdit1.setVisibility(View.INVISIBLE);
         }
+
+        if (binding.txtDescription.length()!=0){
+
+            binding.btnEdit6.setVisibility(View.VISIBLE);
+            binding.btnAdd6.setVisibility(View.INVISIBLE);
+
+        }else {
+
+            binding.btnEdit6.setVisibility(View.INVISIBLE);
+            binding.btnAdd6.setVisibility(View.VISIBLE);
+        }
+
+        if (binding.txtLocation.length() !=0){
+
+            binding.btnEdit3.setVisibility(View.VISIBLE);
+            binding.btnAdd3.setVisibility(View.INVISIBLE);
+        }else {
+            binding.btnEdit3.setVisibility(View.INVISIBLE);
+            binding.btnAdd3.setVisibility(View.VISIBLE);
+
+        }
+
+
     }
 }

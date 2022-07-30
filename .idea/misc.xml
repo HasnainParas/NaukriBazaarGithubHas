@@ -29,6 +29,7 @@
         <entry key="..\:/Users/Faisal/Downloads/Compressed/New folder/NaukriBazaarGithubHas/app/src/main/res/layout-v21/recycler_sample_find_jobs.xml" value="0.19583333333333333" />
         <entry key="..\:/Users/Faisal/Downloads/Compressed/New folder/NaukriBazaarGithubHas/app/src/main/res/layout/activity_add_jobs.xml" value="0.25" />
         <entry key="..\:/Users/Faisal/Downloads/Compressed/New folder/NaukriBazaarGithubHas/app/src/main/res/layout/activity_add_posts.xml" value="0.2" />
+        <entry key="..\:/Users/Faisal/Downloads/Compressed/New folder/NaukriBazaarGithubHas/app/src/main/res/layout/activity_company.xml" value="0.25" />
         <entry key="..\:/Users/Faisal/Downloads/Compressed/New folder/NaukriBazaarGithubHas/app/src/main/res/layout/activity_document_verifaction.xml" value="0.2" />
         <entry key="..\:/Users/Faisal/Downloads/Compressed/New folder/NaukriBazaarGithubHas/app/src/main/res/layout/activity_find_jobs.xml" value="0.25" />
         <entry key="..\:/Users/Faisal/Downloads/Compressed/New folder/NaukriBazaarGithubHas/app/src/main/res/layout/activity_job_details.xml" value="0.5" />
@@ -41,6 +42,7 @@
         <entry key="..\:/Users/Faisal/Downloads/Compressed/New folder/NaukriBazaarGithubHas/app/src/main/res/layout/activity_register_profile.xml" value="0.19583333333333333" />
         <entry key="..\:/Users/Faisal/Downloads/Compressed/New folder/NaukriBazaarGithubHas/app/src/main/res/layout/activity_user_name.xml" value="0.2" />
         <entry key="..\:/Users/Faisal/Downloads/Compressed/New folder/NaukriBazaarGithubHas/app/src/main/res/layout/activity_user_profile.xml" value="0.2" />
+        <entry key="..\:/Users/Faisal/Downloads/Compressed/New folder/NaukriBazaarGithubHas/app/src/main/res/layout/bottom_sheet_employment.xml" value="0.2" />
         <entry key="..\:/Users/Faisal/Downloads/Compressed/New folder/NaukriBazaarGithubHas/app/src/main/res/layout/bottom_sheet_workplace.xml" value="0.25" />
         <entry key="..\:/Users/Faisal/Downloads/Compressed/New folder/NaukriBazaarGithubHas/app/src/main/res/layout/bottom_sheet_workplacee.xml" value="0.18" />
         <entry key="..\:/Users/Faisal/Downloads/Compressed/New folder/NaukriBazaarGithubHas/app/src/main/res/layout/dialog_about.xml" value="0.2" />
@@ -48,7 +50,10 @@
         <entry key="..\:/Users/Faisal/Downloads/Compressed/New folder/NaukriBazaarGithubHas/app/src/main/res/layout/fragment_job.xml" value="0.2" />
         <entry key="..\:/Users/Faisal/Downloads/Compressed/New folder/NaukriBazaarGithubHas/app/src/main/res/layout/include_drawer_menu.xml" value="0.19583333333333333" />
         <entry key="..\:/Users/Faisal/Downloads/Compressed/New folder/NaukriBazaarGithubHas/app/src/main/res/layout/job_list_layout.xml" value="0.2" />
+        <entry key="..\:/Users/Faisal/Downloads/Compressed/New folder/NaukriBazaarGithubHas/app/src/main/res/layout/sample_company.xml" value="0.5" />
+        <entry key="..\:/Users/Faisal/Downloads/Compressed/New folder/NaukriBazaarGithubHas/app/src/main/res/layout/sample_company_searchview.xml" value="0.2" />
         <entry key="..\:/Users/Faisal/Downloads/Compressed/New folder/NaukriBazaarGithubHas/app/src/main/res/layout/samplllll.xml" value="0.19583333333333333" />
+        <entry key="..\:/Users/Faisal/Downloads/Compressed/New folder/NaukriBazaarGithubHas/app/src/main/res/layout/sape_company_mehboob.xml" value="0.25" />
         <entry key="..\:/Users/Faisal/Downloads/Compressed/New folder/NaukriBazaarGithubHas/app/src/main/res/menu/bottom_navigation.xml" value="0.2" />
         <entry key="..\:/Users/Faisal/OneDrive/Documents/Downloads/Naukri Bazaar india/Naukri Bazaar india/app/src/main/res/drawable-v21/ic_bg1.xml" value="0.1425" />
         <entry key="..\:/Users/Faisal/OneDrive/Documents/Downloads/Naukri Bazaar india/Naukri Bazaar india/app/src/main/res/drawable-v21/ic_check.xml" value="0.1425" />

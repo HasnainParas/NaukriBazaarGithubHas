@@ -10,7 +10,6 @@ public class SharedPrefe {
 SharedPreferences sharedPreferences;
 public static String JOB_POS="jobpos";
 public static String JOBLOC="jobloc";
-public static String WORKPL_TYPE = "workpaceT";
 public static String DESC="desc";
 public static String COMP="comp";
 public static String EMPLOTYPE="employType";
@@ -19,7 +18,7 @@ public static String EMPLOTYPE="employType";
 
         sharedPreferences=context.getSharedPreferences(JOB_POS,Context.MODE_PRIVATE);
         sharedPreferences = context.getSharedPreferences(JOBLOC,Context.MODE_PRIVATE);
-        sharedPreferences = context.getSharedPreferences(WORKPL_TYPE,Context.MODE_PRIVATE);
+        sharedPreferences = context.getSharedPreferences(COMP,Context.MODE_PRIVATE);
 
     }
 
@@ -33,18 +32,18 @@ public static String EMPLOTYPE="employType";
         return sharedPreferences.getString(JOB_POS,null);
     }
 
-    public void  saveWorkplace (String workplace){
+    public void  saveCompany (String company){
 
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString(WORKPL_TYPE,workplace);
+        editor.putString(COMP,company);
         editor.apply();
 
     }
 
 
 
-    public String fetchWorkplace(){
-        return sharedPreferences.getString(WORKPL_TYPE,null);
+    public String fetchCompany(){
+        return sharedPreferences.getString(COMP,null);
     }
 
 
@@ -60,5 +59,17 @@ public static String EMPLOTYPE="employType";
         return sharedPreferences.getString(JOBLOC,null);
 
     }
+
+    public void saveDescription(String description){
+
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(DESC,description);
+        editor.apply();
+    }
+    public String fetchDescription(){
+
+        return sharedPreferences.getString(DESC,null);
+    }
+
 
 }

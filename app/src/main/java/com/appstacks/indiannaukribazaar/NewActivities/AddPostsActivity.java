@@ -12,12 +12,14 @@ import com.appstacks.indiannaukribazaar.databinding.ActivityAddPostsBinding;
 public class AddPostsActivity extends AppCompatActivity {
 
     ActivityAddPostsBinding binding;
+    SharedPrefe sharedPrefe;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityAddPostsBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        sharedPrefe = new SharedPrefe(AddPostsActivity.this);
 
 
         binding.icBck.setOnClickListener(new View.OnClickListener() {
@@ -35,7 +37,11 @@ public class AddPostsActivity extends AppCompatActivity {
         binding.postbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getApplicationContext(),AddJobsActivity.class));
+                Intent intent = new Intent(getApplicationContext(), AddJobsActivity.class);
+                String txt = binding.etDescription.getText().toString();
+                sharedPrefe.saveDescription(txt);
+                startActivity(intent);
+
             }
         });
 
