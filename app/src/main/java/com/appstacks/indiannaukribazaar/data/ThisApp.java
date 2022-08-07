@@ -1,11 +1,14 @@
 package com.appstacks.indiannaukribazaar.data;
 
 import android.app.Application;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.net.ConnectivityManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.TextUtils;
@@ -36,8 +39,8 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.analytics.FirebaseAnalytics;
-import com.google.firebase.iid.FirebaseInstanceId;
-import com.google.firebase.iid.InstanceIdResult;
+//import com.google.firebase.iid.FirebaseInstanceId;
+//import com.google.firebase.iid.InstanceIdResult;
 import com.google.firebase.messaging.FirebaseMessaging;
 
 import java.util.ArrayList;
@@ -51,6 +54,8 @@ import retrofit2.Response;
 
 public class ThisApp extends Application {
 
+    public static final String CHANNEL_1_ID = "channel1";
+    public static final String CHANNEL_2_ID = "channel2";
     private static ThisApp mInstance;
 
     public static synchronized ThisApp get() {
@@ -72,6 +77,9 @@ public class ThisApp extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+
+        createNotificationChannels();
+
         mInstance = this;
         shared_pref = new SharedPref(this);
         user = shared_pref.getUser();
@@ -94,6 +102,28 @@ public class ThisApp extends Application {
         subscribeTopicNotif();
 
         initSortByData();
+    }
+
+    private void createNotificationChannels() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            NotificationChannel channel1 = new NotificationChannel(
+                    CHANNEL_1_ID,
+                    "Channel 1",
+                    NotificationManager.IMPORTANCE_HIGH
+            );
+            channel1.setDescription("This is Channel 1");
+
+            NotificationChannel channel2 = new NotificationChannel(
+                    CHANNEL_2_ID,
+                    "Channel 2",
+                    NotificationManager.IMPORTANCE_LOW
+            );
+            channel2.setDescription("This is Channel 2");
+
+            NotificationManager manager = getSystemService(NotificationManager.class);
+            manager.createNotificationChannel(channel1);
+            manager.createNotificationChannel(channel2);
+        }
     }
 
     private void loadInterstitialAds() {
@@ -179,17 +209,15 @@ public class ThisApp extends Application {
         if (NetworkCheck.isConnect(this) && shared_pref.isNeedRegister()) {
             fcm_count++;
 
-            Task<InstanceIdResult> resultTask = FirebaseInstanceId.getInstance().getInstanceId();
-            resultTask.addOnSuccessListener(new OnSuccessListener<InstanceIdResult>() {
+            FirebaseMessaging.getInstance().getToken().addOnSuccessListener(new OnSuccessListener<String>() {
                 @Override
-                public void onSuccess(InstanceIdResult instanceIdResult) {
-                    String regId = instanceIdResult.getToken();
+                public void onSuccess(String token) {
+                    String regId = token;
                     shared_pref.setFcmRegId(regId);
                     if (!TextUtils.isEmpty(regId)) sendRegistrationToServer(regId);
-                }
-            });
 
-            resultTask.addOnFailureListener(new OnFailureListener() {
+                }
+            }).addOnFailureListener(new OnFailureListener() {
                 @Override
                 public void onFailure(@NonNull Exception e) {
                     if (fcm_count > FCM_MAX_COUNT) return;
@@ -201,6 +229,31 @@ public class ThisApp extends Application {
                     }, 500);
                 }
             });
+
+//            Task<InstanceIdResult> resultTask = FirebaseInstanceId.getInstance().getInstanceId();
+//            resultTask.addOnSuccessListener(new OnSuccessListener<InstanceIdResult>() {
+//                @Override
+//                public void onSuccess(InstanceIdResult instanceIdResult) {
+//                    String regId = instanceIdResult.getToken();
+//                    shared_pref.setFcmRegId(regId);
+//                    if (!TextUtils.isEmpty(regId)) sendRegistrationToServer(regId);
+//                }
+//            });
+
+//            resultTask.addOnFailureListener(new OnFailureListener() {
+//                @Override
+//                public void onFailure(@NonNull Exception e) {
+//                    if (fcm_count > FCM_MAX_COUNT) return;
+//                    new Handler().postDelayed(new Runnable() {
+//                        @Override
+//                        public void run() {
+//                            obtainFirebaseToken();
+//                        }
+//                    }, 500);
+//                }
+//            });
+
+
         }
     }
 
@@ -298,6 +351,7 @@ public class ThisApp extends Application {
         params.putString("device_id", Tools.getDeviceID(this));
         firebaseAnalytics.logEvent(event, params);
     }
+
 
 
 }

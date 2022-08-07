@@ -6,15 +6,18 @@ import android.net.Uri;
 import android.os.Bundle;
 
 import com.appstacks.indiannaukribazaar.NewActivities.FindJobsActivity;
+import com.appstacks.indiannaukribazaar.NewActivities.KycPaidJobs.KycStartBrowsingActivity;
 import com.appstacks.indiannaukribazaar.NewActivities.KycPaidJobs.WelldoneActivity;
 import com.appstacks.indiannaukribazaar.NewActivities.SpinWheelActivity;
 
 
 import com.appstacks.indiannaukribazaar.NewFragments.ProfileFragment;
+import com.appstacks.indiannaukribazaar.NewFragments.WellDoneFragment;
 import com.appstacks.indiannaukribazaar.R;
 import com.appstacks.indiannaukribazaar.Slider.SliderAdapter;
 import com.appstacks.indiannaukribazaar.Slider.SliderData;
 import com.appstacks.indiannaukribazaar.databinding.ActivityMainBinding;
+import com.appstacks.indiannaukribazaar.model.DeviceInfo;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -76,7 +79,7 @@ public class ActivityMain extends AppCompatActivity {
 
     ActivityMainBinding binding;
 
-    private DatabaseReference allUserRef;
+    private DatabaseReference allUserRef, deviceRefmain;
     private FirebaseAuth auth;
     private ActionBar actionBar;
     private Toolbar toolbar;
@@ -104,6 +107,7 @@ public class ActivityMain extends AppCompatActivity {
     private PageIndicatorView pageindi;
 
     String currentUserAuth;
+    DeviceInfo deviceInfo;
 
     LinearLayout searchBox;
 
@@ -119,6 +123,11 @@ public class ActivityMain extends AppCompatActivity {
         auth = FirebaseAuth.getInstance();
         currentUserAuth = auth.getCurrentUser().getUid();
         allUserRef = FirebaseDatabase.getInstance().getReference("AllUsers").child(currentUserAuth);
+        deviceRefmain = FirebaseDatabase.getInstance().getReference();
+
+        deviceInfo = Tools.getDeviceInfo(this);
+
+        deviceDisable();
 
 //        bottomNav = findViewById(R.id.bottomNav);
 
@@ -161,6 +170,39 @@ public class ActivityMain extends AppCompatActivity {
 
     }
 
+    public void deviceDisable() {
+        deviceRefmain.child("RegDevices").child(deviceInfo.device_id)
+                .child("valid")
+                .addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        if (snapshot.exists()) {
+                            Boolean istrue = snapshot.getValue(boolean.class);
+//                            sendOnChannel1();
+                            if (istrue) {
+
+
+                            } else {
+                                FirebaseAuth.getInstance().signOut();
+//                                Toast.makeText(ActivityMain.this, " Is signOut", Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(ActivityMain.this, ActivitySplash.class);
+                                startActivity(intent);
+                                finishAffinity();
+                            }
+
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+
+
+    }
+
+
     public void bottomNavigations() {
         binding.bottomNavigationnn.setOnNavigationItemSelectedListener(menuItem -> {
 
@@ -179,27 +221,37 @@ public class ActivityMain extends AppCompatActivity {
 
                 case R.id.find_job:
 //                    loadFragment(new JobButtonsFragment());
-
+                    binding.progressBar4.setVisibility(View.VISIBLE);
                     allUserRef.child("verification").addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
                             if (snapshot.exists()) {
+                                binding.progressBar4.setVisibility(View.GONE);
                                 boolean istrue = snapshot.getValue(Boolean.class);
                                 if (istrue) {
                                     startActivity(new Intent(ActivityMain.this, FindJobsActivity.class));
 
                                 } else {
-                                    Intent intent = new Intent(ActivityMain.this, WelldoneActivity.class);
-                                    intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
-                                    startActivity(intent);
+//                                    Intent intent = new Intent(ActivityMain.this, WelldoneActivity.class);
+//                                    intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+//                                    startActivity(intent);
+//                                    startActivity(new Intent(getApplicationContext(), WelldoneActivity.class));
+                                    loadFragment(new WellDoneFragment());
+
                                 }
 
+                            } else {
+                                Intent intent = new Intent(ActivityMain.this, KycStartBrowsingActivity.class);
+                                intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                                binding.progressBar4.setVisibility(View.GONE);
+                                startActivity(intent);
                             }
+
                         }
 
                         @Override
                         public void onCancelled(@NonNull DatabaseError error) {
-
+                            Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
                         }
                     });
 

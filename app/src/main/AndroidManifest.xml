@@ -12,6 +12,7 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.KILL_BACKGROUND_PROCESSES" />
     <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
 
     <uses-feature android:name="android.hardware.camera" />
 
@@ -25,47 +26,59 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".NewActivities.KycPaidJobs.RazorPayActivity"
+            android:exported="false"
+            android:theme="@style/noactiondisplay" />
+        <activity
             android:name=".NewActivities.CompanyActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/noactiondisplay" />
         <activity
             android:name=".NewActivities.JobLocationActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/noactiondisplay" />
         <activity
             android:name=".NewActivities.JobPosition"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/noactiondisplay" />
         <activity
             android:name=".NewActivities.AddPostsActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/noactiondisplay" />
         <activity
             android:name=".NewActivities.PaidJobsActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/noactiondisplay" />
         <activity
             android:name=".NewActivities.FindJobsActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            android:exported="true"
+            android:theme="@style/noactiondisplay">
+            //here
         </activity>
         <activity
             android:name=".NewActivities.AddJobsActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/noactiondisplay" />
         <activity
             android:name=".NewActivities.KycPaidJobs.WelldoneActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/noactiondisplay" />
         <activity
             android:name=".NewActivities.KycPaidJobs.ScanBackActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/noactiondisplay" />
         <activity
             android:name=".NewActivities.KycPaidJobs.ScanFrontActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/noactiondisplay" />
         <activity
             android:name=".NewActivities.KycPaidJobs.DocumentVerifactionActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/noactiondisplay" />
         <activity
             android:name=".NewActivities.KycPaidJobs.PersonalInformationActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/noactiondisplay" />
         <activity
             android:name=".NewActivities.KycPaidJobs.StartProfileVerification"
             android:exported="false" /> <!-- <activity -->
@@ -80,7 +93,8 @@
             android:theme="@style/noactiondisplay" />
         <activity
             android:name=".NewActivities.SpinWheelActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/noactiondisplay" />
         <activity
             android:name=".NewActivities.User_ProfileActivity"
             android:exported="false"
@@ -114,8 +128,14 @@
         <activity
             android:name=".Activities.ActivitySplash"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:exported="false"
-            android:screenOrientation="portrait" />
+            android:exported="true"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".Activities.ActivityMain"
             android:configChanges="orientation|keyboardHidden|screenSize"

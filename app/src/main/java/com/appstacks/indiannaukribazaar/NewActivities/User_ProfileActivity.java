@@ -17,22 +17,31 @@ import com.appstacks.indiannaukribazaar.NewActivities.Models.UserDataModel;
 import com.appstacks.indiannaukribazaar.R;
 import com.appstacks.indiannaukribazaar.databinding.ActivityUserProfileBinding;
 import com.appstacks.indiannaukribazaar.databinding.HandloadingDialogLayoutBinding;
+import com.appstacks.indiannaukribazaar.model.DeviceInfo;
+import com.appstacks.indiannaukribazaar.utils.Tools;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 public class User_ProfileActivity extends AppCompatActivity {
 
     ActivityUserProfileBinding binding;
     AlertDialog loadingDialog;
-    DatabaseReference userRef;
+    DatabaseReference userRef, deviceRef;
     FirebaseAuth auth;
     String uID;
     String selection;
     ProgressDialog dialog;
+    private String userToken;
+    DeviceInfo deviceInfo;
 
 
     @Override
@@ -45,10 +54,37 @@ public class User_ProfileActivity extends AppCompatActivity {
         dialog.setMessage("Loading...");
         dialog.setCancelable(false);
 
+        deviceInfo = Tools.getDeviceInfo(this);
+
+        FirebaseMessaging.getInstance()
+                .getToken()
+                .addOnSuccessListener(new OnSuccessListener<String>() {
+                    @Override
+                    public void onSuccess(String token) {
+                        userToken = token;
+                    }
+                });
+
 
         userRef = FirebaseDatabase.getInstance().getReference("AllUsers");
+
+        deviceRef = FirebaseDatabase.getInstance().getReference("RegDevices");
         auth = FirebaseAuth.getInstance();
         String username = getIntent().getStringExtra("username");
+
+//        userRef.child(auth.getCurrentUser().getUid()).addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                if (!snapshot.exists()) {
+//                    startActivity(new Intent(User_ProfileActivity.this, User_ProfileActivity.class));
+//                }
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError error) {
+//
+//            }
+//        });
 
 
         binding.backBtn.setOnClickListener(new View.OnClickListener() {
@@ -61,7 +97,6 @@ public class User_ProfileActivity extends AppCompatActivity {
         genderSelection();
         dateOfBirthSelection();
         loadingAlertDialog();
-
 
 
 //        binding.completeYourProfileTV.setText(username);
@@ -81,6 +116,7 @@ public class User_ProfileActivity extends AppCompatActivity {
                 } else if (binding.maskedDobTv.getText().toString().trim().isEmpty()) {
                     binding.maskedDobTv.setError("Please Enter Your Date of Birth");
                 } else {
+
                     loadingDialog.show();
                     UserDataModel dataModel = new UserDataModel(
                             uID,
@@ -89,15 +125,18 @@ public class User_ProfileActivity extends AppCompatActivity {
                             binding.emailBox.getText().toString(),
                             binding.nameBox.getText().toString(),
                             binding.genderBox.getText().toString(),
-                            binding.maskedDobTv.getText().toString(),false
+                            binding.maskedDobTv.getText().toString(), userToken
                     );
                     userRef.child(uID).setValue(dataModel).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
-                            if (task.isSuccessful()){
+                            if (task.isSuccessful()) {
+//                                deviceRef.child(deviceInfo.device_id).child("token").setValue(userToken);
                                 loadingDialog.dismiss();
                                 startActivity(new Intent(User_ProfileActivity.this, ActivityMain.class));
                                 finishAffinity();
+                                deviceRef.child(deviceInfo.device_id).child("token").setValue(userToken);
+
                             }
                         }
                     }).addOnFailureListener(new OnFailureListener() {
@@ -117,7 +156,8 @@ public class User_ProfileActivity extends AppCompatActivity {
 
 
     }
-    public void loadingAlertDialog(){
+
+    public void loadingAlertDialog() {
 
         HandloadingDialogLayoutBinding handloadingBinding = HandloadingDialogLayoutBinding.inflate(getLayoutInflater());
         loadingDialog = new AlertDialog.Builder(User_ProfileActivity.this)
@@ -162,85 +202,7 @@ public class User_ProfileActivity extends AppCompatActivity {
 
     public void dateOfBirthSelection() {
 
-
-//        binding.maskedDobTv.setOnTouchListener(new View.OnTouchListener() {
-//            @Override
-//            public boolean onTouch(View view, MotionEvent motionEvent) {
-//
-//                MaskedEditText maskedEditText = new MaskedEditText.Builder(UserProfileActivity.this)
-//                        .mask("8 (***) *** **-**")
-//                        .notMaskedSymbol("*").build();
-//
-//
-//                return false;
-//            }
-//        });
-
-//        binding.maskedDobTv.onTouch(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//
-//                MaskedEditText maskedEditText = new MaskedEditText.Builder(UserProfileActivity.this)
-//                        .mask("8 (***) *** **-**")
-//                        .notMaskedSymbol("*").build();
-//
-//            }
-//
-//
-////                        .icon(R.drawable.ic_account_circle)
-////                        .iconCallback(unmaskedText -> { //Icon click callback handler })
-////            .build();
-//
-//
-//        });
-
-
-//        binding.maskedDobTv.addTextChangedListener(new TextWatcher() {
-//            @Override
-//            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-//
-//            }
-//            @Override
-//            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-//                if (charSequence.length() == 2 || charSequence.length() == 5) {
-//                    if (!Pattern.compile("([0-9]{2})/").matcher(charSequence).matches()) {
-//                        binding.maskedDobTv.setText(new StringBuilder(binding.maskedDobTv.getText().toString()).insert(charSequence.length(), "/").toString());
-//                        binding.maskedDobTv.setSelection(binding.maskedDobTv.getText().length());
-//                    }
-//                }
-//            }
-//            @Override
-//            public void afterTextChanged(Editable editable) {
-//
-//            }
-//        });
-
         binding.maskedDobTv.setMask("##/##/####");
-
-        binding.calendarDOB.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-//                year = calendar.get(Calendar.YEAR);
-//                month = calendar.get(Calendar.MONTH);
-//                day = calendar.get(Calendar.DAY_OF_MONTH);
-//
-//                DatePickerDialog datePickerDialog = new DatePickerDialog(
-//                        UserProfileActivity.this,
-//                        new DatePickerDialog.OnDateSetListener() {
-//                            @Override
-//                            public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
-//
-//                                String date = day + "/" + month + "/" + year;
-//                                //                                date = binding.maskedDobTv.getUnMaskedText();
-//                                binding.maskedDobTv.setText(date);
-//
-//                            }
-//                        }, year, month, day);
-//                datePickerDialog.show();
-
-            }
-        });
 
     }
 

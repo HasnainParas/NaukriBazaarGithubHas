@@ -17,7 +17,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
+import com.appstacks.indiannaukribazaar.FcmNotificationsSender;
 import com.appstacks.indiannaukribazaar.FirebaseModels.PersonalInformationModel;
+import com.appstacks.indiannaukribazaar.NewActivities.Models.UserDataModel;
 import com.appstacks.indiannaukribazaar.R;
 import com.appstacks.indiannaukribazaar.databinding.ActivityScanBackBinding;
 import com.appstacks.indiannaukribazaar.databinding.HandloadingDialogLayoutBinding;
@@ -26,8 +28,11 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -43,9 +48,11 @@ public class ScanBackActivity extends AppCompatActivity {
     Bitmap photo;
     String user;
     StorageReference storageReference;
-    DatabaseReference reference,userRef;
+    DatabaseReference reference, userRef, adminTokenRef;
     ProgressDialog progressDialog;
     AlertDialog loadingDialog;
+    UserDataModel model;
+    String adminToken;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,6 +70,36 @@ public class ScanBackActivity extends AppCompatActivity {
         }
         reference = FirebaseDatabase.getInstance().getReference("UsersInfo").child(user);
         userRef = FirebaseDatabase.getInstance().getReference("AllUsers").child(user);
+        adminTokenRef = FirebaseDatabase.getInstance().getReference("AdminPanel").child("adminToken");
+
+
+        userRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()) {
+//                    Toast.makeText(RazorPayActivity.this, "Yes", Toast.LENGTH_SHORT).show();
+                    model = snapshot.getValue(UserDataModel.class);
+                    assert model != null;
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(ScanBackActivity.this, error.getMessage().toString(), Toast.LENGTH_SHORT).show();
+            }
+        });
+        adminTokenRef.child("token").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                adminToken = snapshot.getValue(String.class);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
 
         storageReference = FirebaseStorage.getInstance()
                 .getReference("UserInfo")
@@ -121,8 +158,7 @@ public class ScanBackActivity extends AppCompatActivity {
                                         @Override
                                         public void onSuccess(Uri uri) {
                                             backImage = String.valueOf(uri);
-
-                                            uploadData(frontImage,backImage);
+                                            uploadData(frontImage, backImage);
                                         }
                                     });
                                 }
@@ -143,28 +179,40 @@ public class ScanBackActivity extends AppCompatActivity {
         reference.child("frontImage").setValue(frontImage);
         reference.child("backImage").setValue(backImage)
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
-            @Override
-            public void onComplete(@NonNull Task<Void> task) {
-                if (task.isComplete()) {
-                    task.addOnSuccessListener(new OnSuccessListener<Void>() {
-                        @Override
-                        public void onSuccess(Void unused) {
-                            userRef.child("verification").setValue(false);
-                            loadingDialog.dismiss();
-                            Toast.makeText(ScanBackActivity.this, "Submitted Successfully", Toast.LENGTH_SHORT).show();
-                            startActivity(new Intent(ScanBackActivity.this, WelldoneActivity.class));
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isComplete()) {
+                            task.addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void unused) {
+//                                    userRef.child("verification").setValue(false);
+                                    loadingDialog.dismiss();
+                                    Toast.makeText(ScanBackActivity.this, "Submitted Successfully", Toast.LENGTH_SHORT).show();
+//                                    Toast.makeText(ScanBackActivity.this, "Successful \n ID " + s, Toast.LENGTH_SHORT).show();
+                                    userRef.child("verification").setValue(false);
+//                                    binding.status.setText("Successful \n ID: " + s);
+//                                    userRef.child("razorPaymentID").setValue(s);
+                                    FcmNotificationsSender notificationsSender = new FcmNotificationsSender(
+                                            adminToken,
+                                            "Paid Jobs",
+                                            model.getFullName() + " Apply for Paid Jobs", getApplicationContext(), ScanBackActivity.this
+                                    );
+                                    notificationsSender.SendNotifications();
+                                    startActivity(new Intent(ScanBackActivity.this, WelldoneActivity.class));
+                                    finishAffinity();
+//                                    startActivity(new Intent(ScanBackActivity.this, RazorPayActivity.class));
+                                }
+                            }).addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    Toast.makeText(ScanBackActivity.this, "" + e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                        } else {
+                            Toast.makeText(ScanBackActivity.this, "Something went wrong", Toast.LENGTH_SHORT).show();
                         }
-                    }).addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            Toast.makeText(ScanBackActivity.this, "" + e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
-                        }
-                    });
-                } else {
-                    Toast.makeText(ScanBackActivity.this, "Something went wrong", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
+                    }
+                });
 
 
     }
@@ -200,7 +248,7 @@ public class ScanBackActivity extends AppCompatActivity {
     }
 
 
-    public void loadingAlertDialog(){
+    public void loadingAlertDialog() {
 
         HandloadingDialogLayoutBinding handloadingBinding = HandloadingDialogLayoutBinding.inflate(getLayoutInflater());
         loadingDialog = new AlertDialog.Builder(ScanBackActivity.this)

@@ -1,29 +1,47 @@
 package com.appstacks.indiannaukribazaar.Activities;
 
+import static com.appstacks.indiannaukribazaar.data.ThisApp.CHANNEL_1_ID;
+
+import android.annotation.SuppressLint;
+import android.app.AlertDialog;
+import android.app.Notification;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.provider.Settings;
 import android.view.View;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 
 import com.appstacks.indiannaukribazaar.NewActivities.BoardingActivity;
+import com.appstacks.indiannaukribazaar.NewActivities.UserNameActivity;
+import com.appstacks.indiannaukribazaar.NewActivities.User_ProfileActivity;
 import com.appstacks.indiannaukribazaar.R;
 import com.appstacks.indiannaukribazaar.Slider.ImageData;
 import com.appstacks.indiannaukribazaar.data.SharedPref;
 import com.appstacks.indiannaukribazaar.data.ThisApp;
 import com.appstacks.indiannaukribazaar.databinding.ActivitySplashBinding;
+import com.appstacks.indiannaukribazaar.databinding.DeviceLayoutBinding;
+import com.appstacks.indiannaukribazaar.databinding.HandloadingDialogLayoutBinding;
+import com.appstacks.indiannaukribazaar.model.DeviceInfo;
 import com.appstacks.indiannaukribazaar.utils.PermissionUtil;
 import com.appstacks.indiannaukribazaar.utils.Tools;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.dynamiclinks.DynamicLink;
 import com.google.firebase.dynamiclinks.FirebaseDynamicLinks;
 import com.google.firebase.dynamiclinks.ShortDynamicLink;
@@ -40,6 +58,14 @@ public class ActivitySplash extends AppCompatActivity {
     private boolean on_permission_result = false;
     ActivitySplashBinding binding;
     FirebaseAuth auth;
+    DatabaseReference deviceRef, userRef;
+    String android_id;
+    AlertDialog loadingDialog;
+    DeviceInfo deviceInfo;
+    private NotificationManagerCompat notificationManager;
+    DataSnapshot user;
+    String userUID;
+    String namevalid;
 
 
     @Override
@@ -48,7 +74,34 @@ public class ActivitySplash extends AppCompatActivity {
         binding = ActivitySplashBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+
         auth = FirebaseAuth.getInstance();
+        deviceRef = FirebaseDatabase.getInstance().getReference().child("RegDevices");
+        userRef = FirebaseDatabase.getInstance().getReference("AllUsers");
+
+        if (auth.getCurrentUser() != null) {
+            binding.getStartBtn.setVisibility(View.INVISIBLE);
+            userRef.child(auth.getCurrentUser().getUid()).addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    namevalid = snapshot.child("userToken").getValue(String.class);
+
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+                    Toast.makeText(ActivitySplash.this, "SomeThing Wrong\n " + error, Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
+
+        deviceInfo = Tools.getDeviceInfo(this);
+//        Toast.makeText(ActivitySplash.this,deviceInfo.device_name+"\n"+deviceInfo.os_version+"\n"+deviceInfo.device_id, Toast.LENGTH_SHORT).show();
+//        Toast.makeText(ActivitySplash.this, deviceInfo.device_id, Toast.LENGTH_SHORT).show();
+
+        notificationManager = NotificationManagerCompat.from(this);
+
+        loadingAlertDialog();
 
 
         new LongOperation().execute();
@@ -57,6 +110,8 @@ public class ActivitySplash extends AppCompatActivity {
         Tools.setSmartSystemBar(this);
         Tools.RTLMode(getWindow());
         ThisApp.get().saveClassLogEvent(getClass());
+
+
     }
 
     private class LongOperation extends AsyncTask<Void, Void, Void> {
@@ -72,8 +127,6 @@ public class ActivitySplash extends AppCompatActivity {
                     if (task.isSuccessful()) {
                         DocumentSnapshot document = task.getResult();
                         if (document.exists()) {
-
-
                             ImageData imageData = ImageData.getInstance();
                             imageData.setImglink(document.getString("imageLink"));
                             imageData.setWebsiteLink(document.getString("websiteLink"));
@@ -172,20 +225,79 @@ public class ActivitySplash extends AppCompatActivity {
 //                        });
             }
         });
-        if (auth.getCurrentUser() != null) {
-            binding.getStartBtn.setVisibility(View.INVISIBLE);
-            new Handler().postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    /* Create an Intent that will start the Menu-Activity. */
-                    startActivity(new Intent(ActivitySplash.this, ActivityMain.class));
-                    finish();
+
+        deviceRef.child(deviceInfo.device_id).child("valid").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()) {
+//                    Toast.makeText(ActivitySplash.this, "kkkk", Toast.LENGTH_SHORT).show();
+                    Boolean istrue = snapshot.getValue(boolean.class);
+                    if (istrue) {
+//                        utils.toast(ActivitySplash.this, "Its True");
+                        loadingDialog.dismiss();
+                        if (auth.getCurrentUser() != null) {
+                            binding.getStartBtn.setVisibility(View.INVISIBLE);
+                            new Handler().postDelayed(new Runnable() {
+                                @Override
+                                public void run() {
+                                    /* Create an Intent that will start the Menu-Activity. */
+//                                    startActivity(new Intent(ActivitySplash.this, ActivityMain.class));
+//                                    finish();
+
+                                }
+                            }, 1000);
+//                            sendOnChannel1();
+                            if (namevalid == null) {
+                                startActivity(new Intent(ActivitySplash.this, UserNameActivity.class));
+                                finishAffinity();
+                                Toast.makeText(ActivitySplash.this, "NotValid", Toast.LENGTH_SHORT).show();
+                            } else {
+                                startActivity(new Intent(ActivitySplash.this, ActivityMain.class));
+//                                Toast.makeText(ActivitySplash.this, "Valid", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+
+                    } else {
+                        loadingDialog.show();
+                        Toast.makeText(ActivitySplash.this, " Is signOut", Toast.LENGTH_SHORT).show();
+//                        Intent intent = new Intent(ActivitySplash.this, DeviceBlockingActivity.class);
+//                        intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+//                        startActivity(intent);
+
+                    }
 
                 }
-            }, 2000);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(ActivitySplash.this, "SomeThing Wrong\n " + error, Toast.LENGTH_SHORT).show();
+
+            }
+        });
 
 
-        }
+//        if (auth.getCurrentUser() != null) {
+//            binding.getStartBtn.setVisibility(View.INVISIBLE);
+//            new Handler().postDelayed(new Runnable() {
+//                @Override
+//                public void run() {
+//                    /* Create an Intent that will start the Menu-Activity. */
+//                    startActivity(new Intent(ActivitySplash.this, ActivityMain.class));
+//                    finish();
+//
+//                }
+//            }, 2000);
+//
+//
+//        }else {
+////            binding.getStartBtn.setVisibility(View.);
+//            Toast.makeText(this, "Not reg", Toast.LENGTH_SHORT).show();
+//        }
+//        else {
+//            startActivity(new Intent(ActivitySplash.this, DeviceBlockingActivity.class));
+//            finish();
+//        }
 
 
     }
@@ -204,5 +316,60 @@ public class ActivitySplash extends AppCompatActivity {
         }
     }
 
+    @SuppressLint("HardwareIds")
+    @Override
+    protected void onStart() {
+        super.onStart();
+        android_id = Settings.Secure.getString(getApplicationContext().getContentResolver(),
+                Settings.Secure.ANDROID_ID);
+
+//        deviceRef.child(android_id).child("valid").addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                if (snapshot.exists()){
+//                    boolean istrue = snapshot.getValue(Boolean.class);
+//                    if (istrue){
+//                        Toast.makeText(ActivitySplash.this, "Yes", Toast.LENGTH_SHORT).show();
+//                    }else{
+//                        Toast.makeText(ActivitySplash.this, "No", Toast.LENGTH_SHORT).show();
+//                    }
+//                }
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError error) {
+//
+//            }
+//        });
+
+    }
+
+    public void loadingAlertDialog() {
+        DeviceLayoutBinding dialogBinding = DeviceLayoutBinding.inflate(getLayoutInflater());
+        loadingDialog = new AlertDialog.Builder(ActivitySplash.this)
+                .setView(dialogBinding.getRoot()).create();
+        loadingDialog.setCanceledOnTouchOutside(false);
+        loadingDialog.setCancelable(false);
+        loadingDialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+
+
+    }
+
+    public void sendOnChannel1() {
+        String title = "Now Your Account is Unblock";
+        String message = "Open Your App by sign in your old number";
+
+        Notification notification = new NotificationCompat.Builder(this, CHANNEL_1_ID
+
+        )
+                .setSmallIcon(R.drawable.logo)
+                .setContentTitle(title)
+                .setContentText(message)
+                .setPriority(NotificationCompat.PRIORITY_HIGH)
+                .setCategory(NotificationCompat.CATEGORY_MESSAGE)
+                .build();
+
+        notificationManager.notify(1, notification);
+    }
 
 }

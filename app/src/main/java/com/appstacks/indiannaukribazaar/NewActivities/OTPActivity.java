@@ -15,6 +15,8 @@ import com.appstacks.indiannaukribazaar.NewActivities.Models.DeviceDataModel;
 import com.appstacks.indiannaukribazaar.R;
 import com.appstacks.indiannaukribazaar.databinding.ActivityOtpactivityBinding;
 import com.appstacks.indiannaukribazaar.databinding.HandloadingDialogLayoutBinding;
+import com.appstacks.indiannaukribazaar.model.DeviceInfo;
+import com.appstacks.indiannaukribazaar.utils.Tools;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
@@ -38,11 +40,10 @@ public class OTPActivity extends AppCompatActivity {
     String mobileNumber;
     String verificationID;
     String android_id;
-    ProgressDialog dialog;
     DatabaseReference deviceRef;
     int remaintime = 60;
     CountDownTimer countDownTimer;
-
+    DeviceInfo deviceInfo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,13 +51,7 @@ public class OTPActivity extends AppCompatActivity {
         binding = ActivityOtpactivityBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-
-
-
-
-        dialog = new ProgressDialog(this);
-        dialog.setCancelable(false);
-        dialog.setMessage("Loading...");
+        deviceInfo = Tools.getDeviceInfo(this);
 
         loadingAlertDialog();
 
@@ -106,7 +101,10 @@ public class OTPActivity extends AppCompatActivity {
                     FirebaseAuth.getInstance().signInWithCredential(credential).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
-                            DeviceDataModel model = new DeviceDataModel(android_id, mobileNumber);
+                            DeviceDataModel model = new
+                                    DeviceDataModel(
+                                    android_id, mobileNumber, deviceInfo.os_version,
+                                    deviceInfo.device_name, deviceInfo.app_version, true);
                             loadingDialog.dismiss();
                             if (task.isSuccessful()) {
                                 deviceRef.child("RegDevices").child(android_id).setValue(model);
@@ -121,7 +119,7 @@ public class OTPActivity extends AppCompatActivity {
                         @Override
                         public void onFailure(@NonNull Exception e) {
 
-                            Toast.makeText(OTPActivity.this, e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(OTPActivity.this, e.getLocalizedMessage().toString(), Toast.LENGTH_SHORT).show();
                         }
                     });
                 }
@@ -149,6 +147,7 @@ public class OTPActivity extends AppCompatActivity {
                                 Toast.makeText(OTPActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
 
                             }
+
                             @Override
                             public void onCodeSent(@NonNull String newVerificationID, @NonNull PhoneAuthProvider.ForceResendingToken forceResendingToken) {
 //                                super.onCodeSent(s, forceResendingToken);
@@ -163,7 +162,7 @@ public class OTPActivity extends AppCompatActivity {
         });
     }
 
-    public void loadingAlertDialog(){
+    public void loadingAlertDialog() {
 
         HandloadingDialogLayoutBinding handloadingBinding = HandloadingDialogLayoutBinding.inflate(getLayoutInflater());
         loadingDialog = new AlertDialog.Builder(OTPActivity.this)

@@ -3,9 +3,9 @@ package com.appstacks.indiannaukribazaar.NewActivities.Models;
 public class CompanyModel {
 
 
-   private   int image;
-   private String title;
-   private String internet;
+    private int image;
+    private String title;
+    private String internet;
 
     public CompanyModel(int image, String title, String internet) {
         this.image = image;

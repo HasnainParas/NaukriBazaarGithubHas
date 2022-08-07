@@ -9,11 +9,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
-import com.appstacks.indiannaukribazaar.FirebaseAdapters.JobAdapter;
-import com.appstacks.indiannaukribazaar.FirebaseModels.JobModel;
-import com.appstacks.indiannaukribazaar.NewActivities.KycPaidJobs.KycStartBrowsingActivity;
-import com.appstacks.indiannaukribazaar.NewActivities.KycPaidJobs.WelldoneActivity;
-import com.appstacks.indiannaukribazaar.R;
+import com.appstacks.indiannaukribazaar.FcmNotificationsSender;
 import com.appstacks.indiannaukribazaar.databinding.ActivitySpinWheelBinding;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -26,10 +22,10 @@ public class SpinWheelActivity extends AppCompatActivity {
 
     DatabaseReference jobRef;
     ActivitySpinWheelBinding binding;
-    DatabaseReference allUserRef;
+    DatabaseReference allUserRef, adminTokenRef;
     FirebaseAuth auth;
     String currentUserAuth;
-
+    String adminToken;
 
 
     @Override
@@ -40,6 +36,36 @@ public class SpinWheelActivity extends AppCompatActivity {
 
         auth = FirebaseAuth.getInstance();
         currentUserAuth = auth.getCurrentUser().getUid();
+
+        adminTokenRef = FirebaseDatabase.getInstance().getReference("AdminPanel").child("adminToken");
+
+
+        adminTokenRef.child("token").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                adminToken = snapshot.getValue(String.class);
+                Toast.makeText(SpinWheelActivity.this, adminToken, Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+
+        binding.imageclick.setOnClickListener(view -> {
+
+            FcmNotificationsSender notificationsSender = new FcmNotificationsSender(
+                    adminToken,
+                    "Checking Notifications",
+                    "RazorPayment ID: ", getApplicationContext(), SpinWheelActivity.this
+            );
+            notificationsSender.SendNotifications();
+
+
+        });
+
 
         allUserRef = FirebaseDatabase.getInstance().getReference("AllUsers").child(currentUserAuth);
 //        binding.clickJob44.setOnClickListener(new View.OnClickListener() {
@@ -81,8 +107,6 @@ public class SpinWheelActivity extends AppCompatActivity {
 //        });
 
 
-
-
 //        jobRef = FirebaseDatabase.getInstance().getReference("AdminPanel").child("job");
 //
 //
@@ -112,10 +136,7 @@ public class SpinWheelActivity extends AppCompatActivity {
 //        });
 
 
-
-
     }
-
 
 
 }
