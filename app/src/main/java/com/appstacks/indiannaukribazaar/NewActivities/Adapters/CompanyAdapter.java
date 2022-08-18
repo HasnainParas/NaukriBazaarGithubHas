@@ -16,12 +16,15 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.appstacks.indiannaukribazaar.NewActivities.AddJobsActivity;
 import com.appstacks.indiannaukribazaar.NewActivities.Models.CompanyModel;
+import com.appstacks.indiannaukribazaar.NewActivities.SharedPrefe;
 import com.appstacks.indiannaukribazaar.R;
 import com.appstacks.indiannaukribazaar.adapter.AdapterTopicPick;
+import com.appstacks.indiannaukribazaar.data.SharedPref;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,11 +36,11 @@ public class CompanyAdapter extends RecyclerView.Adapter<CompanyAdapter.viewHold
     ArrayList<CompanyModel>list;
     Context context;
     ArrayList<CompanyModel>backup;
+    SharedPrefe sharedPrefe;
 
     public CompanyAdapter(ArrayList<CompanyModel> list, Context context) {
         this.list = list;
         this.context = context;
-
         backup =new ArrayList<>(list);
     }
 
@@ -52,12 +55,26 @@ public class CompanyAdapter extends RecyclerView.Adapter<CompanyAdapter.viewHold
     @Override
     public void onBindViewHolder(@NonNull viewHolder holder, int position) {
 
-
         CompanyModel model = list.get(position);
+        sharedPrefe = new SharedPrefe(context);
 
         holder.companyLogo.setImageResource(model.getImage());
         holder.title.setText(model.getTitle());
         holder.internet.setText(model.getInternet());
+
+        holder.constraintLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context,AddJobsActivity.class);
+                intent.putExtra("company",model.getImage());
+                intent.putExtra("title",model.getTitle());
+                intent.putExtra("cominternet",model.getInternet());
+                sharedPrefe.saveComTitle(model.getTitle());
+                sharedPrefe.saveCompany(model.getInternet());
+                context.startActivity(intent);
+
+            }
+        });
 
     }
 
@@ -109,6 +126,7 @@ public class CompanyAdapter extends RecyclerView.Adapter<CompanyAdapter.viewHold
     public class viewHolder extends RecyclerView.ViewHolder{
      TextView title,internet;
      ImageView companyLogo;
+     ConstraintLayout constraintLayout;
 
 
 
@@ -118,9 +136,7 @@ public class CompanyAdapter extends RecyclerView.Adapter<CompanyAdapter.viewHold
          companyLogo = itemView.findViewById(R.id.imgGoogle);
          title = itemView.findViewById(R.id.companyTitle);
          internet = itemView.findViewById(R.id.internet);
-
-
-
+         constraintLayout = itemView.findViewById(R.id.click);
 
      }
  }

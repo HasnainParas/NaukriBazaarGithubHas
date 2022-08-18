@@ -17,9 +17,10 @@
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/click"
         android:layout_width="match_parent"
-        android:padding="5dp"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:padding="5dp">
 
         <ImageView
             android:id="@+id/imgGoogle"
@@ -61,15 +62,22 @@
                 android:id="@+id/company"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.2"
+                android:layout_marginRight="5dp"
                 android:fontFamily="@font/dm_sans"
                 android:text="Company" />
+
+            <View
+                android:id="@+id/view3"
+                android:layout_width="2dp"
+                android:layout_height="2dp"
+                android:layout_gravity="center"
+                android:background="@drawable/ellipse101" />
 
             <TextView
                 android:id="@+id/internet"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
+                android:layout_marginLeft="5dp"
                 android:text="TextView" />
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>

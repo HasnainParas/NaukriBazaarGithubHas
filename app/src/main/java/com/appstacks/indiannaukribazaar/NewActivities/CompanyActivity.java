@@ -25,6 +25,7 @@ public class CompanyActivity extends AppCompatActivity {
 
 
     ActivityCompanyBinding binding;
+    SharedPrefe sharedPrefe;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +34,7 @@ public class CompanyActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         ArrayList<CompanyModel> list = new ArrayList<>();
+        sharedPrefe = new SharedPrefe(this);
 
 
         list.add(new CompanyModel(R.drawable.googleic, "Google", "Internet"));
@@ -54,6 +56,7 @@ public class CompanyActivity extends AppCompatActivity {
         binding.recyclerViewCom.setAdapter(adapter);
 
 
+
         binding.searchViewCom.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String s) {
@@ -66,7 +69,6 @@ public class CompanyActivity extends AppCompatActivity {
                 return false;
             }
         });
-
 
     }
 

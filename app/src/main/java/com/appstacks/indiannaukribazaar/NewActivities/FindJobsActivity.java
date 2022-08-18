@@ -28,12 +28,11 @@ public class FindJobsActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
 
-
         binding.addjobBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                startActivity(new Intent(FindJobsActivity.this,AddPostsActivity.class));
+                startActivity(new Intent(FindJobsActivity.this, AddPostsActivity.class));
 
             }
         });
@@ -41,9 +40,7 @@ public class FindJobsActivity extends AppCompatActivity {
         binding.paidJob.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-              startActivity(new Intent(FindJobsActivity.this,PaidJobsActivity.class));
-
-
+                startActivity(new Intent(FindJobsActivity.this, PaidJobsActivity.class));
 
 
             }
@@ -52,12 +49,12 @@ public class FindJobsActivity extends AppCompatActivity {
 
         ArrayList<FindJobModel> list = new ArrayList<>();
         list.add(new FindJobModel(R.drawable.ic_name,
-                "Product Designer","Google inc, California, USA","120k","Remote","Full time"));
+                "Product Designer", "Google inc, California, USA", "120k", "Remote", "Full time"));
         list.add(new FindJobModel(R.drawable.ic_name,
-                "Product Designer","Google inc, California, USA","120k","Remote","Full time"));
+                "Product Designer", "Google inc, California, USA", "120k", "Remote", "Full time"));
 
 
-        FindjobAdapter adapter  = new FindjobAdapter(list,this);
+        FindjobAdapter adapter = new FindjobAdapter(list, this);
 
         binding.recycerviewFindJobs.setAdapter(adapter);
 
@@ -68,7 +65,6 @@ public class FindJobsActivity extends AppCompatActivity {
 
 
     }
-
 
 
 //    private void loadFragment(Fragment fragment) {
@@ -83,5 +79,4 @@ public class FindJobsActivity extends AppCompatActivity {
 //    }
 
 
-
-    }
+}

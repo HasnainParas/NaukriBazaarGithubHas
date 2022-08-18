@@ -5,6 +5,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -16,14 +17,18 @@ import android.widget.Toast;
 
 import com.appstacks.indiannaukribazaar.R;
 import com.appstacks.indiannaukribazaar.databinding.ActivityAddJobsBinding;
+import com.bumptech.glide.Glide;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 
 
 public class AddJobsActivity extends AppCompatActivity {
     SharedPrefe sharedPrefe;
     ActivityAddJobsBinding binding;
+    BottomSheetDialog bottomSheetDialog;
+    int checkRadio;
 
 
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,6 +37,17 @@ public class AddJobsActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
 
+        String title = getIntent().getStringExtra("title");
+        String internet = getIntent().getStringExtra("cominternet");
+
+        if (title != null) {
+            binding.comTitle.setText(title);
+
+        }
+        if (internet != null) {
+            binding.txtCompany.setText(internet);
+        }
+
         Intent i = getIntent();
         //job position
         binding.txtPositon.setText(sharedPrefe.fetchJobPosition());
@@ -39,11 +55,13 @@ public class AddJobsActivity extends AppCompatActivity {
 
         binding.txtLocation.setText(sharedPrefe.fetchJobLocation());
 
-        String title = i.getStringExtra("title");
-        binding.txtCompany.setText(title);
+//        String title = i.getStringExtra("title");
+//        binding.txtCompany.setText(title);
 
 
         binding.txtDescription.setText(sharedPrefe.fetchDescription());
+        binding.comTitle.setText(sharedPrefe.fetchComTitle());
+        binding.txtCompany.setText(sharedPrefe.fetchCompany());
 
 
         iconChange();
@@ -72,6 +90,8 @@ public class AddJobsActivity extends AppCompatActivity {
                 RadioButton onsite = bottomsheetView.findViewById(R.id.onSitebtn);
                 RadioButton hybrid = bottomsheetView.findViewById(R.id.hybridBtn);
                 RadioButton remote = bottomsheetView.findViewById(R.id.remoteBtn);
+
+
                 onsite.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -80,8 +100,7 @@ public class AddJobsActivity extends AppCompatActivity {
                         binding.txtWorkplace.setText(onSitTxt);
                         binding.btnAdd5.setVisibility(View.INVISIBLE);
                         binding.btnEdit5.setVisibility(View.VISIBLE);
-
-
+//                        dialog.dismiss();
                     }
                 });
 
@@ -94,7 +113,7 @@ public class AddJobsActivity extends AppCompatActivity {
                         binding.txtWorkplace.setText(hybridTxt);
                         binding.btnAdd5.setVisibility(View.INVISIBLE);
                         binding.btnEdit5.setVisibility(View.VISIBLE);
-
+//                        dialog.dismiss();
 
                     }
                 });
@@ -106,8 +125,7 @@ public class AddJobsActivity extends AppCompatActivity {
                         binding.txtWorkplace.setText(remoteTxt);
                         binding.btnAdd5.setVisibility(View.INVISIBLE);
                         binding.btnEdit5.setVisibility(View.VISIBLE);
-
-                        dialog.dismiss();
+//                        dialog.dismiss();
                     }
                 });
 
@@ -126,10 +144,7 @@ public class AddJobsActivity extends AppCompatActivity {
         binding.btnCompany.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-
                 startActivity(new Intent(getApplicationContext(), CompanyActivity.class));
-
 
             }
         });
@@ -140,13 +155,13 @@ public class AddJobsActivity extends AppCompatActivity {
             public void onClick(View view) {
 
 
-                BottomSheetDialog dialog = new BottomSheetDialog(AddJobsActivity.this, R.style.AppBottomSheetDialogTheme);
+                bottomSheetDialog = new BottomSheetDialog(AddJobsActivity.this, R.style.AppBottomSheetDialogTheme);
 
                 View bottomsheetView = LayoutInflater.from(getApplicationContext()).
                         inflate(R.layout.bottom_sheet_employment, (ConstraintLayout) findViewById(R.id.bottom_sheet_container));
 
-                dialog.setContentView(bottomsheetView);
-                dialog.show();
+                bottomSheetDialog.setContentView(bottomsheetView);
+                bottomSheetDialog.show();
 
                 RadioButton fullTime = bottomsheetView.findViewById(R.id.fulltime);
                 RadioButton partTime = bottomsheetView.findViewById(R.id.partTime);
@@ -163,8 +178,7 @@ public class AddJobsActivity extends AppCompatActivity {
                         String fullTimeTxt = fullTime.getText().toString();
 
                         binding.employmentTxt.setText(fullTimeTxt);
-                        binding.btnAdd4.setVisibility(View.INVISIBLE);
-                        binding.btnEdit4.setVisibility(View.VISIBLE);
+                        dialogandimagechange();
 
                     }
                 });
@@ -176,8 +190,8 @@ public class AddJobsActivity extends AppCompatActivity {
                         String partTimeTxt = partTime.getText().toString();
 
                         binding.employmentTxt.setText(partTimeTxt);
-                        binding.btnAdd4.setVisibility(View.INVISIBLE);
-                        binding.btnEdit4.setVisibility(View.VISIBLE);
+                        dialogandimagechange();
+
 
                     }
                 });
@@ -188,8 +202,7 @@ public class AddJobsActivity extends AppCompatActivity {
                         String contractTxt = contract.getText().toString();
 
                         binding.employmentTxt.setText(contractTxt);
-                        binding.btnAdd4.setVisibility(View.INVISIBLE);
-                        binding.btnEdit4.setVisibility(View.VISIBLE);
+                        dialogandimagechange();
 
                     }
                 });
@@ -201,8 +214,8 @@ public class AddJobsActivity extends AppCompatActivity {
                         String temporaryTxt = contract.getText().toString();
 
                         binding.employmentTxt.setText(temporaryTxt);
-                        binding.btnAdd4.setVisibility(View.INVISIBLE);
-                        binding.btnEdit4.setVisibility(View.VISIBLE);
+                        dialogandimagechange();
+
 
                     }
                 });
@@ -213,8 +226,8 @@ public class AddJobsActivity extends AppCompatActivity {
                         String volunteerTxt = volunteer.getText().toString();
 
                         binding.employmentTxt.setText(volunteerTxt);
-                        binding.btnAdd4.setVisibility(View.INVISIBLE);
-                        binding.btnEdit4.setVisibility(View.VISIBLE);
+                        dialogandimagechange();
+
 
                     }
                 });
@@ -226,8 +239,8 @@ public class AddJobsActivity extends AppCompatActivity {
                         String apprenticeShipTxt = apprenticeship.getText().toString();
 
                         binding.employmentTxt.setText(apprenticeShipTxt);
-                        binding.btnAdd4.setVisibility(View.INVISIBLE);
-                        binding.btnEdit4.setVisibility(View.VISIBLE);
+                        dialogandimagechange();
+
 
                     }
                 });
@@ -235,16 +248,14 @@ public class AddJobsActivity extends AppCompatActivity {
 
             }
         });
-
+        binding.cancelBtn.setOnClickListener(view -> finishAffinity());
 
     }
-
 
     private void iconChange() {
 
 
-        if (binding.txtPositon.length() != 0)
-        {
+        if (binding.txtPositon.length() != 0) {
 
             binding.btnEdit1.setVisibility(View.VISIBLE);
             binding.btnAdd1.setVisibility(View.INVISIBLE);
@@ -255,22 +266,22 @@ public class AddJobsActivity extends AppCompatActivity {
             binding.btnEdit1.setVisibility(View.INVISIBLE);
         }
 
-        if (binding.txtDescription.length()!=0){
+        if (binding.txtDescription.length() != 0) {
 
             binding.btnEdit6.setVisibility(View.VISIBLE);
             binding.btnAdd6.setVisibility(View.INVISIBLE);
 
-        }else {
+        } else {
 
             binding.btnEdit6.setVisibility(View.INVISIBLE);
             binding.btnAdd6.setVisibility(View.VISIBLE);
         }
 
-        if (binding.txtLocation.length() !=0){
+        if (binding.txtLocation.length() != 0) {
 
             binding.btnEdit3.setVisibility(View.VISIBLE);
             binding.btnAdd3.setVisibility(View.INVISIBLE);
-        }else {
+        } else {
             binding.btnEdit3.setVisibility(View.INVISIBLE);
             binding.btnAdd3.setVisibility(View.VISIBLE);
 
@@ -278,4 +289,28 @@ public class AddJobsActivity extends AppCompatActivity {
 
 
     }
+
+    public void dialogandimagechange() {
+        binding.btnAdd4.setVisibility(View.INVISIBLE);
+        binding.btnEdit4.setVisibility(View.VISIBLE);
+        bottomSheetDialog.dismiss();
+    }
+
+    public void savecompanytitle() {
+        SharedPreferences preferences = getSharedPreferences("sharedPrefs", MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString("companyTitle", binding.comTitle.getText().toString());
+        editor.apply();
+        Toast.makeText(this, "Saved", Toast.LENGTH_SHORT).show();
+
+    }
+
+    public void loadPreference() {
+        String savedtitle;
+        SharedPreferences preferences = getSharedPreferences("sharedPrefs", MODE_PRIVATE);
+        savedtitle = preferences.getString("companyTitle", "");
+        binding.comTitle.setText(savedtitle);
+    }
+
+
 }

@@ -12,6 +12,7 @@ public static String JOB_POS="jobpos";
 public static String JOBLOC="jobloc";
 public static String DESC="desc";
 public static String COMP="comp";
+public static String COMPTITLE="COMPTITLE";
 public static String EMPLOTYPE="employType";
 
     public SharedPrefe(Context context) {
@@ -69,6 +70,17 @@ public static String EMPLOTYPE="employType";
     public String fetchDescription(){
 
         return sharedPreferences.getString(DESC,null);
+    }
+
+    public void saveComTitle(String title){
+
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(COMPTITLE,title);
+        editor.apply();
+    }
+    public String fetchComTitle(){
+
+        return sharedPreferences.getString(COMPTITLE,null);
     }
 
 

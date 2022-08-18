@@ -6,35 +6,47 @@
     android:background="@drawable/bottom_sheet_background"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <View
+        android:id="@+id/view5"
+        android:layout_width="24dp"
+        android:layout_height="4dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/viewforbottomsheet"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <TextView
         android:id="@+id/textView41"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
-        android:gravity="center"
         android:fontFamily="@font/dm_sans"
+        android:gravity="center"
         android:text="Choose Job Type"
         android:textColor="#150B3D"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/view5" />
 
     <TextView
         android:id="@+id/textView42"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
         android:layout_marginTop="8dp"
+        android:layout_marginEnd="24dp"
         android:fontFamily="@font/dm_sans"
         android:gravity="center"
         android:text="Determine and choose the type of work according to what you want"
         android:textColor="#524B6B"
         android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="@+id/textView41"
-        app:layout_constraintStart_toStartOf="@+id/textView41"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView41" />
 
     <RadioGroup
@@ -42,7 +54,7 @@
         android:layout_width="match_parent"
         android:layout_height="300dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -53,13 +65,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="start"
+            android:layout_margin="5dp"
             android:fontFamily="@font/dm_sans"
             android:layoutDirection="rtl"
+            android:minHeight="48dp"
             android:text="Full time"
-            android:layout_margin="5dp"
             android:textAlignment="textStart"
             android:textSize="16sp" />
-
 
 
         <RadioButton
@@ -67,10 +79,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="start"
+            android:layout_margin="5dp"
             android:fontFamily="@font/dm_sans"
             android:layoutDirection="rtl"
+            android:minHeight="48dp"
             android:text="Part Time"
-            android:layout_margin="5dp"
             android:textAlignment="textStart"
             android:textSize="16sp" />
 
@@ -80,10 +93,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="start"
+            android:layout_margin="5dp"
             android:fontFamily="@font/dm_sans"
             android:layoutDirection="rtl"
+            android:minHeight="48dp"
             android:text="Contract"
-            android:layout_margin="5dp"
             android:textAlignment="textStart"
             android:textSize="16sp" />
 
@@ -92,10 +106,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="start"
+            android:layout_margin="5dp"
             android:fontFamily="@font/dm_sans"
             android:layoutDirection="rtl"
+            android:minHeight="48dp"
             android:text="Temporary"
-            android:layout_margin="5dp"
             android:textAlignment="textStart"
             android:textSize="16sp" />
 
@@ -104,24 +119,26 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="start"
+            android:layout_margin="5dp"
             android:fontFamily="@font/dm_sans"
             android:layoutDirection="rtl"
+            android:minHeight="48dp"
             android:text="Volunteer"
-            android:layout_margin="5dp"
             android:textAlignment="textStart"
-            android:textSize="16sp"/>
+            android:textSize="16sp" />
 
         <RadioButton
             android:id="@+id/apprenticeship"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="start"
+            android:layout_margin="5dp"
             android:fontFamily="@font/dm_sans"
             android:layoutDirection="rtl"
+            android:minHeight="48dp"
             android:text="Apprenticeship"
-            android:layout_margin="5dp"
             android:textAlignment="textStart"
-            android:textSize="16sp"/>
+            android:textSize="16sp" />
 
 
     </RadioGroup>

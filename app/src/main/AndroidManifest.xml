@@ -26,6 +26,9 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".NewActivities.EditProfileActivity"
+            android:exported="false" />
+        <activity
             android:name=".NewActivities.KycPaidJobs.RazorPayActivity"
             android:exported="false"
             android:theme="@style/noactiondisplay" />

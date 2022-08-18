@@ -11,7 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="16dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_arrow_back_black_24dp" />
@@ -20,21 +20,22 @@
         android:id="@+id/postbtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
         android:layout_marginEnd="16dp"
         android:fontFamily="@font/dm_sans"
         android:text="Post"
         android:textColor="#FF9228"
-        android:textSize="16sp"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/ic_bck"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@+id/ic_bck" />
 
     <TextView
         android:id="@+id/addPost"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="24dp"
         android:fontFamily="@font/dm_sans"
         android:text="Add Post"
         android:textColor="@color/green"
@@ -47,13 +48,12 @@
         android:layout_width="65dp"
         android:layout_height="65dp"
         android:layout_marginTop="24dp"
-        android:src="@drawable/userimg"
         app:layout_constraintStart_toStartOf="@+id/addPost"
         app:layout_constraintTop_toBottomOf="@+id/addPost" />
 
     <TextView
         android:id="@+id/textView18"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
@@ -61,7 +61,6 @@
         android:text="Orlando Diggs"
         android:textColor="@color/green"
         android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/imageView18"
         app:layout_constraintTop_toTopOf="@+id/imageView18" />
 
@@ -81,7 +80,7 @@
         android:id="@+id/textView22"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="24dp"
         android:fontFamily="@font/dm_sans"
         android:text="Post Title"
         android:textColor="@color/green"
@@ -93,7 +92,7 @@
         android:id="@+id/etPostTitle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="8dp"
         android:background="@drawable/postbg"
         android:ems="10"
@@ -132,6 +131,7 @@
         android:padding="10dp"
         android:textAlignment="textStart"
         app:layout_constraintEnd_toEndOf="@+id/etPostTitle"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/etPostTitle"
         app:layout_constraintTop_toBottomOf="@+id/textView23" />
 
@@ -148,7 +148,7 @@
             android:gravity="center_vertical"
             android:orientation="horizontal"
             android:padding="2dp"
-            android:visibility="invisible"
+            android:visibility="visible"
             android:weightSum="2">
 
             <ImageView
