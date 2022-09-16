@@ -39,10 +39,7 @@
         android:background="@drawable/search_bg"
         android:backgroundTint="#E5E5E5"
         android:queryHint="Search"
-        android:iconifiedByDefault="false">
-
-
-    </SearchView>
+        android:iconifiedByDefault="false"/>
 
     <ListView
         android:id="@+id/list_View"

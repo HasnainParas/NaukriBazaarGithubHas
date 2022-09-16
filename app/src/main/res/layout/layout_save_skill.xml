@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/btnBack_skillcomp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="32dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_arrow_back_black_24dp" />
+
+    <TextView
+        android:id="@+id/txtTitle_searchSkillcomp"
+        style="@style/TextBoldStyleBlack"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="32dp"
+        android:text="TextView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnBack_skillcomp" />
+
+    <SearchView
+        android:id="@+id/searchView_searchSkillcomp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/search_bg"
+        android:backgroundTint="#E5E5E5"
+        android:iconifiedByDefault="false"
+        android:queryHint="Search"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtTitle_searchSkillcomp" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="10dp"
+        app:layout_constraintBottom_toTopOf="@+id/btnShow"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/searchView_searchSkillcomp"
+        app:layout_constraintVertical_bias="0.45">
+
+
+        <TextView
+            android:id="@+id/skill_one"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:background="@color/grey_10"
+            android:drawableEnd="@drawable/ic_cancel"
+            android:drawablePadding="16dp"
+            android:padding="10dp"
+            android:text="Oral Communication and Skill"
+            app:layout_constraintEnd_toStartOf="@+id/skill_two"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/skill_two"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/grey_10"
+            android:drawableEnd="@drawable/ic_cancel"
+            android:drawablePadding="16dp"
+            android:padding="10dp"
+            android:text="TextView"
+            app:layout_constraintBaseline_toBaselineOf="@+id/skill_one"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/skill_one" />
+
+        <TextView
+            android:id="@+id/skill_three"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:background="@color/grey_10"
+            android:drawableEnd="@drawable/ic_cancel"
+            android:drawablePadding="16dp"
+            android:padding="10dp"
+            android:text="Oral communication and skills"
+            app:layout_constraintEnd_toStartOf="@+id/skill_four"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/skill_one" />
+
+        <TextView
+            android:id="@+id/skill_four"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/grey_10"
+            android:drawableEnd="@drawable/ic_cancel"
+            android:drawablePadding="16dp"
+            android:padding="10dp"
+            android:text="TextView"
+            app:layout_constraintBaseline_toBaselineOf="@+id/skill_three"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/skill_three" />
+
+        <TextView
+            android:id="@+id/skill_five"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:background="@color/grey_10"
+            android:drawableEnd="@drawable/ic_cancel"
+            android:drawablePadding="16dp"
+            android:padding="10dp"
+            android:text="Oral communication and skills"
+            app:layout_constraintBottom_toBottomOf="@+id/skill_six"
+            app:layout_constraintEnd_toStartOf="@+id/skill_six"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/skill_three"
+            app:layout_constraintVertical_bias="1.0" />
+
+        <TextView
+            android:id="@+id/skill_six"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/grey_10"
+            android:drawableEnd="@drawable/ic_cancel"
+            android:drawablePadding="16dp"
+            android:padding="10dp"
+            android:text="TextView"
+            app:layout_constraintBaseline_toBaselineOf="@+id/skill_five"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/skill_five" />
+
+        <TextView
+            android:id="@+id/skill_Seven"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:background="@color/grey_10"
+            android:drawableEnd="@drawable/ic_cancel"
+            android:drawablePadding="16dp"
+            android:padding="8dp"
+            android:text="TextView"
+            app:layout_constraintBottom_toBottomOf="@+id/skill_eight"
+            app:layout_constraintEnd_toStartOf="@+id/skill_eight"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/skill_five" />
+
+        <TextView
+            android:id="@+id/skill_eight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/grey_10"
+            android:drawableEnd="@drawable/ic_cancel"
+            android:drawablePadding="16dp"
+            android:padding="8dp"
+            android:text="Oral Communication and skills"
+            app:layout_constraintBaseline_toBaselineOf="@+id/skill_Seven"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/skill_Seven" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <Button
+        android:id="@+id/btnShow"
+        android:layout_width="160dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:background="@color/green"
+        android:text="Save"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -43,6 +43,7 @@ public class ActivityLogin extends AppCompatActivity {
     }
 
     private View parent_view;
+
     private EditText et_email, et_password;
     private Button btn_login;
     private ProgressBar progress_bar;
