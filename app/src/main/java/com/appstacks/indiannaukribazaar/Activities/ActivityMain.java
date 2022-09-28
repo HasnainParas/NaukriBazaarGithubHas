@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 
+import com.appstacks.indiannaukribazaar.NewActivities.EditProfileActivity;
 import com.appstacks.indiannaukribazaar.NewActivities.FindJobsActivity;
 import com.appstacks.indiannaukribazaar.NewActivities.KycPaidJobs.KycStartBrowsingActivity;
 import com.appstacks.indiannaukribazaar.NewActivities.KycPaidJobs.WelldoneActivity;
@@ -215,7 +216,7 @@ public class ActivityMain extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "coming soon", Toast.LENGTH_SHORT).show();
                     break;
                 case R.id.profile:
-                    loadFragment(new ProfileFragment());
+                    startActivity(new Intent(ActivityMain.this, EditProfileActivity.class));
 
                     break;
 
@@ -260,6 +261,10 @@ public class ActivityMain extends AppCompatActivity {
 //                    startActivity(intent);
 
 //                   startActivity(new Intent(ActivityMain.this, KycStartBrowsingActivity.class));
+
+
+
+
 
 
             }

@@ -7,7 +7,6 @@ import android.media.RingtoneManager;
 import android.net.Uri;
 import android.preference.PreferenceManager;
 import android.text.TextUtils;
-
 import com.appstacks.indiannaukribazaar.R;
 import com.appstacks.indiannaukribazaar.model.User;
 import com.google.gson.Gson;

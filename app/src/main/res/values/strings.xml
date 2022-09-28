@@ -2,6 +2,7 @@
 
     <string name="app_name">Indian Nokri Bazaar</string>
 
+ <string name="user_profile">UsersProfile</string>
     <string name="content_about">About This App \n
      On mission to eradicate extreme poverty from the world using the super power of technology!
     </string>
@@ -23,6 +24,30 @@
         https://play.google.com/store/apps/details?id=com.app.mazinokri
     </string>
 
+
+    <string-array name="lanuages">
+        <item>Hindi</item>
+        <item>Urdu</item>
+        <item>Punjabi</item>
+        <item>English</item>
+        <item>Marathi</item>
+        <item>Pashto</item>
+        <item>Shina</item>
+        <item>Spanish</item>
+        <item>Chinese</item>
+    </string-array>
+
+   <integer-array name="flags">
+       <item>@drawable/india_flag</item>
+       <item>@drawable/pak_flag</item>
+       <item>@drawable/pak_flag</item>
+       <item>@drawable/us_flag</item>
+       <item>@drawable/india_flag</item>
+       <item>@drawable/pak_flag</item>
+       <item>@drawable/pak_flag</item>
+       <item>@drawable/spanish_flag</item>
+       <item>@drawable/chinese_flag</item>
+   </integer-array>
     <!--=========================================================================================-->
 
     <!--ActivityComment string data -->

@@ -51,123 +51,131 @@
         app:layout_constraintTop_toBottomOf="@+id/searchView_searchSkillcomp"
         app:layout_constraintVertical_bias="0.45">
 
-
-        <TextView
-            android:id="@+id/skill_one"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:background="@color/grey_10"
-            android:drawableEnd="@drawable/ic_cancel"
-            android:drawablePadding="16dp"
-            android:padding="10dp"
-            android:text="Oral Communication and Skill"
-            app:layout_constraintEnd_toStartOf="@+id/skill_two"
-            app:layout_constraintHorizontal_bias="0.5"
+        <ListView
+            android:id="@+id/listOfSkills"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@color/colorAccent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+<!--        <TextView-->
+<!--            android:id="@+id/skill_one"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginTop="16dp"-->
+<!--            android:background="@color/grey_10"-->
+<!--            android:drawableEnd="@drawable/ic_cancel"-->
+<!--            android:drawablePadding="16dp"-->
+<!--            android:padding="10dp"-->
+<!--            android:text="Oral Communication and Skill"-->
+<!--            app:layout_constraintEnd_toStartOf="@+id/skill_two"-->
+<!--            app:layout_constraintHorizontal_bias="0.5"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toTopOf="parent" />-->
 
-        <TextView
-            android:id="@+id/skill_two"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@color/grey_10"
-            android:drawableEnd="@drawable/ic_cancel"
-            android:drawablePadding="16dp"
-            android:padding="10dp"
-            android:text="TextView"
-            app:layout_constraintBaseline_toBaselineOf="@+id/skill_one"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/skill_one" />
+<!--        <TextView-->
+<!--            android:id="@+id/skill_two"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:background="@color/grey_10"-->
+<!--            android:drawableEnd="@drawable/ic_cancel"-->
+<!--            android:drawablePadding="16dp"-->
+<!--            android:padding="10dp"-->
+<!--            android:text="TextView"-->
+<!--            app:layout_constraintBaseline_toBaselineOf="@+id/skill_one"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toEndOf="@+id/skill_one" />-->
 
-        <TextView
-            android:id="@+id/skill_three"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:background="@color/grey_10"
-            android:drawableEnd="@drawable/ic_cancel"
-            android:drawablePadding="16dp"
-            android:padding="10dp"
-            android:text="Oral communication and skills"
-            app:layout_constraintEnd_toStartOf="@+id/skill_four"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/skill_one" />
+<!--        <TextView-->
+<!--            android:id="@+id/skill_three"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginTop="16dp"-->
+<!--            android:background="@color/grey_10"-->
+<!--            android:drawableEnd="@drawable/ic_cancel"-->
+<!--            android:drawablePadding="16dp"-->
+<!--            android:padding="10dp"-->
+<!--            android:text="Oral communication and skills"-->
+<!--            app:layout_constraintEnd_toStartOf="@+id/skill_four"-->
+<!--            app:layout_constraintHorizontal_bias="0.5"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toBottomOf="@+id/skill_one" />-->
 
-        <TextView
-            android:id="@+id/skill_four"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@color/grey_10"
-            android:drawableEnd="@drawable/ic_cancel"
-            android:drawablePadding="16dp"
-            android:padding="10dp"
-            android:text="TextView"
-            app:layout_constraintBaseline_toBaselineOf="@+id/skill_three"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/skill_three" />
+<!--        <TextView-->
+<!--            android:id="@+id/skill_four"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:background="@color/grey_10"-->
+<!--            android:drawableEnd="@drawable/ic_cancel"-->
+<!--            android:drawablePadding="16dp"-->
+<!--            android:padding="10dp"-->
+<!--            android:text="TextView"-->
+<!--            app:layout_constraintBaseline_toBaselineOf="@+id/skill_three"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toEndOf="@+id/skill_three" />-->
 
-        <TextView
-            android:id="@+id/skill_five"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:background="@color/grey_10"
-            android:drawableEnd="@drawable/ic_cancel"
-            android:drawablePadding="16dp"
-            android:padding="10dp"
-            android:text="Oral communication and skills"
-            app:layout_constraintBottom_toBottomOf="@+id/skill_six"
-            app:layout_constraintEnd_toStartOf="@+id/skill_six"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/skill_three"
-            app:layout_constraintVertical_bias="1.0" />
+<!--        <TextView-->
+<!--            android:id="@+id/skill_five"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginTop="16dp"-->
+<!--            android:background="@color/grey_10"-->
+<!--            android:drawableEnd="@drawable/ic_cancel"-->
+<!--            android:drawablePadding="16dp"-->
+<!--            android:padding="10dp"-->
+<!--            android:text="Oral communication and skills"-->
+<!--            app:layout_constraintBottom_toBottomOf="@+id/skill_six"-->
+<!--            app:layout_constraintEnd_toStartOf="@+id/skill_six"-->
+<!--            app:layout_constraintHorizontal_bias="0.5"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toBottomOf="@+id/skill_three"-->
+<!--            app:layout_constraintVertical_bias="1.0" />-->
 
-        <TextView
-            android:id="@+id/skill_six"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@color/grey_10"
-            android:drawableEnd="@drawable/ic_cancel"
-            android:drawablePadding="16dp"
-            android:padding="10dp"
-            android:text="TextView"
-            app:layout_constraintBaseline_toBaselineOf="@+id/skill_five"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/skill_five" />
+<!--        <TextView-->
+<!--            android:id="@+id/skill_six"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:background="@color/grey_10"-->
+<!--            android:drawableEnd="@drawable/ic_cancel"-->
+<!--            android:drawablePadding="16dp"-->
+<!--            android:padding="10dp"-->
+<!--            android:text="TextView"-->
+<!--            app:layout_constraintBaseline_toBaselineOf="@+id/skill_five"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintHorizontal_bias="0.5"-->
+<!--            app:layout_constraintStart_toEndOf="@+id/skill_five" />-->
 
-        <TextView
-            android:id="@+id/skill_Seven"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:background="@color/grey_10"
-            android:drawableEnd="@drawable/ic_cancel"
-            android:drawablePadding="16dp"
-            android:padding="8dp"
-            android:text="TextView"
-            app:layout_constraintBottom_toBottomOf="@+id/skill_eight"
-            app:layout_constraintEnd_toStartOf="@+id/skill_eight"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/skill_five" />
+<!--        <TextView-->
+<!--            android:id="@+id/skill_Seven"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginTop="16dp"-->
+<!--            android:background="@color/grey_10"-->
+<!--            android:drawableEnd="@drawable/ic_cancel"-->
+<!--            android:drawablePadding="16dp"-->
+<!--            android:padding="8dp"-->
+<!--            android:text="TextView"-->
+<!--            app:layout_constraintBottom_toBottomOf="@+id/skill_eight"-->
+<!--            app:layout_constraintEnd_toStartOf="@+id/skill_eight"-->
+<!--            app:layout_constraintHorizontal_bias="0.5"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toBottomOf="@+id/skill_five" />-->
 
-        <TextView
-            android:id="@+id/skill_eight"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@color/grey_10"
-            android:drawableEnd="@drawable/ic_cancel"
-            android:drawablePadding="16dp"
-            android:padding="8dp"
-            android:text="Oral Communication and skills"
-            app:layout_constraintBaseline_toBaselineOf="@+id/skill_Seven"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/skill_Seven" />
+<!--        <TextView-->
+<!--            android:id="@+id/skill_eight"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:background="@color/grey_10"-->
+<!--            android:drawableEnd="@drawable/ic_cancel"-->
+<!--            android:drawablePadding="16dp"-->
+<!--            android:padding="8dp"-->
+<!--            android:text="Oral Communication and skills"-->
+<!--            app:layout_constraintBaseline_toBaselineOf="@+id/skill_Seven"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintHorizontal_bias="0.5"-->
+<!--            app:layout_constraintStart_toEndOf="@+id/skill_Seven" />-->
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <Button
@@ -182,4 +190,14 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/txt_noOfSkills"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="TextView"
+        app:layout_constraintBottom_toBottomOf="@+id/txtTitle_searchSkillcomp"
+        app:layout_constraintStart_toEndOf="@+id/txtTitle_searchSkillcomp"
+        app:layout_constraintTop_toTopOf="@+id/txtTitle_searchSkillcomp" />
 </androidx.constraintlayout.widget.ConstraintLayout>

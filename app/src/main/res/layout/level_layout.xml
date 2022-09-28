@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+    <RadioGroup
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:id="@+id/radioGroup_level"
+        android:orientation="vertical"
+        android:padding="8dp">
+
+        <RadioButton
+            android:id="@+id/radio_level0"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:layoutDirection="rtl"
+            android:padding="16dp"
+            android:text="Level 0"
+            android:textAlignment="textStart" />
+
+        <RadioButton
+            android:id="@+id/radio_level1"
+            android:layout_width="match_parent"
+
+
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:layoutDirection="rtl"
+            android:padding="16dp"
+            android:text="Level 1"
+            android:textAlignment="textStart" />
+
+        <RadioButton
+            android:id="@+id/radio_level2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:layoutDirection="rtl"
+            android:padding="16dp"
+            android:text="Level 2"
+            android:textAlignment="textStart" />
+
+        <RadioButton
+            android:id="@+id/radio_level3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:layoutDirection="rtl"
+            android:padding="16dp"
+            android:text="Level 3"
+            android:textAlignment="textStart" />
+
+        <RadioButton
+            android:id="@+id/radio_level4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:layoutDirection="rtl"
+            android:padding="16dp"
+            android:text="Level 4"
+            android:textAlignment="textStart" />
+
+        <RadioButton
+            android:id="@+id/radio_level5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:layoutDirection="rtl"
+            android:padding="16dp"
+            android:text="Level 5"
+            android:textAlignment="textStart" />
+
+        <RadioButton
+            android:id="@+id/radio_level6"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:layoutDirection="rtl"
+            android:padding="16dp"
+            android:text="Level 6"
+            android:textAlignment="textStart" />
+
+        <RadioButton
+            android:id="@+id/radio_level7"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:layoutDirection="rtl"
+            android:padding="16dp"
+            android:text="Level 7"
+            android:textAlignment="textStart" />
+
+        <RadioButton
+            android:id="@+id/radio_level8"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:layoutDirection="rtl"
+            android:padding="16dp"
+            android:text="Level 8"
+            android:textAlignment="textStart" />
+
+        <RadioButton
+            android:id="@+id/radio_level9"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:layoutDirection="rtl"
+            android:padding="16dp"
+            android:text="Level 9"
+            android:textAlignment="textStart" />
+
+        <RadioButton
+            android:id="@+id/radio_level10"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:layoutDirection="rtl"
+            android:padding="16dp"
+            android:text="Level 10"
+            android:textAlignment="textStart" />
+
+    </RadioGroup>
+
+
+</LinearLayout>

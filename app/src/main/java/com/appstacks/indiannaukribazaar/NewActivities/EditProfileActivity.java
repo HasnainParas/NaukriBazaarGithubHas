@@ -25,6 +25,7 @@ public class EditProfileActivity extends AppCompatActivity {
         });
 
         binding.btnworkExperienceAdd.setOnClickListener(view -> {
+
             in = new Intent(EditProfileActivity.this, DetailsActivity.class);
             in.putExtra("profile", "Add Work" );
             startActivity(in);
@@ -54,7 +55,37 @@ public class EditProfileActivity extends AppCompatActivity {
                 startActivity(in);
             }
         });
+        binding.btnLanguageEdit.setOnClickListener(view -> {
+            in =new Intent(EditProfileActivity.this,DetailsActivity.class);
+            in.putExtra("profile","Edit language");
+            startActivity(in);
+        });
+     binding.btnAppreciationAdd.setOnClickListener(new View.OnClickListener() {
+         @Override
+         public void onClick(View view) {
+             in =new Intent(EditProfileActivity.this,DetailsActivity.class);
+             in.putExtra("profile","Add Appre");
+             startActivity(in);
+         }
 
+     });
+     binding.btnAppreciationEdit.setOnClickListener(new View.OnClickListener() {
+         @Override
+         public void onClick(View view) {
+             in=new Intent(EditProfileActivity.this,DetailsActivity.class);
+             in.putExtra("profile","Edit Appre");
+             startActivity(in);
+         }
+     });
+
+     binding.btnResumeAdd.setOnClickListener(new View.OnClickListener() {
+         @Override
+         public void onClick(View view) {
+             in=new Intent(EditProfileActivity.this,DetailsActivity.class);
+             in.putExtra("profile","Add cv");
+             startActivity(in);
+         }
+     });
 
     }
 }
