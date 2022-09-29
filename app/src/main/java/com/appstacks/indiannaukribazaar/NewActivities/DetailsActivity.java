@@ -18,6 +18,7 @@ import android.os.Bundle;
 import android.provider.OpenableColumns;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 
@@ -37,6 +38,7 @@ import com.appstacks.indiannaukribazaar.NewActivities.Adapters.SelectedLanguages
 import com.appstacks.indiannaukribazaar.NewActivities.Models.SelectedLanguages;
 import com.appstacks.indiannaukribazaar.ProfileModels.AboutMeDescription;
 import com.appstacks.indiannaukribazaar.ProfileModels.AddWorkExperience;
+import com.appstacks.indiannaukribazaar.ProfileModels.Education;
 import com.appstacks.indiannaukribazaar.ProfileModels.Resume;
 import com.appstacks.indiannaukribazaar.R;
 import com.appstacks.indiannaukribazaar.databinding.ActivityDetailsBinding;
@@ -57,6 +59,8 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 public class DetailsActivity extends AppCompatActivity {
@@ -116,8 +120,8 @@ public class DetailsActivity extends AppCompatActivity {
                 });
                 binding.aboutidlay.btnSaveAboutMe.setOnClickListener(view -> {
                     if (binding.aboutidlay.etTellmeAbout.getText().toString().isEmpty()) {
-                       binding.aboutidlay.etTellmeAbout.setError("Kindly describe yourself");
-                    }else{
+                        binding.aboutidlay.etTellmeAbout.setError("Kindly describe yourself");
+                    } else {
                         String aboutMeDescription = binding.aboutidlay.etTellmeAbout.getText().toString();
                         dialog.setTitle("Uploading ");
                         dialog.setMessage("Please wait while uploading");
@@ -185,6 +189,8 @@ public class DetailsActivity extends AppCompatActivity {
                 binding.addworklay.btnRemoveWorkEx.setVisibility(View.GONE);
                 binding.addworklay.textFileOfStudy.setVisibility(View.VISIBLE);
                 binding.addworklay.etFieldofStudy.setVisibility(View.VISIBLE);
+
+                binding.addworklay.checkboxPosition.setVisibility(View.GONE);
                 binding.addworklay.txtaddworkexperience.setText("Add Education");
                 binding.addworklay.textJobTitle.setText("Level of education");
                 binding.addworklay.editTextJobTitle.setOnClickListener(view -> {
@@ -249,6 +255,7 @@ public class DetailsActivity extends AppCompatActivity {
                         binding.searchviewLayo.getRoot().setVisibility(View.GONE);
                         binding.addworklay.getRoot().setVisibility(View.VISIBLE);
 
+
                     });
                 });
                 binding.addworklay.etFieldofStudy.setOnClickListener(view -> {
@@ -287,6 +294,41 @@ public class DetailsActivity extends AppCompatActivity {
                     binding.searchviewLayo.getRoot().setVisibility(View.GONE);
                     binding.addworklay.getRoot().setVisibility(View.VISIBLE);
                 });
+                if (binding.addworklay.txtaddworkexperience.getText().toString().equals("Add Education")) {
+                    binding.addworklay.btnSaveAddWorkEx.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            if (binding.addworklay.edittextCompany.getText().toString().isEmpty()) {
+                                binding.addworklay.edittextCompany.setError("Add your institute by double tapping");
+                            } else if (binding.addworklay.editTextJobTitle.getText().toString().isEmpty()) {
+                                binding.addworklay.editTextJobTitle.setError("Add your education by double tapping");
+                            } else if (binding.addworklay.etFieldofStudy.getText().toString().isEmpty()) {
+                                binding.addworklay.etFieldofStudy.setError("Add your field by double tapping");
+                            } else if (binding.addworklay.etStartDateAddWork.getText().toString().isEmpty()) {
+                                binding.addworklay.etStartDateAddWork.setError("Enter your starting date");
+                            } else if (binding.addworklay.etEndDateAddWork.getText().toString().isEmpty()) {
+                                binding.addworklay.etEndDateAddWork.setError("Kindly enter your end date");
+                            } else if (binding.addworklay.etTellmeAbout.getText().toString().isEmpty()) {
+                                binding.addworklay.etTellmeAbout.setError("Kindly describe about your education");
+                            } else {
+
+                                dialog.setTitle("Uploading");
+                                dialog.setMessage("Please wait while uploading");
+                                dialog.setCancelable(false);
+                                dialog.show();
+                                String levelOfEducation = binding.addworklay.editTextJobTitle.getText().toString();
+                                String instituteName = binding.addworklay.edittextCompany.getText().toString();
+                                String educationFieldOfStudy = binding.addworklay.etFieldofStudy.getText().toString();
+                                String educationStartDate = binding.addworklay.etStartDateAddWork.getText().toString();
+                                String educationEndDate = binding.addworklay.etEndDateAddWork.getText().toString();
+                                String educationDescription = binding.addworklay.etTellmeAbout.getText().toString();
+
+                                uploadEducation(levelOfEducation, instituteName, educationFieldOfStudy, educationStartDate, educationEndDate, educationDescription);
+
+                            }
+                        }
+                    });
+                }
                 break;
 
             case "Edit Education":
@@ -382,18 +424,18 @@ public class DetailsActivity extends AppCompatActivity {
                 binding.searchSkillLayout.btnShow.setOnClickListener(view -> {
 
                     if (skills == null) {
-                        Toast.makeText(DetailsActivity.this, "Select sny skill", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(DetailsActivity.this, "Select any skill", Toast.LENGTH_SHORT).show();
                     } else if (skills.size() != 8) {
                         Toast.makeText(DetailsActivity.this, "Select minimum eight skills", Toast.LENGTH_SHORT).show();
                     } else {
                         binding.searchSkillLayout.getRoot().setVisibility(View.GONE);
                         binding.saveSkillsLayout.getRoot().setVisibility(View.VISIBLE);
                         binding.saveSkillsLayout.txtTitleSearchSkillcomp.setText("Add skill");
-                        binding.saveSkillsLayout.btnShow.setText("Save");
+                        binding.saveSkillsLayout.btnShow.setText("Show");
                         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(DetailsActivity.this, R.layout.sample_skills_layout, R.id.textView, skills);
                         binding.saveSkillsLayout.listOfSkills.setAdapter(arrayAdapter);
 
-                        if (binding.saveSkillsLayout.btnShow.getText() == "Show") {
+                        if (binding.saveSkillsLayout.btnShow.getText().equals("Show")) {
                             binding.saveSkillsLayout.listOfSkills.setOnItemClickListener((adapterView, view112, i, l) -> {
 
                                 skills.remove(i);
@@ -408,7 +450,7 @@ public class DetailsActivity extends AppCompatActivity {
 
                     }
 
-                    if (binding.saveSkillsLayout.btnShow.getText().equals("Save")) {
+                    if (binding.saveSkillsLayout.btnShow.getText().equals("Show")) {
 
                         binding.saveSkillsLayout.btnShow.setOnClickListener(view13 -> {
 
@@ -417,7 +459,26 @@ public class DetailsActivity extends AppCompatActivity {
                             binding.saveSkillsLayout.searchViewSearchSkillcomp.setVisibility(View.GONE);
 
                             binding.saveSkillsLayout.btnShow.setText("Confirm");
-                            binding.saveSkillsLayout.btnShow.setOnClickListener(view110 -> finish());
+
+                            binding.saveSkillsLayout.btnShow.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                   dialog.setTitle("Uploading");
+                                   dialog.setMessage("Please wait while uploading");
+                                   dialog.setCancelable(false);
+                                   dialog.show();
+//                                    for (int i = 0; i < skills.size(); i++) {
+//                                        skillsToUpload += skills.get(i);
+//                                        skillsToUpload += ",";
+//
+//
+//                                    }
+                                    HashMap<String, String> skillsMap = convertArraylistToHashmap(skills);
+                                    uploadSkills(skillsMap);
+
+                                }
+                            });
+
 
                         });
                     }
@@ -648,6 +709,49 @@ public class DetailsActivity extends AppCompatActivity {
 
     }
 
+    private void uploadSkills(HashMap<String, String> skillsMap) {
+
+        databaseReference.child(getString(R.string.user_profile)).child(userId).child("Skills").setValue(skillsMap)
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isComplete() && task.isSuccessful()) {
+                            dialog.dismiss();
+                            Toast.makeText(DetailsActivity.this, "Skills added", Toast.LENGTH_SHORT).show();
+                            finish();
+                        }
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        dialog.dismiss();
+                        Toast.makeText(DetailsActivity.this, "" + e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+    }
+
+    private void uploadEducation(String levelOfEducation, String instituteName, String filedOfStudy, String educationStartDate, String educationEndDate, String educationDescription) {
+        Education education = new Education(levelOfEducation, instituteName, filedOfStudy, educationStartDate, educationEndDate, educationDescription);
+        databaseReference.child(getString(R.string.user_profile)).child(userId).child("Education").setValue(education)
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isComplete() && task.isSuccessful()) {
+                            dialog.dismiss();
+                            Toast.makeText(DetailsActivity.this, "Education Added", Toast.LENGTH_SHORT).show();
+                            finish();
+                        }
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        dialog.dismiss();
+                        Toast.makeText(DetailsActivity.this, "" + e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                });
+    }
+
     private void uploadWorkExperience(String jobTitle, String company, String startDate, String endDate, String description) {
 
         AddWorkExperience data = new AddWorkExperience(jobTitle, company, startDate, endDate, description);
@@ -669,6 +773,24 @@ public class DetailsActivity extends AppCompatActivity {
                         Toast.makeText(DetailsActivity.this, "" + e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
                     }
                 });
+    }
+
+    private static HashMap<String, String> convertArraylistToHashmap(ArrayList<String> arrayList) {
+
+        HashMap<String, String> hashMap = new HashMap<>();
+
+
+        for (int i=0;i<arrayList.size();i++){
+
+            hashMap.put(String.valueOf(i),arrayList.get(i) );
+        }
+//        for (String str : arrayList) {
+//
+//            hashMap.put(String.valueOf(str.indexOf(str)),str);
+//        }
+
+        return hashMap;
+
     }
 
     private void UploadAboutMe(String aboutMeDescription) {
