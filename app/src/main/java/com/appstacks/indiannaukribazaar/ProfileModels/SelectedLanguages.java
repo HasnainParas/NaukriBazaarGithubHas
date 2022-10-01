@@ -1,20 +1,26 @@
-package com.appstacks.indiannaukribazaar.NewActivities.Models;
+package com.appstacks.indiannaukribazaar.ProfileModels;
 
 import android.graphics.drawable.Drawable;
 
 public class SelectedLanguages {
 
     String name;
-    Drawable flag;
+    String flag;
     String oralLevel;
     String writtenLevel;
+    String UUID;
+    String userId;
 
+    public SelectedLanguages() {
+    }
 
-    public SelectedLanguages(String name, Drawable flag, String oralLevel, String writtenLevel) {
+    public SelectedLanguages(String name, String flag, String oralLevel, String writtenLevel, String UUID, String userId) {
         this.name = name;
         this.flag = flag;
         this.oralLevel = oralLevel;
         this.writtenLevel = writtenLevel;
+        this.UUID = UUID;
+        this.userId = userId;
     }
 
     public String getName() {
@@ -25,11 +31,11 @@ public class SelectedLanguages {
         this.name = name;
     }
 
-    public Drawable getFlag() {
+    public String getFlag() {
         return flag;
     }
 
-    public void setFlag(Drawable flag) {
+    public void setFlag(String flag) {
         this.flag = flag;
     }
 
@@ -48,4 +54,21 @@ public class SelectedLanguages {
     public void setWrittenLevel(String writtenLevel) {
         this.writtenLevel = writtenLevel;
     }
+
+    public String getUUID() {
+        return UUID;
+    }
+
+    public void setUUID(String UUID) {
+        this.UUID = UUID;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
 }
+

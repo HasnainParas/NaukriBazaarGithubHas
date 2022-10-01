@@ -4,21 +4,23 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
-import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
-import android.icu.text.DecimalFormat;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
+import android.provider.MediaStore;
 import android.provider.OpenableColumns;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 
@@ -26,6 +28,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -34,8 +37,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.appstacks.indiannaukribazaar.FirebaseAdapters.LanguageAdapter;
-import com.appstacks.indiannaukribazaar.NewActivities.Adapters.SelectedLanguagesAdapter;
-import com.appstacks.indiannaukribazaar.NewActivities.Models.SelectedLanguages;
+import com.appstacks.indiannaukribazaar.ProfileModels.Appreciation;
+import com.appstacks.indiannaukribazaar.ProfileModels.SelectedLanguages;
 import com.appstacks.indiannaukribazaar.ProfileModels.AboutMeDescription;
 import com.appstacks.indiannaukribazaar.ProfileModels.AddWorkExperience;
 import com.appstacks.indiannaukribazaar.ProfileModels.Education;
@@ -54,14 +57,18 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
-import java.net.URLConnection;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
-import java.util.Map;
 import java.util.Objects;
+import java.util.UUID;
 
 public class DetailsActivity extends AppCompatActivity {
     ActivityDetailsBinding binding;
@@ -559,24 +566,30 @@ public class DetailsActivity extends AppCompatActivity {
                             @Override
                             public void onClick(View view) {
                                 Drawable drawable = binding.languageDetailsLayout.flagToSet.getDrawable();
+                                Bitmap bitmap = ((BitmapDrawable)drawable).getBitmap();
+//
+
+//                                int id =binding.languageDetailsLayout.flagToSet.getId();
                                 String language = binding.languageDetailsLayout.txtLanguageToSet.getText().toString();
                                 if (Objects.equals(levelOfOral, null)) {
                                     Toast.makeText(DetailsActivity.this, "Select language's oral level", Toast.LENGTH_SHORT).show();
                                 } else if (Objects.equals(levelOfWritten, null)) {
                                     Toast.makeText(DetailsActivity.this, "Select language's written level", Toast.LENGTH_SHORT).show();
                                 } else {
-                                    binding.languageDetailsLayout.getRoot().setVisibility(View.GONE);
-                                    binding.addlanguageEdit.getRoot().setVisibility(View.VISIBLE);
+//                                    binding.languageDetailsLayout.getRoot().setVisibility(View.GONE);
+//                                    binding.addlanguageEdit.getRoot().setVisibility(View.VISIBLE);
+//
+//                                    binding.addlanguageEdit.listViewAddlanguage1.setVisibility(View.GONE);
+//                                    binding.addlanguageEdit.addedLanguageRecyclerview.setVisibility(View.VISIBLE);
+//
+//                                    selectedLanguagesArrayList = new ArrayList<>();
+//                                    selectedLanguagesArrayList.add(new SelectedLanguages(language, drawable, levelOfOral, levelOfWritten));
+//
+//                                    SelectedLanguagesAdapter selectedLanguagesAdapter = new SelectedLanguagesAdapter(DetailsActivity.this, selectedLanguagesArrayList);
+//                                    binding.addlanguageEdit.addedLanguageRecyclerview.setAdapter(selectedLanguagesAdapter);
+//                                    binding.addlanguageEdit.addedLanguageRecyclerview.setLayoutManager(new LinearLayoutManager(DetailsActivity.this));
 
-                                    binding.addlanguageEdit.listViewAddlanguage1.setVisibility(View.GONE);
-                                    binding.addlanguageEdit.addedLanguageRecyclerview.setVisibility(View.VISIBLE);
-
-                                    selectedLanguagesArrayList = new ArrayList<>();
-                                    selectedLanguagesArrayList.add(new SelectedLanguages(language, drawable, levelOfOral, levelOfWritten));
-
-                                    SelectedLanguagesAdapter selectedLanguagesAdapter = new SelectedLanguagesAdapter(DetailsActivity.this, selectedLanguagesArrayList);
-                                    binding.addlanguageEdit.addedLanguageRecyclerview.setAdapter(selectedLanguagesAdapter);
-                                    binding.addlanguageEdit.addedLanguageRecyclerview.setLayoutManager(new LinearLayoutManager(DetailsActivity.this));
+                                    uploadFlagOfLanguage(bitmap,language);
 
 
                                 }
@@ -660,6 +673,9 @@ public class DetailsActivity extends AppCompatActivity {
                             String awardCategory = binding.addAppreciation.edittextCategory.getText().toString();
                             String awardEndDate = binding.addAppreciation.etEndDateappreciation.getText().toString();
                             String awardDescription = binding.addAppreciation.etTellmeAppreciation.getText().toString();
+
+
+                            uploadAppreciation(awardName,awardCategory,awardEndDate,awardDescription);
                         }
                     }
                 });
@@ -708,6 +724,107 @@ public class DetailsActivity extends AppCompatActivity {
         }
 
     }
+
+    private void uploadAppreciation(String awardName, String awardCategory, String awardEndDate, String awardDescription) {
+                  dialog.setTitle("Adding appreciation");
+                  dialog.setMessage("Please wait while uploading...");
+                  dialog.setCancelable(false);
+                  dialog.show();
+
+        Appreciation appreciation =new Appreciation(awardName,awardCategory,awardEndDate,awardDescription);
+
+                  databaseReference.child(getString(R.string.user_profile)).child(userId).child("Appreciation")
+                          .setValue(appreciation)
+                          .addOnCompleteListener(new OnCompleteListener<Void>() {
+                              @Override
+                              public void onComplete(@NonNull Task<Void> task) {
+                                  if (task.isComplete() && task.isSuccessful()){
+                                         dialog.dismiss();
+                                      Toast.makeText(DetailsActivity.this, "Appreciation Added", Toast.LENGTH_SHORT).show();
+                                      finish();
+                                  }else{
+                                      dialog.dismiss();
+                                      Toast.makeText(DetailsActivity.this, ""+task.getException().toString(), Toast.LENGTH_SHORT).show();
+                                  }
+                              }
+                          }).addOnFailureListener(new OnFailureListener() {
+                              @Override
+                              public void onFailure(@NonNull Exception e) {
+                                  dialog.dismiss();
+                                  Toast.makeText(DetailsActivity.this, "" +e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+                              }
+                          });
+
+    }
+
+    private void uploadFlagOfLanguage(Bitmap bitmap,String language) {
+dialog.setTitle("Adding Language");
+dialog.setMessage("Please wait uploading...");
+dialog.setCancelable(false);
+dialog.show();
+        
+   ByteArrayOutputStream baos =new ByteArrayOutputStream();
+   bitmap.compress(Bitmap.CompressFormat.JPEG,50,baos);
+   byte[] finalImage =baos.toByteArray();
+   final StorageReference filePath;
+   filePath=storageReference.child(getString(R.string.user_profile)).child(userId).child("LanguageFlag"  + UUID.randomUUID().toString());
+   UploadTask uploadTask =filePath.putBytes(finalImage);
+   uploadTask.addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
+       @Override
+       public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
+           if (task.isSuccessful()){
+
+               uploadTask.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                   @Override
+                   public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                       filePath.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                           @Override
+                           public void onSuccess(Uri uri) {
+                               String flagDownloadUrl=String.valueOf(uri);
+                               uploadLangauge(language,flagDownloadUrl,levelOfOral,levelOfWritten);
+                           }
+                       });
+                   }
+               });
+           }else{
+               dialog.dismiss();
+               Toast.makeText(DetailsActivity.this, ""+task.getException().toString(), Toast.LENGTH_SHORT).show();
+           }
+       }
+   }).addOnFailureListener(new OnFailureListener() {
+       @Override
+       public void onFailure(@NonNull Exception e) {
+           dialog.dismiss();
+           Toast.makeText(DetailsActivity.this, ""+e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+       }
+   });
+
+
+    }
+
+    private void uploadLangauge(String language, String flagDownloadUrl, String levelOfOral, String levelOfWritten) {
+    String uID=    UUID.randomUUID().toString();
+
+        SelectedLanguages selectedLanguages=new SelectedLanguages(language,flagDownloadUrl,levelOfOral,levelOfWritten,uID,userId);
+        databaseReference.child(getString(R.string.user_profile)).child(userId).child("Languages").child(uID)
+                .setValue(selectedLanguages)
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        dialog.dismiss();
+                        Toast.makeText(DetailsActivity.this, "Langauge Added", Toast.LENGTH_SHORT).show();
+                        finish();
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        dialog.dismiss();
+                        Toast.makeText(DetailsActivity.this, ""+e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                });
+    }
+
+
 
     private void uploadSkills(HashMap<String, String> skillsMap) {
 
