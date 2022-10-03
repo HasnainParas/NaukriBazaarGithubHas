@@ -32,7 +32,9 @@
             android:exported="false" />
         <activity
             android:name=".NewActivities.EditProfileActivity"
-            android:exported="true" >
+            android:exported="true"
+            android:theme="@style/noactiondisplay"
+            >
 
 
         </activity>
