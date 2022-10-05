@@ -156,7 +156,8 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:paddingBottom="10dp">
 
                 <ImageView
                     android:id="@+id/img_aboutMe"
@@ -198,6 +199,7 @@
                     android:layout_marginTop="24dp"
                     android:layout_marginEnd="24dp"
                     android:background="@color/grey_80"
+                    android:visibility="gone"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/txtAboutMe" />
@@ -212,6 +214,7 @@
                     android:layout_marginBottom="16dp"
                     android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lectus id commodo egestas metus interdum dolor."
                     android:textColor="@color/green"
+                    android:visibility="gone"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"

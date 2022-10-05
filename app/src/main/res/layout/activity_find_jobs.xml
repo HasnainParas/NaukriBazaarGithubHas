@@ -2,10 +2,10 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/scrollview"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:id="@+id/scrollview"
     tools:context=".NewActivities.FindJobsActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -21,22 +21,21 @@
             android:layout_height="65dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="16dp"
-            android:src="@drawable/userimg"
-            android:visibility="invisible"
+            android:src="@drawable/profileplace"
+            android:visibility="visible"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/textView34"
-            android:layout_width="0dp"
+            android:id="@+id/usernameid"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
             android:fontFamily="@font/dm_sans"
-            android:text="Hello\nOrlando Diggs."
+            android:text="Hasnain Paras"
             android:textColor="@color/black"
             android:textSize="20sp"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imageView13" />
 
@@ -45,12 +44,13 @@
             android:layout_width="0dp"
             android:layout_height="200dp"
             android:layout_marginStart="8dp"
+            android:layout_marginTop="2dp"
             android:layout_marginEnd="8dp"
             android:scaleType="centerCrop"
             android:src="@drawable/discountimgg"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView34" />
+            app:layout_constraintTop_toBottomOf="@+id/usernameid" />
 
         <TextView
             android:id="@+id/textView44"
@@ -96,25 +96,25 @@
 
         <TextView
             android:id="@+id/textView49"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:fontFamily="@font/dm_sans"
             android:text="Find Your Job"
             android:textColor="@color/black"
             android:textSize="18sp"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/imageView15"
             app:layout_constraintTop_toBottomOf="@+id/imageView15" />
 
 
-        <RelativeLayout
-            android:id="@+id/relativeLayout"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constantaLayout"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:orientation="horizontal"
+            android:padding="5dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView49">
@@ -123,13 +123,14 @@
                 android:id="@+id/paidJob"
                 android:layout_width="160dp"
                 android:layout_height="170dp"
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="10dp"
-                android:layout_marginBottom="10dp"
+                android:layout_marginStart="8dp"
                 android:background="@drawable/rectangebg"
                 android:backgroundTint="#AFECFE"
                 android:orientation="vertical"
-                android:padding="5dp">
+                android:padding="5dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
                 <ImageView
                     android:layout_width="60dp"
@@ -164,27 +165,32 @@
 
             <LinearLayout
                 android:id="@+id/l2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
                 android:layout_marginStart="8dp"
-                android:layout_marginEnd="5dp"
-                android:layout_toEndOf="@+id/paidJob"
-                android:orientation="horizontal">
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
+                android:background="@drawable/rectangebg"
+                android:backgroundTint="#BEAFFE"
+                android:gravity="center"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toTopOf="@+id/addjobBtn"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/paidJob"
+                app:layout_constraintTop_toTopOf="parent">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
                     android:background="@drawable/rectangebg"
                     android:backgroundTint="#BEAFFE"
                     android:gravity="center"
-                    android:orientation="vertical"
-                    android:padding="15dp">
+                    android:orientation="vertical">
 
                     <TextView
                         android:id="@+id/textView54"
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/dm_sans"
                         android:gravity="center"
@@ -194,7 +200,7 @@
 
                     <TextView
                         android:id="@+id/textView55"
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/dm_sans"
                         android:gravity="center"
@@ -208,16 +214,20 @@
 
             <LinearLayout
                 android:id="@+id/addjobBtn"
-                android:layout_width="190dp"
-                android:layout_height="75dp"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
                 android:layout_below="@id/l2"
                 android:layout_alignStart="@+id/l2"
-                android:layout_marginStart="10dp"
-                android:layout_marginBottom="10dp"
+                android:layout_marginTop="8dp"
                 android:background="@drawable/rectangebg"
                 android:backgroundTint="#FFD6AD"
                 android:gravity="center"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/l2"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="@+id/l2"
+                app:layout_constraintTop_toBottomOf="@+id/l2">
 
                 <!--                <TextView-->
                 <!--                    android:layout_width="match_parent"-->
@@ -229,37 +239,39 @@
                 <!--                    android:textSize="16sp" />-->
 
                 <TextView
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/dm_sans"
                     android:gravity="center"
+                    android:padding="5dp"
                     android:text="Add Job"
                     android:textColor="@color/black"
                     android:textSize="16sp" />
             </LinearLayout>
 
-        </RelativeLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <TextView
             android:id="@+id/textView60"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
             android:layout_marginTop="8dp"
             android:fontFamily="@font/dm_sans"
             android:text="Recent Job List"
             android:textColor="@color/black"
             android:textSize="18sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/relativeLayout" />
+            app:layout_constraintStart_toStartOf="@+id/textView49"
+            app:layout_constraintTop_toBottomOf="@+id/constantaLayout" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycerviewFindJobs"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"

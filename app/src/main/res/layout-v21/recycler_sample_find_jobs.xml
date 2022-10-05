@@ -15,91 +15,98 @@
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toTopOf="parent">
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:paddingTop="15dp"
         android:paddingBottom="15dp">
 
-        <LinearLayout
-            android:layout_width="match_parent"
+        <ImageView
+            android:id="@+id/jobimg2"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:layout_marginStart="8dp"
+            android:background="@drawable/elipse1"
+            android:padding="2dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_name" />
 
-            <ImageView
-                android:id="@+id/jobimg2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="8dp"
-                android:background="@drawable/elipse1"
-                app:srcCompat="@drawable/ic_name" />
+        <TextView
+            android:id="@+id/jobTitle2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_weight="1"
+            android:fontFamily="@font/dm_sans"
+            android:padding="2dp"
+            android:text="Product Designer"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            app:layout_constraintStart_toEndOf="@+id/jobimg2"
+            app:layout_constraintTop_toTopOf="@+id/jobimg2" />
 
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="6dp"
-                android:layout_weight="1"
-                android:orientation="vertical">
+        <TextView
+            android:id="@+id/txt_workplace"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:fontFamily="@font/dm_sans"
+            android:padding="2dp"
+            android:text="Google inc, California, USA"
+            android:textColor="#524B6B"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="@+id/jobTitle2"
+            app:layout_constraintTop_toBottomOf="@+id/jobTitle2" />
 
-                <TextView
-                    android:id="@+id/jobTitle2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:fontFamily="@font/dm_sans"
-                    android:text="Product Designer"
-                    android:textColor="@color/black"
-                    android:textSize="16sp" />
+        <ImageView
+            android:id="@+id/bookmark"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
 
-                <TextView
-                    android:id="@+id/txt_workplace"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:fontFamily="@font/dm_sans"
-                    android:text="Google inc, California, USA"
-                    android:textColor="#524B6B"
-                    android:textSize="14sp" />
-
-            </LinearLayout>
-
-            <ImageView
-                android:id="@+id/bookmark"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-
-                android:layout_weight="1"
-                app:srcCompat="@drawable/ic_bookmark" />
-
-        </LinearLayout>
+            android:layout_marginEnd="8dp"
+            android:layout_weight="1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/jobTitle2"
+            app:srcCompat="@drawable/ic_bookmark" />
 
         <TextView
             android:id="@+id/salary2"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
+            android:layout_marginTop="8dp"
             android:layout_weight="1"
             android:fontFamily="@font/open_sans"
-            android:text="$15K/Mo"
+            android:padding="2dp"
+            android:text="$15K/Month"
             android:textColor="#524B6B"
-            android:textSize="14sp" />
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="@+id/jobimg2"
+            app:layout_constraintTop_toBottomOf="@+id/jobimg2" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:id="@+id/constraintLayout5"
+            android:layout_width="wrap_content"
 
-            android:layout_marginTop="5dp"
-            android:orientation="horizontal">
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:orientation="horizontal"
+            android:padding="5dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/salary2"
+            app:layout_constraintTop_toBottomOf="@+id/salary2">
 
             <TextView
                 android:id="@+id/jobtype2"
-                android:layout_width="120dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="4dp"
+                android:layout_marginStart="10dp"
                 android:background="@drawable/cornerbg"
                 android:fontFamily="@font/dm_sans"
+                android:minWidth="90dp"
                 android:padding="5dp"
                 android:text="Senior designer"
                 android:textAlignment="center"
@@ -111,40 +118,42 @@
 
             <TextView
                 android:id="@+id/time2"
-                android:layout_width="120dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="4dp"
-
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
                 android:background="@drawable/cornerbg"
                 android:fontFamily="@font/dm_sans"
+                android:minWidth="90dp"
                 android:padding="5dp"
                 android:text="Full time"
                 android:textAlignment="center"
                 android:textColor="#524B6B"
-                app:layout_constraintBottom_toBottomOf="@+id/jobtype2"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/apply2"
                 app:layout_constraintStart_toEndOf="@+id/jobtype2"
-                app:layout_constraintTop_toTopOf="@+id/jobtype2" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/apply2"
-                android:layout_width="120dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="4dp"
-                android:layout_marginEnd="5dp"
+                android:layout_marginEnd="10dp"
                 android:background="@drawable/cornerbg2"
                 android:fontFamily="@font/dm_sans"
-                android:paddingStart="5dp"
+                android:minWidth="90dp"
+                android:paddingStart="10dp"
                 android:paddingTop="5dp"
+                android:paddingEnd="10dp"
                 android:paddingBottom="5dp"
                 android:text="Apply"
                 android:textAlignment="center"
                 android:textColor="#524B6B"
-                app:layout_constraintBottom_toBottomOf="@+id/time2"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/time2"
-                app:layout_constraintTop_toTopOf="@+id/time2" />
+                app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
-    </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.cardview.widget.CardView>
 

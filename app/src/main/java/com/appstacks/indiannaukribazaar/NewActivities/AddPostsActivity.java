@@ -1,7 +1,9 @@
 package com.appstacks.indiannaukribazaar.NewActivities;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.room.Database;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -9,9 +11,17 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.Toast;
 
+import com.appstacks.indiannaukribazaar.FirebaseModels.PersonalInformationModel;
 import com.appstacks.indiannaukribazaar.R;
 import com.appstacks.indiannaukribazaar.databinding.ActivityAddPostsBinding;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.io.IOException;
 
@@ -22,6 +32,8 @@ public class AddPostsActivity extends AppCompatActivity {
     private static final int CAMERA_PIC_REQUEST = 1;
     private static final int GALLERY_PIC_REQUEST = 2;
 
+    String username, useraddress;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,6 +41,11 @@ public class AddPostsActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
         sharedPrefe = new SharedPrefe(AddPostsActivity.this);
 
+        username = getIntent().getStringExtra("username");
+        useraddress = getIntent().getStringExtra("useraddress");
+
+        binding.username.setText(username);
+        binding.useraddress.setText(useraddress);
 
         binding.icBck.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -59,11 +76,19 @@ public class AddPostsActivity extends AppCompatActivity {
         binding.postbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), AddJobsActivity.class);
-                String txt = binding.etDescription.getText().toString();
-                sharedPrefe.saveDescription(txt);
-                startActivity(intent);
-
+                if (binding.etPostTitle.getText().toString().isEmpty()) {
+                    binding.etPostTitle.setError("Field Cann't be empty");
+                    return;
+                } else if (binding.etDescription.getText().toString().isEmpty()) {
+                    binding.etDescription.setError("Field Cann't be empty");
+                    return;
+                } else {
+                    Intent intent = new Intent(getApplicationContext(), AddJobsActivity.class);
+                    String txt = binding.etDescription.getText().toString();
+                    sharedPrefe.saveDescription(txt);
+                    startActivity(intent);
+                }
+                
             }
         });
     }
@@ -77,7 +102,7 @@ public class AddPostsActivity extends AppCompatActivity {
                 assert data != null;
                 Bitmap image = (Bitmap) data.getExtras().get("data");
 //                ImageView imageview = (ImageView) findViewById(R.id.imageView18); //sets imageview as the bitmap
-                binding.imageView18.setImageBitmap(image);
+                binding.userpicture.setImageBitmap(image);
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -88,7 +113,7 @@ public class AddPostsActivity extends AppCompatActivity {
                 assert data != null;
                 Bitmap bitmap = MediaStore.Images.Media.getBitmap(getApplicationContext().getContentResolver(), data.getData());
 //                ImageView imageview = (ImageView) findViewById(R.id.imageView18); //sets imageview as the bitmap
-                binding.imageView18.setImageBitmap(bitmap);
+                binding.userpicture.setImageBitmap(bitmap);
             } catch (IOException e) {
                 e.printStackTrace();
             }

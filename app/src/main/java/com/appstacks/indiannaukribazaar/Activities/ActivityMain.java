@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 
+import com.appstacks.indiannaukribazaar.AaForChecking;
 import com.appstacks.indiannaukribazaar.NewActivities.EditProfileActivity;
 import com.appstacks.indiannaukribazaar.NewActivities.FindJobsActivity;
 import com.appstacks.indiannaukribazaar.NewActivities.KycPaidJobs.KycStartBrowsingActivity;
@@ -150,7 +151,7 @@ public class ActivityMain extends AppCompatActivity {
         LinearLayout floating = findViewById(R.id.floatingClick);
 
         floating.setOnClickListener(view -> {
-            startActivity(new Intent(getApplicationContext(), SpinWheelActivity.class));
+            startActivity(new Intent(getApplicationContext(), AaForChecking.class));
         });
 
         dao = AppDatabase.getDb(this).getDAO();
@@ -205,6 +206,20 @@ public class ActivityMain extends AppCompatActivity {
 
 
     public void bottomNavigations() {
+        boolean ch = false;
+
+        BottomNavigationView navigation;
+        navigation = findViewById(R.id.bottomNavigationnn);
+
+//        Menu a = navigation.getMenu();
+//        MenuItem b = a.findItem(R.id.profile);
+//        if(ch){
+//            b.setIcon(R.drawable.userimg);
+//        }
+//        else{
+//            b.setIcon(R.drawable.ic_profile_svg);
+//        }
+
         binding.bottomNavigationnn.setOnNavigationItemSelectedListener(menuItem -> {
 
             switch (menuItem.getItemId()) {
