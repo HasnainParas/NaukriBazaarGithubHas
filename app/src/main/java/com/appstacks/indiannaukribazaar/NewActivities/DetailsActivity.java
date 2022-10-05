@@ -4,21 +4,20 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
-import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
-import android.icu.text.DecimalFormat;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.OpenableColumns;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 
@@ -34,8 +33,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.appstacks.indiannaukribazaar.FirebaseAdapters.LanguageAdapter;
-import com.appstacks.indiannaukribazaar.NewActivities.Adapters.SelectedLanguagesAdapter;
-import com.appstacks.indiannaukribazaar.NewActivities.Models.SelectedLanguages;
+import com.appstacks.indiannaukribazaar.ProfileModels.Appreciation;
+import com.appstacks.indiannaukribazaar.ProfileModels.SelectedLanguages;
 import com.appstacks.indiannaukribazaar.ProfileModels.AboutMeDescription;
 import com.appstacks.indiannaukribazaar.ProfileModels.AddWorkExperience;
 import com.appstacks.indiannaukribazaar.ProfileModels.Education;
@@ -54,14 +53,14 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
-import java.net.URLConnection;
+import java.io.ByteArrayOutputStream;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
-import java.util.Map;
 import java.util.Objects;
+import java.util.UUID;
 
 public class DetailsActivity extends AppCompatActivity {
     ActivityDetailsBinding binding;
@@ -82,6 +81,8 @@ public class DetailsActivity extends AppCompatActivity {
     String userId, pdfName = "";
     String urlOfPdf = "";
 
+    boolean workAdded;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -93,27 +94,31 @@ public class DetailsActivity extends AppCompatActivity {
         storageReference = FirebaseStorage.getInstance().getReference();
         databaseReference = FirebaseDatabase.getInstance().getReference();
         userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+
         switch (profileIntent) {
             case "About Me":
                 binding.aboutidlay.getRoot().setVisibility(View.VISIBLE);
+                String aboutMeFromDb = getIntent().getStringExtra("aboutMeDesc");
+                if (aboutMeFromDb != null)
+                    binding.aboutidlay.etTellmeAbout.setText(aboutMeFromDb);
                 binding.aboutidlay.btnBackAboutMe.setOnClickListener(view -> onBackPressed());
                 binding.aboutidlay.etTellmeAbout.addTextChangedListener(new TextWatcher() {
                     @Override
                     public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                        Toast.makeText(DetailsActivity.this, "Before", Toast.LENGTH_SHORT).show();
+
                         binding.aboutidlay.btnBackAboutMe.setImageResource(R.drawable.ic_arrow_back_black_24dp);
                     }
 
                     @Override
                     public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                        Toast.makeText(DetailsActivity.this, "Changing", Toast.LENGTH_SHORT).show();
+
                         binding.aboutidlay.btnBackAboutMe.setImageResource(R.drawable.ic_cancel);
                         binding.aboutidlay.btnBackAboutMe.setOnClickListener(view -> Toast.makeText(DetailsActivity.this, "On Text Chaged Cacel", Toast.LENGTH_SHORT).show());
                     }
 
                     @Override
                     public void afterTextChanged(Editable editable) {
-                        Toast.makeText(DetailsActivity.this, "Changed", Toast.LENGTH_SHORT).show();
+
                         binding.aboutidlay.btnBackAboutMe.setImageResource(R.drawable.ic_cancel);
                         binding.aboutidlay.btnBackAboutMe.setOnClickListener(view -> bottomDialog());
                     }
@@ -132,6 +137,7 @@ public class DetailsActivity extends AppCompatActivity {
                 });
                 break;
             case "Add Work":
+
                 binding.addworklay.getRoot().setVisibility(View.VISIBLE);
                 binding.addworklay.btnRemoveWorkEx.setVisibility(View.GONE);
 
@@ -144,29 +150,77 @@ public class DetailsActivity extends AppCompatActivity {
                             binding.addworklay.edittextCompany.setError("Enter company title");
                         } else if (binding.addworklay.etStartDateAddWork.getText().toString().isEmpty()) {
                             binding.addworklay.etStartDateAddWork.setError("Start date required");
-                        } else if (binding.addworklay.etEndDateAddWork.getText().toString().isEmpty()) {
-                            binding.addworklay.etEndDateAddWork.setError("End date required");
                         } else if (binding.addworklay.etTellmeAbout.getText().toString().isEmpty()) {
                             binding.addworklay.etTellmeAbout.setError("Kindly provide a description");
+                        } else if (binding.addworklay.checkboxPosition.isChecked() && !binding.addworklay.etEndDateAddWork.getText().toString().isEmpty()) {
+                            Toast.makeText(DetailsActivity.this, "Your current position cannot have an end date", Toast.LENGTH_SHORT).show();
+                        } else if (!binding.addworklay.checkboxPosition.isChecked() && binding.addworklay.etEndDateAddWork.getText().toString().isEmpty()) {
+                            Toast.makeText(DetailsActivity.this, "Provide your end date or this is your current position", Toast.LENGTH_SHORT).show();
                         } else {
+
 
                             String jobTitle = binding.addworklay.editTextJobTitle.getText().toString();
                             String company = binding.addworklay.edittextCompany.getText().toString();
                             String startDate = binding.addworklay.etStartDateAddWork.getText().toString();
                             String endDate = binding.addworklay.etEndDateAddWork.getText().toString();
                             String description = binding.addworklay.etTellmeAbout.getText().toString();
+
+                            boolean isPosition = binding.addworklay.checkboxPosition.isChecked();
                             dialog.setTitle("Uploading");
                             dialog.setMessage("Please wait while uploading");
                             dialog.setCancelable(false);
                             dialog.show();
-                            uploadWorkExperience(jobTitle, company, startDate, endDate, description);
+                            uploadWorkExperience(jobTitle, company, startDate, endDate, description, userId, isPosition);
                         }
                     }
                 });
                 break;
+
             case "Edit Work":
+
+
                 binding.addworklay.getRoot().setVisibility(View.VISIBLE);
+                binding.addworklay.editTextJobTitle.setText(getIntent().getStringExtra("jobTitle"));
+                binding.addworklay.edittextCompany.setText(getIntent().getStringExtra("company"));
+                binding.addworklay.etStartDateAddWork.setText(getIntent().getStringExtra("startDate"));
+                binding.addworklay.etEndDateAddWork.setText(getIntent().getStringExtra("endDate"));
+                binding.addworklay.checkboxPosition.setChecked(getIntent().getBooleanExtra("positionNow", false));
+                binding.addworklay.etTellmeAbout.setText(getIntent().getStringExtra("jobDesc"));
                 binding.addworklay.txtaddworkexperience.setText("Change Work Experience");
+                binding.addworklay.btnSaveAddWorkEx.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        if (binding.addworklay.editTextJobTitle.getText().toString().isEmpty()) {
+                            binding.addworklay.editTextJobTitle.setError("Enter job title");
+                        } else if (binding.addworklay.edittextCompany.getText().toString().isEmpty()) {
+                            binding.addworklay.edittextCompany.setError("Enter company title");
+                        } else if (binding.addworklay.etStartDateAddWork.getText().toString().isEmpty()) {
+                            binding.addworklay.etStartDateAddWork.setError("Start date required");
+                        } else if (binding.addworklay.etTellmeAbout.getText().toString().isEmpty()) {
+                            binding.addworklay.etTellmeAbout.setError("Kindly provide a description");
+                        } else if (binding.addworklay.checkboxPosition.isChecked() && !binding.addworklay.etEndDateAddWork.getText().toString().isEmpty()) {
+                            Toast.makeText(DetailsActivity.this, "Your current position cannot have an end date", Toast.LENGTH_SHORT).show();
+                        } else if (!binding.addworklay.checkboxPosition.isChecked() && binding.addworklay.etEndDateAddWork.getText().toString().isEmpty()) {
+                            Toast.makeText(DetailsActivity.this, "Provide your end date or this is your current position", Toast.LENGTH_SHORT).show();
+                        } else {
+
+
+                            String jobTitle = binding.addworklay.editTextJobTitle.getText().toString();
+                            String company = binding.addworklay.edittextCompany.getText().toString();
+                            String startDate = binding.addworklay.etStartDateAddWork.getText().toString();
+                            String endDate = binding.addworklay.etEndDateAddWork.getText().toString();
+                            String description = binding.addworklay.etTellmeAbout.getText().toString();
+
+                            boolean isPosition = binding.addworklay.checkboxPosition.isChecked();
+                            dialog.setTitle("Updating");
+                            dialog.setMessage("Please wait..");
+                            dialog.setCancelable(false);
+                            dialog.show();
+                            uploadWorkExperience(jobTitle, company, startDate, endDate, description, userId, isPosition);
+                        }
+                    }
+                });
+                binding.addworklay.btnRemoveWorkEx.setVisibility(View.VISIBLE);
                 binding.addworklay.btnRemoveWorkEx.setOnClickListener(view -> {
                     BottomSheetDialog dialog = new BottomSheetDialog(DetailsActivity.this, R.style.AppBottomSheetDialogTheme);
                     View bottomsheetView = LayoutInflater.from(getApplicationContext()).
@@ -182,15 +236,39 @@ public class DetailsActivity extends AppCompatActivity {
                     cancel.setOnClickListener(view16 -> dialog.dismiss());
                     title.setText("Remove Work Experience?");
                     subtitle.setText("Are you sure you want to delete this work experience?");
+
+                    confirm.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            databaseReference.child(getString(R.string.user_profile)).child(userId).child("WorkExperience").removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    if (task.isComplete() && task.isSuccessful()) {
+                                        dialog.dismiss();
+                                        Toast.makeText(DetailsActivity.this, "Successfully removed", Toast.LENGTH_SHORT).show();
+                                        finish();
+                                    } else {
+                                        Toast.makeText(DetailsActivity.this, "Something went wrong", Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+                            }).addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    Toast.makeText(DetailsActivity.this, "" + e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                        }
+                    });
                 });
                 break;
+
             case "Add Education":
                 binding.addworklay.getRoot().setVisibility(View.VISIBLE);
                 binding.addworklay.btnRemoveWorkEx.setVisibility(View.GONE);
                 binding.addworklay.textFileOfStudy.setVisibility(View.VISIBLE);
                 binding.addworklay.etFieldofStudy.setVisibility(View.VISIBLE);
 
-                binding.addworklay.checkboxPosition.setVisibility(View.GONE);
+                binding.addworklay.checkboxPosition.setVisibility(View.VISIBLE);
                 binding.addworklay.txtaddworkexperience.setText("Add Education");
                 binding.addworklay.textJobTitle.setText("Level of education");
                 binding.addworklay.editTextJobTitle.setOnClickListener(view -> {
@@ -306,10 +384,12 @@ public class DetailsActivity extends AppCompatActivity {
                                 binding.addworklay.etFieldofStudy.setError("Add your field by double tapping");
                             } else if (binding.addworklay.etStartDateAddWork.getText().toString().isEmpty()) {
                                 binding.addworklay.etStartDateAddWork.setError("Enter your starting date");
-                            } else if (binding.addworklay.etEndDateAddWork.getText().toString().isEmpty()) {
-                                binding.addworklay.etEndDateAddWork.setError("Kindly enter your end date");
                             } else if (binding.addworklay.etTellmeAbout.getText().toString().isEmpty()) {
                                 binding.addworklay.etTellmeAbout.setError("Kindly describe about your education");
+                            } else if (binding.addworklay.checkboxPosition.isChecked() && !binding.addworklay.etEndDateAddWork.getText().toString().isEmpty()) {
+                                Toast.makeText(DetailsActivity.this, "Your current position cannot have an end date", Toast.LENGTH_SHORT).show();
+                            } else if (!binding.addworklay.checkboxPosition.isChecked() && binding.addworklay.etEndDateAddWork.getText().toString().isEmpty()) {
+                                Toast.makeText(DetailsActivity.this, "Provide your end date or this is your current position", Toast.LENGTH_SHORT).show();
                             } else {
 
                                 dialog.setTitle("Uploading");
@@ -322,8 +402,9 @@ public class DetailsActivity extends AppCompatActivity {
                                 String educationStartDate = binding.addworklay.etStartDateAddWork.getText().toString();
                                 String educationEndDate = binding.addworklay.etEndDateAddWork.getText().toString();
                                 String educationDescription = binding.addworklay.etTellmeAbout.getText().toString();
+                                boolean isPosition = binding.addworklay.checkboxPosition.isChecked();
 
-                                uploadEducation(levelOfEducation, instituteName, educationFieldOfStudy, educationStartDate, educationEndDate, educationDescription);
+                                uploadEducation(levelOfEducation, instituteName, educationFieldOfStudy, educationStartDate, educationEndDate, educationDescription, isPosition);
 
                             }
                         }
@@ -333,11 +414,61 @@ public class DetailsActivity extends AppCompatActivity {
 
             case "Edit Education":
                 binding.addworklay.getRoot().setVisibility(View.VISIBLE);
+
+                binding.addworklay.btnRemoveWorkEx.setVisibility(View.VISIBLE);
                 binding.addworklay.txtaddworkexperience.setText("Change Education");
                 binding.addworklay.textFileOfStudy.setVisibility(View.VISIBLE);
                 binding.addworklay.etFieldofStudy.setVisibility(View.VISIBLE);
                 binding.addworklay.textJobTitle.setText("Level of education");
                 binding.addworklay.textCompanyAddWork.setText("Institute name");
+                binding.addworklay.editTextJobTitle.setText(getIntent().getStringExtra("levelEducation"));
+                binding.addworklay.edittextCompany.setText(getIntent().getStringExtra("institute"));
+                binding.addworklay.etFieldofStudy.setText(getIntent().getStringExtra("fieldOfStudy"));
+                binding.addworklay.etStartDateAddWork.setText(getIntent().getStringExtra("educationStartDate"));
+                binding.addworklay.etEndDateAddWork.setText(getIntent().getStringExtra("educationEndDate"));
+                binding.addworklay.checkboxPosition.setChecked(getIntent().getBooleanExtra("isPositionEducation", false));
+                binding.addworklay.etTellmeAbout.setText(getIntent().getStringExtra("educationDesc"));
+                binding.addworklay.btnSaveAddWorkEx.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+
+
+                        if (binding.addworklay.edittextCompany.getText().toString().isEmpty()) {
+                            binding.addworklay.edittextCompany.setError("Add your institute ");
+                        } else if (binding.addworklay.editTextJobTitle.getText().toString().isEmpty()) {
+                            binding.addworklay.editTextJobTitle.setError("Add your education ");
+                        } else if (binding.addworklay.etFieldofStudy.getText().toString().isEmpty()) {
+                            binding.addworklay.etFieldofStudy.setError("Add your field by double");
+                        } else if (binding.addworklay.etStartDateAddWork.getText().toString().isEmpty()) {
+                            binding.addworklay.etStartDateAddWork.setError("Enter your starting date");
+                        } else if (binding.addworklay.etTellmeAbout.getText().toString().isEmpty()) {
+                            binding.addworklay.etTellmeAbout.setError("Kindly describe about your education");
+                        } else if (binding.addworklay.checkboxPosition.isChecked() && !binding.addworklay.etEndDateAddWork.getText().toString().isEmpty()) {
+                            Toast.makeText(DetailsActivity.this, "Your current position cannot have an end date", Toast.LENGTH_SHORT).show();
+                        } else if (!binding.addworklay.checkboxPosition.isChecked() && binding.addworklay.etEndDateAddWork.getText().toString().isEmpty()) {
+                            Toast.makeText(DetailsActivity.this, "Provide your end date or this is your current position", Toast.LENGTH_SHORT).show();
+                        } else {
+
+                            dialog.setTitle("Uploading");
+                            dialog.setMessage("Please wait while uploading");
+                            dialog.setCancelable(false);
+                            dialog.show();
+                            String levelOfEducation = binding.addworklay.editTextJobTitle.getText().toString();
+                            String instituteName = binding.addworklay.edittextCompany.getText().toString();
+                            String educationFieldOfStudy = binding.addworklay.etFieldofStudy.getText().toString();
+                            String educationStartDate = binding.addworklay.etStartDateAddWork.getText().toString();
+                            String educationEndDate = binding.addworklay.etEndDateAddWork.getText().toString();
+                            String educationDescription = binding.addworklay.etTellmeAbout.getText().toString();
+                            boolean isPosition = binding.addworklay.checkboxPosition.isChecked();
+
+                            uploadEducation(levelOfEducation, instituteName, educationFieldOfStudy, educationStartDate, educationEndDate, educationDescription, isPosition);
+
+                        }
+
+
+
+                    }
+                });
                 binding.addworklay.btnRemoveWorkEx.setOnClickListener(view -> {
 
 
@@ -357,6 +488,29 @@ public class DetailsActivity extends AppCompatActivity {
                     cancel.setOnClickListener(view1 -> dialog.dismiss());
                     title.setText("Remove Education?");
                     subtitle.setText("Are you sure you want to delete this education?");
+                    confirm.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            databaseReference.child(getString(R.string.user_profile)).child(userId).child("Education").removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    if (task.isComplete() && task.isSuccessful()){
+                                        dialog.dismiss();
+                                        Toast.makeText(DetailsActivity.this, "Successfully removed", Toast.LENGTH_SHORT).show();
+                                        finish();
+
+                                    }else{
+                                        Toast.makeText(DetailsActivity.this, "Something went wrong", Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+                            }).addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    Toast.makeText(DetailsActivity.this, ""+e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                        }
+                    });
 
                 });
                 break;
@@ -463,10 +617,10 @@ public class DetailsActivity extends AppCompatActivity {
                             binding.saveSkillsLayout.btnShow.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View view) {
-                                   dialog.setTitle("Uploading");
-                                   dialog.setMessage("Please wait while uploading");
-                                   dialog.setCancelable(false);
-                                   dialog.show();
+                                    dialog.setTitle("Uploading");
+                                    dialog.setMessage("Please wait while uploading");
+                                    dialog.setCancelable(false);
+                                    dialog.show();
 //                                    for (int i = 0; i < skills.size(); i++) {
 //                                        skillsToUpload += skills.get(i);
 //                                        skillsToUpload += ",";
@@ -559,24 +713,30 @@ public class DetailsActivity extends AppCompatActivity {
                             @Override
                             public void onClick(View view) {
                                 Drawable drawable = binding.languageDetailsLayout.flagToSet.getDrawable();
+                                Bitmap bitmap = ((BitmapDrawable) drawable).getBitmap();
+//
+
+//                                int id =binding.languageDetailsLayout.flagToSet.getId();
                                 String language = binding.languageDetailsLayout.txtLanguageToSet.getText().toString();
                                 if (Objects.equals(levelOfOral, null)) {
                                     Toast.makeText(DetailsActivity.this, "Select language's oral level", Toast.LENGTH_SHORT).show();
                                 } else if (Objects.equals(levelOfWritten, null)) {
                                     Toast.makeText(DetailsActivity.this, "Select language's written level", Toast.LENGTH_SHORT).show();
                                 } else {
-                                    binding.languageDetailsLayout.getRoot().setVisibility(View.GONE);
-                                    binding.addlanguageEdit.getRoot().setVisibility(View.VISIBLE);
+//                                    binding.languageDetailsLayout.getRoot().setVisibility(View.GONE);
+//                                    binding.addlanguageEdit.getRoot().setVisibility(View.VISIBLE);
+//
+//                                    binding.addlanguageEdit.listViewAddlanguage1.setVisibility(View.GONE);
+//                                    binding.addlanguageEdit.addedLanguageRecyclerview.setVisibility(View.VISIBLE);
+//
+//                                    selectedLanguagesArrayList = new ArrayList<>();
+//                                    selectedLanguagesArrayList.add(new SelectedLanguages(language, drawable, levelOfOral, levelOfWritten));
+//
+//                                    SelectedLanguagesAdapter selectedLanguagesAdapter = new SelectedLanguagesAdapter(DetailsActivity.this, selectedLanguagesArrayList);
+//                                    binding.addlanguageEdit.addedLanguageRecyclerview.setAdapter(selectedLanguagesAdapter);
+//                                    binding.addlanguageEdit.addedLanguageRecyclerview.setLayoutManager(new LinearLayoutManager(DetailsActivity.this));
 
-                                    binding.addlanguageEdit.listViewAddlanguage1.setVisibility(View.GONE);
-                                    binding.addlanguageEdit.addedLanguageRecyclerview.setVisibility(View.VISIBLE);
-
-                                    selectedLanguagesArrayList = new ArrayList<>();
-                                    selectedLanguagesArrayList.add(new SelectedLanguages(language, drawable, levelOfOral, levelOfWritten));
-
-                                    SelectedLanguagesAdapter selectedLanguagesAdapter = new SelectedLanguagesAdapter(DetailsActivity.this, selectedLanguagesArrayList);
-                                    binding.addlanguageEdit.addedLanguageRecyclerview.setAdapter(selectedLanguagesAdapter);
-                                    binding.addlanguageEdit.addedLanguageRecyclerview.setLayoutManager(new LinearLayoutManager(DetailsActivity.this));
+                                    uploadFlagOfLanguage(bitmap, language);
 
 
                                 }
@@ -660,6 +820,9 @@ public class DetailsActivity extends AppCompatActivity {
                             String awardCategory = binding.addAppreciation.edittextCategory.getText().toString();
                             String awardEndDate = binding.addAppreciation.etEndDateappreciation.getText().toString();
                             String awardDescription = binding.addAppreciation.etTellmeAppreciation.getText().toString();
+
+
+                            uploadAppreciation(awardName, awardCategory, awardEndDate, awardDescription);
                         }
                     }
                 });
@@ -709,6 +872,107 @@ public class DetailsActivity extends AppCompatActivity {
 
     }
 
+
+    private void uploadAppreciation(String awardName, String awardCategory, String awardEndDate, String awardDescription) {
+        dialog.setTitle("Adding appreciation");
+        dialog.setMessage("Please wait while uploading...");
+        dialog.setCancelable(false);
+        dialog.show();
+
+        Appreciation appreciation = new Appreciation(awardName, awardCategory, awardEndDate, awardDescription);
+
+        databaseReference.child(getString(R.string.user_profile)).child(userId).child("Appreciation")
+                .setValue(appreciation)
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isComplete() && task.isSuccessful()) {
+                            dialog.dismiss();
+                            Toast.makeText(DetailsActivity.this, "Appreciation Added", Toast.LENGTH_SHORT).show();
+                            finish();
+                        } else {
+                            dialog.dismiss();
+                            Toast.makeText(DetailsActivity.this, "" + task.getException().toString(), Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        dialog.dismiss();
+                        Toast.makeText(DetailsActivity.this, "" + e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+    }
+
+    private void uploadFlagOfLanguage(Bitmap bitmap, String language) {
+        dialog.setTitle("Adding Language");
+        dialog.setMessage("Please wait uploading...");
+        dialog.setCancelable(false);
+        dialog.show();
+
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 50, baos);
+        byte[] finalImage = baos.toByteArray();
+        final StorageReference filePath;
+        filePath = storageReference.child(getString(R.string.user_profile)).child(userId).child("LanguageFlag" + UUID.randomUUID().toString());
+        UploadTask uploadTask = filePath.putBytes(finalImage);
+        uploadTask.addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
+                if (task.isSuccessful()) {
+
+                    uploadTask.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                            filePath.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                @Override
+                                public void onSuccess(Uri uri) {
+                                    String flagDownloadUrl = String.valueOf(uri);
+                                    uploadLangauge(language, flagDownloadUrl, levelOfOral, levelOfWritten);
+                                }
+                            });
+                        }
+                    });
+                } else {
+                    dialog.dismiss();
+                    Toast.makeText(DetailsActivity.this, "" + task.getException().toString(), Toast.LENGTH_SHORT).show();
+                }
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                dialog.dismiss();
+                Toast.makeText(DetailsActivity.this, "" + e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
+    }
+
+    private void uploadLangauge(String language, String flagDownloadUrl, String levelOfOral, String levelOfWritten) {
+        String uID = UUID.randomUUID().toString();
+
+        SelectedLanguages selectedLanguages = new SelectedLanguages(language, flagDownloadUrl, levelOfOral, levelOfWritten, uID, userId);
+        databaseReference.child(getString(R.string.user_profile)).child(userId).child("Languages").child(uID)
+                .setValue(selectedLanguages)
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        dialog.dismiss();
+                        Toast.makeText(DetailsActivity.this, "Langauge Added", Toast.LENGTH_SHORT).show();
+                        finish();
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        dialog.dismiss();
+                        Toast.makeText(DetailsActivity.this, "" + e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                });
+    }
+
+
     private void uploadSkills(HashMap<String, String> skillsMap) {
 
         databaseReference.child(getString(R.string.user_profile)).child(userId).child("Skills").setValue(skillsMap)
@@ -731,8 +995,8 @@ public class DetailsActivity extends AppCompatActivity {
 
     }
 
-    private void uploadEducation(String levelOfEducation, String instituteName, String filedOfStudy, String educationStartDate, String educationEndDate, String educationDescription) {
-        Education education = new Education(levelOfEducation, instituteName, filedOfStudy, educationStartDate, educationEndDate, educationDescription);
+    private void uploadEducation(String levelOfEducation, String instituteName, String filedOfStudy, String educationStartDate, String educationEndDate, String educationDescription, boolean isPosition) {
+        Education education = new Education(levelOfEducation, instituteName, filedOfStudy, educationStartDate, educationEndDate, educationDescription, isPosition);
         databaseReference.child(getString(R.string.user_profile)).child(userId).child("Education").setValue(education)
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
@@ -752,23 +1016,24 @@ public class DetailsActivity extends AppCompatActivity {
                 });
     }
 
-    private void uploadWorkExperience(String jobTitle, String company, String startDate, String endDate, String description) {
+    private void uploadWorkExperience(String jobTitle, String company, String startDate, String endDate, String description, String userId, boolean isPosition) {
 
-        AddWorkExperience data = new AddWorkExperience(jobTitle, company, startDate, endDate, description);
+        AddWorkExperience data = new AddWorkExperience(jobTitle, company, startDate, endDate, description, userId, isPosition);
 
         databaseReference.child(getString(R.string.user_profile)).child(userId).child("WorkExperience").setValue(data)
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         if (task.isComplete() && task.isSuccessful()) {
+
                             dialog.dismiss();
                             Toast.makeText(DetailsActivity.this, "Work experience added", Toast.LENGTH_SHORT).show();
+                            finish();
                         }
                     }
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-
                         dialog.dismiss();
                         Toast.makeText(DetailsActivity.this, "" + e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
                     }
@@ -780,9 +1045,9 @@ public class DetailsActivity extends AppCompatActivity {
         HashMap<String, String> hashMap = new HashMap<>();
 
 
-        for (int i=0;i<arrayList.size();i++){
+        for (int i = 0; i < arrayList.size(); i++) {
 
-            hashMap.put(String.valueOf(i),arrayList.get(i) );
+            hashMap.put(String.valueOf(i), arrayList.get(i));
         }
 //        for (String str : arrayList) {
 //
