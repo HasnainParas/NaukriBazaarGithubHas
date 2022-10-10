@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.annotation.SuppressLint;
 import android.app.Dialog;
@@ -33,6 +34,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.appstacks.indiannaukribazaar.FirebaseAdapters.LanguageAdapter;
+import com.appstacks.indiannaukribazaar.NewActivities.Adapters.LanguagesAdapter;
 import com.appstacks.indiannaukribazaar.ProfileModels.Appreciation;
 import com.appstacks.indiannaukribazaar.ProfileModels.SelectedLanguages;
 import com.appstacks.indiannaukribazaar.ProfileModels.AboutMeDescription;
@@ -47,8 +49,11 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -80,7 +85,7 @@ public class DetailsActivity extends AppCompatActivity {
     StorageReference storageReference;
     String userId, pdfName = "";
     String urlOfPdf = "";
-
+    String PdfsizeInString,pdfDate;
     boolean workAdded;
 
     @Override
@@ -421,6 +426,8 @@ public class DetailsActivity extends AppCompatActivity {
                 binding.addworklay.etFieldofStudy.setVisibility(View.VISIBLE);
                 binding.addworklay.textJobTitle.setText("Level of education");
                 binding.addworklay.textCompanyAddWork.setText("Institute name");
+
+
                 binding.addworklay.editTextJobTitle.setText(getIntent().getStringExtra("levelEducation"));
                 binding.addworklay.edittextCompany.setText(getIntent().getStringExtra("institute"));
                 binding.addworklay.etFieldofStudy.setText(getIntent().getStringExtra("fieldOfStudy"));
@@ -466,7 +473,6 @@ public class DetailsActivity extends AppCompatActivity {
                         }
 
 
-
                     }
                 });
                 binding.addworklay.btnRemoveWorkEx.setOnClickListener(view -> {
@@ -494,19 +500,19 @@ public class DetailsActivity extends AppCompatActivity {
                             databaseReference.child(getString(R.string.user_profile)).child(userId).child("Education").removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
-                                    if (task.isComplete() && task.isSuccessful()){
+                                    if (task.isComplete() && task.isSuccessful()) {
                                         dialog.dismiss();
                                         Toast.makeText(DetailsActivity.this, "Successfully removed", Toast.LENGTH_SHORT).show();
                                         finish();
 
-                                    }else{
+                                    } else {
                                         Toast.makeText(DetailsActivity.this, "Something went wrong", Toast.LENGTH_SHORT).show();
                                     }
                                 }
                             }).addOnFailureListener(new OnFailureListener() {
                                 @Override
                                 public void onFailure(@NonNull Exception e) {
-                                    Toast.makeText(DetailsActivity.this, ""+e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(DetailsActivity.this, "" + e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
                                 }
                             });
                         }
@@ -642,17 +648,51 @@ public class DetailsActivity extends AppCompatActivity {
             case "Edit language":
                 binding.addlanguageEdit.getRoot().setVisibility(View.VISIBLE);
                 binding.searchSkillLayout.getRoot().setVisibility(View.GONE);
+                binding.addlanguageEdit.btnsaveAddlanguage1.setVisibility(View.GONE);
+                selectedLanguagesArrayList = new ArrayList<>();
+                databaseReference.child(getString(R.string.user_profile)).child(userId).child("Languages").addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        if (snapshot.exists()) {
+
+
+                            for (DataSnapshot snap : snapshot.getChildren()) {
+                                SelectedLanguages languages = snap.getValue(SelectedLanguages.class);
+
+                                selectedLanguagesArrayList.add(languages);
+
+
+                            }
+
+                        } else {
+                            Toast.makeText(DetailsActivity.this, "Something went wrong", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+                        Toast.makeText(DetailsActivity.this, "" + error.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+
                 if (selectedLanguagesArrayList != null) {
+                    LanguagesAdapter languagesAdapter = new LanguagesAdapter(selectedLanguagesArrayList, this);
                     binding.addlanguageEdit.addedLanguageRecyclerview.setVisibility(View.VISIBLE);
+                    binding.addlanguageEdit.addedLanguageRecyclerview.setAdapter(languagesAdapter);
+                    binding.addlanguageEdit.addedLanguageRecyclerview.setLayoutManager(new LinearLayoutManager(this));
+
                 }
 
 
                 //TODO save the below languages and show
                 binding.addlanguageEdit.btnBackAddLanguage1.setOnClickListener(view -> onBackPressed());
+                binding.addlanguageEdit.btnsaveAddlanguage1.setVisibility(View.VISIBLE);
                 binding.addlanguageEdit.btnAddLanguage1.setOnClickListener(view -> {
                     binding.addlanguageEdit.btnsaveAddlanguage1.setVisibility(View.GONE);
                     binding.addlanguageEdit.btnAddLanguage1.setVisibility(View.GONE);
                     binding.addlanguageEdit.btnsaveAddlanguage1.setVisibility(View.GONE);
+                    binding.addlanguageEdit.addedLanguageRecyclerview.setVisibility(View.GONE);
 
 
                     String[] languages = {"Hindi", "Urdu", "Punjabi", "English", "Marathi", "Pashto", "Shina", "Spanish", "Chinese"};
@@ -811,7 +851,7 @@ public class DetailsActivity extends AppCompatActivity {
                         } else if (binding.addAppreciation.edittextCategory.getText().toString().isEmpty()) {
                             binding.addAppreciation.edittextCategory.setError("Enter your category");
                         } else if (binding.addAppreciation.etEndDateappreciation.getText().toString().isEmpty()) {
-                            binding.addAppreciation.etEndDateappreciation.setError("Enter end date");
+                            binding.addAppreciation.etEndDateappreciation.setError("Enter date");
                         } else if (binding.addAppreciation.etTellmeAppreciation.getText().toString().isEmpty()) {
                             Toast.makeText(DetailsActivity.this, "Kindly provide a description", Toast.LENGTH_SHORT).show();
                         } else {
@@ -834,6 +874,50 @@ public class DetailsActivity extends AppCompatActivity {
                 binding.addAppreciation.txtaddappreciation.setText("Edit Appreciation");
                 binding.addAppreciation.btnBackAddappreciation.setImageResource(R.drawable.ic_cancel);
                 binding.addAppreciation.btnRemoveAppreciation.setVisibility(View.VISIBLE);
+                binding.addAppreciation.editTextAwardName.setText(getIntent().getStringExtra("awardName"));
+                binding.addAppreciation.edittextCategory.setText(getIntent().getStringExtra("awardCategory"));
+                binding.addAppreciation.etEndDateappreciation.setText(getIntent().getStringExtra("awardDate"));
+                binding.addAppreciation.etTellmeAppreciation.setText(getIntent().getStringExtra("awardDesc"));
+                binding.addAppreciation.btnSaveAddAppreciation.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+
+                        if (binding.addAppreciation.editTextAwardName.getText().toString().isEmpty()) {
+                            binding.addAppreciation.editTextAwardName.setError("Enter award name");
+                        } else if (binding.addAppreciation.edittextCategory.getText().toString().isEmpty()) {
+                            binding.addAppreciation.edittextCategory.setError("Enter your category");
+                        } else if (binding.addAppreciation.etEndDateappreciation.getText().toString().isEmpty()) {
+                            binding.addAppreciation.etEndDateappreciation.setError("Enter date");
+                        } else if (binding.addAppreciation.etTellmeAppreciation.getText().toString().isEmpty()) {
+                            Toast.makeText(DetailsActivity.this, "Kindly provide a description", Toast.LENGTH_SHORT).show();
+                        } else {
+
+                            String awardName = binding.addAppreciation.editTextAwardName.getText().toString();
+                            String awardCategory = binding.addAppreciation.edittextCategory.getText().toString();
+                            String awardEndDate = binding.addAppreciation.etEndDateappreciation.getText().toString();
+                            String awardDescription = binding.addAppreciation.etTellmeAppreciation.getText().toString();
+
+
+                            uploadAppreciation(awardName, awardCategory, awardEndDate, awardDescription);
+                        }
+
+                    }
+                });
+                binding.addAppreciation.btnRemoveAppreciation.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        databaseReference.child(getString(R.string.user_profile)).child(userId).child("Appreciation").removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                if (task.isComplete() && task.isSuccessful()) {
+
+                                    Toast.makeText(DetailsActivity.this, "Appreciation removed successfully", Toast.LENGTH_SHORT).show();
+                                    finish();
+                                }
+                            }
+                        });
+                    }
+                });
 
 
                 break;
@@ -872,6 +956,11 @@ public class DetailsActivity extends AppCompatActivity {
 
     }
 
+    private ArrayList<SelectedLanguages> fetchLanguage() {
+
+
+        return selectedLanguagesArrayList;
+    }
 
     private void uploadAppreciation(String awardName, String awardCategory, String awardEndDate, String awardDescription) {
         dialog.setTitle("Adding appreciation");
@@ -1086,7 +1175,7 @@ public class DetailsActivity extends AppCompatActivity {
         dialog.setCancelable(false);
         dialog.show();
 
-        StorageReference reference = storageReference.child("Resumes").child(userId).child("pdf/" + pdfName + "-" + ".pdf");
+        StorageReference reference = storageReference.child("Resumes").child(userId).child("pdf/" + pdfName);
         reference.putFile(uri)
                 .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                     @Override
@@ -1109,7 +1198,7 @@ public class DetailsActivity extends AppCompatActivity {
     }
 
     private void uploadPdfData(String downloadUrl, String pdfName) {
-        Resume resume = new Resume(downloadUrl, pdfName);
+        Resume resume = new Resume(downloadUrl, pdfName,PdfsizeInString,pdfDate);
         databaseReference.child("UsersProfile").child(userId).child("Resume").setValue(resume)
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
@@ -1148,12 +1237,12 @@ public class DetailsActivity extends AppCompatActivity {
                     if (cursor != null && cursor.moveToFirst()) {
                         int sizeIndex = cursor.getColumnIndex(OpenableColumns.SIZE);
                         long size = cursor.getLong(sizeIndex);
-                        String sizeInString = getReadableFileSize(size);
+                        PdfsizeInString= getReadableFileSize(size);
                         pdfName = cursor.getString(cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME));
                         DateFormat df = new SimpleDateFormat("EEE, d MMM yyyy, HH:mm");
-                        String date = df.format(Calendar.getInstance().getTime());
-                        Toast.makeText(this, "selected " + pdfName + " adn size is " + sizeInString, Toast.LENGTH_SHORT).show();
-                        binding.addResumelayout.resumeInfo.setText(date);
+                     pdfDate= df.format(Calendar.getInstance().getTime());
+                        Toast.makeText(this, "selected " + pdfName + " adn size is " + PdfsizeInString, Toast.LENGTH_SHORT).show();
+                        binding.addResumelayout.resumeInfo.setText(pdfDate);
                         binding.addResumelayout.resumeName.setText(pdfName);
 
 

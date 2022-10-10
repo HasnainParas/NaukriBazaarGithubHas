@@ -35,72 +35,46 @@ public class AaForChecking extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_aa_for_checking);
 
-        userauth = FirebaseAuth.getInstance().getCurrentUser().getUid();
-
-        userReference = FirebaseDatabase.getInstance().getReference("UsersProfile");
-
-
-        listView = (GridView) findViewById(R.id.listvieww);
-
-
-//        userReference.child(userauth).child("Skills").addValueEventListener(new ValueEventListener() {
+//        userauth = FirebaseAuth.getInstance().getCurrentUser().getUid();
+//
+//        userReference = FirebaseDatabase.getInstance().getReference("UsersProfile");
+//
+//
+//        listView = (GridView) findViewById(R.id.listvieww);
+//
+//        userReference.child(userauth).child("Skills").addChildEventListener(new ChildEventListener() {
 //            @Override
-//            public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                if (snapshot.exists()){
-//                    Toast.makeText(AaForChecking.this, "yes Available", Toast.LENGTH_SHORT).show();
-//                    String value = snapshot.getValue(String.class);
-//                    arrayList.add(value);
-//                    arrayAdapter = new ArrayAdapter<String>(AaForChecking.this, android.R.layout.simple_list_item_1, arrayList);
-//                    listView.setAdapter(arrayAdapter);
-//                    arrayAdapter.notifyDataSetChanged();
+//            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+//                String value=dataSnapshot.getValue(String.class);
+//                arrayList.add(value);
+////                arrayAdapter = new ArrayAdapter<String>(AaForChecking.this, android.R.layout.simple_list_item_1, arrayList);
+//                gridAdapter = new GridAdapter(AaForChecking.this,arrayList);
 //
-//                }else {
-//                    Toast.makeText(AaForChecking.this, "not", Toast.LENGTH_SHORT).show();
-//                }
-//
+//                listView.setAdapter(gridAdapter);
 //
 //            }
 //
 //            @Override
-//            public void onCancelled(@NonNull DatabaseError error) {
+//            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+//
+//            }
+//
+//            @Override
+//            public void onChildRemoved(DataSnapshot dataSnapshot) {
+//
+//            }
+//
+//            @Override
+//            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+//
+//            }
+//
+//            @Override
+//            public void onCancelled(DatabaseError databaseError) {
 //
 //            }
 //        });
-
-        Toast.makeText(this, "ok", Toast.LENGTH_SHORT).show();
-        userReference.child(userauth).child("Skills").addChildEventListener(new ChildEventListener() {
-            @Override
-            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                String value=dataSnapshot.getValue(String.class);
-                arrayList.add(value);
-//                arrayAdapter = new ArrayAdapter<String>(AaForChecking.this, android.R.layout.simple_list_item_1, arrayList);
-                gridAdapter = new GridAdapter(AaForChecking.this,arrayList);
-
-                listView.setAdapter(gridAdapter);
-
-            }
-
-            @Override
-            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-
-            }
-
-            @Override
-            public void onChildRemoved(DataSnapshot dataSnapshot) {
-
-            }
-
-            @Override
-            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
-
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
-
+//
 
 
     }
