@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
     <style name="AppTheme" parent="BaseTheme" />
 
@@ -21,6 +21,11 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="Divider.Horizontal" parent="Divider.Horizontal" tools:ignore="ResourceCycle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">1dp</item> // You can change thickness here.
+
+    </style>
     <style name="AppTheme.Dialog.NoActionBar" parent="Theme.AppCompat.Light.Dialog">
         <item name="windowNoTitle">true</item>
         <item name="windowActionBar">false</item>

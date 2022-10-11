@@ -19,28 +19,32 @@
     <application
         android:name=".data.ThisApp"
         android:allowBackup="true"
+        android:debuggable="true"
         android:icon="@mipmap/ic_indiannaukribazaar"
         android:label="@string/app_name"
-        android:debuggable="true"
         android:roundIcon="@mipmap/ic_indiannaukribazaar"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:ignore="HardcodedDebugMode">
         <activity
+            android:name=".SettingActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".NewActivities.DetailsActivity"
             android:exported="false" />
         <activity
             android:name=".NewActivities.EditProfileActivity"
             android:exported="true"
-            android:theme="@style/noactiondisplay"
-            >
-
-
-        </activity>
-        <activity android:name=".AaForChecking"
+            android:theme="@style/noactiondisplay"></activity>
+        <activity
+            android:name=".AaForChecking"
             android:exported="false"
-            android:theme="@style/noactiondisplay"/>
+            android:theme="@style/noactiondisplay" />
         <activity
             android:name=".NewActivities.KycPaidJobs.RazorPayActivity"
             android:exported="false"
@@ -68,9 +72,7 @@
         <activity
             android:name=".NewActivities.FindJobsActivity"
             android:exported="true"
-            android:theme="@style/noactiondisplay">
-
-        </activity>
+            android:theme="@style/noactiondisplay"></activity>
         <activity
             android:name=".NewActivities.AddJobsActivity"
             android:exported="false"
@@ -140,9 +142,7 @@
         <activity
             android:name=".NewActivities.WelcomeActivity"
             android:exported="true"
-            android:screenOrientation="portrait" >
-
-        </activity>
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name=".Activities.ActivitySplash"
             android:configChanges="orientation|keyboardHidden|screenSize"
@@ -153,7 +153,6 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
         <activity
             android:name=".Activities.ActivityMain"
