@@ -45,7 +45,7 @@
             app:layout_constraintTop_toBottomOf="@id/textupdatesetting">
 
             <ImageView
-                android:id="@+id/imageView7"
+                android:id="@+id/imgPayment"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_gravity="center_vertical"
@@ -63,7 +63,7 @@
                 android:orientation="horizontal"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/imageView7"
+                app:layout_constraintStart_toEndOf="@+id/imgPayment"
                 app:layout_constraintTop_toTopOf="parent">
 
                 <LinearLayout
@@ -90,7 +90,7 @@
 
 
                 <ImageView
-                    android:id="@+id/imageView18"
+                    android:id="@+id/btnForwardPaymentMethods"
                     android:layout_width="20dp"
                     android:layout_height="20dp"
                     android:layout_marginEnd="8dp"
@@ -116,7 +116,7 @@
             app:layout_constraintTop_toBottomOf="@id/btnPaymentMethods">
 
             <ImageView
-                android:id="@+id/imageView7"
+                android:id="@+id/imgLocation"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_gravity="center_vertical"
@@ -134,7 +134,7 @@
                 android:orientation="horizontal"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/imageView7"
+                app:layout_constraintStart_toEndOf="@+id/imgLocation"
                 app:layout_constraintTop_toTopOf="parent">
 
                 <LinearLayout
@@ -161,7 +161,7 @@
 
 
                 <ImageView
-                    android:id="@+id/imageView18"
+                    android:id="@+id/btnForwardLocation"
                     android:layout_width="20dp"
                     android:layout_height="20dp"
                     android:layout_marginEnd="8dp"
@@ -187,7 +187,7 @@
             app:layout_constraintTop_toBottomOf="@id/btnLocationAccountSetting">
 
             <ImageView
-                android:id="@+id/imageView7"
+                android:id="@+id/imgAddSocial"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_gravity="center_vertical"
@@ -206,7 +206,7 @@
                 android:orientation="horizontal"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/imageView7"
+                app:layout_constraintStart_toEndOf="@+id/imgAddSocial"
                 app:layout_constraintTop_toTopOf="parent">
 
                 <LinearLayout
@@ -233,7 +233,7 @@
 
 
                 <ImageView
-                    android:id="@+id/imageView18"
+                    android:id="@+id/btnForwardAddSocialAccount"
                     android:layout_width="20dp"
                     android:layout_height="20dp"
                     android:layout_marginEnd="8dp"
@@ -259,7 +259,7 @@
             app:layout_constraintTop_toBottomOf="@id/btnAddSocialAccountAccountSetting">
 
             <ImageView
-                android:id="@+id/imageView7"
+                android:id="@+id/imgReferFriends"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_gravity="center_vertical"
@@ -278,7 +278,7 @@
                 android:orientation="horizontal"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/imageView7"
+                app:layout_constraintStart_toEndOf="@+id/imgReferFriends"
                 app:layout_constraintTop_toTopOf="parent">
 
                 <LinearLayout
@@ -305,7 +305,7 @@
 
 
                 <ImageView
-                    android:id="@+id/imageView18"
+                    android:id="@+id/btnForwardReferFriend"
                     android:layout_width="20dp"
                     android:layout_height="20dp"
                     android:layout_marginEnd="8dp"
@@ -344,7 +344,7 @@
             app:layout_constraintTop_toBottomOf="@id/textNotifications">
 
             <ImageView
-                android:id="@+id/imageView7"
+                android:id="@+id/imgPushNotification"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_gravity="center_vertical"
@@ -363,7 +363,7 @@
                 android:orientation="horizontal"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/imageView7"
+                app:layout_constraintStart_toEndOf="@+id/imgPushNotification"
                 app:layout_constraintTop_toTopOf="parent">
 
                 <LinearLayout
@@ -413,7 +413,7 @@
             app:layout_constraintTop_toBottomOf="@id/btnPushNotifications">
 
             <ImageView
-                android:id="@+id/imageView7"
+                android:id="@+id/imgSmsNotification"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_gravity="center_vertical"
@@ -432,7 +432,7 @@
                 android:orientation="horizontal"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/imageView7"
+                app:layout_constraintStart_toEndOf="@+id/imgSmsNotification"
                 app:layout_constraintTop_toTopOf="parent">
 
                 <LinearLayout
@@ -482,7 +482,7 @@
             app:layout_constraintTop_toBottomOf="@id/btnSmsNotifications">
 
             <ImageView
-                android:id="@+id/imageView7"
+                android:id="@+id/imgPromotionalNotifications"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_gravity="center_vertical"
@@ -501,7 +501,7 @@
                 android:orientation="horizontal"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/imageView7"
+                app:layout_constraintStart_toEndOf="@+id/imgPromotionalNotifications"
                 app:layout_constraintTop_toTopOf="parent">
 
                 <LinearLayout
@@ -563,7 +563,7 @@
             app:layout_constraintTop_toBottomOf="@id/textMore">
 
             <ImageView
-                android:id="@+id/imageView7"
+                android:id="@+id/imgRateUs"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_gravity="center_vertical"
@@ -581,7 +581,7 @@
                 android:orientation="horizontal"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/imageView7"
+                app:layout_constraintStart_toEndOf="@+id/imgRateUs"
                 app:layout_constraintTop_toTopOf="parent">
 
                 <LinearLayout
@@ -608,7 +608,7 @@
 
 
                 <ImageView
-                    android:id="@+id/imageView18"
+                    android:id="@+id/btnForwardRateUs"
                     android:layout_width="20dp"
                     android:layout_height="20dp"
                     android:layout_marginEnd="8dp"
@@ -633,7 +633,7 @@
             app:layout_constraintTop_toBottomOf="@id/btnRateUs">
 
             <ImageView
-                android:id="@+id/imageView7"
+                android:id="@+id/imgFaq"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_gravity="center_vertical"
@@ -651,7 +651,7 @@
                 android:orientation="horizontal"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/imageView7"
+                app:layout_constraintStart_toEndOf="@+id/imgFaq"
                 app:layout_constraintTop_toTopOf="parent">
 
                 <LinearLayout
@@ -678,7 +678,7 @@
 
 
                 <ImageView
-                    android:id="@+id/imageView18"
+                    android:id="@+id/btnForwardFaq"
                     android:layout_width="20dp"
                     android:layout_height="20dp"
                     android:layout_marginEnd="8dp"
@@ -704,7 +704,7 @@
             app:layout_constraintTop_toBottomOf="@id/btnFAQ">
 
             <ImageView
-                android:id="@+id/imageView7"
+                android:id="@+id/imgLogout"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_gravity="center_vertical"
@@ -722,7 +722,7 @@
                 android:orientation="horizontal"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/imageView7"
+                app:layout_constraintStart_toEndOf="@+id/imgLogout"
                 app:layout_constraintTop_toTopOf="parent">
 
                 <LinearLayout
@@ -743,7 +743,7 @@
 
 
                 <ImageView
-                    android:id="@+id/imageView18"
+                    android:id="@+id/btnForwardLogout"
                     android:layout_width="20dp"
                     android:layout_height="20dp"
                     android:layout_gravity="center_vertical"

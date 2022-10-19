@@ -45,6 +45,8 @@ public class EditProfileActivity extends AppCompatActivity {
     private StorageReference storageReference, storagedlt;
     DatabaseReference userRef;
     String userId;
+    String name ;
+
     AddWorkExperience workExperience = new AddWorkExperience();
     AboutMeDescription aboutme = new AboutMeDescription();
     Education education;
@@ -63,7 +65,12 @@ public class EditProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityEditProfileBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-
+        binding.btnSettingeditprofile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(EditProfileActivity.this, SettingActivity.class));
+            }
+        });
         storagedlt = FirebaseStorage.getInstance().getReference("Resumes/");
         languagesList = new ArrayList<>();
         selectedLanguages = new SelectedLanguages();
@@ -104,7 +111,7 @@ public class EditProfileActivity extends AppCompatActivity {
                 public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                     String value = dataSnapshot.getValue(String.class);
                     arrayList.add(value);
-//                arrayAdapter = new ArrayAdapter<String>(AaForChecking.this, android.R.layout.simple_list_item_1, arrayList);
+
                     gridAdapter = new GridAdapter(EditProfileActivity.this, arrayList);
 
                     binding.listvieww.setAdapter(gridAdapter);
@@ -282,50 +289,12 @@ public class EditProfileActivity extends AppCompatActivity {
 
                             }
                         });
-//
-//                        storagedlt.child(userId + "/").child("pdf/").child(resume.getPdfTitle()).delete().addOnSuccessListener(new OnSuccessListener<Void>() {
-//                            @Override
-//                            public void onSuccess(Void unused) {
-//
-//                                Toast.makeText(EditProfileActivity.this, "Comple", Toast.LENGTH_SHORT).show();
-//                            }
-//                        }).addOnFailureListener(new OnFailureListener() {
-//                            @Override
-//                            public void onFailure(@NonNull Exception e) {
-//                                Toast.makeText(EditProfileActivity.this, e + "", Toast.LENGTH_SHORT).show();
-//                            }
-//                        });
+
 
 
                     });
 
 
-//                    binding.btnResumeDelete.setOnClickListener(new View.OnClickListener() {
-//                        @Override
-//                        public void onClick(View view) {
-//                            userRef.child(userId).child("Resume").removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
-//                                @Override
-//                                public void onComplete(@NonNull Task<Void> task) {
-//                                    if (task.isSuccessful()) {
-//                                        storageReference = FirebaseStorage.getInstance().getReference("Resumes/");
-//                                        storageReference.child(userId).delete().addOnSuccessListener(new OnSuccessListener<Void>() {
-//                                            @Override
-//                                            public void onSuccess(Void unused) {
-//                                                Toast.makeText(EditProfileActivity.this, "File deleted", Toast.LENGTH_SHORT).show();
-//                                            }
-//                                        }).addOnFailureListener(new OnFailureListener() {
-//                                            @Override
-//                                            public void onFailure(@NonNull Exception e) {
-//                                                Toast.makeText(EditProfileActivity.this, "" + e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
-//                                            }
-//                                        });
-//                                    } else {
-//                                        Toast.makeText(EditProfileActivity.this, "Something wen wrong", Toast.LENGTH_SHORT).show();
-//                                    }
-//                                }
-//                            });
-//                        }
-//                    });
                 } else {
 
                     binding.btnResumeAdd.setVisibility(View.VISIBLE);
@@ -382,9 +351,7 @@ public class EditProfileActivity extends AppCompatActivity {
                         list.add(obj);
 
                     }
-//                    for (int i = 0; i < list.size(); i++) {
-//                        Toast.makeText(EditProfileActivity.this, "" + list.get(i), Toast.LENGTH_SHORT).show();
-//                    }
+
 
                 }
             }
