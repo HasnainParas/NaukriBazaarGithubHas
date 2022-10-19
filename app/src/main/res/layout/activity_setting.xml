@@ -390,6 +390,7 @@
 
 
                 <Switch
+                    android:id="@+id/switchPushNotifications"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:checked="true" />
@@ -459,6 +460,7 @@
 
 
                 <Switch
+                    android:id="@+id/switchSmsNotifications"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:checked="false" />
@@ -528,6 +530,7 @@
 
 
                 <Switch
+                    android:id="@+id/switchPromoNotification"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:checked="true" />
