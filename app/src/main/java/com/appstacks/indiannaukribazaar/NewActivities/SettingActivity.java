@@ -30,8 +30,10 @@ public class SettingActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
         binding.btnPaymentMethods.setOnClickListener(view -> Toast.makeText(SettingActivity.this, "This feature is currently in under development mode", Toast.LENGTH_SHORT).show());
 
+
         binding.btnLocationAccountSetting.setOnClickListener(view -> {
             startActivity(new Intent(SettingActivity.this, LocationActivity.class));
+
         });
 
         binding.switchPushNotifications.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -53,6 +55,9 @@ public class SettingActivity extends AppCompatActivity {
 
             }
         });
+        binding.btnAddSocialAccountAccountSetting.setOnClickListener(view -> {
+            startActivity(new Intent(SettingActivity.this,AddSocialAccountActivity.class));
+        });
         binding.switchPromoNotification.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
@@ -61,6 +66,7 @@ public class SettingActivity extends AppCompatActivity {
 
 
             }
+
         });
 
         binding.btnRateUs.setOnClickListener(new View.OnClickListener() {

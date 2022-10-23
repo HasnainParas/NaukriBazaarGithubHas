@@ -24,6 +24,10 @@
         https://play.google.com/store/apps/details?id=com.app.mazinokri
     </string>
 
+<!--    Facebook Property-->
+    <string name="facebook_app_id">513903477260610</string>
+    <string name="fb_login_protocol_scheme">fb1234</string>
+    <string name="facebook_client_token">666eed3c80881e08f91a4eb1d5c1e5fb</string>
 
     <string-array name="lanuages">
         <item>Hindi</item>
@@ -236,7 +240,7 @@
     <string name="days_ago">days ago</string>
 
     <!--Other String -->
-    <string name="confirmation">Confirmation</string>
+    <string name="confirmation">Confirmation</string>AddSocialAccountActivity.this
     <string name="failed_text">Something went wrong</string>
     <string name="failed_when_load">Failed when load data</string>
     <string name="no_internet_text">You are offline</string>

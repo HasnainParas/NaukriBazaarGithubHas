@@ -36,6 +36,7 @@ public class LanguagesAdapter extends RecyclerView.Adapter<LanguagesAdapter.view
     @Override
     public void onBindViewHolder(@NonNull viewHolder holder, int position) {
         SelectedLanguages data = list.get(position);
+        holder.oralLevel.setText(data.getName());
         holder.oralLevel.setText(data.getOralLevel());
         holder.writtenLevel.setText(data.getWrittenLevel());
         holder.languageName.setText(data.getName());

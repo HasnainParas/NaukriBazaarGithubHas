@@ -46,14 +46,13 @@
     <color name="darkgreen">#07864B</color>
     <color name="darkblc">#181A1F</color>
     <color name="bluelight">#347AF0</color>
-
-
+    <color name="facebook_color">#395998</color>
+    <color name="google_color">#4285F4</color>
 
 
     <color name="green">#6EDB47</color>
     <color name="greytextcolor">#697A83</color>
     <color name="companytitlecolor">#AAA6B9</color>
-
 
 
 </resources>
