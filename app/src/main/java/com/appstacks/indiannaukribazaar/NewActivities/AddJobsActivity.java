@@ -7,19 +7,17 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.RadioButton;
-import android.widget.RadioGroup;
+
 import android.widget.Toast;
 
 import com.appstacks.indiannaukribazaar.R;
 import com.appstacks.indiannaukribazaar.databinding.ActivityAddJobsBinding;
-import com.bumptech.glide.Glide;
-import com.google.android.material.bottomsheet.BottomSheetDialog;
 
+import com.google.android.material.bottomsheet.BottomSheetDialog;
 
 public class AddJobsActivity extends AppCompatActivity {
     SharedPrefe sharedPrefe;
@@ -35,7 +33,6 @@ public class AddJobsActivity extends AppCompatActivity {
         sharedPrefe = new SharedPrefe(this);
         binding = ActivityAddJobsBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-
 
         String title = getIntent().getStringExtra("title");
         String internet = getIntent().getStringExtra("cominternet");

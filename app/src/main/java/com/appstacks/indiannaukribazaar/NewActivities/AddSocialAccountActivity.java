@@ -14,6 +14,7 @@ import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
+import com.facebook.login.widget.LoginButton;
 
 import java.util.Arrays;
 
@@ -21,11 +22,13 @@ public class AddSocialAccountActivity extends AppCompatActivity {
     CallbackManager callbackManager;
     ActivityAddSocialAccountBinding binding;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding=ActivityAddSocialAccountBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
         callbackManager = CallbackManager.Factory.create();
 
         LoginManager.getInstance().registerCallback(callbackManager,

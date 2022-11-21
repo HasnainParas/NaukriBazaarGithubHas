@@ -72,19 +72,6 @@ public class User_ProfileActivity extends AppCompatActivity {
         auth = FirebaseAuth.getInstance();
         String username = getIntent().getStringExtra("username");
 
-//        userRef.child(auth.getCurrentUser().getUid()).addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                if (!snapshot.exists()) {
-//                    startActivity(new Intent(User_ProfileActivity.this, User_ProfileActivity.class));
-//                }
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError error) {
-//
-//            }
-//        });
 
 
         binding.backBtn.setOnClickListener(new View.OnClickListener() {
@@ -99,7 +86,7 @@ public class User_ProfileActivity extends AppCompatActivity {
         loadingAlertDialog();
 
 
-//        binding.completeYourProfileTV.setText(username);
+
         uID = auth.getUid();
 
 
@@ -195,7 +182,7 @@ public class User_ProfileActivity extends AppCompatActivity {
             @Override
             public void onClick(final View arg0) {
                 binding.genderBox.showDropDown();
-//                Toast.makeText(UserProfileActivity.this,selection, Toast.LENGTH_SHORT).show();
+
             }
         });
     }

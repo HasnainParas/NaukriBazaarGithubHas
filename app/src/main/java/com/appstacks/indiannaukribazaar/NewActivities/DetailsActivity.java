@@ -313,7 +313,7 @@ public class DetailsActivity extends AppCompatActivity {
                     binding.addworklay.getRoot().setVisibility(View.GONE);
                     binding.searchviewLayo.txtTitleSearchData.setText("Institute name");
                     ArrayList<String> list = new ArrayList<>();
-                    list.add("Karakuram Internation University");
+                    list.add("Karakoram Internation University");
                     list.add("Oxford University");
                     list.add("University of Punjab");
                     list.add("National University of Science and Technology");
@@ -323,6 +323,7 @@ public class DetailsActivity extends AppCompatActivity {
                     list.add("Islamic University");
                     list.add("University of Peshawar");
                     list.add("Institute of Business and Accounting");
+
                     addList(list);
                     searchView();
                     binding.searchviewLayo.listViewSearchData.setOnItemClickListener((adapterView, view18, i, l) -> {
@@ -1004,7 +1005,7 @@ public class DetailsActivity extends AppCompatActivity {
         bitmap.compress(Bitmap.CompressFormat.JPEG, 50, baos);
         byte[] finalImage = baos.toByteArray();
         final StorageReference filePath;
-        filePath = storageReference.child(getString(R.string.user_profile)).child(userId).child("LanguageFlag" + UUID.randomUUID().toString());
+        filePath = storageReference.child(getString(R.string.user_profile)).child("Languages").child(userId).child("LanguageFlag" + UUID.randomUUID().toString());
         UploadTask uploadTask = filePath.putBytes(finalImage);
         uploadTask.addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
             @Override

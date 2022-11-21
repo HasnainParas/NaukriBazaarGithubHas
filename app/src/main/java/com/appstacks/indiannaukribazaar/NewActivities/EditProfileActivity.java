@@ -4,9 +4,15 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.IntentSender;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.GridView;
@@ -21,7 +27,9 @@ import com.appstacks.indiannaukribazaar.ProfileModels.Appreciation;
 import com.appstacks.indiannaukribazaar.ProfileModels.Education;
 import com.appstacks.indiannaukribazaar.ProfileModels.Resume;
 import com.appstacks.indiannaukribazaar.ProfileModels.SelectedLanguages;
+import com.appstacks.indiannaukribazaar.R;
 import com.appstacks.indiannaukribazaar.databinding.ActivityEditProfileBinding;
+import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -35,18 +43,23 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class EditProfileActivity extends AppCompatActivity {
 
+
+    private final int PICK_IMAGE_REQUEST = 22;
+    private static final String TAG = "EditProfileActivity";
     ActivityEditProfileBinding binding;
     Intent in;
     private StorageReference storageReference, storagedlt;
     DatabaseReference userRef;
     String userId;
-    String name ;
-
+    String name;
+    private String downloadUrlOfUserImage;
     AddWorkExperience workExperience = new AddWorkExperience();
     AboutMeDescription aboutme = new AboutMeDescription();
     Education education;
@@ -59,6 +72,7 @@ public class EditProfileActivity extends AppCompatActivity {
     SelectedLanguages selectedLanguages;
     LanguageGridAdapter languageGridAdapter;
     Resume resume;
+    private Uri filePath;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,6 +98,13 @@ public class EditProfileActivity extends AppCompatActivity {
                 binding.listvieww.setNestedScrollingEnabled(true);
                 binding.gridLanguage.setNestedScrollingEnabled(true);
             }
+
+
+            binding.circleImageView.setOnClickListener(view -> {
+
+                pickImage();
+
+            });
 
             userRef.child(userId).child("Languages").addValueEventListener(new ValueEventListener() {
                 @Override
@@ -149,95 +170,45 @@ public class EditProfileActivity extends AppCompatActivity {
             fetchResume();
 
         }
+//
+        checkForUserImage();
+        //
+        onClicks();
 
 
-        binding.btnAboutMeEdit.setOnClickListener(view -> {
-            in = new Intent(EditProfileActivity.this, DetailsActivity.class);
-            in.putExtra("profile", "About Me");
-            in.putExtra("aboutMeDesc", aboutme.getAboutMeDescription());
-            startActivity(in);
-        });
-
-        binding.btnworkExperienceAdd.setOnClickListener(view -> {
-
-            in = new Intent(EditProfileActivity.this, DetailsActivity.class);
-            in.putExtra("profile", "Add Work");
-            startActivity(in);
-        });
-
-        binding.btnworkExperienceEdit.setOnClickListener(view -> {
-            in = new Intent(EditProfileActivity.this, DetailsActivity.class);
-            in.putExtra("profile", "Edit Work");
-            in.putExtra("jobTitle", workExperience.getJobTitle());
-            in.putExtra("company", workExperience.getCompany());
-            in.putExtra("startDate", workExperience.getStartDate());
-            in.putExtra("endDate", workExperience.getEndDate());
-            in.putExtra("positionNow", workExperience.isPositionNow());
-            in.putExtra("jobDesc", workExperience.getDescription());
-            startActivity(in);
-        });
-        binding.btnEducationAdd.setOnClickListener(view -> {
-            in = new Intent(EditProfileActivity.this, DetailsActivity.class);
-            in.putExtra("profile", "Add Education");
-            startActivity(in);
+    }
 
 
-        });
-        binding.btnEducationEdit.setOnClickListener(view -> {
-            in = new Intent(EditProfileActivity.this, DetailsActivity.class);
-            in.putExtra("profile", "Edit Education");
-            in.putExtra("levelEducation", education.getLevelOfEducation());
-            in.putExtra("institute", education.getInstituteName());
-            in.putExtra("educationStartDate", education.getStartDate());
-            in.putExtra("educationEndDate", education.getEndDate());
-            in.putExtra("isPositionEducation", education.isPosition());
-            in.putExtra("fieldOfStudy", education.getFieldOfStudy());
-            in.putExtra("educationDesc", education.getDescription());
-            startActivity(in);
-        });
-        binding.btnSkillEdit.setOnClickListener(new View.OnClickListener() {
+    private void checkForUserImage() {
+
+        userRef.child(userId).child(getString(R.string.user_image)).addValueEventListener(new ValueEventListener() {
             @Override
-            public void onClick(View view) {
-                in = new Intent(EditProfileActivity.this, DetailsActivity.class);
-                in.putExtra("profile", "Edit Skills");
-                startActivity(in);
-            }
-        });
-        binding.btnLanguageEdit.setOnClickListener(view -> {
-            in = new Intent(EditProfileActivity.this, DetailsActivity.class);
-            in.putExtra("profile", "Edit language");
-            startActivity(in);
-        });
-        binding.btnAppreciationAdd.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                in = new Intent(EditProfileActivity.this, DetailsActivity.class);
-                in.putExtra("profile", "Add Appre");
-                startActivity(in);
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()) {
+
+
+                    String data = snapshot.getValue(String.class);
+
+                    Glide.with(EditProfileActivity.this)
+                            .load(data)
+                            .into(binding.circleImageView);
+                }
+
+
             }
 
-        });
-        binding.btnAppreciationEdit.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                in = new Intent(EditProfileActivity.this, DetailsActivity.class);
-                in.putExtra("profile", "Edit Appre");
-                in.putExtra("awardName", appreciation.getAwardName());
-                in.putExtra("awardCategory", appreciation.getAwardCategory());
-                in.putExtra("awardDate", appreciation.getAwardEndDate());
-                in.putExtra("awardDesc", appreciation.getAwardDescription());
-                startActivity(in);
-            }
-        });
+            public void onCancelled(@NonNull DatabaseError error) {
 
-        binding.btnResumeAdd.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                in = new Intent(EditProfileActivity.this, DetailsActivity.class);
-                in.putExtra("profile", "Add cv");
-                startActivity(in);
             }
         });
+    }
+
+    private void pickImage() {
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(Intent.createChooser(intent, "Select any image"), PICK_IMAGE_REQUEST);
 
     }
 
@@ -289,7 +260,6 @@ public class EditProfileActivity extends AppCompatActivity {
 
                             }
                         });
-
 
 
                     });
@@ -396,6 +366,107 @@ public class EditProfileActivity extends AppCompatActivity {
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 
+            }
+        });
+    }
+
+    private void onClicks() {
+        binding.btnAboutMeEdit.setOnClickListener(view -> {
+            in = new Intent(EditProfileActivity.this, DetailsActivity.class);
+            in.putExtra("profile", "About Me");
+            in.putExtra("aboutMeDesc", aboutme.getAboutMeDescription());
+            startActivity(in);
+        });
+
+        binding.btnShareeditprofile.setOnClickListener(view -> {
+            // Sharing intent
+            Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
+            sharingIntent.setType("text/plain");
+            String shareBody = getString(R.string.share_text);
+            sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Subject Here");
+            sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareBody);
+            startActivity(Intent.createChooser(sharingIntent, "Share via"));
+        });
+
+        binding.btnworkExperienceAdd.setOnClickListener(view -> {
+
+            in = new Intent(EditProfileActivity.this, DetailsActivity.class);
+            in.putExtra("profile", "Add Work");
+            startActivity(in);
+        });
+
+        binding.btnworkExperienceEdit.setOnClickListener(view -> {
+            in = new Intent(EditProfileActivity.this, DetailsActivity.class);
+            in.putExtra("profile", "Edit Work");
+            in.putExtra("jobTitle", workExperience.getJobTitle());
+            in.putExtra("company", workExperience.getCompany());
+            in.putExtra("startDate", workExperience.getStartDate());
+            in.putExtra("endDate", workExperience.getEndDate());
+            in.putExtra("positionNow", workExperience.isPositionNow());
+            in.putExtra("jobDesc", workExperience.getDescription());
+            startActivity(in);
+        });
+        binding.btnEducationAdd.setOnClickListener(view -> {
+            in = new Intent(EditProfileActivity.this, DetailsActivity.class);
+            in.putExtra("profile", "Add Education");
+            startActivity(in);
+
+
+        });
+
+        binding.btnEducationEdit.setOnClickListener(view -> {
+            in = new Intent(EditProfileActivity.this, DetailsActivity.class);
+            in.putExtra("profile", "Edit Education");
+            in.putExtra("levelEducation", education.getLevelOfEducation());
+            in.putExtra("institute", education.getInstituteName());
+            in.putExtra("educationStartDate", education.getStartDate());
+            in.putExtra("educationEndDate", education.getEndDate());
+            in.putExtra("isPositionEducation", education.isPosition());
+            in.putExtra("fieldOfStudy", education.getFieldOfStudy());
+            in.putExtra("educationDesc", education.getDescription());
+            startActivity(in);
+        });
+        binding.btnSkillEdit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                in = new Intent(EditProfileActivity.this, DetailsActivity.class);
+                in.putExtra("profile", "Edit Skills");
+                startActivity(in);
+            }
+        });
+        binding.btnLanguageEdit.setOnClickListener(view -> {
+            in = new Intent(EditProfileActivity.this, DetailsActivity.class);
+            in.putExtra("profile", "Edit language");
+            startActivity(in);
+        });
+        binding.btnAppreciationAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                in = new Intent(EditProfileActivity.this, DetailsActivity.class);
+                in.putExtra("profile", "Add Appre");
+                startActivity(in);
+            }
+
+        });
+        binding.btnAppreciationEdit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                in = new Intent(EditProfileActivity.this, DetailsActivity.class);
+                in.putExtra("profile", "Edit Appre");
+                in.putExtra("awardName", appreciation.getAwardName());
+                in.putExtra("awardCategory", appreciation.getAwardCategory());
+                in.putExtra("awardDate", appreciation.getAwardEndDate());
+                in.putExtra("awardDesc", appreciation.getAwardDescription());
+                startActivity(in);
+            }
+        });
+
+        binding.btnResumeAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                in = new Intent(EditProfileActivity.this, DetailsActivity.class);
+                in.putExtra("profile", "Add cv");
+                startActivity(in);
             }
         });
     }
@@ -523,4 +594,73 @@ public class EditProfileActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null) {
+
+            filePath = data.getData();
+
+            Bitmap bitmap = null;
+            try {
+                bitmap = MediaStore
+                        .Images
+                        .Media
+                        .getBitmap(
+                                getContentResolver(),
+                                filePath);
+                binding.circleImageView.setImageBitmap(bitmap);
+                uploadImageOfUser();
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+        }
+    }
+
+    private void uploadImageOfUser() {
+
+        if (filePath != null) {
+
+            StorageReference storageReference = FirebaseStorage.getInstance().getReference(getString(R.string.user_profile));
+            storageReference.child(getString(R.string.user_image))
+                    .putFile(filePath)
+                    .addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
+                            if (task.isComplete()) {
+
+                                task.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                                    @Override
+                                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                                        storageReference.child("UserImage").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                            @Override
+                                            public void onSuccess(Uri uri) {
+
+                                                downloadUrlOfUserImage = String.valueOf(uri);
+                                                userRef.child(userId).child(getString(R.string.user_image)).setValue(downloadUrlOfUserImage);
+
+                                            }
+                                        }).addOnFailureListener(new OnFailureListener() {
+                                            @Override
+                                            public void onFailure(@NonNull Exception e) {
+                                                Log.d(TAG, "Download url not found " + e.getLocalizedMessage());
+                                            }
+                                        });
+                                    }
+                                });
+                            }
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Log.d(TAG, "Image upload failed" + e.getLocalizedMessage());
+                        }
+                    });
+
+
+        }
+    }
 }

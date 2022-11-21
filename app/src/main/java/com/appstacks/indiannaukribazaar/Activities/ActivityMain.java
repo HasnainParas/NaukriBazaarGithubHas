@@ -588,7 +588,7 @@ public class ActivityMain extends AppCompatActivity {
             Toast.makeText(this, R.string.press_again_exit_app, Toast.LENGTH_SHORT).show();
             exitTime = System.currentTimeMillis();
         } else {
-            finish();
+            finishAffinity();
         }
     }
 

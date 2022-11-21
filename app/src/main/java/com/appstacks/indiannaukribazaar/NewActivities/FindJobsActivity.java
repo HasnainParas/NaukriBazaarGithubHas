@@ -23,7 +23,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+
 import java.util.ArrayList;
+import java.util.List;
 
 public class FindJobsActivity extends AppCompatActivity {
 
@@ -40,7 +42,11 @@ public class FindJobsActivity extends AppCompatActivity {
         binding = ActivityFindJobsBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        auth = FirebaseAuth.getInstance();
+
+        //Hashtag
+
+
+                auth = FirebaseAuth.getInstance();
 
         currentUser = auth.getCurrentUser().getUid();
 
@@ -105,17 +111,6 @@ public class FindJobsActivity extends AppCompatActivity {
 
     }
 
-
-//    private void loadFragment(Fragment fragment) {
-//        // load fragment
-//
-//
-//    FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-//        transaction.replace(R.id.containerFjobs, fragment);
-//        binding.containerFjobs.setVisibility(View.GONE);
-//        transaction.addToBackStack(null);
-//        transaction.commitAllowingStateLoss();
-//    }
 
 
 }

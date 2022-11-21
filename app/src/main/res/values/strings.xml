@@ -3,6 +3,8 @@
     <string name="app_name">Indian Nokri Bazaar</string>
 
     <string name="user_profile">UsersProfile</string>
+    <string name="user_image">ImageOfUser</string>
+
     <string name="content_about">About This App \n
      On mission to eradicate extreme poverty from the world using the super power of technology!
     </string>
