@@ -48,7 +48,8 @@
         android:id="@+id/userpicture"
         android:layout_width="65dp"
         android:layout_height="65dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="32dp"
         android:src="@drawable/profileplace"
         app:layout_constraintStart_toStartOf="@+id/addPost"
         app:layout_constraintTop_toBottomOf="@+id/addPost" />
@@ -84,7 +85,7 @@
         android:id="@+id/textView22"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="24dp"
         android:fontFamily="@font/dm_sans"
         android:text="Post Title"
         android:textColor="@color/green"
@@ -92,22 +93,31 @@
         app:layout_constraintStart_toStartOf="@+id/userpicture"
         app:layout_constraintTop_toBottomOf="@+id/userpicture" />
 
-    <EditText
+    <androidx.cardview.widget.CardView
         android:id="@+id/etPostTitle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="4dp"
         android:layout_marginEnd="8dp"
-        android:background="@drawable/postbg"
-        android:ems="10"
-        android:hint="Write the title of your post here"
-        android:inputType="textPersonName"
-        android:paddingStart="10dp"
-        android:paddingTop="15dp"
-        android:paddingBottom="15dp"
+        app:cardCornerRadius="10dp"
+        app:cardElevation="5dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/textView22"
-        app:layout_constraintTop_toBottomOf="@+id/textView22" />
+        app:layout_constraintTop_toBottomOf="@+id/textView22">
+
+
+        <EditText
+            android:id="@+id/etPostTitleTx"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/postbg"
+            android:ems="10"
+            android:hint="Write the title of your post here"
+            android:inputType="textPersonName"
+            android:paddingStart="10dp"
+            android:paddingTop="15dp"
+            android:paddingBottom="15dp" />
+    </androidx.cardview.widget.CardView>
 
     <TextView
         android:id="@+id/textView23"
@@ -121,29 +131,38 @@
         app:layout_constraintStart_toStartOf="@+id/etPostTitle"
         app:layout_constraintTop_toBottomOf="@+id/etPostTitle" />
 
-    <EditText
-        android:id="@+id/etDescription"
+    <androidx.cardview.widget.CardView
         android:layout_width="0dp"
         android:layout_height="200dp"
-        android:layout_marginTop="16dp"
-        android:background="@drawable/postbg"
-        android:ems="10"
-        android:gravity="top"
-        android:hint="What do you want to talk about?"
-        android:inputType="textMultiLine|textPersonName"
-        android:maxLines="6"
-        android:padding="10dp"
-        android:textAlignment="textStart"
+        android:layout_marginTop="4dp"
+        app:cardCornerRadius="10dp"
+        app:cardElevation="5dp"
         app:layout_constraintEnd_toEndOf="@+id/etPostTitle"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/etPostTitle"
-        app:layout_constraintTop_toBottomOf="@+id/textView23" />
+        app:layout_constraintTop_toBottomOf="@+id/textView23">
+
+        <EditText
+            android:id="@+id/etDescription"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/postbg"
+            android:ems="10"
+            android:gravity="top"
+            android:hint="What do you want to talk about?"
+            android:inputType="textMultiLine|textPersonName"
+            android:maxLines="6"
+            android:padding="10dp"
+            android:textAlignment="textStart" />
+
+    </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:focusable="true"
-        app:cardCornerRadius="5dp"
+        app:cardCornerRadius="10dp"
+        app:cardElevation="5dp"
         app:layout_constraintBottom_toBottomOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout

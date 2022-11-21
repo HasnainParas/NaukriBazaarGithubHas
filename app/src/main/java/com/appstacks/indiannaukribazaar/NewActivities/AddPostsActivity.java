@@ -76,8 +76,8 @@ public class AddPostsActivity extends AppCompatActivity {
         binding.postbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (binding.etPostTitle.getText().toString().isEmpty()) {
-                    binding.etPostTitle.setError("Field Cann't be empty");
+                if (binding.etPostTitleTx.getText().toString().isEmpty()) {
+                    binding.etPostTitleTx.setError("Field Cann't be empty");
                     return;
                 } else if (binding.etDescription.getText().toString().isEmpty()) {
                     binding.etDescription.setError("Field Cann't be empty");
