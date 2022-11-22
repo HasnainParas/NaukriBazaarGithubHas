@@ -1298,8 +1298,9 @@ public class DetailsActivity extends AppCompatActivity {
     }
 
 
-    private static void addList(ArrayList<String> options) {
-        listOptions = new ArrayList<>(options);
+
+    private static void addList(ArrayList<String> options){
+        listOptions= new ArrayList<>(options);
     }
 
     private void searchView() {

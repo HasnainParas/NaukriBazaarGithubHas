@@ -84,8 +84,17 @@ public class ActivitySplash extends AppCompatActivity {
             userRef.child(auth.getCurrentUser().getUid()).addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    namevalid = snapshot.child("userToken").getValue(String.class);
-
+//                    namevalid = snapshot.child("userToken").getValue(String.class);
+                    namevalid = snapshot.child("userName").getValue(String.class);
+                    if (!snapshot.exists() || namevalid.isEmpty()) {
+                        startActivity(new Intent(ActivitySplash.this, UserNameActivity.class));
+                        Toast.makeText(ActivitySplash.this, "NotValid", Toast.LENGTH_SHORT).show();
+                        finishAffinity();
+                    } else {
+                        startActivity(new Intent(ActivitySplash.this, ActivityMain.class));
+//                                Toast.makeText(ActivitySplash.this, "Valid", Toast.LENGTH_SHORT).show();
+                    }
+                    Toast.makeText(ActivitySplash.this, namevalid + "", Toast.LENGTH_SHORT).show();
                 }
 
                 @Override
@@ -247,14 +256,14 @@ public class ActivitySplash extends AppCompatActivity {
                                 }
                             }, 1000);
 //                            sendOnChannel1();
-                            if (namevalid == null) {
-                                startActivity(new Intent(ActivitySplash.this, UserNameActivity.class));
-                                finishAffinity();
-                                Toast.makeText(ActivitySplash.this, "NotValid", Toast.LENGTH_SHORT).show();
-                            } else {
-                                startActivity(new Intent(ActivitySplash.this, ActivityMain.class));
-//                                Toast.makeText(ActivitySplash.this, "Valid", Toast.LENGTH_SHORT).show();
-                            }
+//                            if (namevalid.isEmpty()) {
+//                                startActivity(new Intent(ActivitySplash.this, UserNameActivity.class));
+//                                Toast.makeText(ActivitySplash.this, "NotValid", Toast.LENGTH_SHORT).show();
+//                                finishAffinity();
+//                            } else {
+//                                startActivity(new Intent(ActivitySplash.this, ActivityMain.class));
+////                                Toast.makeText(ActivitySplash.this, "Valid", Toast.LENGTH_SHORT).show();
+//                            }
                         }
 
                     } else {
