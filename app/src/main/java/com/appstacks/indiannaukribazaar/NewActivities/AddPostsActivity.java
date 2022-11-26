@@ -72,17 +72,15 @@ public class AddPostsActivity extends AppCompatActivity {
             }
         });
 
-        binding.hashtagid.setOnClickListener(view -> {
 
-        });
         binding.postbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (binding.etPostTitle.getText().toString().isEmpty()) {
-                    binding.etPostTitle.setError("Field Can't be empty");
+                if (binding.etPostTitleTx.getText().toString().isEmpty()) {
+                    binding.etPostTitleTx.setError("Field Cann't be empty");
                     return;
                 } else if (binding.etDescription.getText().toString().isEmpty()) {
-                    binding.etDescription.setError("Field Can't be empty");
+                    binding.etDescription.setError("Field Cann't be empty");
                     return;
                 } else {
                     Intent intent = new Intent(getApplicationContext(), AddJobsActivity.class);
@@ -90,7 +88,7 @@ public class AddPostsActivity extends AppCompatActivity {
                     sharedPrefe.saveDescription(txt);
                     startActivity(intent);
                 }
-
+                
             }
         });
     }

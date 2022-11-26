@@ -5,6 +5,10 @@ public class Constant {
     /**
      * -------------------- EDIT THIS WITH YOURS -------------------------------------------------
      */
+    /**
+
+     ---------------------------- HELLO MY NAME IS KHAN ------------------------------------------
+     */
 
     // Edit WEB_URL with your url. Make sure you have backslash('/') in the end url
     public static String WEB_URL = "https://jobtanks.com/";
@@ -39,5 +43,6 @@ public class Constant {
     public static String getURLimgUser(String file_name) {
         return WEB_URL + "uploads/user/" + file_name;
     }
+
 
 }

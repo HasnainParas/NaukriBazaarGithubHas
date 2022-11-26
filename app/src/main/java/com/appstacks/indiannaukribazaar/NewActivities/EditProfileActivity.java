@@ -94,6 +94,7 @@ public class EditProfileActivity extends AppCompatActivity {
         if (FirebaseAuth.getInstance().getCurrentUser() != null) {
             userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
             storageReference = FirebaseStorage.getInstance().getReference();
+            checkForUserImage();
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                 binding.listvieww.setNestedScrollingEnabled(true);
                 binding.gridLanguage.setNestedScrollingEnabled(true);
@@ -171,7 +172,7 @@ public class EditProfileActivity extends AppCompatActivity {
 
         }
 //
-        checkForUserImage();
+
         //
         onClicks();
 
@@ -489,6 +490,7 @@ public class EditProfileActivity extends AppCompatActivity {
                     assert education != null;
                     binding.txtEducation.setText(education.getFieldOfStudy());
                     binding.txtEducationInstitue.setText(education.getInstituteName());
+
                     binding.txtEducationDate.setText(education.getStartDate() + " - " + education.getEndDate());
                     if (!education.getEndDate().isEmpty()) {
                         int years = Integer.parseInt(education.getEndDate()) - Integer.parseInt(education.getStartDate());
@@ -503,6 +505,7 @@ public class EditProfileActivity extends AppCompatActivity {
                     binding.txtEducation.setVisibility(View.GONE);
                     binding.txtEducationInstitue.setVisibility(View.GONE);
                     binding.txtEducationDate.setVisibility(View.GONE);
+
                     binding.txtEducationTimePeriod.setVisibility(View.GONE);
 
                 }

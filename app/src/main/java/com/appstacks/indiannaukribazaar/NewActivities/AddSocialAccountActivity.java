@@ -35,8 +35,11 @@ public class AddSocialAccountActivity extends AppCompatActivity {
                 new FacebookCallback<LoginResult>() {
                     @Override
                     public void onSuccess(LoginResult loginResult) {
+
                         // App code
-                        Toast.makeText(AddSocialAccountActivity.this, "Daone4", Toast.LENGTH_SHORT).show();
+
+                        Toast.makeText(AddSocialAccountActivity.this, "Done", Toast.LENGTH_SHORT).show();
+
                     }
 
                     @Override
@@ -54,6 +57,7 @@ public class AddSocialAccountActivity extends AppCompatActivity {
             LoginManager.getInstance().logInWithReadPermissions(this, Arrays.asList("public_profile"));
         });
     }
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {

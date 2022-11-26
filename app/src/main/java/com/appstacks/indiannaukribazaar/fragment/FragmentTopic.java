@@ -2,11 +2,13 @@ package com.appstacks.indiannaukribazaar.fragment;
 
 import android.os.Bundle;
 import android.os.Handler;
+
 import androidx.annotation.DrawableRes;
 import androidx.fragment.app.Fragment;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -75,7 +77,7 @@ public class FragmentTopic extends Fragment {
             public void onItemClick(View view, Topic obj, int position) {
                 SearchFilter sf = new SearchFilter(obj);
                 ActivitySearch.navigate(getActivity(), sf, getString(R.string.hint_topic) + obj.name);
-                ((ActivityMain)getActivity()).ShowInterstitial();
+                ((ActivityMain) getActivity()).ShowInterstitial();
             }
         });
 
@@ -91,6 +93,8 @@ public class FragmentTopic extends Fragment {
                 }
             }
         });
+
+
 
         swipe_refresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override

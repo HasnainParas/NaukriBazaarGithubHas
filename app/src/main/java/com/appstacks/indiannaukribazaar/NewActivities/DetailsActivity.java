@@ -88,6 +88,7 @@ public class DetailsActivity extends AppCompatActivity {
     String PdfsizeInString,pdfDate;
     boolean workAdded;
 
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -755,27 +756,13 @@ public class DetailsActivity extends AppCompatActivity {
                             public void onClick(View view) {
                                 Drawable drawable = binding.languageDetailsLayout.flagToSet.getDrawable();
                                 Bitmap bitmap = ((BitmapDrawable) drawable).getBitmap();
-//
 
-//                                int id =binding.languageDetailsLayout.flagToSet.getId();
                                 String language = binding.languageDetailsLayout.txtLanguageToSet.getText().toString();
                                 if (Objects.equals(levelOfOral, null)) {
                                     Toast.makeText(DetailsActivity.this, "Select language's oral level", Toast.LENGTH_SHORT).show();
                                 } else if (Objects.equals(levelOfWritten, null)) {
                                     Toast.makeText(DetailsActivity.this, "Select language's written level", Toast.LENGTH_SHORT).show();
                                 } else {
-//                                    binding.languageDetailsLayout.getRoot().setVisibility(View.GONE);
-//                                    binding.addlanguageEdit.getRoot().setVisibility(View.VISIBLE);
-//
-//                                    binding.addlanguageEdit.listViewAddlanguage1.setVisibility(View.GONE);
-//                                    binding.addlanguageEdit.addedLanguageRecyclerview.setVisibility(View.VISIBLE);
-//
-//                                    selectedLanguagesArrayList = new ArrayList<>();
-//                                    selectedLanguagesArrayList.add(new SelectedLanguages(language, drawable, levelOfOral, levelOfWritten));
-//
-//                                    SelectedLanguagesAdapter selectedLanguagesAdapter = new SelectedLanguagesAdapter(DetailsActivity.this, selectedLanguagesArrayList);
-//                                    binding.addlanguageEdit.addedLanguageRecyclerview.setAdapter(selectedLanguagesAdapter);
-//                                    binding.addlanguageEdit.addedLanguageRecyclerview.setLayoutManager(new LinearLayoutManager(DetailsActivity.this));
 
                                     uploadFlagOfLanguage(bitmap, language);
 
@@ -1139,10 +1126,10 @@ public class DetailsActivity extends AppCompatActivity {
 
             hashMap.put(String.valueOf(i), arrayList.get(i));
         }
-//        for (String str : arrayList) {
-//
-//            hashMap.put(String.valueOf(str.indexOf(str)),str);
-//        }
+
+
+
+
 
         return hashMap;
 
@@ -1294,7 +1281,9 @@ public class DetailsActivity extends AppCompatActivity {
             finish();
 
         });
+
         btnContinue.setOnClickListener(view -> dialog.dismiss());
+
     }
 
 
