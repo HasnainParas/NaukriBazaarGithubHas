@@ -70,11 +70,17 @@ public class JobPosition extends AppCompatActivity {
                 String tv = list.get(index).toString();
                 sharedPrefe.saveJoPosition(tv);
                 startActivity(intent);
-
-
+                finish();
             }
         });
 
+    }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent intent = new Intent(getApplicationContext(), AddJobsActivity.class);
+        startActivity(intent);
+        finish();
     }
 }

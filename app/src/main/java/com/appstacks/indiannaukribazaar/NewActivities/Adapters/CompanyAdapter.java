@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -30,25 +31,25 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-public class CompanyAdapter extends RecyclerView.Adapter<CompanyAdapter.viewHolder> implements Filterable{
+public class CompanyAdapter extends RecyclerView.Adapter<CompanyAdapter.viewHolder> implements Filterable {
 
 
-    ArrayList<CompanyModel>list;
+    ArrayList<CompanyModel> list;
     Context context;
-    ArrayList<CompanyModel>backup;
+    ArrayList<CompanyModel> backup;
     SharedPrefe sharedPrefe;
 
     public CompanyAdapter(ArrayList<CompanyModel> list, Context context) {
         this.list = list;
         this.context = context;
-        backup =new ArrayList<>(list);
+        backup = new ArrayList<>(list);
     }
 
     @NonNull
     @Override
     public viewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
-      View view =  LayoutInflater.from(context).inflate(R.layout.sample_company,parent,false);
+        View view = LayoutInflater.from(context).inflate(R.layout.sample_company, parent, false);
         return new viewHolder(view);
     }
 
@@ -65,13 +66,14 @@ public class CompanyAdapter extends RecyclerView.Adapter<CompanyAdapter.viewHold
         holder.constraintLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(context,AddJobsActivity.class);
-                intent.putExtra("company",model.getImage());
-                intent.putExtra("title",model.getTitle());
-                intent.putExtra("cominternet",model.getInternet());
+                Intent intent = new Intent(context, AddJobsActivity.class);
+                intent.putExtra("company", model.getImage());
+                intent.putExtra("title", model.getTitle());
+                intent.putExtra("cominternet", model.getInternet());
                 sharedPrefe.saveComTitle(model.getTitle());
                 sharedPrefe.saveCompany(model.getInternet());
                 context.startActivity(intent);
+                ((AppCompatActivity) context).finish();
 
             }
         });
@@ -92,18 +94,17 @@ public class CompanyAdapter extends RecyclerView.Adapter<CompanyAdapter.viewHold
         @Override
         protected FilterResults performFiltering(CharSequence keyWord) {
 
-            ArrayList<CompanyModel>filterData = new ArrayList<>();
+            ArrayList<CompanyModel> filterData = new ArrayList<>();
 
-            if (keyWord.toString().isEmpty()){
+            if (keyWord.toString().isEmpty()) {
 
                 filterData.addAll(backup);
-            }
-            else {
+            } else {
 
-                for (CompanyModel obj: backup){
+                for (CompanyModel obj : backup) {
 
                     if (obj.getTitle().toString().toLowerCase()
-                            .contains(keyWord.toString().toLowerCase()))filterData.add(obj);
+                            .contains(keyWord.toString().toLowerCase())) filterData.add(obj);
 
                 }
 
@@ -118,28 +119,27 @@ public class CompanyAdapter extends RecyclerView.Adapter<CompanyAdapter.viewHold
         protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
 
             list.clear();
-            list.addAll((ArrayList<CompanyModel>)filterResults.values);
+            list.addAll((ArrayList<CompanyModel>) filterResults.values);
             notifyDataSetChanged();
         }
     };
 
-    public class viewHolder extends RecyclerView.ViewHolder{
-     TextView title,internet;
-     ImageView companyLogo;
-     ConstraintLayout constraintLayout;
+    public class viewHolder extends RecyclerView.ViewHolder {
+        TextView title, internet;
+        ImageView companyLogo;
+        ConstraintLayout constraintLayout;
 
 
+        public viewHolder(@NonNull View itemView) {
+            super(itemView);
 
-     public viewHolder(@NonNull View itemView) {
-         super(itemView);
+            companyLogo = itemView.findViewById(R.id.imgGoogle);
+            title = itemView.findViewById(R.id.companyTitle);
+            internet = itemView.findViewById(R.id.internet);
+            constraintLayout = itemView.findViewById(R.id.click);
 
-         companyLogo = itemView.findViewById(R.id.imgGoogle);
-         title = itemView.findViewById(R.id.companyTitle);
-         internet = itemView.findViewById(R.id.internet);
-         constraintLayout = itemView.findViewById(R.id.click);
-
-     }
- }
+        }
+    }
 
 
 }

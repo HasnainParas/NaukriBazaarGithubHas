@@ -46,7 +46,7 @@ public class FindJobsActivity extends AppCompatActivity {
         //Hashtag
 
 
-                auth = FirebaseAuth.getInstance();
+        auth = FirebaseAuth.getInstance();
 
         currentUser = auth.getCurrentUser().getUid();
 
@@ -57,10 +57,10 @@ public class FindJobsActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()) {
                     model = snapshot.getValue(PersonalInformationModel.class);
-                    username = model.getFirstName() + model.getLastName();
+                    username = model.getFirstName() +" "+ model.getLastName();
                     userAddress = model.getUserAddress();
                     Toast.makeText(FindJobsActivity.this, username, Toast.LENGTH_SHORT).show();
-                    binding.usernameid.setText("Hello\n" + model.getFirstName() + " " + model.getLastName());
+                    binding.usernameid.setText("Hello\n" + username);
                 }
             }
 
@@ -75,7 +75,7 @@ public class FindJobsActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(FindJobsActivity.this, AddPostsActivity.class);
-                intent.putExtra("username", binding.usernameid.getText().toString());
+                intent.putExtra("username", username);
                 intent.putExtra("useraddress", userAddress);
                 startActivity(intent);
 
@@ -110,7 +110,6 @@ public class FindJobsActivity extends AppCompatActivity {
 
 
     }
-
 
 
 }

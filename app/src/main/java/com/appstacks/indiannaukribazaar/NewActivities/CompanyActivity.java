@@ -72,4 +72,12 @@ public class CompanyActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent intent = new Intent(getApplicationContext(), AddJobsActivity.class);
+        startActivity(intent);
+        finish();
+
+    }
 }
