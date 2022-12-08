@@ -90,6 +90,13 @@ public class FindJobsActivity extends AppCompatActivity {
 
             }
         });
+        binding.fullTimeJob.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(FindJobsActivity.this, PaidJobsActivity.class));
+
+            }
+        });
 
 
         ArrayList<FindJobModel> list = new ArrayList<>();

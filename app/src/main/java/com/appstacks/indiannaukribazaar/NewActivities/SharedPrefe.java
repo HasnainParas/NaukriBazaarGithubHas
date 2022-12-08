@@ -7,80 +7,106 @@ import com.appstacks.indiannaukribazaar.data.SharedPref;
 
 public class SharedPrefe {
 
-SharedPreferences sharedPreferences;
-public static String JOB_POS="jobpos";
-public static String JOBLOC="jobloc";
-public static String DESC="desc";
-public static String COMP="comp";
-public static String COMPTITLE="COMPTITLE";
-public static String EMPLOTYPE="employType";
+    SharedPreferences sharedPreferences;
+    public static String JOB_POS = "jobpos";
+    public static String JOBLOC = "jobloc";
+    public static String DESC = "desc";
+    public static String TITLE = "title";
+    public static String COMP = "comp";
+    public static String COMPTITLE = "COMPTITLE";
+    public static String EMPLOTYPE = "employType";
 
     public SharedPrefe(Context context) {
 
-        sharedPreferences=context.getSharedPreferences(JOB_POS,Context.MODE_PRIVATE);
-        sharedPreferences = context.getSharedPreferences(JOBLOC,Context.MODE_PRIVATE);
-        sharedPreferences = context.getSharedPreferences(COMP,Context.MODE_PRIVATE);
+        sharedPreferences = context.getSharedPreferences(JOB_POS, Context.MODE_PRIVATE);
+        sharedPreferences = context.getSharedPreferences(JOBLOC, Context.MODE_PRIVATE);
+        sharedPreferences = context.getSharedPreferences(COMP, Context.MODE_PRIVATE);
 
     }
 
-    public void saveJoPosition(String jobPos){
+    public void saveJoPosition(String jobPos) {
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString(JOB_POS,jobPos);
-        editor.apply();
-
-    }
-    public String fetchJobPosition(){
-        return sharedPreferences.getString(JOB_POS,null);
-    }
-
-    public void  saveCompany (String company){
-
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString(COMP,company);
+        editor.putString(JOB_POS, jobPos);
         editor.apply();
 
     }
 
+    public String fetchJobPosition() {
+        return sharedPreferences.getString(JOB_POS, null);
+    }
 
+    public void saveCompany(String company) {
 
-    public String fetchCompany(){
-        return sharedPreferences.getString(COMP,null);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(COMP, company);
+        editor.apply();
+
     }
 
 
-    public void saveJobBLocation(String jobLoc){
+    public String fetchCompany() {
+        return sharedPreferences.getString(COMP, null);
+    }
+
+
+    public void saveJobBLocation(String jobLoc) {
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString(JOBLOC,jobLoc);
+        editor.putString(JOBLOC, jobLoc);
         editor.apply();
     }
 
-    public String fetchJobLocation(){
+    public String fetchJobLocation() {
 
 
-        return sharedPreferences.getString(JOBLOC,null);
+        return sharedPreferences.getString(JOBLOC, null);
 
     }
 
-    public void saveDescription(String description){
+    public void saveDescription(String description) {
 
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString(DESC,description);
+        editor.putString(DESC, description);
         editor.apply();
     }
-    public String fetchDescription(){
 
-        return sharedPreferences.getString(DESC,null);
+    public String fetchDescription() {
+
+        return sharedPreferences.getString(DESC, null);
     }
 
-    public void saveComTitle(String title){
+    public void saveTitle(String title) {
 
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString(COMPTITLE,title);
+        editor.putString(TITLE, title);
         editor.apply();
     }
-    public String fetchComTitle(){
 
-        return sharedPreferences.getString(COMPTITLE,null);
+    public String fetchTitle() {
+
+        return sharedPreferences.getString(TITLE, null);
+    }
+
+    public void saveComTitle(String title) {
+
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(COMPTITLE, title);
+        editor.apply();
+    }
+
+    public String fetchComTitle() {
+
+        return sharedPreferences.getString(COMPTITLE, null);
+    }
+
+    public void deleteAllsharedPre() {
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.remove(JOB_POS);
+        editor.remove(JOBLOC);
+        editor.remove(DESC);
+        editor.remove(TITLE);
+        editor.remove(COMPTITLE);
+        editor.remove(COMP);
+        editor.apply();
     }
 
 

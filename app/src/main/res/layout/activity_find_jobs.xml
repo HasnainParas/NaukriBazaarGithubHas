@@ -181,8 +181,9 @@
                 app:layout_constraintTop_toTopOf="parent">
 
                 <LinearLayout
+                    android:id="@+id/fullTimeJob"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:background="@drawable/rectangebg"
                     android:backgroundTint="#BEAFFE"
                     android:gravity="center"

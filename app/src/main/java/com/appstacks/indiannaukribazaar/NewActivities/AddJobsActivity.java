@@ -1,9 +1,11 @@
 package com.appstacks.indiannaukribazaar.NewActivities;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -14,16 +16,27 @@ import android.widget.RadioButton;
 
 import android.widget.Toast;
 
+import com.appstacks.indiannaukribazaar.NewActivities.Models.UserJobModel;
 import com.appstacks.indiannaukribazaar.R;
 import com.appstacks.indiannaukribazaar.databinding.ActivityAddJobsBinding;
 
+import com.appstacks.indiannaukribazaar.databinding.HandloadingDialogLayoutBinding;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class AddJobsActivity extends AppCompatActivity {
     SharedPrefe sharedPrefe;
     ActivityAddJobsBinding binding;
     BottomSheetDialog bottomSheetDialog;
     int checkRadio;
+    DatabaseReference userJobRef;
+    UserJobModel userJobModel;
+    String userUid;
+    AlertDialog loadingDialog;
 
 
     @SuppressLint("SetTextI18n")
@@ -36,6 +49,12 @@ public class AddJobsActivity extends AppCompatActivity {
 
         String title = getIntent().getStringExtra("title");
         String internet = getIntent().getStringExtra("cominternet");
+
+        userUid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+
+
+        userJobRef = FirebaseDatabase.getInstance().getReference("userJobs");
+
 
         if (title != null) {
             binding.comTitle.setText(title);
@@ -62,7 +81,39 @@ public class AddJobsActivity extends AppCompatActivity {
 
 
         iconChange();
+        loadingAlertDialog();
 
+        binding.postBtn.setOnClickListener(view -> {
+//            Toast.makeText(AddJobsActivity.this, sharedPrefe.fetchTitle(), Toast.LENGTH_SHORT).show();
+
+            userJobModel = new UserJobModel(sharedPrefe.fetchTitle(),
+                    binding.txtPositon.getText().toString(),
+                    binding.txtCompany.getText().toString(),
+                    binding.txtLocation.getText().toString(),
+                    binding.employmentTxt.getText().toString(),
+                    binding.txtWorkplace.getText().toString(),
+                    binding.txtDescription.getText().toString()
+            );
+            loadingDialog.show();
+
+            userJobRef.child(userUid).setValue(userJobModel).addOnSuccessListener(new OnSuccessListener<Void>() {
+                @Override
+                public void onSuccess(Void unused) {
+                    loadingDialog.dismiss();
+                    sharedPrefe.deleteAllsharedPre();
+                    startActivity(new Intent(AddJobsActivity.this, FindJobsActivity.class));
+                    finish();
+                    Toast.makeText(AddJobsActivity.this, "Job submitted Successfully", Toast.LENGTH_SHORT).show();
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    loadingDialog.dismiss();
+                    Toast.makeText(AddJobsActivity.this, e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+                }
+            });
+
+        });
 
         binding.jobPosition.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -71,7 +122,6 @@ public class AddJobsActivity extends AppCompatActivity {
                 finish();
             }
         });
-
 
         binding.btnWorkplaceType.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -146,7 +196,6 @@ public class AddJobsActivity extends AppCompatActivity {
             }
         });
 
-
         binding.employmentBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -218,7 +267,8 @@ public class AddJobsActivity extends AppCompatActivity {
 
             }
         });
-        binding.cancelBtn.setOnClickListener(view -> finishAffinity());
+
+        binding.cancelBtn.setOnClickListener(view -> finish());
 
     }
 
@@ -280,5 +330,15 @@ public class AddJobsActivity extends AppCompatActivity {
         binding.comTitle.setText(savedtitle);
     }
 
+    public void loadingAlertDialog() {
 
+        HandloadingDialogLayoutBinding handloadingBinding = HandloadingDialogLayoutBinding.inflate(getLayoutInflater());
+        loadingDialog = new AlertDialog.Builder(AddJobsActivity.this)
+                .setView(handloadingBinding.getRoot()).create();
+        loadingDialog.setCanceledOnTouchOutside(false);
+        loadingDialog.setCancelable(false);
+        loadingDialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+
+    }
 }
+

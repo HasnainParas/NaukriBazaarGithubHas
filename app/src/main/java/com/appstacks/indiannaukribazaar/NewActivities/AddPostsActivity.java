@@ -86,8 +86,10 @@ public class AddPostsActivity extends AppCompatActivity {
                     return;
                 } else {
                     Intent intent = new Intent(getApplicationContext(), AddJobsActivity.class);
-                    String txt = binding.etDescription.getText().toString();
-                    sharedPrefe.saveDescription(txt);
+                    String descriptionTxt = binding.etDescription.getText().toString();
+                    String titleTxt = binding.etPostTitleTx.getText().toString();
+                    sharedPrefe.saveDescription(descriptionTxt);
+                    sharedPrefe.saveTitle(titleTxt);
                     startActivity(intent);
                 }
 

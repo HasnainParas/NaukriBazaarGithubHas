@@ -26,7 +26,7 @@
         https://play.google.com/store/apps/details?id=com.app.mazinokri
     </string>
 
-<!--    Facebook Property-->
+    <!--    Facebook Property-->
     <string name="facebook_app_id">513903477260610</string>
     <string name="fb_login_protocol_scheme">fb1234</string>
     <string name="facebook_client_token">666eed3c80881e08f91a4eb1d5c1e5fb</string>
