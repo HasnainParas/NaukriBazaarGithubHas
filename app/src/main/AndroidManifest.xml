@@ -32,6 +32,9 @@
         android:usesCleartextTraffic="true"
         tools:ignore="HardcodedDebugMode">
         <activity
+            android:name=".NewActivities.UserJobDetailsActivity"
+            android:exported="false" />
+        <activity
             android:name=".NewActivities.FullTimeJobActivity"
             android:exported="false" />
         <activity
@@ -61,7 +64,7 @@
         <activity
             android:name=".NewActivities.EditProfileActivity"
             android:exported="true"
-            android:theme="@style/noactiondisplay"></activity>
+            android:theme="@style/noactiondisplay" />
         <activity
             android:name=".AaForChecking"
             android:exported="false"
