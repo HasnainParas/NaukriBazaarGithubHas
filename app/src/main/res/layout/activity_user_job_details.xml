@@ -113,8 +113,8 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 android:fontFamily="@font/dm_sans"
-                android:text="Hey Guys"
-                android:textColor="@color/black"
+                android:text="Hey guys"
+                android:textColor="@color/darkblc"
                 android:textSize="16sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -127,15 +127,19 @@
                 android:layout_marginEnd="8dp"
                 android:background="@drawable/postbg"
                 android:ems="10"
-                android:gravity="top"
+                android:enabled="false"
+                android:gravity="center|start"
                 android:hint="What do you want to talk about?"
                 android:inputType="textMultiLine|textPersonName"
                 android:maxLines="6"
+                android:minHeight="48dp"
                 android:paddingStart="5dp"
                 android:paddingTop="10dp"
-                android:paddingEnd="10dp"
+                android:paddingEnd="5dp"
                 android:paddingBottom="10dp"
                 android:textAlignment="textStart"
+                android:textColor="@color/darkblc"
+                android:textSize="12sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/textView21"
                 app:layout_constraintTop_toBottomOf="@+id/textView21" />
@@ -143,9 +147,9 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="32dp"
+                android:layout_marginStart="16dp"
                 android:layout_marginTop="32dp"
-                android:layout_marginEnd="32dp"
+                android:layout_marginEnd="16dp"
                 android:layout_marginBottom="24dp"
                 android:background="@drawable/usrdetailbg"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -160,20 +164,20 @@
                     android:layout_width="40dp"
                     android:layout_height="35dp"
                     android:layout_marginStart="16dp"
-                    android:layout_marginTop="24dp"
+                    android:layout_marginTop="16dp"
 
                     android:src="@drawable/profileplace"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@+id/textView34"
+                    android:id="@+id/titleTextView"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:layout_marginEnd="8dp"
                     android:fontFamily="@font/dm_sans"
-                    android:padding="2dp"
+                    android:padding="1dp"
                     android:text="UI/UX Designer"
                     android:textColor="@color/black"
                     android:textSize="12sp"
@@ -183,37 +187,47 @@
                     app:layout_constraintTop_toTopOf="@+id/userpictureuser2" />
 
                 <TextView
-                    android:id="@+id/textView62"
+                    android:id="@+id/jobCompany"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:text="Job vacancies from Apple company"
+                    android:layout_marginTop="4dp"
                     android:textSize="12sp"
-                    app:layout_constraintEnd_toEndOf="@+id/textView34"
-                    app:layout_constraintStart_toStartOf="@+id/textView34"
-                    app:layout_constraintTop_toBottomOf="@+id/textView34" />
+                    app:layout_constraintEnd_toEndOf="@+id/titleTextView"
+                    app:layout_constraintStart_toStartOf="@+id/titleTextView"
+                    app:layout_constraintTop_toBottomOf="@+id/titleTextView" />
 
                 <TextView
-                    android:id="@+id/textView63"
+                    android:id="@+id/userAddress4job"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginTop="4dp"
                     android:text="TextView"
                     android:textSize="12sp"
-                    app:layout_constraintStart_toStartOf="@+id/textView62"
-                    app:layout_constraintTop_toBottomOf="@+id/textView62" />
+                    app:layout_constraintStart_toStartOf="@+id/jobCompany"
+                    app:layout_constraintTop_toBottomOf="@+id/jobCompany" />
 
                 <TextView
-                    android:id="@+id/textView67"
+                    android:id="@+id/userWorkPlaceTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:text="TextView"
+                    android:textSize="12sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/userAddress4job"
+                    app:layout_constraintStart_toEndOf="@+id/userAddress4job"
+                    app:layout_constraintTop_toTopOf="@+id/userAddress4job" />
+
+                <TextView
+                    android:id="@+id/seeDetailsTV"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
                     android:layout_marginBottom="32dp"
                     android:background="@drawable/usrbgbtn"
                     android:paddingStart="10dp"
-                    android:paddingTop="5dp"
+                    android:paddingTop="8dp"
                     android:paddingEnd="10dp"
-                    android:paddingBottom="5dp"
+                    android:paddingBottom="8dp"
                     android:text="Application details"
                     android:textAlignment="center"
                     android:textColor="@color/black"
@@ -221,7 +235,7 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView63" />
+                    app:layout_constraintTop_toBottomOf="@+id/userAddress4job" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>

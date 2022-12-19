@@ -28,11 +28,13 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.Objects;
+
 public class AddJobsActivity extends AppCompatActivity {
     SharedPrefe sharedPrefe;
     ActivityAddJobsBinding binding;
     BottomSheetDialog bottomSheetDialog;
-    int checkRadio;
+//    int checkRadio;
     DatabaseReference userJobRef;
     UserJobModel userJobModel;
     String userUid;
@@ -50,7 +52,7 @@ public class AddJobsActivity extends AppCompatActivity {
         String title = getIntent().getStringExtra("title");
         String internet = getIntent().getStringExtra("cominternet");
 
-        userUid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        userUid = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
 
 
         userJobRef = FirebaseDatabase.getInstance().getReference("userJobs");
@@ -101,7 +103,7 @@ public class AddJobsActivity extends AppCompatActivity {
                 public void onSuccess(Void unused) {
                     loadingDialog.dismiss();
                     sharedPrefe.deleteAllsharedPre();
-                    startActivity(new Intent(AddJobsActivity.this, FindJobsActivity.class));
+                    startActivity(new Intent(AddJobsActivity.this, UserJobDetailsActivity.class));
                     finish();
                     Toast.makeText(AddJobsActivity.this, "Job submitted Successfully", Toast.LENGTH_SHORT).show();
                 }
