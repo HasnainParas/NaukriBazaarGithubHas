@@ -31,12 +31,15 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:ignore="HardcodedDebugMode">
+
         <activity
             android:name=".NewActivities.UserJobDetailsActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/noactiondisplay" />
         <activity
             android:name=".NewActivities.FullTimeJobActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/noactiondisplay" />
         <activity
             android:name=".NewActivities.AddSocialAccountActivity"
             android:exported="false">

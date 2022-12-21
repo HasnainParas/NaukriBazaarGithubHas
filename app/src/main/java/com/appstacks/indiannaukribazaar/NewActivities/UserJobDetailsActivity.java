@@ -26,6 +26,8 @@ public class UserJobDetailsActivity extends AppCompatActivity {
     UserJobModel userJobModel;
 
     String username, userAddress;
+    String uniqueKey;
+
 
 
     @Override
@@ -34,10 +36,13 @@ public class UserJobDetailsActivity extends AppCompatActivity {
         binding = ActivityUserJobDetailsBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        currentUser = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        uniqueKey = getIntent().getStringExtra("unikey");
 
+        currentUser = FirebaseAuth.getInstance().getCurrentUser().getUid();
         userJobRef = FirebaseDatabase.getInstance().getReference("userJobs");
         userRef = FirebaseDatabase.getInstance().getReference();
+
+
 
         // UserProfile
         userRef.child("UsersInfo").child(currentUser).addValueEventListener(new ValueEventListener() {
@@ -61,7 +66,7 @@ public class UserJobDetailsActivity extends AppCompatActivity {
 
 
         // Job Data
-        userJobRef.child(currentUser).addValueEventListener(new ValueEventListener() {
+        userJobRef.child(currentUser).child(uniqueKey).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()) {
@@ -72,6 +77,7 @@ public class UserJobDetailsActivity extends AppCompatActivity {
                     binding.jobCompany.setText("Job vacancies from " + userJobModel.getCompany() + " company");
                     binding.userAddress4job.setText(userJobModel.getJobLocation());
                     binding.userWorkPlaceTv.setText(". " + userJobModel.getTypeOfWorkPlace());
+
 //                    username = model.getFirstName() + " " + model.getLastName();
 //                    userAddress = model.getUserAddress();
                     Toast.makeText(UserJobDetailsActivity.this, "Yes Existed...", Toast.LENGTH_SHORT).show();

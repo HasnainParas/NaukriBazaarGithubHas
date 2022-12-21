@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/cardclickerUjOb"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="5dp"
+    android:layout_marginTop="10dp"
+    android:layout_marginEnd="5dp"
+    app:cardBackgroundColor="@color/white"
+    app:cardCornerRadius="8dp"
+    app:cardElevation="7dp"
+    app:cardMaxElevation="5dp">
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:padding="10dp">
+
+        <View
+            android:id="@+id/view8"
+            android:layout_width="21dp"
+            android:layout_height="21dp"
+            android:background="@drawable/ic_optiondot"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/jobcompic" />
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/jobcompic"
+            android:layout_width="41dp"
+            android:layout_height="41dp"
+            android:layout_marginStart="8dp"
+            android:src="@drawable/profileplace"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/titlesamjob"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/dm_sans"
+            android:text="UI/UX Designer"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="@+id/jobcompic"
+            app:layout_constraintTop_toBottomOf="@+id/jobcompic" />
+
+        <TextView
+            android:id="@+id/companyNdaddress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="TextView"
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="@+id/titlesamjob"
+            app:layout_constraintTop_toBottomOf="@+id/titlesamjob" />
+
+        <TextView
+            android:id="@+id/tview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="18dp"
+            android:background="@drawable/bg4txtview"
+            android:paddingStart="8dp"
+            android:paddingTop="5dp"
+            android:paddingEnd="8dp"
+            android:paddingBottom="5dp"
+            android:text="TextView"
+            android:textColor="@color/black"
+            android:textSize="10sp"
+            app:layout_constraintEnd_toStartOf="@+id/tview1"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/companyNdaddress" />
+
+        <TextView
+            android:id="@+id/tview1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg4txtview"
+            android:paddingStart="8dp"
+            android:paddingTop="5dp"
+            android:paddingEnd="8dp"
+            android:paddingBottom="5dp"
+            android:text="TextView"
+            android:textColor="@color/black"
+            android:textSize="10sp"
+            app:layout_constraintEnd_toStartOf="@+id/tview2"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/tview"
+            app:layout_constraintTop_toTopOf="@+id/tview" />
+
+        <TextView
+            android:id="@+id/tview2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/bg4txtview"
+            android:paddingStart="8dp"
+            android:paddingTop="5dp"
+            android:paddingEnd="8dp"
+            android:paddingBottom="5dp"
+            android:text="TextView"
+            android:textColor="@color/black"
+            android:textSize="10sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/tview1"
+            app:layout_constraintTop_toTopOf="@+id/tview1" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>

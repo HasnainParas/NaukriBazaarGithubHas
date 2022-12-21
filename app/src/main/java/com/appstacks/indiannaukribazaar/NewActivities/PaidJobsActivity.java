@@ -31,11 +31,8 @@ public class PaidJobsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         binding = ActivityPaidJobsBinding.inflate(getLayoutInflater());
-
         setContentView(binding.getRoot());
-
 
 
 

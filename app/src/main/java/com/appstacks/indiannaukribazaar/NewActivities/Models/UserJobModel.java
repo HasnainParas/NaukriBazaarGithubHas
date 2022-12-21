@@ -2,12 +2,12 @@ package com.appstacks.indiannaukribazaar.NewActivities.Models;
 
 public class UserJobModel {
 
-    private String jobTitle,jobPosition, company, jobLocation, employmentType, typeOfWorkPlace, description;
+    private String jobTitle,jobPosition, company, jobLocation, employmentType, typeOfWorkPlace, description,uniqueKey,userAuthId;
 
     public UserJobModel() {
     }
 
-    public UserJobModel(String jobTitle, String jobPosition, String company, String jobLocation, String employmentType, String typeOfWorkPlace, String description) {
+    public UserJobModel(String jobTitle, String jobPosition, String company, String jobLocation, String employmentType, String typeOfWorkPlace, String description, String uniqueKey, String userAuthId) {
         this.jobTitle = jobTitle;
         this.jobPosition = jobPosition;
         this.company = company;
@@ -15,6 +15,8 @@ public class UserJobModel {
         this.employmentType = employmentType;
         this.typeOfWorkPlace = typeOfWorkPlace;
         this.description = description;
+        this.uniqueKey = uniqueKey;
+        this.userAuthId = userAuthId;
     }
 
     public String getJobTitle() {
@@ -71,5 +73,21 @@ public class UserJobModel {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getUniqueKey() {
+        return uniqueKey;
+    }
+
+    public void setUniqueKey(String uniqueKey) {
+        this.uniqueKey = uniqueKey;
+    }
+
+    public String getUserAuthId() {
+        return userAuthId;
+    }
+
+    public void setUserAuthId(String userAuthId) {
+        this.userAuthId = userAuthId;
     }
 }

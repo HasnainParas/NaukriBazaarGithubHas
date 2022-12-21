@@ -29,16 +29,20 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.Objects;
+import java.util.Random;
+import java.util.UUID;
 
 public class AddJobsActivity extends AppCompatActivity {
     SharedPrefe sharedPrefe;
     ActivityAddJobsBinding binding;
     BottomSheetDialog bottomSheetDialog;
-//    int checkRadio;
-    DatabaseReference userJobRef;
+    //    int checkRadio;
+    DatabaseReference userJobRef, allUserJobs;
     UserJobModel userJobModel;
     String userUid;
     AlertDialog loadingDialog;
+
+    String uniqueKey;
 
 
     @SuppressLint("SetTextI18n")
@@ -56,6 +60,7 @@ public class AddJobsActivity extends AppCompatActivity {
 
 
         userJobRef = FirebaseDatabase.getInstance().getReference("userJobs");
+        allUserJobs = FirebaseDatabase.getInstance().getReference("allUserJobs");
 
 
         if (title != null) {
@@ -88,22 +93,35 @@ public class AddJobsActivity extends AppCompatActivity {
         binding.postBtn.setOnClickListener(view -> {
 //            Toast.makeText(AddJobsActivity.this, sharedPrefe.fetchTitle(), Toast.LENGTH_SHORT).show();
 
+            uniqueKey = UUID.randomUUID().toString();
+
             userJobModel = new UserJobModel(sharedPrefe.fetchTitle(),
                     binding.txtPositon.getText().toString(),
                     binding.txtCompany.getText().toString(),
                     binding.txtLocation.getText().toString(),
                     binding.employmentTxt.getText().toString(),
                     binding.txtWorkplace.getText().toString(),
-                    binding.txtDescription.getText().toString()
+                    binding.txtDescription.getText().toString(),
+                    uniqueKey,userUid
             );
             loadingDialog.show();
 
-            userJobRef.child(userUid).setValue(userJobModel).addOnSuccessListener(new OnSuccessListener<Void>() {
+            allUserJobs.child(uniqueKey).setValue(userJobModel).addOnSuccessListener(new OnSuccessListener<Void>() {
+                @Override
+                public void onSuccess(Void unused) {
+                    Toast.makeText(AddJobsActivity.this, "JobPosted in AllUserNote...\n;)", Toast.LENGTH_SHORT).show();
+                }
+            });
+
+            userJobRef.child(userUid).child(uniqueKey).setValue(userJobModel).addOnSuccessListener(new OnSuccessListener<Void>() {
                 @Override
                 public void onSuccess(Void unused) {
                     loadingDialog.dismiss();
                     sharedPrefe.deleteAllsharedPre();
-                    startActivity(new Intent(AddJobsActivity.this, UserJobDetailsActivity.class));
+//                    startActivity(new Intent(AddJobsActivity.this, UserJobDetailsActivity.class));
+                    Intent intent = new Intent(AddJobsActivity.this, UserJobDetailsActivity.class);
+                    intent.putExtra("unikey", uniqueKey);
+                    startActivity(intent);
                     finish();
                     Toast.makeText(AddJobsActivity.this, "Job submitted Successfully", Toast.LENGTH_SHORT).show();
                 }
