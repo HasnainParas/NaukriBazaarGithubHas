@@ -8,9 +8,11 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
 import com.appstacks.indiannaukribazaar.NewActivities.Models.UserJobModel;
 import com.appstacks.indiannaukribazaar.R;
 import com.appstacks.indiannaukribazaar.databinding.JobtitlesampleLayoutBinding;
+
 import java.util.ArrayList;
 
 public class JobTitleAdapter extends RecyclerView.Adapter<JobTitleAdapter.viewHolder> {
@@ -35,13 +37,19 @@ public class JobTitleAdapter extends RecyclerView.Adapter<JobTitleAdapter.viewHo
         UserJobModel model = userJobModel.get(position);
 
         holder.binding.titlesamjob.setText(model.getJobTitle());
-        holder.binding.companyNdaddress.setText(model.getCompany()+" . "+model.getJobLocation());
+        holder.binding.companyNdaddress.setText(model.getCompany() + " . " + model.getJobLocation());
         holder.binding.tview.setText(model.getEmploymentType());
         holder.binding.tview1.setText(model.getJobPosition());
         holder.binding.tview2.setText(model.getTypeOfWorkPlace());
 
-        holder.binding.cardclickerUjOb.setOnClickListener(view ->
-                Toast.makeText(context, model.getUserAuthId().toString() +"\nJuuuu Laa", Toast.LENGTH_SHORT).show());
+        holder.binding.cardclickerUjOb.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(context, model.getUserAuthId().toString(), Toast.LENGTH_SHORT).show();
+
+
+            }
+        });
 
     }
 

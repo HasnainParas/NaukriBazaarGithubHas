@@ -47,7 +47,7 @@ public class FullTimeJobActivity extends AppCompatActivity {
                 if (snapshot.exists()) {
                     for (DataSnapshot s : snapshot.getChildren()) {
                         UserJobModel data = s.getValue(UserJobModel.class);
-
+//                        jobModelArrayList.clear();
                         jobModelArrayList.add(data);
                         jobTitleAdapter = new JobTitleAdapter(jobModelArrayList, getApplicationContext());
 

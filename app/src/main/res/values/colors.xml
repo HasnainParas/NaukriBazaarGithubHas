@@ -21,6 +21,8 @@
     <color name="grey_90">#263238</color>
     <color name="greyuserbg">#F8F8F9</color>
     <color name="grey4txtbg">#D2D1D8</color>
+    <color name="instantservicebtnColor">#0091EA</color>
+
 
     <color name="overlay_dark_10">#1A000000</color>
     <color name="overlay_dark_20">#33000000</color>

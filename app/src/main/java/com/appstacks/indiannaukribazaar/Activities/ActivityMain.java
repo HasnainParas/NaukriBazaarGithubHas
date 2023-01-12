@@ -6,6 +6,7 @@ import android.net.Uri;
 import android.os.Bundle;
 
 import com.appstacks.indiannaukribazaar.AaForChecking;
+import com.appstacks.indiannaukribazaar.NewActivities.DetailsActivity;
 import com.appstacks.indiannaukribazaar.NewActivities.EditProfileActivity;
 import com.appstacks.indiannaukribazaar.NewActivities.FindJobsActivity;
 import com.appstacks.indiannaukribazaar.NewActivities.KycPaidJobs.KycStartBrowsingActivity;
@@ -23,9 +24,11 @@ import com.appstacks.indiannaukribazaar.model.DeviceInfo;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.navigation.NavigationView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.core.view.GravityCompat;
@@ -36,9 +39,11 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -276,10 +281,6 @@ public class ActivityMain extends AppCompatActivity {
 //                    startActivity(intent);
 
 //                   startActivity(new Intent(ActivityMain.this, KycStartBrowsingActivity.class));
-
-
-
-
 
 
             }
@@ -751,4 +752,5 @@ public class ActivityMain extends AppCompatActivity {
     }
 
     // done
+
 }
