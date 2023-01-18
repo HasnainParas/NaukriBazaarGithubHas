@@ -120,7 +120,7 @@ public class FindJobsActivity extends AppCompatActivity {
         });
 
 
-        binding.jobsBtn.setOnClickListener(new View.OnClickListener() {
+        binding.instantJobService.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 //                Intent intent = new Intent(FindJobsActivity.this, AddPostsActivity.class);
@@ -146,7 +146,7 @@ public class FindJobsActivity extends AppCompatActivity {
 
             }
         });
-        binding.fullTimeJob.setOnClickListener(new View.OnClickListener() {
+        binding.jobsBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(FindJobsActivity.this, FullTimeJobActivity.class));

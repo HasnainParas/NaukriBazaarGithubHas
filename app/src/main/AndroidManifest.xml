@@ -32,6 +32,17 @@
         android:usesCleartextTraffic="true"
         tools:ignore="HardcodedDebugMode">
         <activity
+            android:name=".NewActivities.JobsActivities.AddInstantJobActivity"
+            android:exported="false" />
+        <activity
+            android:name=".NewActivities.JobsActivities.N_JobsDetailActivity"
+            android:exported="true"
+            android:theme="@style/noactiondisplay">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".NewActivities.InstantJobActivity"
             android:exported="false" />
         <activity
