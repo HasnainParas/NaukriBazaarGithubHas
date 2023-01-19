@@ -2,15 +2,20 @@ package com.appstacks.indiannaukribazaar.NewActivities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.appstacks.indiannaukribazaar.Activities.ActivityMain;
 import com.appstacks.indiannaukribazaar.FirebaseAdapters.FindjobAdapter;
 import com.appstacks.indiannaukribazaar.FirebaseModels.FindJobModel;
 import com.appstacks.indiannaukribazaar.FirebaseModels.JobModel;
@@ -18,6 +23,7 @@ import com.appstacks.indiannaukribazaar.FirebaseModels.PersonalInformationModel;
 import com.appstacks.indiannaukribazaar.NewActivities.Models.UserJobModel;
 import com.appstacks.indiannaukribazaar.R;
 import com.appstacks.indiannaukribazaar.databinding.ActivityFindJobsBinding;
+import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -114,32 +120,33 @@ public class FindJobsActivity extends AppCompatActivity {
         });
 
 
-        binding.addjobBtn.setOnClickListener(new View.OnClickListener() {
+        binding.instantJobService.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(FindJobsActivity.this, AddPostsActivity.class);
-                intent.putExtra("username", username);
-                intent.putExtra("useraddress", userAddress);
-                if (size >= 3) {
-                    Toast.makeText(FindJobsActivity.this, "Your Limit is Finished", Toast.LENGTH_SHORT).show();
-                } else {
-                    startActivity(intent);
-                }
-                Toast.makeText(FindJobsActivity.this, Integer.toString(size), Toast.LENGTH_SHORT).show();
-                binding.textView49.setText(Integer.toString(size));
+//                Intent intent = new Intent(FindJobsActivity.this, AddPostsActivity.class);
+//                intent.putExtra("username", username);
+//                intent.putExtra("useraddress", userAddress);
+//                if (size >= 3) {
+//                    Toast.makeText(FindJobsActivity.this, "Your Limit is Finished", Toast.LENGTH_SHORT).show();
+//                } else {
+//                    startActivity(intent);
+//                }
+//                Toast.makeText(FindJobsActivity.this, Integer.toString(size), Toast.LENGTH_SHORT).show();
+//                binding.textView49.setText(Integer.toString(size));
+
 
             }
         });
 
-        binding.paidJob.setOnClickListener(new View.OnClickListener() {
+        binding.addJobBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(FindJobsActivity.this, PaidJobsActivity.class));
-
+//                startActivity(new Intent(FindJobsActivity.this, PaidJobsActivity.class));
+                bottomDialog();
 
             }
         });
-        binding.fullTimeJob.setOnClickListener(new View.OnClickListener() {
+        binding.jobsBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(FindJobsActivity.this, FullTimeJobActivity.class));
@@ -164,6 +171,43 @@ public class FindJobsActivity extends AppCompatActivity {
         binding.recycerviewFindJobs.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
         binding.recycerviewFindJobs.setAdapter(adapter);
 
+
+    }
+
+    private void bottomDialog() {
+        BottomSheetDialog dialog = new BottomSheetDialog(FindJobsActivity.this, R.style.AppBottomSheetDialogTheme);
+
+        View bottomsheetView = LayoutInflater.from(getApplicationContext()).
+                inflate(R.layout.post_job_request, (CardView) findViewById(R.id.UndoChanges));
+        dialog.setContentView(bottomsheetView);
+        dialog.show();
+        dialog.setCancelable(false);
+        Button jobpostBtn = bottomsheetView.findViewById(R.id.jobPostBtn);
+        Button instantJobBtn = bottomsheetView.findViewById(R.id.instantJobBtn);
+        Button jobStatus = bottomsheetView.findViewById(R.id.jobStatusBtn);
+        ImageView cancenBtn = bottomsheetView.findViewById(R.id.postjobCancelBtn);
+
+        jobpostBtn.setOnClickListener(view1 -> {
+            Intent intent = new Intent(FindJobsActivity.this, AddPostsActivity.class);
+            intent.putExtra("username", username);
+            intent.putExtra("useraddress", userAddress);
+            if (size >= 3) {
+                Toast.makeText(FindJobsActivity.this, "Your Limit is Finished", Toast.LENGTH_SHORT).show();
+            } else {
+                startActivity(intent);
+                dialog.dismiss();
+            }
+            Toast.makeText(FindJobsActivity.this, Integer.toString(size), Toast.LENGTH_SHORT).show();
+            binding.textView49.setText(Integer.toString(size));
+
+        });
+
+        instantJobBtn.setOnClickListener(view -> {
+            startActivity(new Intent(FindJobsActivity.this, InstantJobActivity.class));
+        });
+
+
+        cancenBtn.setOnClickListener(view -> dialog.dismiss());
 
     }
 

@@ -120,51 +120,41 @@
             app:layout_constraintTop_toBottomOf="@+id/textView49">
 
             <LinearLayout
-                android:id="@+id/paidJob"
+                android:id="@+id/addJobBtn"
                 android:layout_width="160dp"
                 android:layout_height="170dp"
                 android:layout_marginStart="8dp"
                 android:background="@drawable/rectangebg"
                 android:backgroundTint="#AFECFE"
+                android:gravity="center"
                 android:orientation="vertical"
-                android:padding="5dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
                 <ImageView
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
+                    android:layout_width="34dp"
+                    android:layout_height="34dp"
                     android:layout_gravity="center"
-                    android:layout_marginTop="30dp"
-                    android:src="@drawable/ic_job_svg" />
+                    android:src="@drawable/ic_job_svg"
+
+                    />
 
                 <TextView
                     android:id="@+id/textView52"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
+                    android:layout_marginTop="2dp"
                     android:fontFamily="@font/dm_sans"
                     android:gravity="center"
-                    android:text="Paid Jobs"
+                    android:text="Add Job"
                     android:textColor="@color/black"
                     android:textSize="16sp" />
-
-                <TextView
-                    android:id="@+id/textView53"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/dm_sans"
-                    android:gravity="center"
-                    android:text="Remote Job"
-                    android:textColor="@color/black"
-                    android:textSize="16sp"
-                    android:visibility="invisible" />
 
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/l2"
+                android:id="@+id/instantJobService"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:layout_marginStart="8dp"
@@ -174,10 +164,10 @@
                 android:backgroundTint="#BEAFFE"
                 android:gravity="center"
                 android:orientation="vertical"
-                app:layout_constraintBottom_toTopOf="@+id/addjobBtn"
+                app:layout_constraintBottom_toTopOf="@+id/jobsBtn"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toEndOf="@+id/paidJob"
+                app:layout_constraintStart_toEndOf="@+id/addJobBtn"
                 app:layout_constraintTop_toTopOf="parent">
 
                 <LinearLayout
@@ -194,18 +184,17 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/dm_sans"
-                        android:gravity="center"
-                        android:text="***"
+                        android:text="99k"
                         android:textColor="@color/black"
-                        android:textSize="16sp" />
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/textView55"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/dm_sans"
-                        android:gravity="center"
-                        android:text="Full time jobs"
+                        android:text="Instant Services"
                         android:textColor="@color/black"
                         android:textSize="15sp" />
 
@@ -214,21 +203,21 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/addjobBtn"
+                android:id="@+id/jobsBtn"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:layout_below="@id/l2"
-                android:layout_alignStart="@+id/l2"
+                android:layout_below="@id/instantJobService"
+                android:layout_alignStart="@+id/instantJobService"
                 android:layout_marginTop="8dp"
                 android:background="@drawable/rectangebg"
                 android:backgroundTint="#FFD6AD"
                 android:gravity="center"
                 android:orientation="vertical"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="@+id/l2"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="@+id/l2"
-                app:layout_constraintTop_toBottomOf="@+id/l2">
+                app:layout_constraintEnd_toEndOf="@+id/instantJobService"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="@+id/instantJobService"
+                app:layout_constraintTop_toBottomOf="@+id/instantJobService">
 
                 <!--                <TextView-->
                 <!--                    android:layout_width="match_parent"-->
@@ -240,12 +229,19 @@
                 <!--                    android:textSize="16sp" />-->
 
                 <TextView
+                    android:id="@+id/textView34"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/dm_sans"
-                    android:gravity="center"
-                    android:padding="5dp"
-                    android:text="Add Job"
+                    android:text="99k"
+                    android:textColor="@color/black"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/dm_sans"
+                    android:text="Job"
                     android:textColor="@color/black"
                     android:textSize="16sp" />
             </LinearLayout>

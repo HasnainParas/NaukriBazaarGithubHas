@@ -14,6 +14,7 @@ import com.appstacks.indiannaukribazaar.FirebaseModels.JobModel;
 import com.appstacks.indiannaukribazaar.NewActivities.Models.UserJobModel;
 import com.appstacks.indiannaukribazaar.R;
 import com.appstacks.indiannaukribazaar.databinding.ActivityFullTimeJobBinding;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -47,13 +48,14 @@ public class FullTimeJobActivity extends AppCompatActivity {
                 if (snapshot.exists()) {
                     for (DataSnapshot s : snapshot.getChildren()) {
                         UserJobModel data = s.getValue(UserJobModel.class);
-
-                        jobModelArrayList.add(data);
-                        jobTitleAdapter = new JobTitleAdapter(jobModelArrayList, getApplicationContext());
+//                        jobModelArrayList.clear();
+                        if (!data.getUserAuthId().equals(FirebaseAuth.getInstance().getUid()))
+                            jobModelArrayList.add(data);
+                        jobTitleAdapter = new JobTitleAdapter(jobModelArrayList, FullTimeJobActivity.this);
 
                         binding.userjobrecycler.setAdapter(jobTitleAdapter);
 
-                        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getApplicationContext());
+                        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(FullTimeJobActivity.this);
                         binding.userjobrecycler.setLayoutManager(linearLayoutManager);
 //                        binding.loadingFragment.setVisibility(View.GONE);
 

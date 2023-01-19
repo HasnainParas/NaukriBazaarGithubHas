@@ -1,6 +1,7 @@
 package com.appstacks.indiannaukribazaar.FirebaseAdapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,9 +9,15 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.appstacks.indiannaukribazaar.Activities.ActivityMain;
+import com.appstacks.indiannaukribazaar.NewActivities.FindJobsActivity;
+import com.appstacks.indiannaukribazaar.NewActivities.JobsActivities.N_JobsDetailActivity;
 import com.appstacks.indiannaukribazaar.NewActivities.Models.UserJobModel;
+import com.appstacks.indiannaukribazaar.NewActivities.SpinWheelActivity;
 import com.appstacks.indiannaukribazaar.R;
 import com.appstacks.indiannaukribazaar.databinding.JobtitlesampleLayoutBinding;
+
 import java.util.ArrayList;
 
 public class JobTitleAdapter extends RecyclerView.Adapter<JobTitleAdapter.viewHolder> {
@@ -35,14 +42,30 @@ public class JobTitleAdapter extends RecyclerView.Adapter<JobTitleAdapter.viewHo
         UserJobModel model = userJobModel.get(position);
 
         holder.binding.titlesamjob.setText(model.getJobTitle());
-        holder.binding.companyNdaddress.setText(model.getCompany()+" . "+model.getJobLocation());
+        holder.binding.companyNdaddress.setText(model.getCompany() + " . " + model.getJobLocation());
         holder.binding.tview.setText(model.getEmploymentType());
         holder.binding.tview1.setText(model.getJobPosition());
         holder.binding.tview2.setText(model.getTypeOfWorkPlace());
 
-        holder.binding.cardclickerUjOb.setOnClickListener(view ->
-                Toast.makeText(context, model.getUserAuthId().toString() +"\nJuuuu Laa", Toast.LENGTH_SHORT).show());
+        holder.binding.cardclickerUjOb.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(context, model.getUniqueKey(), Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(context, N_JobsDetailActivity.class);
+                intent.putExtra("jobtile", model.getJobTitle());
+                intent.putExtra("company", model.getCompany());
+                intent.putExtra("location", model.getJobLocation());
+                intent.putExtra("description", model.getDescription());
+                context.startActivity(intent);
+            }
+        });
 
+//
+//        holder.binding.tview1.setOnClickListener(view -> {
+//            view.getContext().startActivity(new Intent(view.getContext(), N_JobsDetailActivity.class));
+//            context.startActivity(new Intent(context,N_JobsDetailActivity.class));
+
+//        });
     }
 
     @Override
