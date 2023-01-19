@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -11,23 +12,25 @@ import android.widget.SearchView;
 import android.widget.Toast;
 
 import com.appstacks.indiannaukribazaar.R;
+import com.appstacks.indiannaukribazaar.data.JobPositionData;
 import com.appstacks.indiannaukribazaar.databinding.ActivityJobPositionBinding;
 
 import java.util.ArrayList;
 
 
-public class JobPosition extends AppCompatActivity {
-    ActivityJobPositionBinding binding;
-
-    ArrayList<String> list;
-    ArrayAdapter<String> adapter;
-    SharedPrefe sharedPrefe;
+public class JobPosition extends AppCompatActivity implements View.OnClickListener {
+    private ActivityJobPositionBinding binding;
+    private static final String TAG = "JobPosition";
+    private ArrayList<String> list;
+    private ArrayAdapter<String> adapter;
+    private SharedPrefe sharedPrefe;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityJobPositionBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
         sharedPrefe = new SharedPrefe(JobPosition.this);
         list = new ArrayList<String>();
 
@@ -42,10 +45,11 @@ public class JobPosition extends AppCompatActivity {
         list.add("Sales Advocate");
         list.add("Analyst");
 
-        adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, list);
-
+        JobPositionData.listJobPosition.addAll(list);
+        adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, JobPositionData.listJobPosition);
+        adapter.setNotifyOnChange(true);
         binding.listView.setAdapter(adapter);
-
+        binding.btnAddPosition.setOnClickListener(this::onClick);
         binding.searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String s) {
@@ -56,7 +60,21 @@ public class JobPosition extends AppCompatActivity {
             @Override
             public boolean onQueryTextChange(String s) {
 
+                for (String data : list) {
+                    if (data.equals(s)) {
+                        binding.btnAddPosition.setVisibility(View.INVISIBLE);
+                        adapter.getFilter().filter(s);
+
+                        Log.d(TAG, s);
+                    } else if (s.equals(""))
+                        binding.btnAddPosition.setVisibility(View.INVISIBLE);
+                    else
+                        binding.btnAddPosition.setVisibility(View.VISIBLE);
+                    Toast.makeText(JobPosition.this, "No such itmes in the list", Toast.LENGTH_SHORT).show();
+                }
+
                 adapter.getFilter().filter(s);
+
                 return false;
             }
         });
@@ -82,5 +100,35 @@ public class JobPosition extends AppCompatActivity {
         Intent intent = new Intent(getApplicationContext(), AddJobsActivity.class);
         startActivity(intent);
         finish();
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.btnAddPosition:
+                addContentToList();
+                break;
+        }
+
+    }
+
+    private void addContentToList() {
+
+       // binding.addItemLayout.setVisibility(View.VISIBLE);
+        binding.btnSubmitItem.setOnClickListener(view -> {
+            if (binding.etAddItme.getText().toString().isEmpty()) {
+                Toast.makeText(this, "Add any item", Toast.LENGTH_SHORT).show();
+            } else {
+                String item = binding.etAddItme.getText().toString();
+                //((list.add(item);
+                JobPositionData.listJobPosition.add(item);
+
+                adapter.setNotifyOnChange(true);
+
+                binding.etAddItme.setText("");
+
+            }
+        });
+
     }
 }

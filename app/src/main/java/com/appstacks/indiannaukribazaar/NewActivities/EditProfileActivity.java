@@ -79,6 +79,7 @@ public class EditProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityEditProfileBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        setViews();
         binding.btnSettingeditprofile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -113,6 +114,7 @@ public class EditProfileActivity extends AppCompatActivity {
                     if (snapshot.exists()) {
                         languagesList.clear();
                         for (DataSnapshot snapshot1 : snapshot.getChildren()) {
+
                             SelectedLanguages selectedLanguages = snapshot1.getValue(SelectedLanguages.class);
                             assert selectedLanguages != null;
                             languagesList.add(selectedLanguages.getName());
@@ -162,6 +164,7 @@ public class EditProfileActivity extends AppCompatActivity {
             });
 
 
+
             fetchAboutMe();
             fetchWorkExperience();
             fetchEducation();
@@ -177,6 +180,14 @@ public class EditProfileActivity extends AppCompatActivity {
         onClicks();
 
 
+    }
+
+    private void setViews() {
+Toast.makeText(this,binding.progressBarResponseTime.getProgress() + " " ,Toast.LENGTH_SHORT).show();
+        binding.txtPercentageResponseTime.setText(String.valueOf(binding.progressBarResponseTime.getProgress() ) );
+        binding.txtPercentageOrderCompletion.setText(String.valueOf(binding.progressBarOrderCompletion.getProgress() ) +"%");
+        binding.txtPercentageOnTimeDelivery.setText(String.valueOf(binding.progressBarOnTimeDelivery.getProgress() ) +"%");
+        binding.txtPercentagePositiveRanking.setText(String.valueOf(binding.progressBarPositiveRanking.getProgress() ) +"%");
     }
 
 

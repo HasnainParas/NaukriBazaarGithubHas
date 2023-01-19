@@ -19,14 +19,15 @@ import com.facebook.login.widget.LoginButton;
 import java.util.Arrays;
 
 public class AddSocialAccountActivity extends AppCompatActivity {
-    CallbackManager callbackManager;
-    ActivityAddSocialAccountBinding binding;
+
+    private CallbackManager callbackManager;
+    private ActivityAddSocialAccountBinding binding;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding=ActivityAddSocialAccountBinding.inflate(getLayoutInflater());
+        binding = ActivityAddSocialAccountBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
         callbackManager = CallbackManager.Factory.create();
@@ -49,11 +50,13 @@ public class AddSocialAccountActivity extends AppCompatActivity {
 
                     @Override
                     public void onError(FacebookException exception) {
+
                         // App code
+
                     }
                 });
 
-        binding.btnConnectFacebook.setOnClickListener( view -> {
+        binding.btnConnectFacebook.setOnClickListener(view -> {
             LoginManager.getInstance().logInWithReadPermissions(this, Arrays.asList("public_profile"));
         });
     }

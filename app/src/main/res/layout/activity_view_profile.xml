@@ -171,9 +171,9 @@
                     tools:layout_editor_absoluteY="10dp">
 
                     <TextView
+                        android:id="@+id/txt_Percentage_responseTime"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:id="@+id/txt_Percentage_responseTime"
 
                         android:textColor="@color/black"
                         android:textStyle="bold"
@@ -212,8 +212,8 @@
                         android:text="Response\nTime"
                         android:textAlignment="center"
                         android:textColor="@color/black"
-                        android:textStyle="bold"
                         android:textSize="12sp"
+                        android:textStyle="bold"
                         app:layout_constraintEnd_toEndOf="@+id/progress_bar_ResponseTime"
                         app:layout_constraintStart_toStartOf="@+id/progress_bar_ResponseTime"
                         app:layout_constraintTop_toBottomOf="@+id/progress_bar_ResponseTime" />
@@ -230,10 +230,10 @@
                     tools:layout_editor_absoluteY="10dp">
 
                     <TextView
+                        android:id="@+id/txt_PercentageOrderCompletion"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
 
-android:id="@+id/txt_PercentageOrderCompletion"
+                        android:layout_height="wrap_content"
                         android:textColor="@color/black"
                         android:textStyle="bold"
                         app:layout_constraintBottom_toBottomOf="@+id/progress_bar_OrderCompletion"
@@ -267,8 +267,8 @@ android:id="@+id/txt_PercentageOrderCompletion"
                         android:text="Order\nCompletion"
                         android:textAlignment="center"
                         android:textColor="@color/black"
-                        android:textStyle="bold"
                         android:textSize="12sp"
+                        android:textStyle="bold"
                         app:layout_constraintEnd_toEndOf="@+id/progress_bar_OrderCompletion"
                         app:layout_constraintStart_toStartOf="@+id/progress_bar_OrderCompletion"
                         app:layout_constraintTop_toBottomOf="@+id/progress_bar_OrderCompletion" />
@@ -284,9 +284,9 @@ android:id="@+id/txt_PercentageOrderCompletion"
                     tools:layout_editor_absoluteY="10dp">
 
                     <TextView
+                        android:id="@+id/txt_PercentageOnTimeDelivery"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:id="@+id/txt_PercentageOnTimeDelivery"
 
                         android:textColor="@color/black"
                         android:textStyle="bold"
@@ -321,8 +321,8 @@ android:id="@+id/txt_PercentageOrderCompletion"
                         android:text="On-Time\nDelivery"
                         android:textAlignment="center"
                         android:textColor="@color/black"
-                        android:textStyle="bold"
                         android:textSize="12sp"
+                        android:textStyle="bold"
                         app:layout_constraintEnd_toEndOf="@+id/progress_bar_OnTimeDelivery"
                         app:layout_constraintStart_toStartOf="@+id/progress_bar_OnTimeDelivery"
                         app:layout_constraintTop_toBottomOf="@+id/progress_bar_OnTimeDelivery" />
@@ -338,10 +338,10 @@ android:id="@+id/txt_PercentageOrderCompletion"
                     tools:layout_editor_absoluteY="10dp">
 
                     <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-
                         android:id="@+id/txt_PercentagePositiveRanking"
+                        android:layout_width="wrap_content"
+
+                        android:layout_height="wrap_content"
                         android:textColor="@color/black"
                         android:textStyle="bold"
                         app:layout_constraintBottom_toBottomOf="@+id/progress_bar_PositiveRanking"
@@ -376,8 +376,8 @@ android:id="@+id/txt_PercentageOrderCompletion"
                         android:text="Positive\nRanking"
                         android:textAlignment="center"
                         android:textColor="@color/black"
-                        android:textStyle="bold"
                         android:textSize="12sp"
+                        android:textStyle="bold"
                         app:layout_constraintEnd_toEndOf="@+id/progress_bar_PositiveRanking"
                         app:layout_constraintStart_toStartOf="@+id/progress_bar_PositiveRanking"
                         app:layout_constraintTop_toBottomOf="@+id/progress_bar_PositiveRanking" />
@@ -385,6 +385,7 @@ android:id="@+id/txt_PercentageOrderCompletion"
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>
+
         <androidx.cardview.widget.CardView
             android:id="@+id/cardAboutMe"
             android:layout_width="match_parent"
@@ -392,6 +393,7 @@ android:id="@+id/txt_PercentageOrderCompletion"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
+            android:visibility="gone"
             app:cardCornerRadius="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -418,12 +420,11 @@ android:id="@+id/txt_PercentageOrderCompletion"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="@dimen/activity_horizontal_margin"
-                    android:text="Bio"
+                    android:text="About me"
                     android:textColor="@color/black"
                     android:textStyle="bold"
                     app:layout_constraintStart_toEndOf="@+id/img_aboutMe"
                     app:layout_constraintTop_toTopOf="parent" />
-
 
 
                 <View
@@ -466,6 +467,7 @@ android:id="@+id/txt_PercentageOrderCompletion"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
+            android:visibility="gone"
             app:cardCornerRadius="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -526,17 +528,6 @@ android:id="@+id/txt_PercentageOrderCompletion"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/view2" />
 
-                <ImageView
-                    android:id="@+id/btnworkExperienceEdit"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginEnd="24dp"
-
-
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/view2"
-                    app:srcCompat="@drawable/ic_edit" />
 
                 <TextView
                     android:id="@+id/txtWorkExperienceCompany"
@@ -546,7 +537,7 @@ android:id="@+id/txt_PercentageOrderCompletion"
                     android:layout_marginTop="8dp"
                     android:text="Amazon Inc"
                     android:textColor="@color/green"
-       
+
 
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/txtWorkExperience" />
@@ -559,7 +550,7 @@ android:id="@+id/txt_PercentageOrderCompletion"
                     android:layout_marginTop="8dp"
                     android:text="Jan 2015 - Feb2022"
                     android:textColor="@color/green"
-                    android:visibility="gone"
+
 
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/txtWorkExperienceCompany" />
@@ -572,7 +563,7 @@ android:id="@+id/txt_PercentageOrderCompletion"
                     android:layout_marginBottom="16dp"
                     android:text=". 5 years"
                     android:textColor="@color/green"
-                    android:visibility="gone"
+
 
                     app:layout_constraintBottom_toBottomOf="@+id/txtWorkExperienceDate"
                     app:layout_constraintStart_toEndOf="@+id/txtWorkExperienceDate"
@@ -589,8 +580,9 @@ android:id="@+id/txt_PercentageOrderCompletion"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
-            app:cardCornerRadius="16dp"
+            android:visibility="gone"
 
+            app:cardCornerRadius="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/cardWorkExperience">
@@ -622,15 +614,6 @@ android:id="@+id/txt_PercentageOrderCompletion"
                     app:layout_constraintStart_toEndOf="@+id/imgEducation"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <ImageView
-                    android:id="@+id/btnEducationAdd"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginEnd="24dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/addddd" />
 
                 <View
                     android:id="@+id/view3"
@@ -640,7 +623,6 @@ android:id="@+id/txt_PercentageOrderCompletion"
                     android:layout_marginTop="24dp"
                     android:layout_marginEnd="24dp"
                     android:background="@color/grey_80"
-                    android:visibility="gone"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/txtEdu" />
@@ -654,20 +636,9 @@ android:id="@+id/txt_PercentageOrderCompletion"
                     android:text="Information Technology"
                     android:textColor="@color/black"
                     android:textStyle="bold"
-                    android:visibility="gone"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/view3" />
 
-                <ImageView
-                    android:id="@+id/btnEducationEdit"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginEnd="24dp"
-                    android:visibility="gone"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/view3"
-                    app:srcCompat="@drawable/ic_edit" />
 
                 <TextView
                     android:id="@+id/txtEducationInstitue"
@@ -677,7 +648,7 @@ android:id="@+id/txt_PercentageOrderCompletion"
                     android:layout_marginTop="8dp"
                     android:text="Amazon Inc"
                     android:textColor="@color/green"
-                    android:visibility="gone"
+
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/txtEducation" />
 
@@ -689,7 +660,7 @@ android:id="@+id/txt_PercentageOrderCompletion"
                     android:layout_marginTop="8dp"
                     android:text="Jan 2015 - Feb2022"
                     android:textColor="@color/green"
-                    android:visibility="gone"
+
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/txtEducationInstitue" />
 
@@ -717,6 +688,7 @@ android:id="@+id/txt_PercentageOrderCompletion"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
+            android:visibility="gone"
             app:cardCornerRadius="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -750,16 +722,6 @@ android:id="@+id/txt_PercentageOrderCompletion"
                     app:layout_constraintStart_toEndOf="@+id/imgSkill"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <ImageView
-                    android:id="@+id/btnSkillEdit"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-
-                    android:layout_marginEnd="24dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/ic_edit" />
 
                 <View
                     android:id="@+id/view4"
@@ -769,7 +731,7 @@ android:id="@+id/txt_PercentageOrderCompletion"
                     android:layout_marginTop="24dp"
                     android:layout_marginEnd="24dp"
                     android:background="@color/grey_80"
-                    android:visibility="gone"
+
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/txtSkill" />
@@ -999,12 +961,12 @@ android:id="@+id/txt_PercentageOrderCompletion"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
-            app:cardCornerRadius="16dp"
+            android:visibility="gone"
 
+            app:cardCornerRadius="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/cardSkill"
-            tools:layout_editor_absoluteY="854dp">
+            app:layout_constraintTop_toBottomOf="@id/cardSkill">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -1034,15 +996,6 @@ android:id="@+id/txt_PercentageOrderCompletion"
                     app:layout_constraintStart_toEndOf="@+id/imgLang"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <ImageView
-                    android:id="@+id/btnLanguageEdit"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginEnd="24dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/ic_edit" />
 
                 <View
                     android:id="@+id/view5"
@@ -1052,7 +1005,6 @@ android:id="@+id/txt_PercentageOrderCompletion"
                     android:layout_marginTop="24dp"
                     android:layout_marginEnd="24dp"
                     android:background="@color/grey_80"
-                    android:visibility="gone"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/txtLang" />
@@ -1169,6 +1121,7 @@ android:id="@+id/txt_PercentageOrderCompletion"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
+            android:visibility="gone"
             app:cardCornerRadius="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -1176,8 +1129,8 @@ android:id="@+id/txt_PercentageOrderCompletion"
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:paddingBottom="10dp"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:paddingBottom="10dp">
 
                 <TextView
                     android:id="@+id/txtAppre"
@@ -1191,15 +1144,6 @@ android:id="@+id/txt_PercentageOrderCompletion"
                     app:layout_constraintStart_toEndOf="@+id/imgAppre"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <ImageView
-                    android:id="@+id/btnAppreciationAdd"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginEnd="24dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/addddd" />
 
                 <View
                     android:id="@+id/view6"
@@ -1207,7 +1151,6 @@ android:id="@+id/txt_PercentageOrderCompletion"
                     android:layout_height="1dp"
                     android:layout_marginStart="24dp"
                     android:layout_marginTop="24dp"
-                    android:visibility="gone"
                     android:layout_marginEnd="24dp"
                     android:background="@color/grey_80"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -1220,30 +1163,18 @@ android:id="@+id/txt_PercentageOrderCompletion"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="24dp"
                     android:layout_marginTop="16dp"
-                    android:visibility="gone"
                     android:text="Wireless Symposium (RWS)"
                     android:textColor="@color/black"
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/view6" />
 
-                <ImageView
-                    android:id="@+id/btnAppreciationEdit"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginEnd="24dp"
-                    android:visibility="gone"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/view6"
-                    app:srcCompat="@drawable/ic_edit" />
 
                 <TextView
                     android:id="@+id/txtAppreciationInstitue"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="24dp"
-                    android:visibility="gone"
                     android:layout_marginTop="8dp"
                     android:text="Young Scientist"
                     android:textColor="@color/green"
@@ -1258,7 +1189,6 @@ android:id="@+id/txt_PercentageOrderCompletion"
                     android:layout_marginTop="8dp"
                     android:layout_marginBottom="16dp"
                     android:text="2014"
-                    android:visibility="gone"
                     android:textColor="@color/green"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -1284,6 +1214,7 @@ android:id="@+id/txt_PercentageOrderCompletion"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
+            android:visibility="gone"
             app:cardCornerRadius="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -1306,15 +1237,6 @@ android:id="@+id/txt_PercentageOrderCompletion"
                     app:layout_constraintStart_toEndOf="@+id/imgResume"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <ImageView
-                    android:id="@+id/btnResumeAdd"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginEnd="24dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/addddd" />
 
                 <ImageView
                     android:id="@+id/imgResume"
@@ -1334,7 +1256,7 @@ android:id="@+id/txt_PercentageOrderCompletion"
                     android:layout_marginTop="24dp"
                     android:layout_marginEnd="24dp"
                     android:background="@color/grey_80"
-                    android:visibility="gone"
+
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/txtResu" />
@@ -1347,7 +1269,6 @@ android:id="@+id/txt_PercentageOrderCompletion"
                     android:layout_marginTop="16dp"
                     android:layout_marginBottom="16dp"
                     android:src="@drawable/icon_pdf"
-                    android:visibility="gone"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/view7" />
@@ -1361,21 +1282,10 @@ android:id="@+id/txt_PercentageOrderCompletion"
                     android:layout_marginEnd="16dp"
                     android:text="TextView"
                     android:textColor="@color/black"
-                    android:visibility="gone"
                     app:layout_constraintEnd_toStartOf="@+id/btnResumeDelete"
                     app:layout_constraintStart_toEndOf="@+id/imagePDF"
                     app:layout_constraintTop_toBottomOf="@+id/view7" />
 
-                <ImageView
-                    android:id="@+id/btnResumeDelete"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_marginTop="24dp"
-                    android:layout_marginEnd="24dp"
-                    android:visibility="gone"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/view7"
-                    app:srcCompat="@drawable/icon_delete" />
 
                 <LinearLayout
                     android:id="@+id/linearLayout6"
@@ -1394,8 +1304,7 @@ android:id="@+id/txt_PercentageOrderCompletion"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="TextView"
-                        android:visibility="gone" />
+                        android:text="TextView" />
 
 
                 </LinearLayout>
@@ -1410,13 +1319,13 @@ android:id="@+id/txt_PercentageOrderCompletion"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
             android:layout_marginTop="16dp"
-            app:layout_constraintTop_toBottomOf="@id/cardResume"
+            android:layout_marginEnd="16dp"
+android:visibility="gone"
             app:cardCornerRadius="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            tools:layout_editor_absoluteY="817dp">
+            app:layout_constraintTop_toBottomOf="@id/cardResume">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -1432,102 +1341,388 @@ android:id="@+id/txt_PercentageOrderCompletion"
                     android:text="Hourly Charges"
                     android:textColor="@color/black"
                     android:textStyle="bold"
-                    app:layout_constraintStart_toEndOf="@+id/imgResume"
+                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <ImageView
-                    android:id="@+id/btnResumeAdd"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginEnd="24dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/addddd" />
-
-                <ImageView
-                    android:id="@+id/imgResume"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="24dp"
-                    android:layout_marginTop="16dp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/icon_appreciation" />
 
                 <View
                     android:id="@+id/view7"
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:layout_marginStart="24dp"
-                    android:layout_marginTop="24dp"
+                    android:layout_marginTop="16dp"
                     android:layout_marginEnd="24dp"
                     android:background="@color/grey_80"
-                    android:visibility="gone"
+
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/txtResu" />
+                    app:layout_constraintTop_toBottomOf="@+id/txtHourlyCharges" />
 
-                <ImageView
-                    android:id="@+id/imagePDF"
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginBottom="16dp"
-                    android:src="@drawable/icon_pdf"
-                    android:visibility="gone"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/view7" />
 
                 <TextView
-                    android:id="@+id/txtResumeFileName"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="24dp"
-                    android:layout_marginEnd="16dp"
-                    android:text="TextView"
-                    android:textColor="@color/black"
-                    android:visibility="gone"
-                    app:layout_constraintEnd_toStartOf="@+id/btnResumeDelete"
-                    app:layout_constraintStart_toEndOf="@+id/imagePDF"
-                    app:layout_constraintTop_toBottomOf="@+id/view7" />
-
-                <ImageView
-                    android:id="@+id/btnResumeDelete"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_marginTop="24dp"
-                    android:layout_marginEnd="24dp"
-                    android:visibility="gone"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/view7"
-                    app:srcCompat="@drawable/icon_delete" />
-
-                <LinearLayout
-                    android:id="@+id/linearLayout6"
-                    android:layout_width="0dp"
+                    android:id="@+id/txtHourlyChargesInfo"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="8dp"
-                    android:layout_marginEnd="16dp"
-                    android:orientation="horizontal"
-                    app:layout_constraintEnd_toStartOf="@+id/btnResumeDelete"
-                    app:layout_constraintStart_toEndOf="@+id/imagePDF"
-                    app:layout_constraintTop_toBottomOf="@+id/txtResumeFileName">
+                    android:layout_marginBottom="8dp"
+                    android:layout_weight="1"
+                    android:text="TextView"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/txtHourlyCharges"
+                    app:layout_constraintTop_toBottomOf="@id/view7" />
 
-                    <TextView
-                        android:id="@+id/txtResumeInfor"
-                        android:layout_width="wrap_content"
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardAvailability"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+android:visibility="gone"
+            app:cardCornerRadius="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/cardHourlyCharges">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="10dp">
+
+                <TextView
+                    android:id="@+id/txtAvailability"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:text="Availability"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+                <View
+                    android:id="@+id/view7"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="24dp"
+                    android:background="@color/grey_80"
+
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/txtAvailability" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:orientation="horizontal"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/view7">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="TextView"
-                        android:visibility="gone" />
+                        android:orientation="vertical">
 
+                        <TextView
+                            android:id="@+id/txtHrsPerWeek"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="> 30"
+                            android:textAlignment="center"
+                            android:textColor="@color/black"
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="HRS PER WEEK"
+                            android:textSize="12sp"
+                            android:textAlignment="center"
+                            android:textStyle="bold" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/txtHoursResponseTime"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="< 24"
+                            android:textAlignment="center"
+                            android:textColor="@color/black"
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="HRS RESPONSE TIME"
+                            android:textSize="12sp"
+                            android:textAlignment="center"
+                            android:textStyle="bold" />
+
+                    </LinearLayout>
 
                 </LinearLayout>
+
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardChargesWork"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+
+            app:cardCornerRadius="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/cardAvailability">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="10dp">
+
+                <TextView
+                    android:id="@+id/txtCharges"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:text="Charges and Work"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+                <View
+                    android:id="@+id/view7"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="24dp"
+                    android:background="@color/grey_80"
+
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/txtCharges" />
+
+                <LinearLayout
+                    android:id="@+id/lineRateCharges"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="8dp"
+
+                    android:orientation="horizontal"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/view7">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/txtHourlyRate"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="$ 45.00"
+                            android:textAlignment="center"
+                            android:textColor="@color/black"
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Hourly Rate"
+                            android:textAllCaps="true"
+                            android:textAlignment="center"
+                            android:textSize="12sp"
+                            android:textStyle="bold" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/txtTotalEarned"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="$ 200k+"
+                            android:textAlignment="center"
+
+                            android:textColor="@color/black"
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Total Earned"
+                            android:textSize="12sp"
+                            android:textAllCaps="true"
+                            android:textAlignment="center"
+                            android:textStyle="bold" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="8dp"
+                    android:orientation="horizontal"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/lineRateCharges">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/txtHourlyRate"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="70"
+                            android:textAlignment="center"
+                            android:textColor="@color/black"
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Jobs"
+                            android:textAlignment="center"
+                            android:textAllCaps="true"
+                            android:textSize="12sp"
+                            android:textStyle="bold"
+                            android:visibility="gone" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/txtTotalEarned"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="5,270"
+                            android:textAlignment="center"
+
+                            android:textColor="@color/black"
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Hours Worked"
+                            android:textSize="12sp"
+                            android:textAllCaps="true"
+                            android:textAlignment="center"
+                            android:textStyle="bold" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardWorkFeedback"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+
+            app:cardCornerRadius="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/cardChargesWork">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="10dp">
+
+                <TextView
+                    android:id="@+id/txtAvailability"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:text="Work History and Feedback"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginEnd="24dp"
+                    android:src="@drawable/union"
+                    app:layout_constraintBottom_toBottomOf="@+id/txtAvailability"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/txtAvailability" />
+
+
+
+
+
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>

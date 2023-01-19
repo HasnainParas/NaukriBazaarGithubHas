@@ -91,8 +91,8 @@ public class ActivitySplash extends AppCompatActivity {
                         Toast.makeText(ActivitySplash.this, "NotValid", Toast.LENGTH_SHORT).show();
                         finishAffinity();
                     } else {
-                        startActivity(new Intent(ActivitySplash.this, ActivityMain.class));
 //                                Toast.makeText(ActivitySplash.this, "Valid", Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(ActivitySplash.this,ActivityMain.class));
                     }
                     Toast.makeText(ActivitySplash.this, namevalid + "", Toast.LENGTH_SHORT).show();
                 }

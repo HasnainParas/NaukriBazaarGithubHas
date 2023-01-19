@@ -91,7 +91,7 @@ public class FragmentHome extends Fragment {
                 } else {
                    // mAdapter.setLoaded();
                 }
-//                ((ActivityMain)getActivity()).ShowInterstitial();
+//
             }
         });
 

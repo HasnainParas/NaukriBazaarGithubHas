@@ -139,7 +139,6 @@ public class AddJobsActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(getApplicationContext(), JobPosition.class));
-                finish();
             }
         });
 
@@ -164,10 +163,11 @@ public class AddJobsActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View view) {
                         String onSitTxt = onsite.getText().toString();
+
                         binding.txtWorkplace.setText(onSitTxt);
                         binding.btnAdd5.setVisibility(View.INVISIBLE);
                         binding.btnEdit5.setVisibility(View.VISIBLE);
-                        dialog.dismiss();
+//                        dialog.dismiss();
                     }
                 });
 
@@ -180,7 +180,7 @@ public class AddJobsActivity extends AppCompatActivity {
                         binding.txtWorkplace.setText(hybridTxt);
                         binding.btnAdd5.setVisibility(View.INVISIBLE);
                         binding.btnEdit5.setVisibility(View.VISIBLE);
-                        dialog.dismiss();
+//                        dialog.dismiss();
 
                     }
                 });
@@ -192,7 +192,7 @@ public class AddJobsActivity extends AppCompatActivity {
                         binding.txtWorkplace.setText(remoteTxt);
                         binding.btnAdd5.setVisibility(View.INVISIBLE);
                         binding.btnEdit5.setVisibility(View.VISIBLE);
-                        dialog.dismiss();
+//                        dialog.dismiss();
                     }
                 });
 
@@ -204,7 +204,7 @@ public class AddJobsActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(getApplicationContext(), JobLocationActivity.class));
-                finish();
+
             }
         });
 
@@ -212,13 +212,16 @@ public class AddJobsActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(getApplicationContext(), CompanyActivity.class));
-                finish();
+
             }
         });
 
         binding.employmentBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                bottomSheetDialog = new BottomSheetDialog(AddJobsActivity.this, R.style.AppBottomSheetDialogTheme);
+
 
                 bottomSheetDialog = new BottomSheetDialog(AddJobsActivity.this, R.style.AppBottomSheetDialogTheme);
                 View bottomsheetView = LayoutInflater.from(getApplicationContext()).
@@ -237,17 +240,26 @@ public class AddJobsActivity extends AppCompatActivity {
                 fullTime.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
+
+
                         String fullTimeTxt = fullTime.getText().toString();
+
                         binding.employmentTxt.setText(fullTimeTxt);
                         dialogandimagechange();
+
                     }
                 });
                 partTime.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
+
+
                         String partTimeTxt = partTime.getText().toString();
+
                         binding.employmentTxt.setText(partTimeTxt);
                         dialogandimagechange();
+
+
                     }
                 });
 
@@ -255,35 +267,51 @@ public class AddJobsActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View view) {
                         String contractTxt = contract.getText().toString();
+
                         binding.employmentTxt.setText(contractTxt);
                         dialogandimagechange();
+
                     }
                 });
 
                 temporary.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
+
                         String temporaryTxt = contract.getText().toString();
+
                         binding.employmentTxt.setText(temporaryTxt);
                         dialogandimagechange();
+
+
                     }
                 });
                 volunteer.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
+
                         String volunteerTxt = volunteer.getText().toString();
+
                         binding.employmentTxt.setText(volunteerTxt);
                         dialogandimagechange();
+
+
                     }
                 });
+
                 apprenticeship.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
+
                         String apprenticeShipTxt = apprenticeship.getText().toString();
+
                         binding.employmentTxt.setText(apprenticeShipTxt);
                         dialogandimagechange();
+
+
                     }
                 });
+
 
             }
         });
@@ -296,8 +324,10 @@ public class AddJobsActivity extends AppCompatActivity {
 
 
         if (binding.txtPositon.length() != 0) {
+
             binding.btnEdit1.setVisibility(View.VISIBLE);
             binding.btnAdd1.setVisibility(View.INVISIBLE);
+
 
         } else {
             binding.btnAdd1.setVisibility(View.VISIBLE);

@@ -85,7 +85,7 @@ public class DetailsActivity extends AppCompatActivity {
     StorageReference storageReference;
     String userId, pdfName = "";
     String urlOfPdf = "";
-    String PdfsizeInString,pdfDate;
+    String PdfsizeInString, pdfDate;
     boolean workAdded;
 
     @SuppressLint("SetTextI18n")
@@ -1128,9 +1128,6 @@ public class DetailsActivity extends AppCompatActivity {
         }
 
 
-
-
-
         return hashMap;
 
     }
@@ -1186,7 +1183,7 @@ public class DetailsActivity extends AppCompatActivity {
     }
 
     private void uploadPdfData(String downloadUrl, String pdfName) {
-        Resume resume = new Resume(downloadUrl, pdfName,PdfsizeInString,pdfDate);
+        Resume resume = new Resume(downloadUrl, pdfName, PdfsizeInString, pdfDate);
         databaseReference.child("UsersProfile").child(userId).child("Resume").setValue(resume)
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
@@ -1225,10 +1222,11 @@ public class DetailsActivity extends AppCompatActivity {
                     if (cursor != null && cursor.moveToFirst()) {
                         int sizeIndex = cursor.getColumnIndex(OpenableColumns.SIZE);
                         long size = cursor.getLong(sizeIndex);
-                        PdfsizeInString= getReadableFileSize(size);
+                        PdfsizeInString = getReadableFileSize(size);
                         pdfName = cursor.getString(cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME));
+                        @SuppressLint("SimpleDateFormat")
                         DateFormat df = new SimpleDateFormat("EEE, d MMM yyyy, HH:mm");
-                     pdfDate= df.format(Calendar.getInstance().getTime());
+                        pdfDate = df.format(Calendar.getInstance().getTime());
                         Toast.makeText(this, "selected " + pdfName + " adn size is " + PdfsizeInString, Toast.LENGTH_SHORT).show();
                         binding.addResumelayout.resumeInfo.setText(pdfDate);
                         binding.addResumelayout.resumeName.setText(pdfName);
@@ -1236,6 +1234,7 @@ public class DetailsActivity extends AppCompatActivity {
 
                     }
                 } finally {
+
                     cursor.close();
                 }
 
@@ -1287,9 +1286,8 @@ public class DetailsActivity extends AppCompatActivity {
     }
 
 
-
-    private static void addList(ArrayList<String> options){
-        listOptions= new ArrayList<>(options);
+    private static void addList(ArrayList<String> options) {
+        listOptions = new ArrayList<>(options);
     }
 
     private void searchView() {

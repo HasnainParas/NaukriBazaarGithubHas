@@ -102,6 +102,9 @@ dependencies {
 
     implementation 'com.facebook.android:facebook-android-sdk:latest.release'
 
+    implementation 'com.emredavarci:CircleProgressBar:1.0.8'
+    implementation 'com.github.yuriy-budiyev:circular-progress-bar:1.2.3'
+
 
 
 

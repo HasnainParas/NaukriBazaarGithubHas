@@ -31,15 +31,19 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:ignore="HardcodedDebugMode">
-
+        <activity
+            android:name=".ViewProfileActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
         <activity
             android:name=".NewActivities.UserJobDetailsActivity"
-            android:exported="false"
-            android:theme="@style/noactiondisplay" />
+            android:exported="false" />
         <activity
             android:name=".NewActivities.FullTimeJobActivity"
-            android:exported="false"
-            android:theme="@style/noactiondisplay" />
+            android:exported="false" />
         <activity
             android:name=".NewActivities.AddSocialAccountActivity"
             android:exported="false">
@@ -67,7 +71,13 @@
         <activity
             android:name=".NewActivities.EditProfileActivity"
             android:exported="true"
-            android:theme="@style/noactiondisplay" />
+            android:theme="@style/noactiondisplay">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".AaForChecking"
             android:exported="false"
@@ -174,13 +184,18 @@
             android:name=".Activities.ActivitySplash"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:exported="true"
-            android:screenOrientation="portrait">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+            android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".games.AllGamesActivity"
+            android:theme="@style/noactiondisplay" />
+        <activity
+            android:name=".games.FullGameActivity"
+            android:theme="@style/noactiondisplay" />
+        <activity
+            android:name=".games.GamesActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:exported="true"
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name=".Activities.ActivityMain"
             android:configChanges="orientation|keyboardHidden|screenSize"
