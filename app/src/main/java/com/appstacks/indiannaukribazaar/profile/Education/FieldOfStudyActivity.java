@@ -3,54 +3,49 @@ package com.appstacks.indiannaukribazaar.profile.Education;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
-import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.SearchView;
-import android.widget.Toast;
 
-import com.appstacks.indiannaukribazaar.NewActivities.DetailsActivity;
 import com.appstacks.indiannaukribazaar.R;
-import com.appstacks.indiannaukribazaar.databinding.ActivityLevelOfEducationBinding;
+import com.appstacks.indiannaukribazaar.databinding.ActivityFieldOfStudyBinding;
 import com.appstacks.indiannaukribazaar.profile.ProfileUtils;
 
 import java.util.ArrayList;
 
-public class LevelOfEducationActivity extends AppCompatActivity {
-    private ActivityLevelOfEducationBinding binding;
+public class FieldOfStudyActivity extends AppCompatActivity {
+private ActivityFieldOfStudyBinding binding;
+private ProfileUtils profileUtils;
     private static ArrayList<String> list = new ArrayList<>();
     private ArrayAdapter<String> adapter;
-    private ProfileUtils profileUtils;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = ActivityLevelOfEducationBinding.inflate(getLayoutInflater());
+        binding=ActivityFieldOfStudyBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         profileUtils = new ProfileUtils(this);
 
-        list.add("Assistant");
-        list.add("Associate");
-        list.add("Administrative Assistant");
-        list.add("Account Manager");
-        list.add("Assistant Manager");
-        list.add("Commission Sales Associate");
-        list.add("Sales Attendant");
-
-        list.add("Accountant");
-        list.add("Sales Advocate");
-        list.add("Analyst");
+        list.add("Bs Computer science");
+        list.add("Bs Information Technology");
+        list.add("Bs Software Engineering");
+        list.add("Bs GIS");
+        list.add("Bs in Medical Science");
+        list.add("Bs in Social Sciences");
+        list.add("Bs Zoology");
+        list.add("BS Mathematics");
+        list.add("BS Sociology");
+        list.add("BS Honors");
         searchView(list);
 
-        binding.btnBackLevelOfEducation.setOnClickListener(view -> {
+        binding.btnBackField.setOnClickListener(view -> {
             finish();
         });
 
 
         binding.listViewSearchData.setOnItemClickListener((adapterView, view15, i, l) -> {
-            String levelOfEducation = list.get(i).toString();
+            String fieldOfStudy = list.get(i).toString();
 
-           profileUtils.saveLevelOfEducation(levelOfEducation);
-           finish();
+            profileUtils.saveFieldStudy(fieldOfStudy);
+            finish();
 
         });
 

@@ -3,54 +3,51 @@ package com.appstacks.indiannaukribazaar.profile.Education;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
-import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.SearchView;
-import android.widget.Toast;
 
-import com.appstacks.indiannaukribazaar.NewActivities.DetailsActivity;
 import com.appstacks.indiannaukribazaar.R;
-import com.appstacks.indiannaukribazaar.databinding.ActivityLevelOfEducationBinding;
+import com.appstacks.indiannaukribazaar.databinding.ActivityInstituteNameBinding;
 import com.appstacks.indiannaukribazaar.profile.ProfileUtils;
 
 import java.util.ArrayList;
 
-public class LevelOfEducationActivity extends AppCompatActivity {
-    private ActivityLevelOfEducationBinding binding;
+public class InstituteNameActivity extends AppCompatActivity {
+    private ActivityInstituteNameBinding binding;
+    private ProfileUtils profileUtils;
     private static ArrayList<String> list = new ArrayList<>();
     private ArrayAdapter<String> adapter;
-    private ProfileUtils profileUtils;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = ActivityLevelOfEducationBinding.inflate(getLayoutInflater());
+        binding = ActivityInstituteNameBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
         profileUtils = new ProfileUtils(this);
 
-        list.add("Assistant");
-        list.add("Associate");
-        list.add("Administrative Assistant");
-        list.add("Account Manager");
-        list.add("Assistant Manager");
-        list.add("Commission Sales Associate");
-        list.add("Sales Attendant");
-
-        list.add("Accountant");
-        list.add("Sales Advocate");
-        list.add("Analyst");
+        list.add("Karakoram Internation University");
+        list.add("Oxford University");
+        list.add("University of Punjab");
+        list.add("National University of Science and Technology");
+        list.add("University of Engineering and Technology ");
+        list.add("National University of Modern Languages");
+        list.add("Bahria University");
+        list.add("Islamic University");
+        list.add("University of Peshawar");
+        list.add("Institute of Business and Accounting");
         searchView(list);
 
-        binding.btnBackLevelOfEducation.setOnClickListener(view -> {
+        binding.btnBackInstituteName.setOnClickListener(view -> {
             finish();
         });
 
 
         binding.listViewSearchData.setOnItemClickListener((adapterView, view15, i, l) -> {
-            String levelOfEducation = list.get(i).toString();
+            String instituteName = list.get(i).toString();
 
-           profileUtils.saveLevelOfEducation(levelOfEducation);
-           finish();
+            profileUtils.saveInstituteName(instituteName);
+            finish();
 
         });
 
