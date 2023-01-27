@@ -32,6 +32,57 @@
         android:usesCleartextTraffic="true"
         tools:ignore="HardcodedDebugMode">
         <activity
+            android:name=".profile.Education.LevelOfEducationActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".profile.Education.AddEducationActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".profile.WorkExperienceActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".profile.EditBioActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".profile.ProfileEditActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".NewActivities.EditProfileActivity"
+            android:exported="false"
+            android:label="@string/title_activity_edit_profile"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".profile.UserProfileActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".NewActivities.JobsActivities.AddInstantJobActivity"
             android:exported="false" />
         <activity
@@ -42,6 +93,9 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
+        <activity
+            android:name=".profile.ViewProfileActivity"
+            android:exported="true" />
         <activity
             android:name=".NewActivities.InstantJobActivity"
             android:exported="false" />
@@ -77,10 +131,6 @@
         <activity
             android:name=".NewActivities.DetailsActivity"
             android:exported="false" />
-        <activity
-            android:name=".NewActivities.EditProfileActivity"
-            android:exported="true"
-            android:theme="@style/noactiondisplay" />
         <activity
             android:name=".AaForChecking"
             android:exported="false"

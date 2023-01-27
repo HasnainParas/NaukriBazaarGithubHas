@@ -28,14 +28,14 @@
                 android:background="@drawable/editprofilebg">
 
                 <ImageView
-                    android:id="@+id/btnOptionViewProfile"
+                    android:id="@+id/btnSettingProfile"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="24dp"
                     android:layout_marginEnd="24dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/ic_optiondot"
+                    app:srcCompat="@drawable/icon_setting"
                     app:tint="@color/white" />
 
                 <ImageView
@@ -43,8 +43,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="16dp"
-                    app:layout_constraintEnd_toStartOf="@+id/btnOptionViewProfile"
-                    app:layout_constraintTop_toTopOf="@+id/btnOptionViewProfile"
+                    app:layout_constraintEnd_toStartOf="@+id/btnSettingProfile"
+                    app:layout_constraintTop_toTopOf="@+id/btnSettingProfile"
                     app:srcCompat="@drawable/icon_shared" />
 
                 <de.hdodenhof.circleimageview.CircleImageView
@@ -79,40 +79,67 @@
                     app:layout_constraintStart_toStartOf="@+id/txtNameeditProfile"
                     app:layout_constraintTop_toBottomOf="@+id/txtNameeditProfile" />
 
+
                 <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_marginStart="24dp"
-                    android:layout_marginEnd="24dp"
+                    android:id="@+id/btnEditprofile"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:background="@drawable/bg_edit_profile"
                     android:orientation="horizontal"
-                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:padding="4dp"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/txtFollowingProfile"
                     app:layout_constraintTop_toBottomOf="@+id/txtLocationProfile">
 
                     <TextView
-                        android:id="@+id/txtFollowers"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
 
-                        android:layout_gravity="center_vertical"
-                        android:text="120k Follower"
-                        android:textColor="@color/white"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/txtFollow"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
-                        android:layout_marginStart="16dp"
-                        android:background="@drawable/bg_edit_profile"
-                        android:drawableStart="@drawable/follow"
-                        android:drawablePadding="8dp"
-                        android:padding="5dp"
-                        android:text="Follow"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginEnd="5dp"
+                        android:layout_weight="1"
+                        android:text="Edit profile"
                         android:textColor="@color/white" />
+
+                    <ImageView
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginEnd="5dp"
+                        android:layout_weight="1"
+                        android:tint="@color/white"
+                        app:srcCompat="@drawable/ic_edit" />
                 </LinearLayout>
+
+                <TextView
+                    android:id="@+id/txtFollowerProfile"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/follower"
+                    android:textColor="@color/white"
+
+                    app:layout_constraintEnd_toStartOf="@+id/txtFollowingProfile"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/txtFollowingProfile" />
+
+                <TextView
+                    android:id="@+id/txtFollowingProfile"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="@string/following"
+                    android:textColor="@color/white"
+
+                    app:layout_constraintEnd_toStartOf="@+id/btnEditprofile"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/txtFollowerProfile"
+                    app:layout_constraintTop_toTopOf="@+id/btnEditprofile" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </LinearLayout>

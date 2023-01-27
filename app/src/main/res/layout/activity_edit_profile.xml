@@ -171,9 +171,9 @@
                     tools:layout_editor_absoluteY="10dp">
 
                     <TextView
+                        android:id="@+id/txt_Percentage_responseTime"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:id="@+id/txt_Percentage_responseTime"
 
                         android:textColor="@color/black"
                         android:textStyle="bold"
@@ -212,8 +212,8 @@
                         android:text="Response\nTime"
                         android:textAlignment="center"
                         android:textColor="@color/black"
-                        android:textStyle="bold"
                         android:textSize="12sp"
+                        android:textStyle="bold"
                         app:layout_constraintEnd_toEndOf="@+id/progress_bar_ResponseTime"
                         app:layout_constraintStart_toStartOf="@+id/progress_bar_ResponseTime"
                         app:layout_constraintTop_toBottomOf="@+id/progress_bar_ResponseTime" />
@@ -230,10 +230,9 @@
                     tools:layout_editor_absoluteY="10dp">
 
                     <TextView
+                        android:id="@+id/txt_PercentageOrderCompletion"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-
-android:id="@+id/txt_PercentageOrderCompletion"
                         android:textColor="@color/black"
                         android:textStyle="bold"
                         app:layout_constraintBottom_toBottomOf="@+id/progress_bar_OrderCompletion"
@@ -267,8 +266,8 @@ android:id="@+id/txt_PercentageOrderCompletion"
                         android:text="Order\nCompletion"
                         android:textAlignment="center"
                         android:textColor="@color/black"
-                        android:textStyle="bold"
                         android:textSize="12sp"
+                        android:textStyle="bold"
                         app:layout_constraintEnd_toEndOf="@+id/progress_bar_OrderCompletion"
                         app:layout_constraintStart_toStartOf="@+id/progress_bar_OrderCompletion"
                         app:layout_constraintTop_toBottomOf="@+id/progress_bar_OrderCompletion" />
@@ -284,9 +283,9 @@ android:id="@+id/txt_PercentageOrderCompletion"
                     tools:layout_editor_absoluteY="10dp">
 
                     <TextView
+                        android:id="@+id/txt_PercentageOnTimeDelivery"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:id="@+id/txt_PercentageOnTimeDelivery"
 
                         android:textColor="@color/black"
                         android:textStyle="bold"
@@ -321,8 +320,8 @@ android:id="@+id/txt_PercentageOrderCompletion"
                         android:text="On-Time\nDelivery"
                         android:textAlignment="center"
                         android:textColor="@color/black"
-                        android:textStyle="bold"
                         android:textSize="12sp"
+                        android:textStyle="bold"
                         app:layout_constraintEnd_toEndOf="@+id/progress_bar_OnTimeDelivery"
                         app:layout_constraintStart_toStartOf="@+id/progress_bar_OnTimeDelivery"
                         app:layout_constraintTop_toBottomOf="@+id/progress_bar_OnTimeDelivery" />
@@ -338,10 +337,10 @@ android:id="@+id/txt_PercentageOrderCompletion"
                     tools:layout_editor_absoluteY="10dp">
 
                     <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-
                         android:id="@+id/txt_PercentagePositiveRanking"
+                        android:layout_width="wrap_content"
+
+                        android:layout_height="wrap_content"
                         android:textColor="@color/black"
                         android:textStyle="bold"
                         app:layout_constraintBottom_toBottomOf="@+id/progress_bar_PositiveRanking"
@@ -376,8 +375,8 @@ android:id="@+id/txt_PercentageOrderCompletion"
                         android:text="Positive\nRanking"
                         android:textAlignment="center"
                         android:textColor="@color/black"
-                        android:textStyle="bold"
                         android:textSize="12sp"
+                        android:textStyle="bold"
                         app:layout_constraintEnd_toEndOf="@+id/progress_bar_PositiveRanking"
                         app:layout_constraintStart_toStartOf="@+id/progress_bar_PositiveRanking"
                         app:layout_constraintTop_toBottomOf="@+id/progress_bar_PositiveRanking" />
@@ -385,6 +384,7 @@ android:id="@+id/txt_PercentageOrderCompletion"
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>
+
         <androidx.cardview.widget.CardView
             android:id="@+id/cardAboutMe"
             android:layout_width="match_parent"
@@ -412,6 +412,10 @@ android:id="@+id/txt_PercentageOrderCompletion"
                     app:layout_constraintTop_toTopOf="parent"
                     app:srcCompat="@drawable/icon_about_me" />
 
+
+
+
+
                 <TextView
                     android:id="@+id/txtAboutMe"
                     android:layout_width="wrap_content"
@@ -423,7 +427,6 @@ android:id="@+id/txt_PercentageOrderCompletion"
                     android:textStyle="bold"
                     app:layout_constraintStart_toEndOf="@+id/img_aboutMe"
                     app:layout_constraintTop_toTopOf="parent" />
-
 
 
                 <View
@@ -546,7 +549,7 @@ android:id="@+id/txt_PercentageOrderCompletion"
                     android:layout_marginTop="8dp"
                     android:text="Amazon Inc"
                     android:textColor="@color/green"
-       
+
 
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/txtWorkExperience" />
@@ -1176,8 +1179,8 @@ android:id="@+id/txt_PercentageOrderCompletion"
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:paddingBottom="10dp"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:paddingBottom="10dp">
 
                 <TextView
                     android:id="@+id/txtAppre"
@@ -1207,9 +1210,9 @@ android:id="@+id/txt_PercentageOrderCompletion"
                     android:layout_height="1dp"
                     android:layout_marginStart="24dp"
                     android:layout_marginTop="24dp"
-                    android:visibility="gone"
                     android:layout_marginEnd="24dp"
                     android:background="@color/grey_80"
+                    android:visibility="gone"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/txtAppre" />
@@ -1220,10 +1223,10 @@ android:id="@+id/txt_PercentageOrderCompletion"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="24dp"
                     android:layout_marginTop="16dp"
-                    android:visibility="gone"
                     android:text="Wireless Symposium (RWS)"
                     android:textColor="@color/black"
                     android:textStyle="bold"
+                    android:visibility="gone"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/view6" />
 
@@ -1243,10 +1246,10 @@ android:id="@+id/txt_PercentageOrderCompletion"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="24dp"
-                    android:visibility="gone"
                     android:layout_marginTop="8dp"
                     android:text="Young Scientist"
                     android:textColor="@color/green"
+                    android:visibility="gone"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/txtAppreciation" />
 
@@ -1258,8 +1261,8 @@ android:id="@+id/txt_PercentageOrderCompletion"
                     android:layout_marginTop="8dp"
                     android:layout_marginBottom="16dp"
                     android:text="2014"
-                    android:visibility="gone"
                     android:textColor="@color/green"
+                    android:visibility="gone"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/txtAppreciationInstitue" />
@@ -1410,12 +1413,12 @@ android:id="@+id/txt_PercentageOrderCompletion"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
             android:layout_marginTop="16dp"
-            app:layout_constraintTop_toBottomOf="@id/cardResume"
+            android:layout_marginEnd="16dp"
             app:cardCornerRadius="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/cardResume"
             tools:layout_editor_absoluteY="817dp">
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -1436,7 +1439,7 @@ android:id="@+id/txt_PercentageOrderCompletion"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <ImageView
-                    android:id="@+id/btnResumeAdd"
+
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
@@ -1446,7 +1449,7 @@ android:id="@+id/txt_PercentageOrderCompletion"
                     app:srcCompat="@drawable/addddd" />
 
                 <ImageView
-                    android:id="@+id/imgResume"
+
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="24dp"
@@ -1456,7 +1459,7 @@ android:id="@+id/txt_PercentageOrderCompletion"
                     app:srcCompat="@drawable/icon_appreciation" />
 
                 <View
-                    android:id="@+id/view7"
+                    android:id="@+id/view8"
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:layout_marginStart="24dp"
@@ -1469,7 +1472,7 @@ android:id="@+id/txt_PercentageOrderCompletion"
                     app:layout_constraintTop_toBottomOf="@+id/txtResu" />
 
                 <ImageView
-                    android:id="@+id/imagePDF"
+                    android:id="@+id/imagePDFf"
                     android:layout_width="60dp"
                     android:layout_height="60dp"
                     android:layout_marginStart="16dp"
@@ -1479,10 +1482,10 @@ android:id="@+id/txt_PercentageOrderCompletion"
                     android:visibility="gone"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/view7" />
+                    app:layout_constraintTop_toBottomOf="@id/view8" />
 
                 <TextView
-                    android:id="@+id/txtResumeFileName"
+                    android:id="@+id/txtResumeFileNamee"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
@@ -1492,34 +1495,34 @@ android:id="@+id/txt_PercentageOrderCompletion"
                     android:textColor="@color/black"
                     android:visibility="gone"
                     app:layout_constraintEnd_toStartOf="@+id/btnResumeDelete"
-                    app:layout_constraintStart_toEndOf="@+id/imagePDF"
-                    app:layout_constraintTop_toBottomOf="@+id/view7" />
+                    app:layout_constraintStart_toEndOf="@+id/imagePDFf"
+                    app:layout_constraintTop_toBottomOf="@+id/view8" />
 
                 <ImageView
-                    android:id="@+id/btnResumeDelete"
+                    android:id="@+id/btnResumeDeleta"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:layout_marginTop="24dp"
                     android:layout_marginEnd="24dp"
                     android:visibility="gone"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/view7"
+                    app:layout_constraintTop_toBottomOf="@+id/view8"
                     app:srcCompat="@drawable/icon_delete" />
 
                 <LinearLayout
-                    android:id="@+id/linearLayout6"
+
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="8dp"
                     android:layout_marginEnd="16dp"
                     android:orientation="horizontal"
-                    app:layout_constraintEnd_toStartOf="@+id/btnResumeDelete"
-                    app:layout_constraintStart_toEndOf="@+id/imagePDF"
-                    app:layout_constraintTop_toBottomOf="@+id/txtResumeFileName">
+                    app:layout_constraintEnd_toStartOf="@+id/btnResumeDeletea"
+                    app:layout_constraintStart_toEndOf="@+id/imagePDFf"
+                    app:layout_constraintTop_toBottomOf="@+id/txtResumeFileNamee">
 
                     <TextView
-                        android:id="@+id/txtResumeInfor"
+
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"

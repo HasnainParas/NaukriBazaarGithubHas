@@ -81,7 +81,7 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/txt_positonintant"
+
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
@@ -147,7 +147,7 @@
             android:padding="5dp">
 
             <TextView
-                android:id="@+id/textView38intant2"
+
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
@@ -160,7 +160,7 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/txt_positonintant"
+
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
@@ -169,7 +169,7 @@
                 android:text="ffdsfasfasfd"
                 android:textColor="#524B6B"
                 android:textSize="14sp"
-                android:visibility="gone" />
+            />
 
         </LinearLayout>
 
@@ -226,7 +226,7 @@
             android:padding="5dp">
 
             <TextView
-                android:id="@+id/textView38intant2"
+
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
@@ -239,7 +239,7 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/txt_positonintant"
+
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
@@ -307,7 +307,7 @@
             android:padding="5dp">
 
             <TextView
-                android:id="@+id/textView38intant2"
+
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
@@ -320,7 +320,7 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/txt_positonintant"
+
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
@@ -386,7 +386,7 @@
             android:padding="5dp">
 
             <TextView
-                android:id="@+id/textView38intant2"
+
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
@@ -399,7 +399,7 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/txt_positonintant"
+
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
@@ -465,7 +465,7 @@
             android:padding="5dp">
 
             <TextView
-                android:id="@+id/textView38intant2"
+
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
@@ -478,7 +478,7 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/txt_positonintant"
+
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"

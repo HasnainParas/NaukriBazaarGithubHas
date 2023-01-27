@@ -2,6 +2,8 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
+    android:layout_margin="5dp"
+    app:cardCornerRadius="8dp"
     android:layout_height="wrap_content">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -36,6 +38,7 @@
                     android:rating="3" />
 
                 <TextView
+                    android:id="@+id/txtRating"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
@@ -54,6 +57,7 @@
 
 
                 <TextView
+                    android:id="@+id/txtDate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
@@ -110,6 +114,7 @@ Specifications"
 
 
             <TextView
+                android:id="@+id/txtPriceJob"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -119,6 +124,7 @@ Specifications"
                 android:textStyle="bold" />
 
             <TextView
+                android:id="@+id/txtPerHour"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -128,6 +134,7 @@ Specifications"
                 android:textStyle="bold" />
 
             <TextView
+                android:id="@+id/txtTotalHours"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"

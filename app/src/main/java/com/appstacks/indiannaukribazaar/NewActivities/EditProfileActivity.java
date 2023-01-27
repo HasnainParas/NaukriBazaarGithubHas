@@ -383,12 +383,12 @@ Toast.makeText(this,binding.progressBarResponseTime.getProgress() + " " ,Toast.L
     }
 
     private void onClicks() {
-        binding.btnAboutMeEdit.setOnClickListener(view -> {
-            in = new Intent(EditProfileActivity.this, DetailsActivity.class);
-            in.putExtra("profile", "About Me");
-            in.putExtra("aboutMeDesc", aboutme.getAboutMeDescription());
-            startActivity(in);
-        });
+//        binding.btnAboutMeEdit.setOnClickListener(view -> {
+//            in = new Intent(EditProfileActivity.this, DetailsActivity.class);
+//            in.putExtra("profile", "About Me");
+//            in.putExtra("aboutMeDesc", aboutme.getAboutMeDescription());
+//            startActivity(in);
+//        });
 
         binding.btnShareeditprofile.setOnClickListener(view -> {
             // Sharing intent
@@ -400,12 +400,12 @@ Toast.makeText(this,binding.progressBarResponseTime.getProgress() + " " ,Toast.L
             startActivity(Intent.createChooser(sharingIntent, "Share via"));
         });
 
-        binding.btnworkExperienceAdd.setOnClickListener(view -> {
-
-            in = new Intent(EditProfileActivity.this, DetailsActivity.class);
-            in.putExtra("profile", "Add Work");
-            startActivity(in);
-        });
+//        binding.btnworkExperienceAdd.setOnClickListener(view -> {
+//
+//            in = new Intent(EditProfileActivity.this, DetailsActivity.class);
+//            in.putExtra("profile", "Add Work");
+//            startActivity(in);
+//        });
 
         binding.btnworkExperienceEdit.setOnClickListener(view -> {
             in = new Intent(EditProfileActivity.this, DetailsActivity.class);
@@ -539,7 +539,7 @@ Toast.makeText(this,binding.progressBarResponseTime.getProgress() + " " ,Toast.L
 
                     binding.btnworkExperienceEdit.setVisibility(View.VISIBLE);
 
-                    binding.btnworkExperienceAdd.setVisibility(View.GONE);
+                  //  binding.btnworkExperienceAdd.setVisibility(View.GONE);
                     binding.txtWorkExperience.setVisibility(View.VISIBLE);
 
                     binding.view2.setVisibility(View.VISIBLE);
@@ -562,7 +562,7 @@ Toast.makeText(this,binding.progressBarResponseTime.getProgress() + " " ,Toast.L
                     }
 
                 } else {
-                    binding.btnworkExperienceAdd.setVisibility(View.VISIBLE);
+                   // binding.btnworkExperienceAdd.setVisibility(View.VISIBLE);
                     binding.txtWorkExperience.setVisibility(View.GONE);
                     binding.view2.setVisibility(View.GONE);
                     binding.btnworkExperienceEdit.setVisibility(View.GONE);

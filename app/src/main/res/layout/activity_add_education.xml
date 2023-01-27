@@ -4,6 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    tools:context=".profile.Education.AddEducationActivity"
+
     android:background="#F4F5F6" >
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -12,7 +14,7 @@
 
 
         <ImageView
-            android:id="@+id/btnBack_addworkEx"
+            android:id="@+id/btnBack_addEduca"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -22,25 +24,25 @@
             app:srcCompat="@drawable/ic_arrow_back_black_24dp" />
 
         <TextView
-            android:id="@+id/txtaddworkexperience"
+            android:id="@+id/txtaddEduca"
             style="@style/TextBoldStyleBlack"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Add work experience"
+            android:text="Add Education"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btnBack_addworkEx" />
+            app:layout_constraintTop_toBottomOf="@+id/btnBack_addEduca" />
 
         <TextView
             android:id="@+id/textJobTitle"
             style="@style/TextBoldStyleBlack"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Job title"
+            android:text="Level of Education"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txtaddworkexperience" />
+            app:layout_constraintTop_toBottomOf="@+id/txtaddEduca" />
 
         <EditText
-            android:id="@+id/editTextJobTitle"
+            android:id="@+id/editlevelofEduca"
             style="@style/EditTextStyle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -55,12 +57,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="Company"
+            android:text="Institute name"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editTextJobTitle" />
+            app:layout_constraintTop_toBottomOf="@+id/editlevelofEduca" />
 
         <EditText
-            android:id="@+id/edittext_company"
+            android:id="@+id/edittext_instituteName"
             style="@style/EditTextStyle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -92,7 +94,7 @@
             app:layout_constraintTop_toTopOf="@+id/textStartDateAddWork" />
 
         <EditText
-            android:id="@+id/et_startDateAddWork"
+            android:id="@+id/et_startDateAddEdca"
             style="@style/EditTextStyle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -110,10 +112,10 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:inputType="number"
-            app:layout_constraintBottom_toBottomOf="@+id/et_startDateAddWork"
+            app:layout_constraintBottom_toBottomOf="@+id/et_startDateAddEdca"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/et_startDateAddWork"
+            app:layout_constraintStart_toEndOf="@+id/et_startDateAddEdca"
             app:layout_constraintTop_toBottomOf="@+id/textView65" />
 
         <CheckBox
@@ -125,7 +127,7 @@
             android:layout_marginTop="16dp"
             android:text="This is my position now"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/et_startDateAddWork" />
+            app:layout_constraintTop_toBottomOf="@+id/et_startDateAddEdca" />
 
         <TextView
             android:id="@+id/textDesc_AddWork"
@@ -148,7 +150,7 @@
             android:layout_marginBottom="16dp"
             android:background="@drawable/edit_text_round"
             app:cardCornerRadius="8dp"
-            app:layout_constraintBottom_toTopOf="@+id/btnSaveAddWorkEx"
+            app:layout_constraintBottom_toTopOf="@+id/btnSaveAddEduca"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textDesc_AddWork">
@@ -181,7 +183,7 @@
         </androidx.cardview.widget.CardView>
 
         <Button
-            android:id="@+id/btnSaveAddWorkEx"
+            android:id="@+id/btnSaveAddEduca"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
@@ -193,10 +195,10 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/btnRemoveWorkEx" />
+            app:layout_constraintStart_toEndOf="@+id/btnRemoveEducation" />
 
         <Button
-            android:id="@+id/btnRemoveWorkEx"
+            android:id="@+id/btnRemoveEducation"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
@@ -207,10 +209,10 @@
 
             android:textColor="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/btnSaveAddWorkEx"
+            app:layout_constraintEnd_toStartOf="@+id/btnSaveAddEduca"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/btnSaveAddWorkEx"
+            app:layout_constraintTop_toTopOf="@+id/btnSaveAddEduca"
             app:layout_constraintVertical_bias="0.0" />
 
         <TextView
@@ -222,7 +224,7 @@
             android:layout_marginTop="32dp"
             android:text="Field of study"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/edittext_company" />
+            app:layout_constraintTop_toBottomOf="@+id/edittext_instituteName" />
 
         <EditText
             android:id="@+id/et_fieldofStudy"

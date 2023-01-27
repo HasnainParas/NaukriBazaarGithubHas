@@ -94,7 +94,7 @@ public class DetailsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityDetailsBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        aboutlayout = findViewById(R.id.aboutidlay);
+//        aboutlayout = findViewById(R.id.aboutidlay);
         dialog = new ProgressDialog(DetailsActivity.this);
         profileIntent = getIntent().getStringExtra("profile");
         storageReference = FirebaseStorage.getInstance().getReference();
@@ -102,46 +102,46 @@ public class DetailsActivity extends AppCompatActivity {
         userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
         switch (profileIntent) {
-            case "About Me":
-                binding.aboutidlay.getRoot().setVisibility(View.VISIBLE);
-                String aboutMeFromDb = getIntent().getStringExtra("aboutMeDesc");
-                if (aboutMeFromDb != null)
-                    binding.aboutidlay.etTellmeAbout.setText(aboutMeFromDb);
-                binding.aboutidlay.btnBackAboutMe.setOnClickListener(view -> onBackPressed());
-                binding.aboutidlay.etTellmeAbout.addTextChangedListener(new TextWatcher() {
-                    @Override
-                    public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-                        binding.aboutidlay.btnBackAboutMe.setImageResource(R.drawable.ic_arrow_back_black_24dp);
-                    }
-
-                    @Override
-                    public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-                        binding.aboutidlay.btnBackAboutMe.setImageResource(R.drawable.ic_cancel);
-                        binding.aboutidlay.btnBackAboutMe.setOnClickListener(view -> Toast.makeText(DetailsActivity.this, "On Text Chaged Cacel", Toast.LENGTH_SHORT).show());
-                    }
-
-                    @Override
-                    public void afterTextChanged(Editable editable) {
-
-                        binding.aboutidlay.btnBackAboutMe.setImageResource(R.drawable.ic_cancel);
-                        binding.aboutidlay.btnBackAboutMe.setOnClickListener(view -> bottomDialog());
-                    }
-                });
-                binding.aboutidlay.btnSaveAboutMe.setOnClickListener(view -> {
-                    if (binding.aboutidlay.etTellmeAbout.getText().toString().isEmpty()) {
-                        binding.aboutidlay.etTellmeAbout.setError("Kindly describe yourself");
-                    } else {
-                        String aboutMeDescription = binding.aboutidlay.etTellmeAbout.getText().toString();
-                        dialog.setTitle("Uploading ");
-                        dialog.setMessage("Please wait while uploading");
-                        dialog.setCancelable(false);
-                        dialog.show();
-                        UploadAboutMe(aboutMeDescription);
-                    }
-                });
-                break;
+//            case "About Me":
+//                binding.aboutidlay.getRoot().setVisibility(View.VISIBLE);
+//                String aboutMeFromDb = getIntent().getStringExtra("aboutMeDesc");
+//                if (aboutMeFromDb != null)
+//                    binding.aboutidlay.etTellmeAbout.setText(aboutMeFromDb);
+//                binding.aboutidlay.btnBackAboutMe.setOnClickListener(view -> onBackPressed());
+//                binding.aboutidlay.etTellmeAbout.addTextChangedListener(new TextWatcher() {
+//                    @Override
+//                    public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+//
+//                        binding.aboutidlay.btnBackAboutMe.setImageResource(R.drawable.ic_arrow_back_black_24dp);
+//                    }
+//
+//                    @Override
+//                    public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+//
+//                        binding.aboutidlay.btnBackAboutMe.setImageResource(R.drawable.ic_cancel);
+//                        binding.aboutidlay.btnBackAboutMe.setOnClickListener(view -> Toast.makeText(DetailsActivity.this, "On Text Chaged Cacel", Toast.LENGTH_SHORT).show());
+//                    }
+//
+//                    @Override
+//                    public void afterTextChanged(Editable editable) {
+//
+//                        binding.aboutidlay.btnBackAboutMe.setImageResource(R.drawable.ic_cancel);
+//                        binding.aboutidlay.btnBackAboutMe.setOnClickListener(view -> bottomDialog());
+//                    }
+//                });
+//                binding.aboutidlay.btnSaveAboutMe.setOnClickListener(view -> {
+//                    if (binding.aboutidlay.etTellmeAbout.getText().toString().isEmpty()) {
+//                        binding.aboutidlay.etTellmeAbout.setError("Kindly describe yourself");
+//                    } else {
+//                        String aboutMeDescription = binding.aboutidlay.etTellmeAbout.getText().toString();
+//                        dialog.setTitle("Uploading ");
+//                        dialog.setMessage("Please wait while uploading");
+//                        dialog.setCancelable(false);
+//                        dialog.show();
+//                        UploadAboutMe(aboutMeDescription);
+//                    }
+//                });
+//                break;
             case "Add Work":
 
                 binding.addworklay.getRoot().setVisibility(View.VISIBLE);
@@ -290,6 +290,7 @@ public class DetailsActivity extends AppCompatActivity {
                     list.add("Assistant Manager");
                     list.add("Commission Sales Associate");
                     list.add("Sales Attendant");
+
                     list.add("Accountant");
                     list.add("Sales Advocate");
                     list.add("Analyst");
