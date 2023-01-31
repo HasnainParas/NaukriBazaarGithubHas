@@ -1,27 +1,25 @@
-package com.appstacks.indiannaukribazaar.NewActivities.Adapters;
+package com.appstacks.indiannaukribazaar.profile.Lanuages;
 
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.appstacks.indiannaukribazaar.ProfileModels.SelectedLanguages;
 import com.appstacks.indiannaukribazaar.R;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
-public class LanguagesAdapter extends RecyclerView.Adapter<LanguagesAdapter.viewHolder> {
+public class LanguagesAdapterFirebase extends RecyclerView.Adapter<LanguagesAdapterFirebase.viewHolder> {
     private ArrayList<SelectedLanguages> list;
     private Context context;
 
-    public LanguagesAdapter(ArrayList<SelectedLanguages> list, Context context) {
+    public LanguagesAdapterFirebase(ArrayList<SelectedLanguages> list, Context context) {
         this.list = list;
         this.context = context;
     }
@@ -40,6 +38,8 @@ public class LanguagesAdapter extends RecyclerView.Adapter<LanguagesAdapter.view
         holder.oralLevel.setText(data.getOralLevel());
         holder.writtenLevel.setText(data.getWrittenLevel());
         holder.languageName.setText(data.getName());
+        if (data.isFirstLanguage())
+            holder.languageName.setText(data.getName() + " ( First language )");
         Picasso.get().load(data.getFlag()).into(holder.flag);
 
 

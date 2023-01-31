@@ -165,7 +165,7 @@ public class WorkExperienceActivity extends AppCompatActivity {
                     binding.checkboxPosition.setChecked(workExperience.isPositionNow());
                     binding.etTellmeAbout.setText(workExperience.getDescription());
 
-                    // saving work experience to sharedpreferences
+                    // saving work experience to shared preferences
                     profileUtils.saveWorkExperience(workExperience);
 
 

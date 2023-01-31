@@ -26,9 +26,10 @@ import com.appstacks.indiannaukribazaar.ProfileModels.AddWorkExperience;
 import com.appstacks.indiannaukribazaar.ProfileModels.Appreciation;
 import com.appstacks.indiannaukribazaar.ProfileModels.Education;
 import com.appstacks.indiannaukribazaar.ProfileModels.Resume;
-import com.appstacks.indiannaukribazaar.ProfileModels.SelectedLanguages;
+
 import com.appstacks.indiannaukribazaar.R;
 import com.appstacks.indiannaukribazaar.databinding.ActivityEditProfileBinding;
+import com.appstacks.indiannaukribazaar.profile.Lanuages.SelectedLanguages;
 import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -53,12 +54,12 @@ public class EditProfileActivity extends AppCompatActivity {
 
     private final int PICK_IMAGE_REQUEST = 22;
     private static final String TAG = "EditProfileActivity";
-    ActivityEditProfileBinding binding;
-    Intent in;
+   private ActivityEditProfileBinding binding;
+   private Intent in;
     private StorageReference storageReference, storagedlt;
-    DatabaseReference userRef;
-    String userId;
-    String name;
+   private DatabaseReference userRef;
+   private String userId;
+private     String name;
     private String downloadUrlOfUserImage;
     AddWorkExperience workExperience = new AddWorkExperience();
     AboutMeDescription aboutme = new AboutMeDescription();
@@ -136,7 +137,7 @@ public class EditProfileActivity extends AppCompatActivity {
                     String value = dataSnapshot.getValue(String.class);
                     arrayList.add(value);
 
-                    gridAdapter = new GridAdapter(EditProfileActivity.this, arrayList);
+//                    gridAdapter = new GridAdapter(EditProfileActivity.this, arrayList);
 
                     binding.listvieww.setAdapter(gridAdapter);
 

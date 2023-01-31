@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 
 import com.appstacks.indiannaukribazaar.ProfileModels.AddWorkExperience;
+import com.appstacks.indiannaukribazaar.ProfileModels.Education;
 import com.google.gson.Gson;
 
 public class ProfileUtils {
@@ -17,6 +18,7 @@ public class ProfileUtils {
     private static final String LEVEL_EDUCATION="LevelEducation";
     private static final String INSTITUTE_NAME="InstituteName";
     private static final String FIELD_OF_STUDY="FieldStudy";
+    private static final String EDUCATION="Education";
 
     public ProfileUtils(Context context) {
         this.context = context;
@@ -24,6 +26,7 @@ public class ProfileUtils {
         sharedPreferences = context.getSharedPreferences(WORK_EXPERIENCE, Context.MODE_PRIVATE);
         sharedPreferences= context.getSharedPreferences(INSTITUTE_NAME,Context.MODE_PRIVATE);
         sharedPreferences= context.getSharedPreferences(FIELD_OF_STUDY,Context.MODE_PRIVATE);
+        sharedPreferences= context.getSharedPreferences(EDUCATION,Context.MODE_PRIVATE);
     }
 
     public void saveUserBio(String bio) {
@@ -34,7 +37,19 @@ public class ProfileUtils {
     public String fetchUserBio() {
         return sharedPreferences.getString(USER_BIO, "");
     }
+    public void saveEducation(Education education){
+        Gson gson = new Gson();
+        String jsonStr = gson.toJson(education, AddWorkExperience.class);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(EDUCATION, jsonStr);
+        editor.apply();
 
+    }
+    public Education fetchEducation(){
+        String str = sharedPreferences.getString(EDUCATION, null);
+        Gson gson = new Gson();
+        return gson.fromJson(str, Education.class);
+    }
     public void saveWorkExperience(AddWorkExperience workExperience) {
 
         Gson gson = new Gson();
@@ -46,9 +61,10 @@ public class ProfileUtils {
 
     }
 
+
     public AddWorkExperience fetchWorkExperience() {
 
-        String str = sharedPreferences.getString(WORK_EXPERIENCE, "N/A");
+        String str = sharedPreferences.getString(WORK_EXPERIENCE, null);
         Gson gson = new Gson();
         return gson.fromJson(str, AddWorkExperience.class);
 

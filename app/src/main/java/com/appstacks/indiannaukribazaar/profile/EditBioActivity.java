@@ -27,6 +27,7 @@ public class EditBioActivity extends AppCompatActivity {
     private DatabaseReference databaseReference, userRef;
     private String userId;
     private AboutMeDescription aboutme;
+    private ProfileUtils profileUtils;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +36,7 @@ public class EditBioActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
         databaseReference = FirebaseDatabase.getInstance().getReference();
         userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        profileUtils = new ProfileUtils(this);
         userRef = FirebaseDatabase.getInstance().getReference("UsersProfile");
 
         aboutme = new AboutMeDescription();
@@ -90,7 +92,7 @@ public class EditBioActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         if (task.isComplete() && task.isSuccessful()) {
-
+                            profileUtils.saveUserBio(aboutMeDescription);
                             Toast.makeText(EditBioActivity.this, "Description Added", Toast.LENGTH_LONG).show();
                             finish();
                         }
