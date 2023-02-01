@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Toast;
 
 import com.appstacks.indiannaukribazaar.NewActivities.EditProfileActivity;
@@ -34,6 +35,8 @@ public class AddlanguagesActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
         userRef = FirebaseDatabase.getInstance().getReference("UsersProfile");
         userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        binding.noDataLayout.setVisibility(View.VISIBLE);
+        binding.addedLanguageRecyclerview.setVisibility(View.GONE);
         fetchLanguage();
         binding.btnAddLanguage1.setOnClickListener(view -> {
             startActivity(new Intent(AddlanguagesActivity.this, SearchLanguagesActivity.class));
@@ -49,6 +52,8 @@ public class AddlanguagesActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()) {
+                    binding.noDataLayout.setVisibility(View.GONE);
+                    binding.addedLanguageRecyclerview.setVisibility(View.VISIBLE);
 
                     list = new ArrayList<>();
                     list.clear();
@@ -62,6 +67,11 @@ public class AddlanguagesActivity extends AppCompatActivity {
                     adapterFirebase = new LanguagesAdapterFirebase(list, AddlanguagesActivity.this);
                     binding.addedLanguageRecyclerview.setLayoutManager(new LinearLayoutManager(AddlanguagesActivity.this));
                     binding.addedLanguageRecyclerview.setAdapter(adapterFirebase);
+                }else{
+                    binding.noDataLayout.setVisibility(View.VISIBLE);
+                    binding.addedLanguageRecyclerview.setVisibility(View.GONE);
+
+
                 }
             }
 

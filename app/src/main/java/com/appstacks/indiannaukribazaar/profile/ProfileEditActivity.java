@@ -18,8 +18,12 @@ import com.appstacks.indiannaukribazaar.ProfileModels.Education;
 import com.appstacks.indiannaukribazaar.R;
 import com.appstacks.indiannaukribazaar.data.SharedPref;
 import com.appstacks.indiannaukribazaar.databinding.ActivityProfileEditBinding;
+import com.appstacks.indiannaukribazaar.databinding.AddResumeLayoutBinding;
 import com.appstacks.indiannaukribazaar.profile.Education.AddEducationActivity;
 import com.appstacks.indiannaukribazaar.profile.Lanuages.AddlanguagesActivity;
+import com.appstacks.indiannaukribazaar.profile.appreciation.AddAppreciationActivity;
+import com.appstacks.indiannaukribazaar.profile.appreciation.EditAppreciationActivity;
+import com.appstacks.indiannaukribazaar.profile.resume.AddResmueActivity;
 import com.appstacks.indiannaukribazaar.profile.skills.AllSkillsActivity;
 import com.appstacks.indiannaukribazaar.profile.skills.Skills;
 import com.appstacks.indiannaukribazaar.profile.skills.SkillsActivity;
@@ -91,6 +95,16 @@ public class ProfileEditActivity extends AppCompatActivity {
             startActivity(new Intent(ProfileEditActivity.this, AddlanguagesActivity.class));
         });
 
+        binding.btnAppreciationAdd.setOnClickListener(view -> {
+            startActivity(new Intent(ProfileEditActivity.this, AddAppreciationActivity.class));
+        });
+        binding.btnAppreciationEdit.setOnClickListener(view -> {
+            startActivity(new Intent(ProfileEditActivity.this, EditAppreciationActivity.class));
+        });
+
+        binding.btnResumeAdd.setOnClickListener(view -> {
+            startActivity(new Intent(ProfileEditActivity.this, AddResmueActivity.class));
+        });
     }
 
 

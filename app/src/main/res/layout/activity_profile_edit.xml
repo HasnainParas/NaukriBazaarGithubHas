@@ -298,7 +298,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="24dp"
                     android:layout_marginTop="8dp"
-                    android:text="Manager"
+                    android:text="Title"
                     android:textColor="@color/black"
                     android:textStyle="bold"
 
@@ -324,7 +324,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="24dp"
                     android:layout_marginTop="8dp"
-                    android:text="Amazon Inc"
+                    android:text="Company "
                     android:textColor="@color/green"
 
 
@@ -432,7 +432,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="24dp"
                     android:layout_marginTop="16dp"
-                    android:text="Information Technology"
+                    android:text="Title"
                     android:textColor="@color/black"
                     android:textStyle="bold"
 
@@ -456,7 +456,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="24dp"
                     android:layout_marginTop="8dp"
-                    android:text="Amazon Inc"
+                    android:text="Institute "
                     android:textColor="@color/green"
 
                     app:layout_constraintStart_toStartOf="parent"
@@ -721,7 +721,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="24dp"
                     android:layout_marginTop="16dp"
-                    android:text="Wireless Symposium (RWS)"
+                    android:text="Appreciation title "
                     android:textColor="@color/black"
                     android:textStyle="bold"
 
@@ -745,7 +745,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="24dp"
                     android:layout_marginTop="8dp"
-                    android:text="Young Scientist"
+                    android:text="Institute"
                     android:textColor="@color/green"
 
                     app:layout_constraintStart_toStartOf="parent"
@@ -758,7 +758,7 @@
                     android:layout_marginStart="24dp"
                     android:layout_marginTop="8dp"
                     android:layout_marginBottom="16dp"
-                    android:text="2014"
+                    android:text="Date"
                     android:textColor="@color/green"
 
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -862,7 +862,7 @@
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="24dp"
                     android:layout_marginEnd="16dp"
-                    android:text="TextView"
+                    android:text="Pdf name"
                     android:textColor="@color/black"
 
                     app:layout_constraintEnd_toStartOf="@+id/btnResumeDelete"

@@ -30,7 +30,7 @@ import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.appstacks.indiannaukribazaar.ProfileModels.Appreciation;
+import com.appstacks.indiannaukribazaar.profile.appreciation.Appreciation;
 
 import com.appstacks.indiannaukribazaar.ProfileModels.AboutMeDescription;
 import com.appstacks.indiannaukribazaar.ProfileModels.AddWorkExperience;

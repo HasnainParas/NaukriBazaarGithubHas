@@ -4,9 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
-import android.content.IntentSender;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Build;
@@ -14,16 +12,13 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.GridView;
 import android.widget.Toast;
 
-import com.appstacks.indiannaukribazaar.AaForChecking;
 import com.appstacks.indiannaukribazaar.NewActivities.Adapters.GridAdapter;
 import com.appstacks.indiannaukribazaar.NewActivities.Adapters.LanguageGridAdapter;
 import com.appstacks.indiannaukribazaar.ProfileModels.AboutMeDescription;
 import com.appstacks.indiannaukribazaar.ProfileModels.AddWorkExperience;
-import com.appstacks.indiannaukribazaar.ProfileModels.Appreciation;
+import com.appstacks.indiannaukribazaar.profile.appreciation.Appreciation;
 import com.appstacks.indiannaukribazaar.ProfileModels.Education;
 import com.appstacks.indiannaukribazaar.ProfileModels.Resume;
 

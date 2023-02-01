@@ -88,7 +88,7 @@ public class AddCompleteLanuageActivity extends AppCompatActivity {
                     Toast.makeText(AddCompleteLanuageActivity.this, "Select language's written level", Toast.LENGTH_SHORT).show();
                 } else {
                     String oralLevel = binding.levelToSet.getText().toString();
-                    String writtenLevel = binding.levelToSet.getText().toString();
+                    String writtenLevel = binding.writtenLevel.getText().toString();
                     boolean isfirst= binding.btnFirstLanguage.isChecked();
                     uploadFlagOfLanguage(bitmap, language, oralLevel, writtenLevel,isfirst);
 
@@ -105,12 +105,13 @@ public class AddCompleteLanuageActivity extends AppCompatActivity {
         progressDialog.setMessage("Please wait uploading...");
         progressDialog.setCancelable(false);
         progressDialog.show();
+        String uID = UUID.randomUUID().toString();
 
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.JPEG, 50, baos);
         byte[] finalImage = baos.toByteArray();
         final StorageReference filePath;
-        filePath = storageReference.child(getString(R.string.user_profile)).child("Languages").child(userId).child("LanguageFlag" + UUID.randomUUID().toString());
+        filePath = storageReference.child(getString(R.string.user_profile)).child("Languages").child(userId).child("LanguageFlag" + uID);
         UploadTask uploadTask = filePath.putBytes(finalImage);
         uploadTask.addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
             @Override
@@ -124,7 +125,7 @@ public class AddCompleteLanuageActivity extends AppCompatActivity {
                                 @Override
                                 public void onSuccess(Uri uri) {
                                     String flagDownloadUrl = String.valueOf(uri);
-                                    uploadLangauge(language, flagDownloadUrl, oralLevel, writtenLevel,isFirst);
+                                    uploadLangauge(language, flagDownloadUrl, oralLevel, writtenLevel,isFirst,uID);
                                 }
                             });
                         }
@@ -145,8 +146,8 @@ public class AddCompleteLanuageActivity extends AppCompatActivity {
 
     }
 
-    private void uploadLangauge(String language, String flagDownloadUrl, String levelOfOral, String levelOfWritten,boolean isFirst) {
-        String uID = UUID.randomUUID().toString();
+    private void uploadLangauge(String language, String flagDownloadUrl, String levelOfOral, String levelOfWritten,boolean isFirst,String uID) {
+
 
         SelectedLanguages selectedLanguages = new SelectedLanguages(language, flagDownloadUrl, levelOfOral, levelOfWritten, uID, userId,isFirst);
         databaseReference.child(getString(R.string.user_profile)).child(userId).child("Languages").child(uID)
