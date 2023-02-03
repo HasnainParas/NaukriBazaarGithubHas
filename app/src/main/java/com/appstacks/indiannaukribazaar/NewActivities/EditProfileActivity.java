@@ -19,8 +19,8 @@ import com.appstacks.indiannaukribazaar.NewActivities.Adapters.LanguageGridAdapt
 import com.appstacks.indiannaukribazaar.ProfileModels.AboutMeDescription;
 import com.appstacks.indiannaukribazaar.ProfileModels.AddWorkExperience;
 import com.appstacks.indiannaukribazaar.profile.appreciation.Appreciation;
-import com.appstacks.indiannaukribazaar.ProfileModels.Education;
-import com.appstacks.indiannaukribazaar.ProfileModels.Resume;
+import com.appstacks.indiannaukribazaar.profile.Education.Education;
+import com.appstacks.indiannaukribazaar.profile.resume.Resume;
 
 import com.appstacks.indiannaukribazaar.R;
 import com.appstacks.indiannaukribazaar.databinding.ActivityEditProfileBinding;

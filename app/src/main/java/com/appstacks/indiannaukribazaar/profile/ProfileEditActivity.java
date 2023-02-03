@@ -3,32 +3,24 @@ package com.appstacks.indiannaukribazaar.profile;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
-import com.appstacks.indiannaukribazaar.NewActivities.Adapters.GridAdapter;
-import com.appstacks.indiannaukribazaar.NewActivities.EditProfileActivity;
 import com.appstacks.indiannaukribazaar.ProfileModels.AboutMeDescription;
 import com.appstacks.indiannaukribazaar.ProfileModels.AddWorkExperience;
-import com.appstacks.indiannaukribazaar.ProfileModels.Education;
+import com.appstacks.indiannaukribazaar.profile.Education.Education;
 import com.appstacks.indiannaukribazaar.R;
-import com.appstacks.indiannaukribazaar.data.SharedPref;
 import com.appstacks.indiannaukribazaar.databinding.ActivityProfileEditBinding;
-import com.appstacks.indiannaukribazaar.databinding.AddResumeLayoutBinding;
 import com.appstacks.indiannaukribazaar.profile.Education.AddEducationActivity;
 import com.appstacks.indiannaukribazaar.profile.Lanuages.AddlanguagesActivity;
 import com.appstacks.indiannaukribazaar.profile.appreciation.AddAppreciationActivity;
 import com.appstacks.indiannaukribazaar.profile.appreciation.EditAppreciationActivity;
+import com.appstacks.indiannaukribazaar.profile.hourlycharges.AddHourlyChargesActivity;
 import com.appstacks.indiannaukribazaar.profile.resume.AddResmueActivity;
-import com.appstacks.indiannaukribazaar.profile.skills.AllSkillsActivity;
-import com.appstacks.indiannaukribazaar.profile.skills.Skills;
 import com.appstacks.indiannaukribazaar.profile.skills.SkillsActivity;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -104,6 +96,17 @@ public class ProfileEditActivity extends AppCompatActivity {
 
         binding.btnResumeAdd.setOnClickListener(view -> {
             startActivity(new Intent(ProfileEditActivity.this, AddResmueActivity.class));
+        });
+
+        binding.btnHourlyChargesAdd.setOnClickListener(view -> {
+            Intent intent = new Intent(ProfileEditActivity.this, AddHourlyChargesActivity.class);
+            intent.putExtra("hourly","add");
+            startActivity(intent);
+        });
+        binding.btnHourlyChargsEdit.setOnClickListener(view -> {
+            Intent intent = new Intent(ProfileEditActivity.this, AddHourlyChargesActivity.class);
+            intent.putExtra("hourly","edit");
+            startActivity(intent);
         });
     }
 

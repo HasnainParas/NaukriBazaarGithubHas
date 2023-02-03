@@ -12,6 +12,7 @@ import android.widget.Toast;
 import com.appstacks.indiannaukribazaar.NewActivities.EditProfileActivity;
 import com.appstacks.indiannaukribazaar.R;
 import com.appstacks.indiannaukribazaar.databinding.ActivityAddlanguagesBinding;
+import com.appstacks.indiannaukribazaar.profile.ProfileUtils;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -27,6 +28,8 @@ public class AddlanguagesActivity extends AppCompatActivity {
     private String userId;
     private ArrayList<SelectedLanguages> list;
     private LanguagesAdapterFirebase adapterFirebase;
+    private ProfileUtils profileUtils;
+    ArrayList<String> listToShared;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +40,9 @@ public class AddlanguagesActivity extends AppCompatActivity {
         userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
         binding.noDataLayout.setVisibility(View.VISIBLE);
         binding.addedLanguageRecyclerview.setVisibility(View.GONE);
+
+        profileUtils = new ProfileUtils(this);
+
         fetchLanguage();
         binding.btnAddLanguage1.setOnClickListener(view -> {
             startActivity(new Intent(AddlanguagesActivity.this, SearchLanguagesActivity.class));
@@ -64,10 +70,12 @@ public class AddlanguagesActivity extends AppCompatActivity {
 
 
                     }
+
                     adapterFirebase = new LanguagesAdapterFirebase(list, AddlanguagesActivity.this);
                     binding.addedLanguageRecyclerview.setLayoutManager(new LinearLayoutManager(AddlanguagesActivity.this));
                     binding.addedLanguageRecyclerview.setAdapter(adapterFirebase);
-                }else{
+
+                } else {
                     binding.noDataLayout.setVisibility(View.VISIBLE);
                     binding.addedLanguageRecyclerview.setVisibility(View.GONE);
 

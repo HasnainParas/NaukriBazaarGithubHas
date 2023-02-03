@@ -14,6 +14,7 @@ import com.appstacks.indiannaukribazaar.NewActivities.Adapters.GridAdapter;
 import com.appstacks.indiannaukribazaar.R;
 import com.appstacks.indiannaukribazaar.databinding.ActivityAllSkillsBinding;
 import com.appstacks.indiannaukribazaar.profile.ProfileEditActivity;
+import com.appstacks.indiannaukribazaar.profile.ProfileUtils;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
@@ -35,6 +36,7 @@ public class AllSkillsActivity extends AppCompatActivity {
     private DatabaseReference databaseReference;
     private String userId;
     private ProgressDialog dialog;
+    private ProfileUtils profileUtils;
 
 
     @Override
@@ -48,12 +50,13 @@ public class AllSkillsActivity extends AppCompatActivity {
         dialog.setMessage("Adding skills");
         dialog.setCancelable(false);
 
+        profileUtils = new ProfileUtils(this);
 
         binding.btnBackSkills.setOnClickListener(view -> {
             finish();
         });
 
-list= getIntent().getStringArrayListExtra("data");
+        list = getIntent().getStringArrayListExtra("data");
         binding.txtTitleSkills.setText("Skills (" + list.size() + ")");
         setupGridView();
 
@@ -80,7 +83,7 @@ list= getIntent().getStringArrayListExtra("data");
 
                     }
 
-                    adapter = new ArrayAdapter<String>(AllSkillsActivity.this,R.layout.item_skil,R.id.item_skill,list);
+                    adapter = new ArrayAdapter<String>(AllSkillsActivity.this, R.layout.item_skil, R.id.item_skill, list);
 
                     binding.gridViewSkills.setAdapter(adapter);
 
@@ -101,33 +104,32 @@ list= getIntent().getStringArrayListExtra("data");
 
         dialog.show();
 
-            databaseReference.child(getString(R.string.user_profile)).child(userId).child("Skills").setValue(list)
-                    .addOnCompleteListener(new OnCompleteListener<Void>() {
-                        @Override
-                        public void onComplete(@NonNull Task<Void> task) {
-                            if (task.isComplete() && task.isSuccessful()) {
-                                dialog.dismiss();
-                                Toast.makeText(AllSkillsActivity.this, "Skills added", Toast.LENGTH_SHORT).show();
-
-                                finish();
-                            }
-                        }
-                    }).addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
+        databaseReference.child(getString(R.string.user_profile)).child(userId).child("Skills").setValue(list)
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isComplete() && task.isSuccessful()) {
                             dialog.dismiss();
-                            Toast.makeText(AllSkillsActivity.this, "" + e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+                            profileUtils.saveSkills(list);
+                            Toast.makeText(AllSkillsActivity.this, "Skills added", Toast.LENGTH_SHORT).show();
+
+                            finish();
                         }
-                    });
-
-
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        dialog.dismiss();
+                        Toast.makeText(AllSkillsActivity.this, "" + e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                });
 
 
     }
 
     private void setupGridView() {
 
-        adapter = new ArrayAdapter<String>(AllSkillsActivity.this,R.layout.item_skil,R.id.item_skill,list);
+        adapter = new ArrayAdapter<String>(AllSkillsActivity.this, R.layout.item_skil, R.id.item_skill, list);
 
         binding.gridViewSkills.setAdapter(adapter);
 

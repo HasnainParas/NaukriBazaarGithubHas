@@ -13,8 +13,6 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.appstacks.indiannaukribazaar.NewActivities.DetailsActivity;
-import com.appstacks.indiannaukribazaar.ProfileModels.Education;
 import com.appstacks.indiannaukribazaar.R;
 import com.appstacks.indiannaukribazaar.databinding.ActivityAddEducationBinding;
 import com.appstacks.indiannaukribazaar.profile.ProfileUtils;
@@ -169,6 +167,7 @@ public class AddEducationActivity extends AppCompatActivity {
                 if (snapshot.exists()) {
 
                     Education education = snapshot.getValue(Education.class);
+                    profileUtils.saveEducation(education);
                     binding.editlevelofEduca.setText(education.getLevelOfEducation());
                     binding.edittextInstituteName.setText(education.getInstituteName());
                     binding.etFieldofStudy.setText(education.getFieldOfStudy());

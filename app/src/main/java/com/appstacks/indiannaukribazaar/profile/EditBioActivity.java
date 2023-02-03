@@ -68,7 +68,7 @@ public class EditBioActivity extends AppCompatActivity {
 
                     aboutme = snapshot.getValue(AboutMeDescription.class);
                     assert aboutme != null;
-
+                    profileUtils.saveUserBio(aboutme.getAboutMeDescription());
                     binding.etTellmeAbout.setText(aboutme.getAboutMeDescription());
                 } else {
 
@@ -92,7 +92,7 @@ public class EditBioActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         if (task.isComplete() && task.isSuccessful()) {
-                            profileUtils.saveUserBio(aboutMeDescription);
+
                             Toast.makeText(EditBioActivity.this, "Description Added", Toast.LENGTH_LONG).show();
                             finish();
                         }
