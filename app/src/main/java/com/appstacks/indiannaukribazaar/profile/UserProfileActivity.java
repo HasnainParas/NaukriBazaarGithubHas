@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 
@@ -45,7 +46,8 @@ public class UserProfileActivity extends AppCompatActivity {
     private static final String TAG = "UserProfileActivity";
     private DatabaseReference userRef;
     private String userId;
-
+    private ArrayList<Feedback> list;
+   private FeedbackAdapter adapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,7 +71,38 @@ public class UserProfileActivity extends AppCompatActivity {
         fetchLanguage();
         fetchAppreciation();
         fetchResume();
+        fetchHourlyCharges();
 //     checkForpreferences();
+
+
+        // dummy data to recycler view
+        list= new ArrayList<>();
+        list.add(new Feedback("5","2022","Android developer","Mehboob is good android developer","$100","10/Hr","10 Hours"));
+        list.add(new Feedback("5","2022","Android developer","Mehboob is good android developer","$100","10/Hr","10 Hours"));
+
+        adapter= new FeedbackAdapter(this,list);
+        binding.recyclerFeedBack.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false));
+        binding.recyclerFeedBack.setAdapter(adapter);
+    }
+
+    private void fetchHourlyCharges() {
+        userRef.child(userId).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.child("Hourly Charges").exists()) {
+                    String data = snapshot.child("Hourly Charges").getValue(String.class);
+                    binding.txtHourlyChargesInfo.setText(data + "$ Per Hour");
+                    binding.txtHourlyRate.setText("$ "+data + ".00");
+                } else {
+                    Log.d(TAG, "no hourly charges");
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.d(TAG, error.getMessage());
+            }
+        });
     }
 
     private void fetchResume() {
@@ -81,7 +114,7 @@ public class UserProfileActivity extends AppCompatActivity {
                     Resume resume = snapshot.getValue(Resume.class);
                     assert resume != null;
                     binding.txtResumeFileName.setText(resume.getPdfTitle());
-                    binding.txtResumeInfor.setText(resume.getSize() + "."+resume.getTime());
+                    binding.txtResumeInfor.setText(resume.getSize() + "." + resume.getTime());
                 }
             }
 
