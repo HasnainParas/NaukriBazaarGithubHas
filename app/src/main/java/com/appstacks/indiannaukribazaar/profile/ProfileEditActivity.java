@@ -13,6 +13,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
 import com.appstacks.indiannaukribazaar.NewActivities.EditProfileActivity;
+import com.appstacks.indiannaukribazaar.NewActivities.SettingActivity;
 import com.appstacks.indiannaukribazaar.ProfileModels.AboutMeDescription;
 import com.appstacks.indiannaukribazaar.ProfileModels.AddWorkExperience;
 import com.appstacks.indiannaukribazaar.profile.Education.Education;
@@ -28,8 +29,10 @@ import com.appstacks.indiannaukribazaar.profile.hourlycharges.AddHourlyChargesAc
 import com.appstacks.indiannaukribazaar.profile.resume.AddResmueActivity;
 import com.appstacks.indiannaukribazaar.profile.resume.Resume;
 import com.appstacks.indiannaukribazaar.profile.skills.SkillsActivity;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -52,6 +55,7 @@ public class ProfileEditActivity extends AppCompatActivity {
     private FeedbackAdapter adapterFeedback;
     private StorageReference storageReference;
     private Resume resume;
+    private Resume resumeData;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,7 +65,7 @@ public class ProfileEditActivity extends AppCompatActivity {
         profileUtils = new ProfileUtils(this);
         userRef = FirebaseDatabase.getInstance().getReference("UsersProfile");
         resume = new Resume();
-        storageReference = FirebaseStorage.getInstance().getReference("UsersProfile/");
+        storageReference = FirebaseStorage.getInstance().getReference("Resumes/");
         userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
         fetchWorkExperience();
@@ -149,14 +153,12 @@ public class ProfileEditActivity extends AppCompatActivity {
 
 
         });
+        binding.btnSettingeditprofile.setOnClickListener(view -> {
+            startActivity(new Intent(ProfileEditActivity.this, SettingActivity.class));
+        });
     }
 
-    private void deleteResume() {
-        userRef.child(userId).child("Resume").removeValue().addOnSuccessListener(unused -> storageReference.child("Resumes/").child(userId+"/").delete().addOnSuccessListener(unused1 -> {
-            binding.btnResumeDelete.setVisibility(View.INVISIBLE);
-            Toast.makeText(ProfileEditActivity.this, "Deleted Successfully", Toast.LENGTH_SHORT).show();
-        }).addOnFailureListener(e -> Toast.makeText(ProfileEditActivity.this, e + "", Toast.LENGTH_SHORT).show())).addOnFailureListener(e -> Toast.makeText(ProfileEditActivity.this, e + "", Toast.LENGTH_SHORT).show());
-    }
+
 
     private void fetchHourlyCharges() {
         userRef.child(userId).addValueEventListener(new ValueEventListener() {
@@ -188,10 +190,10 @@ public class ProfileEditActivity extends AppCompatActivity {
                 if (snapshot.exists()) {
                     binding.btnResumeDelete.setVisibility(View.VISIBLE);
                     binding.btnResumeAdd.setVisibility(View.INVISIBLE);
-                    Resume resume = snapshot.getValue(Resume.class);
+                    resumeData  = snapshot.getValue(Resume.class);
                     assert resume != null;
-                    binding.txtResumeFileName.setText(resume.getPdfTitle());
-                    binding.txtResumeInfor.setText(resume.getSize() + "." + resume.getTime());
+                    binding.txtResumeFileName.setText(resumeData.getPdfTitle());
+                    binding.txtResumeInfor.setText(resumeData.getSize() + "." + resumeData.getTime());
                 } else {
                     binding.btnResumeAdd.setVisibility(View.VISIBLE);
                     binding.btnResumeDelete.setVisibility(View.INVISIBLE);
@@ -203,6 +205,17 @@ public class ProfileEditActivity extends AppCompatActivity {
 
             }
         });
+    }
+    private void deleteResume() {
+
+        StorageReference reference = storageReference.child(userId+"/").child("pdf/").child(resumeData.getPdfTitle());
+        reference.delete().addOnSuccessListener(unused -> userRef.child(userId).child("Resume").removeValue().addOnCompleteListener(task -> {
+            if (task.isComplete() && task.isSuccessful()){
+                Toast.makeText(ProfileEditActivity.this, "Deleted Success", Toast.LENGTH_SHORT).show();
+                binding.txtResumeFileName.setText(" ");
+            }
+        }).addOnFailureListener(e -> Toast.makeText(ProfileEditActivity.this, ""+e.getLocalizedMessage(), Toast.LENGTH_SHORT).show())).addOnFailureListener(e -> Toast.makeText(ProfileEditActivity.this, ""+e.getLocalizedMessage(), Toast.LENGTH_SHORT).show());
+
     }
 
     private void fetchAppreciation() {

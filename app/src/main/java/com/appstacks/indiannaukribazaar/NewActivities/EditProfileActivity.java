@@ -49,25 +49,24 @@ public class EditProfileActivity extends AppCompatActivity {
 
     private final int PICK_IMAGE_REQUEST = 22;
     private static final String TAG = "EditProfileActivity";
-   private ActivityEditProfileBinding binding;
-   private Intent in;
+    private ActivityEditProfileBinding binding;
+    private Intent in;
     private StorageReference storageReference, storagedlt;
-   private DatabaseReference userRef;
-   private String userId;
-private     String name;
+    private DatabaseReference userRef;
+    private String userId;
+    private String name;
     private String downloadUrlOfUserImage;
-    AddWorkExperience workExperience = new AddWorkExperience();
-    AboutMeDescription aboutme = new AboutMeDescription();
-    Education education;
-    ArrayList<SelectedLanguages> list;
-    Appreciation appreciation = new Appreciation();
-
-    ArrayList<String> arrayList = new ArrayList<>();
-    ArrayList<String> languagesList;
-    GridAdapter gridAdapter;
-    SelectedLanguages selectedLanguages;
-    LanguageGridAdapter languageGridAdapter;
-    Resume resume;
+    private AddWorkExperience workExperience = new AddWorkExperience();
+    private AboutMeDescription aboutme = new AboutMeDescription();
+    private Education education;
+    private ArrayList<SelectedLanguages> list;
+    private Appreciation appreciation = new Appreciation();
+    private ArrayList<String> arrayList = new ArrayList<>();
+    private ArrayList<String> languagesList;
+    private GridAdapter gridAdapter;
+    private SelectedLanguages selectedLanguages;
+    private LanguageGridAdapter languageGridAdapter;
+    private Resume resume;
     private Uri filePath;
 
     @Override
@@ -160,7 +159,6 @@ private     String name;
             });
 
 
-
             fetchAboutMe();
             fetchWorkExperience();
             fetchEducation();
@@ -179,11 +177,11 @@ private     String name;
     }
 
     private void setViews() {
-Toast.makeText(this,binding.progressBarResponseTime.getProgress() + " " ,Toast.LENGTH_SHORT).show();
-        binding.txtPercentageResponseTime.setText(String.valueOf(binding.progressBarResponseTime.getProgress() ) );
-        binding.txtPercentageOrderCompletion.setText(String.valueOf(binding.progressBarOrderCompletion.getProgress() ) +"%");
-        binding.txtPercentageOnTimeDelivery.setText(String.valueOf(binding.progressBarOnTimeDelivery.getProgress() ) +"%");
-        binding.txtPercentagePositiveRanking.setText(String.valueOf(binding.progressBarPositiveRanking.getProgress() ) +"%");
+        Toast.makeText(this, binding.progressBarResponseTime.getProgress() + " ", Toast.LENGTH_SHORT).show();
+        binding.txtPercentageResponseTime.setText(String.valueOf(binding.progressBarResponseTime.getProgress()));
+        binding.txtPercentageOrderCompletion.setText(String.valueOf(binding.progressBarOrderCompletion.getProgress()) + "%");
+        binding.txtPercentageOnTimeDelivery.setText(String.valueOf(binding.progressBarOnTimeDelivery.getProgress()) + "%");
+        binding.txtPercentagePositiveRanking.setText(String.valueOf(binding.progressBarPositiveRanking.getProgress()) + "%");
     }
 
 
@@ -535,7 +533,7 @@ Toast.makeText(this,binding.progressBarResponseTime.getProgress() + " " ,Toast.L
 
                     binding.btnworkExperienceEdit.setVisibility(View.VISIBLE);
 
-                  //  binding.btnworkExperienceAdd.setVisibility(View.GONE);
+                    //  binding.btnworkExperienceAdd.setVisibility(View.GONE);
                     binding.txtWorkExperience.setVisibility(View.VISIBLE);
 
                     binding.view2.setVisibility(View.VISIBLE);
@@ -558,7 +556,7 @@ Toast.makeText(this,binding.progressBarResponseTime.getProgress() + " " ,Toast.L
                     }
 
                 } else {
-                   // binding.btnworkExperienceAdd.setVisibility(View.VISIBLE);
+                    // binding.btnworkExperienceAdd.setVisibility(View.VISIBLE);
                     binding.txtWorkExperience.setVisibility(View.GONE);
                     binding.view2.setVisibility(View.GONE);
                     binding.btnworkExperienceEdit.setVisibility(View.GONE);

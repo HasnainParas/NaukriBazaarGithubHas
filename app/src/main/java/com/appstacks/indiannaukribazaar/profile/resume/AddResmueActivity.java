@@ -48,7 +48,7 @@ public class AddResmueActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         databaseReference = FirebaseDatabase.getInstance().getReference(getString(R.string.user_profile));
-        storageReference = FirebaseStorage.getInstance().getReference(getString(R.string.user_profile));
+        storageReference = FirebaseStorage.getInstance().getReference("Resumes/");
         userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
         dialog = new ProgressDialog(this);
 
@@ -158,7 +158,7 @@ public class AddResmueActivity extends AppCompatActivity {
         dialog.setCancelable(false);
         dialog.show();
 
-        StorageReference reference = storageReference.child("Resumes").child(userId).child("pdf/" + pdfName);
+        StorageReference reference = storageReference.child(userId +"/").child("pdf/" + pdfName);
         reference.putFile(uri)
                 .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                     @Override

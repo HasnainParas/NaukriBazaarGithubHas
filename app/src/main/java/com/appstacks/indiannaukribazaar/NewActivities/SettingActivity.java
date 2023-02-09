@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import com.appstacks.indiannaukribazaar.R;
 import com.appstacks.indiannaukribazaar.databinding.ActivitySettingBinding;
+import com.appstacks.indiannaukribazaar.profile.paymentmethods.AddPaymentMethodActivity;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -28,8 +29,11 @@ public class SettingActivity extends AppCompatActivity {
         binding = ActivitySettingBinding.inflate(getLayoutInflater());
         databaseReference= FirebaseDatabase.getInstance().getReference(getString(R.string.user_profile)).child("Notifications");
         setContentView(binding.getRoot());
-        binding.btnPaymentMethods.setOnClickListener(view -> Toast.makeText(SettingActivity.this, "This feature is currently in under development mode", Toast.LENGTH_SHORT).show());
 
+
+        binding.btnPaymentMethods.setOnClickListener(view -> {
+            startActivity(new Intent(SettingActivity.this, AddPaymentMethodActivity.class));
+        });
 
         binding.btnLocationAccountSetting.setOnClickListener(view -> {
             startActivity(new Intent(SettingActivity.this, LocationActivity.class));

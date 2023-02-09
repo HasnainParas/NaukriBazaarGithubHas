@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 
 import com.appstacks.indiannaukribazaar.NewActivities.Adapters.GridAdapter;
+import com.appstacks.indiannaukribazaar.NewActivities.SettingActivity;
 import com.appstacks.indiannaukribazaar.ProfileModels.AboutMeDescription;
 import com.appstacks.indiannaukribazaar.ProfileModels.AddWorkExperience;
 import com.appstacks.indiannaukribazaar.R;
@@ -83,6 +84,12 @@ public class UserProfileActivity extends AppCompatActivity {
         adapter= new FeedbackAdapter(this,list);
         binding.recyclerFeedBack.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false));
         binding.recyclerFeedBack.setAdapter(adapter);
+
+        //
+
+        binding.btnSettingProfile.setOnClickListener(view -> {
+            startActivity(new Intent(UserProfileActivity.this, SettingActivity.class));
+        });
     }
 
     private void fetchHourlyCharges() {
