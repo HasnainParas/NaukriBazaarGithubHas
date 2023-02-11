@@ -69,6 +69,7 @@ dependencies {
     implementation 'androidx.navigation:navigation-fragment:2.5.3'
     implementation 'androidx.navigation:navigation-ui:2.5.3'
     implementation 'com.google.code.gson:gson:2.10.1'
+    implementation 'com.google.android.gms:play-services-maps:18.1.0'
     annotationProcessor 'androidx.room:room-compiler:2.0.0'
 
     implementation 'com.squareup.retrofit2:retrofit:2.4.0'
@@ -119,6 +120,7 @@ dependencies {
 }
 
 apply plugin: 'com.google.gms.google-services'
+apply plugin: 'com.google.android.libraries.mapsplatform.secrets-gradle-plugin'
 repositories {
     mavenCentral()
 }

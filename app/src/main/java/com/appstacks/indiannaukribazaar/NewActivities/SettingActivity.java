@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import com.appstacks.indiannaukribazaar.R;
 import com.appstacks.indiannaukribazaar.databinding.ActivitySettingBinding;
+import com.appstacks.indiannaukribazaar.profile.location.MapsActivity;
 import com.appstacks.indiannaukribazaar.profile.paymentmethods.AddPaymentMethodActivity;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -36,8 +37,12 @@ public class SettingActivity extends AppCompatActivity {
         });
 
         binding.btnLocationAccountSetting.setOnClickListener(view -> {
-            startActivity(new Intent(SettingActivity.this, LocationActivity.class));
+//            Fragment fragment = new MapsFragment();
+//            getSupportFragmentManager().beginTransaction()
+//                    .replace(R.id.framelayout, fragment, fragment.getClass().getSimpleName())
+//                    .commit();
 
+            startActivity(new Intent(SettingActivity.this, MapsActivity.class));
         });
 
         binding.switchPushNotifications.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
