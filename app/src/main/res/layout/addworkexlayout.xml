@@ -206,7 +206,6 @@
             android:text="Remove"
 
             android:textColor="@color/white"
-            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/btnSaveAddWorkEx"
             app:layout_constraintHorizontal_bias="0.5"
@@ -222,7 +221,6 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="32dp"
             android:text="Field of study"
-            android:visibility="gone"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/edittext_company" />
 
@@ -233,7 +231,6 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:inputType="textPersonName"
-            android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/text_fileOfStudy" />

@@ -1,4 +1,4 @@
-package com.appstacks.indiannaukribazaar.ProfileModels;
+package com.appstacks.indiannaukribazaar.profile.Education;
 
 public class Education {
 

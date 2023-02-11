@@ -4,7 +4,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
-import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.annotation.SuppressLint;
 import android.app.Dialog;
@@ -17,8 +16,6 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.OpenableColumns;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 
@@ -33,14 +30,12 @@ import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.appstacks.indiannaukribazaar.FirebaseAdapters.LanguageAdapter;
-import com.appstacks.indiannaukribazaar.NewActivities.Adapters.LanguagesAdapter;
-import com.appstacks.indiannaukribazaar.ProfileModels.Appreciation;
-import com.appstacks.indiannaukribazaar.ProfileModels.SelectedLanguages;
+import com.appstacks.indiannaukribazaar.profile.appreciation.Appreciation;
+
 import com.appstacks.indiannaukribazaar.ProfileModels.AboutMeDescription;
 import com.appstacks.indiannaukribazaar.ProfileModels.AddWorkExperience;
-import com.appstacks.indiannaukribazaar.ProfileModels.Education;
-import com.appstacks.indiannaukribazaar.ProfileModels.Resume;
+import com.appstacks.indiannaukribazaar.profile.Education.Education;
+import com.appstacks.indiannaukribazaar.profile.resume.Resume;
 import com.appstacks.indiannaukribazaar.R;
 import com.appstacks.indiannaukribazaar.databinding.ActivityDetailsBinding;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -71,7 +66,7 @@ public class DetailsActivity extends AppCompatActivity {
     ActivityDetailsBinding binding;
     View aboutlayout;
     String profileIntent;
-    ArrayList<SelectedLanguages> selectedLanguagesArrayList;
+    //ArrayList<SelectedLanguages> selectedLanguagesArrayList;
     ArrayAdapter<String> adapter;
     String levelOfEducation, instituteName, filedOfStudy;
     public static ArrayList<String> listOptions;
@@ -94,7 +89,7 @@ public class DetailsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityDetailsBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        aboutlayout = findViewById(R.id.aboutidlay);
+//        aboutlayout = findViewById(R.id.aboutidlay);
         dialog = new ProgressDialog(DetailsActivity.this);
         profileIntent = getIntent().getStringExtra("profile");
         storageReference = FirebaseStorage.getInstance().getReference();
@@ -102,46 +97,46 @@ public class DetailsActivity extends AppCompatActivity {
         userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
         switch (profileIntent) {
-            case "About Me":
-                binding.aboutidlay.getRoot().setVisibility(View.VISIBLE);
-                String aboutMeFromDb = getIntent().getStringExtra("aboutMeDesc");
-                if (aboutMeFromDb != null)
-                    binding.aboutidlay.etTellmeAbout.setText(aboutMeFromDb);
-                binding.aboutidlay.btnBackAboutMe.setOnClickListener(view -> onBackPressed());
-                binding.aboutidlay.etTellmeAbout.addTextChangedListener(new TextWatcher() {
-                    @Override
-                    public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-                        binding.aboutidlay.btnBackAboutMe.setImageResource(R.drawable.ic_arrow_back_black_24dp);
-                    }
-
-                    @Override
-                    public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-                        binding.aboutidlay.btnBackAboutMe.setImageResource(R.drawable.ic_cancel);
-                        binding.aboutidlay.btnBackAboutMe.setOnClickListener(view -> Toast.makeText(DetailsActivity.this, "On Text Chaged Cacel", Toast.LENGTH_SHORT).show());
-                    }
-
-                    @Override
-                    public void afterTextChanged(Editable editable) {
-
-                        binding.aboutidlay.btnBackAboutMe.setImageResource(R.drawable.ic_cancel);
-                        binding.aboutidlay.btnBackAboutMe.setOnClickListener(view -> bottomDialog());
-                    }
-                });
-                binding.aboutidlay.btnSaveAboutMe.setOnClickListener(view -> {
-                    if (binding.aboutidlay.etTellmeAbout.getText().toString().isEmpty()) {
-                        binding.aboutidlay.etTellmeAbout.setError("Kindly describe yourself");
-                    } else {
-                        String aboutMeDescription = binding.aboutidlay.etTellmeAbout.getText().toString();
-                        dialog.setTitle("Uploading ");
-                        dialog.setMessage("Please wait while uploading");
-                        dialog.setCancelable(false);
-                        dialog.show();
-                        UploadAboutMe(aboutMeDescription);
-                    }
-                });
-                break;
+//            case "About Me":
+//                binding.aboutidlay.getRoot().setVisibility(View.VISIBLE);
+//                String aboutMeFromDb = getIntent().getStringExtra("aboutMeDesc");
+//                if (aboutMeFromDb != null)
+//                    binding.aboutidlay.etTellmeAbout.setText(aboutMeFromDb);
+//                binding.aboutidlay.btnBackAboutMe.setOnClickListener(view -> onBackPressed());
+//                binding.aboutidlay.etTellmeAbout.addTextChangedListener(new TextWatcher() {
+//                    @Override
+//                    public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+//
+//                        binding.aboutidlay.btnBackAboutMe.setImageResource(R.drawable.ic_arrow_back_black_24dp);
+//                    }
+//
+//                    @Override
+//                    public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+//
+//                        binding.aboutidlay.btnBackAboutMe.setImageResource(R.drawable.ic_cancel);
+//                        binding.aboutidlay.btnBackAboutMe.setOnClickListener(view -> Toast.makeText(DetailsActivity.this, "On Text Chaged Cacel", Toast.LENGTH_SHORT).show());
+//                    }
+//
+//                    @Override
+//                    public void afterTextChanged(Editable editable) {
+//
+//                        binding.aboutidlay.btnBackAboutMe.setImageResource(R.drawable.ic_cancel);
+//                        binding.aboutidlay.btnBackAboutMe.setOnClickListener(view -> bottomDialog());
+//                    }
+//                });
+//                binding.aboutidlay.btnSaveAboutMe.setOnClickListener(view -> {
+//                    if (binding.aboutidlay.etTellmeAbout.getText().toString().isEmpty()) {
+//                        binding.aboutidlay.etTellmeAbout.setError("Kindly describe yourself");
+//                    } else {
+//                        String aboutMeDescription = binding.aboutidlay.etTellmeAbout.getText().toString();
+//                        dialog.setTitle("Uploading ");
+//                        dialog.setMessage("Please wait while uploading");
+//                        dialog.setCancelable(false);
+//                        dialog.show();
+//                        UploadAboutMe(aboutMeDescription);
+//                    }
+//                });
+//                break;
             case "Add Work":
 
                 binding.addworklay.getRoot().setVisibility(View.VISIBLE);
@@ -290,6 +285,7 @@ public class DetailsActivity extends AppCompatActivity {
                     list.add("Assistant Manager");
                     list.add("Commission Sales Associate");
                     list.add("Sales Attendant");
+
                     list.add("Accountant");
                     list.add("Sales Advocate");
                     list.add("Analyst");
@@ -651,7 +647,7 @@ public class DetailsActivity extends AppCompatActivity {
                 binding.addlanguageEdit.getRoot().setVisibility(View.VISIBLE);
                 binding.searchSkillLayout.getRoot().setVisibility(View.GONE);
                 binding.addlanguageEdit.btnsaveAddlanguage1.setVisibility(View.GONE);
-                selectedLanguagesArrayList = new ArrayList<>();
+              //  selectedLanguagesArrayList = new ArrayList<>();
                 databaseReference.child(getString(R.string.user_profile)).child(userId).child("Languages").addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -659,9 +655,9 @@ public class DetailsActivity extends AppCompatActivity {
 
 
                             for (DataSnapshot snap : snapshot.getChildren()) {
-                                SelectedLanguages languages = snap.getValue(SelectedLanguages.class);
+                            //    SelectedLanguages languages = snap.getValue(SelectedLanguages.class);
 
-                                selectedLanguagesArrayList.add(languages);
+                                //selectedLanguagesArrayList.add(languages);
 
 
                             }
@@ -678,13 +674,13 @@ public class DetailsActivity extends AppCompatActivity {
                 });
 
 
-                if (selectedLanguagesArrayList != null) {
-                    LanguagesAdapter languagesAdapter = new LanguagesAdapter(selectedLanguagesArrayList, this);
-                    binding.addlanguageEdit.addedLanguageRecyclerview.setVisibility(View.VISIBLE);
-                    binding.addlanguageEdit.addedLanguageRecyclerview.setAdapter(languagesAdapter);
-                    binding.addlanguageEdit.addedLanguageRecyclerview.setLayoutManager(new LinearLayoutManager(this));
-
-                }
+//                if (selectedLanguagesArrayList != null) {
+//                    LanguagesAdapter languagesAdapter = new LanguagesAdapter(selectedLanguagesArrayList, this);
+//                    binding.addlanguageEdit.addedLanguageRecyclerview.setVisibility(View.VISIBLE);
+//                    binding.addlanguageEdit.addedLanguageRecyclerview.setAdapter(languagesAdapter);
+//                    binding.addlanguageEdit.addedLanguageRecyclerview.setLayoutManager(new LinearLayoutManager(this));
+//
+//                }
 
 
                 //TODO save the below languages and show
@@ -700,8 +696,8 @@ public class DetailsActivity extends AppCompatActivity {
                     String[] languages = {"Hindi", "Urdu", "Punjabi", "English", "Marathi", "Pashto", "Shina", "Spanish", "Chinese"};
                     int[] flags = {R.drawable.india_flag, R.drawable.pak_flag, R.drawable.pak_flag, R.drawable.us_flag, R.drawable.india_flag, R.drawable.pak_flag, R.drawable.pak_flag, R.drawable.spanish_flag, R.drawable.chinese_flag};
 
-                    LanguageAdapter languageAdapter = new LanguageAdapter(this, languages, flags);
-                    binding.addlanguageEdit.listViewAddlanguage1.setAdapter(languageAdapter);
+                   // LanguageAdapter languageAdapter = new LanguageAdapter(this, languages, flags);
+                   // binding.addlanguageEdit.listViewAddlanguage1.setAdapter(languageAdapter);
                     binding.addlanguageEdit.listViewAddlanguage1.setOnItemClickListener((adapterView, view111, i, l) -> {
 
                         binding.addlanguageEdit.getRoot().setVisibility(View.GONE);
@@ -944,11 +940,11 @@ public class DetailsActivity extends AppCompatActivity {
 
     }
 
-    private ArrayList<SelectedLanguages> fetchLanguage() {
-
-
-        return selectedLanguagesArrayList;
-    }
+//    private ArrayList<SelectedLanguages> fetchLanguage() {
+//
+//
+//        return selectedLanguagesArrayList;
+//    }
 
     private void uploadAppreciation(String awardName, String awardCategory, String awardEndDate, String awardDescription) {
         dialog.setTitle("Adding appreciation");
@@ -1006,7 +1002,7 @@ public class DetailsActivity extends AppCompatActivity {
                                 @Override
                                 public void onSuccess(Uri uri) {
                                     String flagDownloadUrl = String.valueOf(uri);
-                                    uploadLangauge(language, flagDownloadUrl, levelOfOral, levelOfWritten);
+                                    //uploadLangauge(language, flagDownloadUrl, levelOfOral, levelOfWritten);
                                 }
                             });
                         }
@@ -1027,27 +1023,27 @@ public class DetailsActivity extends AppCompatActivity {
 
     }
 
-    private void uploadLangauge(String language, String flagDownloadUrl, String levelOfOral, String levelOfWritten) {
-        String uID = UUID.randomUUID().toString();
-
-        SelectedLanguages selectedLanguages = new SelectedLanguages(language, flagDownloadUrl, levelOfOral, levelOfWritten, uID, userId);
-        databaseReference.child(getString(R.string.user_profile)).child(userId).child("Languages").child(uID)
-                .setValue(selectedLanguages)
-                .addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        dialog.dismiss();
-                        Toast.makeText(DetailsActivity.this, "Langauge Added", Toast.LENGTH_SHORT).show();
-                        finish();
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        dialog.dismiss();
-                        Toast.makeText(DetailsActivity.this, "" + e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
-                    }
-                });
-    }
+//    private void uploadLangauge(String language, String flagDownloadUrl, String levelOfOral, String levelOfWritten) {
+//        String uID = UUID.randomUUID().toString();
+//
+//        SelectedLanguages selectedLanguages = new SelectedLanguages(language, flagDownloadUrl, levelOfOral, levelOfWritten, uID, userId);
+//        databaseReference.child(getString(R.string.user_profile)).child(userId).child("Languages").child(uID)
+//                .setValue(selectedLanguages)
+//                .addOnCompleteListener(new OnCompleteListener<Void>() {
+//                    @Override
+//                    public void onComplete(@NonNull Task<Void> task) {
+//                        dialog.dismiss();
+//                        Toast.makeText(DetailsActivity.this, "Langauge Added", Toast.LENGTH_SHORT).show();
+//                        finish();
+//                    }
+//                }).addOnFailureListener(new OnFailureListener() {
+//                    @Override
+//                    public void onFailure(@NonNull Exception e) {
+//                        dialog.dismiss();
+//                        Toast.makeText(DetailsActivity.this, "" + e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+//                    }
+//                });
+//    }
 
 
     private void uploadSkills(HashMap<String, String> skillsMap) {

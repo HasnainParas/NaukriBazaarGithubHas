@@ -8,25 +8,26 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.appstacks.indiannaukribazaar.R;
+import com.appstacks.indiannaukribazaar.profile.skills.Skills;
 
 import java.util.ArrayList;
 
 public class GridAdapter extends BaseAdapter {
 
     Context context;
-    ArrayList<String> flowerName;
+    ArrayList<Skills> list;
 
     LayoutInflater inflater;
 
 
-    public GridAdapter(Context context, ArrayList<String> flowerName) {
+    public GridAdapter(Context context, ArrayList<Skills> list) {
         this.context = context;
-        this.flowerName = flowerName;
+        this.list = list;
     }
 
     @Override
     public int getCount() {
-        return flowerName.size();
+        return list.size();
     }
 
     @Override
@@ -53,7 +54,7 @@ public class GridAdapter extends BaseAdapter {
 
         TextView textView = convertView.findViewById(R.id.tvidd);
 
-        textView.setText(flowerName.get(position));
+        textView.setText(list.get(position).getSkill());
 
         return convertView;
     }

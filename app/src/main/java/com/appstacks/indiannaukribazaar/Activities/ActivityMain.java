@@ -21,6 +21,7 @@ import com.appstacks.indiannaukribazaar.Slider.SliderAdapter;
 import com.appstacks.indiannaukribazaar.Slider.SliderData;
 import com.appstacks.indiannaukribazaar.databinding.ActivityMainBinding;
 import com.appstacks.indiannaukribazaar.model.DeviceInfo;
+import com.appstacks.indiannaukribazaar.profile.UserProfileActivity;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -236,7 +237,7 @@ public class ActivityMain extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "coming soon", Toast.LENGTH_SHORT).show();
                     break;
                 case R.id.profile:
-                    startActivity(new Intent(ActivityMain.this, EditProfileActivity.class));
+                    startActivity(new Intent(ActivityMain.this, UserProfileActivity.class));
 
                     break;
 

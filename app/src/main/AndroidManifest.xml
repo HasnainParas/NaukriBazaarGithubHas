@@ -32,6 +32,148 @@
         android:usesCleartextTraffic="true"
         tools:ignore="HardcodedDebugMode">
         <activity
+            android:name=".profile.paymentmethods.BankingInformationActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".profile.paymentmethods.AddPaymentMethodActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".profile.hourlycharges.AddHourlyChargesActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".profile.resume.AddResmueActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".profile.appreciation.EditAppreciationActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".profile.appreciation.AddAppreciationActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".profile.Lanuages.AddCompleteLanuageActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".profile.Lanuages.SearchLanguagesActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".profile.Lanuages.AddlanguagesActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".profile.skills.AllSkillsActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".profile.skills.SkillsActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".profile.Education.FieldOfStudyActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".profile.Education.InstituteNameActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".profile.Education.LevelOfEducationActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".profile.Education.AddEducationActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".profile.WorkExperienceActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".profile.EditBioActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".profile.ProfileEditActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".NewActivities.EditProfileActivity"
+            android:exported="false"
+            android:label="@string/title_activity_edit_profile"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".profile.UserProfileActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".NewActivities.JobsActivities.AddInstantJobActivity"
             android:exported="true"
             android:theme="@style/noactiondisplay"
@@ -52,6 +194,9 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
+        <activity
+            android:name=".profile.ViewProfileActivity"
+            android:exported="true" />
         <activity
             android:name=".NewActivities.InstantJobActivity"
             android:exported="false"
@@ -88,10 +233,6 @@
         <activity
             android:name=".NewActivities.DetailsActivity"
             android:exported="false" />
-        <activity
-            android:name=".NewActivities.EditProfileActivity"
-            android:exported="true"
-            android:theme="@style/noactiondisplay" />
         <activity
             android:name=".AaForChecking"
             android:exported="false"
