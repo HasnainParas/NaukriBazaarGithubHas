@@ -4,17 +4,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
-    app:cardCornerRadius="10dp"
     android:layout_marginTop="5dp"
-    tools:context=".NewActivities.CompanyActivity">
+    android:background="@color/white"
+    android:orientation="vertical"
+    app:cardCornerRadius="10dp"
+    tools:context=".NewActivities.JobPosition">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <View
-            android:id="@+id/view11"
+            android:id="@+id/view7"
             android:layout_width="40dp"
             android:layout_height="4dp"
             android:layout_marginTop="8dp"
@@ -23,46 +24,42 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/bck"
+        <ImageView
+            android:id="@+id/instantposbackbtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+
             android:layout_marginTop="8dp"
-            android:layout_marginEnd="16dp"
+            android:layout_marginEnd="8dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/ic_cancel" />
 
         <SearchView
-            android:id="@+id/searchViewCom"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
+            android:id="@+id/instantPos_SearchView"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            android:layout_marginEnd="16dp"
+            android:layout_marginEnd="8dp"
             android:background="@drawable/search_bg"
             android:backgroundTint="#E5E5E5"
             android:iconifiedByDefault="false"
             android:queryHint="Search"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/bck" />
+            app:layout_constraintTop_toBottomOf="@+id/instantposbackbtn" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerViewCom"
-
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
+        <ListView
+            android:id="@+id/instant_list_View"
+            android:layout_width="match_parent"
+            android:layout_height="617dp"
             android:layout_marginTop="8dp"
-            android:layout_marginEnd="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/searchViewCom"
-            tools:listitem="@layout/sample_company" />
-
+            app:layout_constraintTop_toBottomOf="@+id/instantPos_SearchView" />
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 
 
 </androidx.cardview.widget.CardView>

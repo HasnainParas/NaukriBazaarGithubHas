@@ -6,1700 +6,1727 @@
     android:layout_height="match_parent"
     tools:context=".NewActivities.EditProfileActivity">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <LinearLayout
-            android:id="@+id/lineMainProfile"
-            android:layout_width="match_parent"
-            android:layout_height="230dp"
-            android:layout_marginStart="@dimen/activity_horizontal_margin"
-            android:layout_marginTop="@dimen/activity_horizontal_margin"
-            android:layout_marginEnd="@dimen/activity_horizontal_margin"
-
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@drawable/editprofilebg">
-
-                <ImageView
-                    android:id="@+id/btnOptionViewProfile"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="24dp"
-                    android:layout_marginEnd="24dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/ic_optiondot"
-                    app:tint="@color/white" />
-
-                <ImageView
-                    android:id="@+id/btnShareeditprofile"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="16dp"
-                    app:layout_constraintEnd_toStartOf="@+id/btnOptionViewProfile"
-                    app:layout_constraintTop_toTopOf="@+id/btnOptionViewProfile"
-                    app:srcCompat="@drawable/icon_shared" />
-
-                <de.hdodenhof.circleimageview.CircleImageView
-                    android:id="@+id/circleImageView"
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
-                    android:layout_marginStart="24dp"
-                    android:src="@drawable/userimg"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/btnShareeditprofile" />
-
-                <TextView
-                    android:id="@+id/txtNameeditProfile"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:text="Orlando Diggs"
-                    android:textColor="@color/white"
-                    android:textStyle="bold"
-                    app:layout_constraintEnd_toEndOf="@+id/circleImageView"
-                    app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toStartOf="@+id/circleImageView"
-                    app:layout_constraintTop_toBottomOf="@+id/circleImageView" />
-
-                <TextView
-                    android:id="@+id/txtLocationProfile"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    android:text="California,USA"
-                    android:textColor="@color/white"
-                    app:layout_constraintStart_toStartOf="@+id/txtNameeditProfile"
-                    app:layout_constraintTop_toBottomOf="@+id/txtNameeditProfile" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_marginStart="24dp"
-                    android:layout_marginEnd="24dp"
-                    android:orientation="horizontal"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/txtLocationProfile">
-
-                    <TextView
-                        android:id="@+id/txtFollowers"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-
-                        android:layout_gravity="center_vertical"
-                        android:text="120k Follower"
-                        android:textColor="@color/white"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/txtFollow"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginStart="16dp"
-                        android:background="@drawable/bg_edit_profile"
-                        android:drawableStart="@drawable/follow"
-                        android:drawablePadding="8dp"
-                        android:padding="5dp"
-                        android:text="Follow"
-                        android:textColor="@color/white" />
-                </LinearLayout>
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-        </LinearLayout>
-
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/LineAnalytics"
-            android:layout_width="match_parent"
-
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
-            app:cardCornerRadius="16dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/lineMainProfile">
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="10dp">
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/ResponseLayout"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintEnd_toStartOf="@+id/OrderLayout"
-                    app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toStartOf="parent"
-                    tools:layout_editor_absoluteY="10dp">
-
-                    <TextView
-                        android:id="@+id/txt_Percentage_responseTime"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-
-                        android:textColor="@color/black"
-                        android:textStyle="bold"
-                        app:layout_constraintBottom_toBottomOf="@+id/progress_bar_ResponseTime"
-                        app:layout_constraintEnd_toEndOf="@+id/progress_bar_ResponseTime"
-                        app:layout_constraintStart_toStartOf="@+id/progress_bar_ResponseTime"
-                        app:layout_constraintTop_toTopOf="@+id/progress_bar_ResponseTime" />
-
-                    <com.budiyev.android.circularprogressbar.CircularProgressBar
-                        android:id="@+id/progress_bar_ResponseTime"
-                        android:layout_width="70dp"
-                        android:layout_height="70dp"
-                        app:animateProgress="true"
-                        app:backgroundStrokeColor="#ff3f51b5"
-                        app:backgroundStrokeWidth="2dp"
-                        app:drawBackgroundStroke="false"
-                        app:foregroundStrokeCap="butt"
-                        app:foregroundStrokeColor="@color/green"
-                        app:foregroundStrokeWidth="8dp"
-                        app:indeterminate="false"
-                        app:indeterminateMinimumAngle="45"
-                        app:indeterminateRotationAnimationDuration="1200"
-                        app:indeterminateSweepAnimationDuration="600"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:maximum="100"
-                        app:progress="89"
-                        app:progressAnimationDuration="100"
-                        app:startAngle="270" />
-
-                    <TextView
-
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Response\nTime"
-                        android:textAlignment="center"
-                        android:textColor="@color/black"
-                        android:textSize="12sp"
-                        android:textStyle="bold"
-                        app:layout_constraintEnd_toEndOf="@+id/progress_bar_ResponseTime"
-                        app:layout_constraintStart_toStartOf="@+id/progress_bar_ResponseTime"
-                        app:layout_constraintTop_toBottomOf="@+id/progress_bar_ResponseTime" />
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/OrderLayout"
-                    android:layout_width="wrap_content"
-
-                    android:layout_height="wrap_content"
-                    app:layout_constraintEnd_toStartOf="@+id/onTimeLayout"
-                    app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toEndOf="@+id/ResponseLayout"
-                    tools:layout_editor_absoluteY="10dp">
-
-                    <TextView
-                        android:id="@+id/txt_PercentageOrderCompletion"
-                        android:layout_width="wrap_content"
-
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/black"
-                        android:textStyle="bold"
-                        app:layout_constraintBottom_toBottomOf="@+id/progress_bar_OrderCompletion"
-                        app:layout_constraintEnd_toEndOf="@+id/progress_bar_OrderCompletion"
-                        app:layout_constraintStart_toStartOf="@+id/progress_bar_OrderCompletion"
-                        app:layout_constraintTop_toTopOf="@+id/progress_bar_OrderCompletion" />
-
-                    <com.budiyev.android.circularprogressbar.CircularProgressBar
-                        android:id="@+id/progress_bar_OrderCompletion"
-                        android:layout_width="70dp"
-                        android:layout_height="70dp"
-                        app:animateProgress="true"
-                        app:backgroundStrokeColor="#ff3f51b5"
-                        app:backgroundStrokeWidth="2dp"
-                        app:drawBackgroundStroke="false"
-                        app:foregroundStrokeCap="butt"
-                        app:foregroundStrokeColor="@color/green"
-                        app:foregroundStrokeWidth="8dp"
-                        app:indeterminate="false"
-                        app:indeterminateMinimumAngle="45"
-                        app:indeterminateRotationAnimationDuration="1200"
-                        app:indeterminateSweepAnimationDuration="600"
-                        app:maximum="100"
-                        app:progress="89"
-                        app:progressAnimationDuration="100"
-                        app:startAngle="270" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Order\nCompletion"
-                        android:textAlignment="center"
-                        android:textColor="@color/black"
-                        android:textSize="12sp"
-                        android:textStyle="bold"
-                        app:layout_constraintEnd_toEndOf="@+id/progress_bar_OrderCompletion"
-                        app:layout_constraintStart_toStartOf="@+id/progress_bar_OrderCompletion"
-                        app:layout_constraintTop_toBottomOf="@+id/progress_bar_OrderCompletion" />
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/onTimeLayout"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintEnd_toStartOf="@+id/positiveLayout"
-                    app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toEndOf="@+id/OrderLayout"
-                    tools:layout_editor_absoluteY="10dp">
-
-                    <TextView
-                        android:id="@+id/txt_PercentageOnTimeDelivery"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-
-                        android:textColor="@color/black"
-                        android:textStyle="bold"
-                        app:layout_constraintBottom_toBottomOf="@+id/progress_bar_OnTimeDelivery"
-                        app:layout_constraintEnd_toEndOf="@+id/progress_bar_OnTimeDelivery"
-                        app:layout_constraintStart_toStartOf="@+id/progress_bar_OnTimeDelivery"
-                        app:layout_constraintTop_toTopOf="@+id/progress_bar_OnTimeDelivery" />
-
-                    <com.budiyev.android.circularprogressbar.CircularProgressBar
-                        android:id="@+id/progress_bar_OnTimeDelivery"
-                        android:layout_width="70dp"
-                        android:layout_height="70dp"
-                        app:animateProgress="true"
-                        app:backgroundStrokeColor="#ff3f51b5"
-                        app:backgroundStrokeWidth="2dp"
-                        app:drawBackgroundStroke="false"
-                        app:foregroundStrokeCap="butt"
-                        app:foregroundStrokeColor="@color/green"
-                        app:foregroundStrokeWidth="8dp"
-                        app:indeterminate="false"
-                        app:indeterminateMinimumAngle="45"
-                        app:indeterminateRotationAnimationDuration="1200"
-                        app:indeterminateSweepAnimationDuration="600"
-                        app:maximum="100"
-                        app:progress="89"
-                        app:progressAnimationDuration="100"
-                        app:startAngle="270" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="On-Time\nDelivery"
-                        android:textAlignment="center"
-                        android:textColor="@color/black"
-                        android:textSize="12sp"
-                        android:textStyle="bold"
-                        app:layout_constraintEnd_toEndOf="@+id/progress_bar_OnTimeDelivery"
-                        app:layout_constraintStart_toStartOf="@+id/progress_bar_OnTimeDelivery"
-                        app:layout_constraintTop_toBottomOf="@+id/progress_bar_OnTimeDelivery" />
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/positiveLayout"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toEndOf="@+id/onTimeLayout"
-                    tools:layout_editor_absoluteY="10dp">
-
-                    <TextView
-                        android:id="@+id/txt_PercentagePositiveRanking"
-                        android:layout_width="wrap_content"
-
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/black"
-                        android:textStyle="bold"
-                        app:layout_constraintBottom_toBottomOf="@+id/progress_bar_PositiveRanking"
-                        app:layout_constraintEnd_toEndOf="@+id/progress_bar_PositiveRanking"
-                        app:layout_constraintStart_toStartOf="@+id/progress_bar_PositiveRanking"
-                        app:layout_constraintTop_toTopOf="@+id/progress_bar_PositiveRanking" />
-
-                    <com.budiyev.android.circularprogressbar.CircularProgressBar
-                        android:id="@+id/progress_bar_PositiveRanking"
-                        android:layout_width="70dp"
-                        android:layout_height="70dp"
-                        app:animateProgress="true"
-                        app:backgroundStrokeColor="#ff3f51b5"
-                        app:backgroundStrokeWidth="2dp"
-                        app:drawBackgroundStroke="false"
-                        app:foregroundStrokeCap="butt"
-                        app:foregroundStrokeColor="@color/green"
-                        app:foregroundStrokeWidth="8dp"
-                        app:indeterminate="false"
-                        app:indeterminateMinimumAngle="45"
-                        app:indeterminateRotationAnimationDuration="1200"
-                        app:indeterminateSweepAnimationDuration="600"
-                        app:maximum="100"
-                        app:progress="89"
-                        app:progressAnimationDuration="100"
-                        app:startAngle="270" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-
-                        android:text="Positive\nRanking"
-                        android:textAlignment="center"
-                        android:textColor="@color/black"
-                        android:textSize="12sp"
-                        android:textStyle="bold"
-                        app:layout_constraintEnd_toEndOf="@+id/progress_bar_PositiveRanking"
-                        app:layout_constraintStart_toStartOf="@+id/progress_bar_PositiveRanking"
-                        app:layout_constraintTop_toBottomOf="@+id/progress_bar_PositiveRanking" />
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-        </androidx.cardview.widget.CardView>
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/cardAboutMe"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
-            app:cardCornerRadius="16dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/LineAnalytics">
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingBottom="10dp">
-
-                <ImageView
-                    android:id="@+id/img_aboutMe"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="24dp"
-                    android:layout_marginTop="@dimen/activity_horizontal_margin"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/icon_about_me" />
-
-                <TextView
-                    android:id="@+id/txtAboutMe"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="@dimen/activity_horizontal_margin"
-                    android:text="Bio"
-                    android:textColor="@color/black"
-                    android:textStyle="bold"
-                    app:layout_constraintStart_toEndOf="@+id/img_aboutMe"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-
-                <View
-                    android:id="@+id/view1"
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginStart="24dp"
-                    android:layout_marginTop="24dp"
-                    android:layout_marginEnd="24dp"
-                    android:background="@color/grey_80"
-
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/txtAboutMe" />
-
-                <TextView
-                    android:id="@+id/txtAboutMeDescription"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="24dp"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginEnd="24dp"
-                    android:layout_marginBottom="16dp"
-                    android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lectus id commodo egestas metus interdum dolor."
-                    android:textColor="@color/grey_60"
-
-
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/view1" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-        </androidx.cardview.widget.CardView>
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/cardWorkExperience"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
-            app:cardCornerRadius="16dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/cardAboutMe">
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingBottom="10dp">
-
-                <ImageView
-                    android:id="@+id/imgExperience"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="24dp"
-                    android:layout_marginTop="16dp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/icon_workexperience" />
-
-                <TextView
-                    android:id="@+id/textView59"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="16dp"
-                    android:text="Work Experience"
-                    android:textColor="@color/black"
-                    android:textStyle="bold"
-                    app:layout_constraintStart_toEndOf="@+id/imgExperience"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-
-                <View
-                    android:id="@+id/view2"
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginStart="24dp"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginEnd="24dp"
-                    android:background="@color/grey_80"
-
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView59" />
-
-                <TextView
-                    android:id="@+id/txtWorkExperience"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="24dp"
-                    android:layout_marginTop="8dp"
-                    android:text="Manager"
-                    android:textColor="@color/black"
-                    android:textStyle="bold"
-
-
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/view2" />
-
-
-                <TextView
-                    android:id="@+id/txtWorkExperienceCompany"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="24dp"
-                    android:layout_marginTop="8dp"
-                    android:text="Amazon Inc"
-                    android:textColor="@color/green"
-
-
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/txtWorkExperience" />
-
-                <TextView
-                    android:id="@+id/txtWorkExperienceDate"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="24dp"
-                    android:layout_marginTop="8dp"
-                    android:text="Jan 2015 - Feb2022"
-                    android:textColor="@color/green"
-
-
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/txtWorkExperienceCompany" />
-
-                <TextView
-                    android:id="@+id/txtWorkExperienceTimePeriod"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginBottom="16dp"
-                    android:text=". 5 years"
-                    android:textColor="@color/green"
-
-
-                    app:layout_constraintBottom_toBottomOf="@+id/txtWorkExperienceDate"
-                    app:layout_constraintStart_toEndOf="@+id/txtWorkExperienceDate"
-                    app:layout_constraintTop_toTopOf="@+id/txtWorkExperienceDate"
-                    app:layout_constraintVertical_bias="0.0" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-        </androidx.cardview.widget.CardView>
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/cardEducation"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
-
-            app:cardCornerRadius="16dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/cardWorkExperience">
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingBottom="10dp">
-
-                <ImageView
-                    android:id="@+id/imgEducation"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="24dp"
-                    android:layout_marginTop="16dp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/icon_education" />
-
-                <TextView
-                    android:id="@+id/txtEdu"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="16dp"
-                    android:text="Education"
-                    android:textColor="@color/black"
-                    android:textStyle="bold"
-                    app:layout_constraintStart_toEndOf="@+id/imgEducation"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-
-                <View
-                    android:id="@+id/view3"
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginStart="24dp"
-                    android:layout_marginTop="24dp"
-                    android:layout_marginEnd="24dp"
-                    android:background="@color/grey_80"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/txtEdu" />
-
-                <TextView
-                    android:id="@+id/txtEducation"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="24dp"
-                    android:layout_marginTop="16dp"
-                    android:text="Information Technology"
-                    android:textColor="@color/black"
-                    android:textStyle="bold"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/view3" />
-
-
-                <TextView
-                    android:id="@+id/txtEducationInstitue"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="24dp"
-                    android:layout_marginTop="8dp"
-                    android:text="Amazon Inc"
-                    android:textColor="@color/green"
-
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/txtEducation" />
-
-                <TextView
-                    android:id="@+id/txtEducationDate"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="24dp"
-                    android:layout_marginTop="8dp"
-                    android:text="Jan 2015 - Feb2022"
-                    android:textColor="@color/green"
-
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/txtEducationInstitue" />
-
-                <TextView
-                    android:id="@+id/txtEducationTimePeriod"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginBottom="16dp"
-                    android:text=". 5 years"
-                    android:textColor="@color/green"
-                    app:layout_constraintBottom_toBottomOf="@+id/txtEducationDate"
-                    app:layout_constraintStart_toEndOf="@+id/txtEducationDate"
-                    app:layout_constraintTop_toTopOf="@+id/txtEducationDate"
-                    app:layout_constraintVertical_bias="0.0" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-        </androidx.cardview.widget.CardView>
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/cardSkill"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
-            app:cardCornerRadius="16dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/cardEducation">
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingBottom="10dp">
-
-
-                <ImageView
-                    android:id="@+id/imgSkill"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="24dp"
-                    android:layout_marginTop="16dp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/icon_skill" />
-
-                <TextView
-                    android:id="@+id/txtSkill"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="16dp"
-                    android:text="Skill"
-                    android:textColor="@color/black"
-                    android:textStyle="bold"
-                    app:layout_constraintStart_toEndOf="@+id/imgSkill"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-
-                <View
-                    android:id="@+id/view4"
-                    android:layout_width="0dp"
-                    android:layout_height="1dp"
-                    android:layout_marginStart="24dp"
-                    android:layout_marginTop="24dp"
-                    android:layout_marginEnd="24dp"
-                    android:background="@color/grey_80"
-
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/txtSkill" />
-
-                <!--                <LinearLayout-->
-                <!--                    android:id="@+id/lineSkillOne"-->
-                <!--                    android:layout_width="0dp"-->
-                <!--                    android:layout_height="wrap_content"-->
-                <!--                    android:layout_marginTop="8dp"-->
-                <!--                    android:orientation="horizontal"-->
-                <!--                    app:layout_constraintEnd_toEndOf="parent"-->
-                <!--                    app:layout_constraintHorizontal_bias="0.0"-->
-                <!--                    app:layout_constraintStart_toStartOf="parent"-->
-                <!--                    app:layout_constraintTop_toBottomOf="@+id/view4">-->
-
-                <!--                    <TextView-->
-                <!--                        android:id="@+id/txtSkillOne"-->
-                <!--                        android:layout_width="wrap_content"-->
-                <!--                        android:layout_height="wrap_content"-->
-                <!--                        android:layout_marginStart="5dp"-->
-                <!--                        android:layout_marginEnd="5dp"-->
-                <!--                        android:layout_weight="1"-->
-                <!--                        android:background="@drawable/edit_text_round"-->
-                <!--                        android:text="TextView"-->
-                <!--                        android:textAlignment="center"-->
-                <!--                        android:textColor="@color/green" />-->
-
-                <!--                    <TextView-->
-                <!--                        android:id="@+id/txtSkillTwo"-->
-                <!--                        android:layout_width="wrap_content"-->
-                <!--                        android:layout_height="wrap_content"-->
-                <!--                        android:layout_marginStart="5dp"-->
-                <!--                        android:layout_marginEnd="5dp"-->
-                <!--                        android:layout_weight="1"-->
-                <!--                        android:background="@drawable/edit_text_round"-->
-                <!--                        android:text="TextView"-->
-                <!--                        android:textAlignment="center"-->
-                <!--                        android:textColor="@color/green" />-->
-
-                <!--                    <TextView-->
-                <!--                        android:id="@+id/txtSkillThree"-->
-                <!--                        android:layout_width="wrap_content"-->
-                <!--                        android:layout_height="wrap_content"-->
-                <!--                        android:layout_marginStart="5dp"-->
-                <!--                        android:layout_marginEnd="5dp"-->
-                <!--                        android:layout_weight="1"-->
-                <!--                        android:background="@drawable/edit_text_round"-->
-                <!--                        android:text="TextView"-->
-                <!--                        android:textAlignment="center"-->
-                <!--                        android:textColor="@color/green" />-->
-
-                <!--                </LinearLayout>-->
-
-                <!--                <LinearLayout-->
-                <!--                    android:id="@+id/lineSkillTwo"-->
-                <!--                    android:layout_width="0dp"-->
-                <!--                    android:layout_height="wrap_content"-->
-                <!--                    android:layout_marginTop="8dp"-->
-                <!--                    android:orientation="horizontal"-->
-                <!--                    app:layout_constraintEnd_toStartOf="@+id/btnSkillmore"-->
-                <!--                    app:layout_constraintStart_toStartOf="parent"-->
-                <!--                    app:layout_constraintTop_toBottomOf="@+id/lineSkillOne">-->
-
-                <!--                    <TextView-->
-                <!--                        android:id="@+id/txtSkillFour"-->
-                <!--                        android:layout_width="wrap_content"-->
-                <!--                        android:layout_height="wrap_content"-->
-                <!--                        android:layout_marginStart="5dp"-->
-                <!--                        android:layout_marginEnd="5dp"-->
-                <!--                        android:layout_weight="1"-->
-                <!--                        android:background="@drawable/edit_text_round"-->
-                <!--                        android:text="TextView"-->
-                <!--                        android:textAlignment="center"-->
-                <!--                        android:textColor="@color/green" />-->
-
-                <!--                    <TextView-->
-                <!--                        android:id="@+id/txtSkillFive"-->
-                <!--                        android:layout_width="wrap_content"-->
-                <!--                        android:layout_height="wrap_content"-->
-                <!--                        android:layout_marginStart="5dp"-->
-                <!--                        android:layout_marginEnd="5dp"-->
-                <!--                        android:layout_weight="1"-->
-                <!--                        android:background="@drawable/edit_text_round"-->
-                <!--                        android:text="TextView"-->
-                <!--                        android:textAlignment="center"-->
-                <!--                        android:textColor="@color/green" />-->
-
-                <!--                </LinearLayout>-->
-
-                <!--                <TextView-->
-                <!--                    android:id="@+id/btnSkillmore"-->
-                <!--                    android:layout_width="wrap_content"-->
-                <!--                    android:layout_height="wrap_content"-->
-                <!--                    android:layout_marginEnd="16dp"-->
-                <!--                    android:text="+5 more"-->
-                <!--                    android:textColor="@color/green"-->
-                <!--                    app:layout_constraintBottom_toBottomOf="@+id/lineSkillTwo"-->
-                <!--                    app:layout_constraintEnd_toEndOf="parent"-->
-                <!--                    app:layout_constraintTop_toTopOf="@+id/lineSkillTwo" />-->
-
-
-                <!--                <LinearLayout-->
-                <!--                    android:id="@+id/lineSkillthree"-->
-                <!--                    android:layout_width="0dp"-->
-                <!--                    android:layout_height="wrap_content"-->
-                <!--                    android:orientation="vertical"-->
-                <!--                    app:layout_constraintEnd_toEndOf="parent"-->
-                <!--                    app:layout_constraintStart_toStartOf="parent"-->
-                <!--                    app:layout_constraintTop_toBottomOf="@+id/lineSkillTwo">-->
-
-
-                <!--                    <LinearLayout-->
-                <!--                        android:id="@+id/lineSkillthreeOne"-->
-                <!--                        android:layout_width="match_parent"-->
-                <!--                        android:layout_height="wrap_content"-->
-                <!--                        android:layout_marginTop="8dp"-->
-                <!--                        android:orientation="horizontal">-->
-
-                <!--                        <TextView-->
-                <!--                            android:id="@+id/txtSkillSix"-->
-                <!--                            android:layout_width="wrap_content"-->
-                <!--                            android:layout_height="wrap_content"-->
-                <!--                            android:layout_marginStart="5dp"-->
-                <!--                            android:layout_marginEnd="5dp"-->
-                <!--                            android:layout_weight="1"-->
-                <!--                            android:background="@drawable/edit_text_round"-->
-                <!--                            android:text="TextView"-->
-                <!--                            android:textAlignment="center"-->
-                <!--                            android:textColor="@color/green" />-->
-
-                <!--                        <TextView-->
-                <!--                            android:id="@+id/txtSkillSeven"-->
-                <!--                            android:layout_width="wrap_content"-->
-                <!--                            android:layout_height="wrap_content"-->
-                <!--                            android:layout_marginStart="5dp"-->
-                <!--                            android:layout_marginEnd="5dp"-->
-                <!--                            android:layout_weight="1"-->
-                <!--                            android:background="@drawable/edit_text_round"-->
-                <!--                            android:text="TextView"-->
-                <!--                            android:textAlignment="center"-->
-                <!--                            android:textColor="@color/green" />-->
-
-                <!--                        <TextView-->
-                <!--                            android:id="@+id/txtSkillEight"-->
-                <!--                            android:layout_width="wrap_content"-->
-                <!--                            android:layout_height="wrap_content"-->
-                <!--                            android:layout_marginStart="5dp"-->
-                <!--                            android:layout_marginEnd="5dp"-->
-                <!--                            android:layout_weight="1"-->
-                <!--                            android:background="@drawable/edit_text_round"-->
-                <!--                            android:text="TextView"-->
-                <!--                            android:textAlignment="center"-->
-                <!--                            android:textColor="@color/green" />-->
-                <!--                    </LinearLayout>-->
-
-                <!--                    <LinearLayout-->
-                <!--                        android:id="@+id/lineSkillthreetwo"-->
-                <!--                        android:layout_width="match_parent"-->
-                <!--                        android:layout_height="wrap_content"-->
-                <!--                        android:layout_marginTop="8dp"-->
-                <!--                        android:orientation="horizontal">-->
-
-                <!--                        <TextView-->
-                <!--                            android:id="@+id/txtSkillNine"-->
-                <!--                            android:layout_width="wrap_content"-->
-                <!--                            android:layout_height="wrap_content"-->
-                <!--                            android:layout_marginStart="5dp"-->
-                <!--                            android:layout_marginEnd="5dp"-->
-                <!--                            android:layout_weight="1"-->
-                <!--                            android:background="@drawable/edit_text_round"-->
-                <!--                            android:text="TextView"-->
-                <!--                            android:textAlignment="center"-->
-                <!--                            android:textColor="@color/green" />-->
-
-                <!--                        <TextView-->
-                <!--                            android:id="@+id/txtSkillTen"-->
-                <!--                            android:layout_width="wrap_content"-->
-                <!--                            android:layout_height="wrap_content"-->
-                <!--                            android:layout_marginStart="5dp"-->
-                <!--                            android:layout_marginEnd="5dp"-->
-                <!--                            android:layout_weight="1"-->
-                <!--                            android:background="@drawable/edit_text_round"-->
-                <!--                            android:text="TextView"-->
-                <!--                            android:textAlignment="center"-->
-                <!--                            android:textColor="@color/green" />-->
-
-
-                <!--                    </LinearLayout>-->
-                <!--                </LinearLayout>-->
-
-                <!--                <TextView-->
-                <!--                    android:id="@+id/btnSkillSeeMore"-->
-                <!--                    android:layout_width="wrap_content"-->
-                <!--                    android:layout_height="wrap_content"-->
-                <!--                    android:layout_marginTop="8dp"-->
-                <!--                    android:layout_marginBottom="8dp"-->
-                <!--                    android:text="See more"-->
-                <!--                    android:textColor="@color/blue"-->
-                <!--                    app:layout_constraintBottom_toBottomOf="parent"-->
-                <!--                    app:layout_constraintEnd_toEndOf="parent"-->
-                <!--                    app:layout_constraintStart_toStartOf="parent"-->
-                <!--                    app:layout_constraintTop_toBottomOf="@+id/lineSkillthree" />-->
-
-                <GridView
-                    android:id="@+id/listvieww"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginEnd="8dp"
-
-                    android:layout_marginBottom="5dp"
-                    android:numColumns="auto_fit"
-                    android:scrollbars="vertical"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/view4" />
-
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-        </androidx.cardview.widget.CardView>
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/cardLanguage"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
-
-            app:cardCornerRadius="16dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/cardSkill">
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingBottom="10dp">
-
-
-                <ImageView
-                    android:id="@+id/imgLang"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="24dp"
-                    android:layout_marginTop="16dp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/icon_language" />
-
-                <TextView
-                    android:id="@+id/txtLang"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="16dp"
-                    android:text="Language"
-                    android:textColor="@color/black"
-                    android:textStyle="bold"
-                    app:layout_constraintStart_toEndOf="@+id/imgLang"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-
-                <View
-                    android:id="@+id/view5"
-                    android:layout_width="0dp"
-                    android:layout_height="1dp"
-                    android:layout_marginStart="24dp"
-                    android:layout_marginTop="24dp"
-                    android:layout_marginEnd="24dp"
-                    android:background="@color/grey_80"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/txtLang" />
-
-                <GridView
-                    android:id="@+id/grid_language"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginEnd="8dp"
-
-                    android:layout_marginBottom="5dp"
-                    android:numColumns="auto_fit"
-                    android:scrollbars="vertical"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/view5" />
-                <!--                <LinearLayout-->
-                <!--                    android:id="@+id/lineLanguageOne"-->
-                <!--                    android:layout_width="0dp"-->
-                <!--                    android:layout_height="wrap_content"-->
-                <!--                    android:layout_marginTop="8dp"-->
-                <!--                    android:orientation="horizontal"-->
-                <!--                    app:layout_constraintEnd_toEndOf="parent"-->
-                <!--                    app:layout_constraintHorizontal_bias="0.0"-->
-                <!--                    app:layout_constraintStart_toStartOf="parent"-->
-                <!--                    app:layout_constraintTop_toBottomOf="@+id/view5">-->
-
-                <!--                    <TextView-->
-                <!--                        android:id="@+id/txtLanguageOne"-->
-                <!--                        android:layout_width="wrap_content"-->
-                <!--                        android:layout_height="wrap_content"-->
-                <!--                        android:layout_marginStart="5dp"-->
-                <!--                        android:layout_marginEnd="5dp"-->
-                <!--                        android:layout_weight="1"-->
-                <!--                        android:background="@drawable/edit_text_round"-->
-                <!--                        android:text="TextView"-->
-                <!--                        android:textAlignment="center"-->
-                <!--                        android:textColor="@color/green" />-->
-
-                <!--                    <TextView-->
-                <!--                        android:id="@+id/txtLanguageTwo"-->
-                <!--                        android:layout_width="wrap_content"-->
-                <!--                        android:layout_height="wrap_content"-->
-                <!--                        android:layout_marginStart="5dp"-->
-                <!--                        android:layout_marginEnd="5dp"-->
-                <!--                        android:layout_weight="1"-->
-                <!--                        android:background="@drawable/edit_text_round"-->
-                <!--                        android:text="TextView"-->
-                <!--                        android:textAlignment="center"-->
-                <!--                        android:textColor="@color/green" />-->
-
-                <!--                    <TextView-->
-                <!--                        android:id="@+id/txtLanguageThree"-->
-                <!--                        android:layout_width="wrap_content"-->
-                <!--                        android:layout_height="wrap_content"-->
-                <!--                        android:layout_marginStart="5dp"-->
-                <!--                        android:layout_marginEnd="5dp"-->
-                <!--                        android:layout_weight="1"-->
-                <!--                        android:background="@drawable/edit_text_round"-->
-                <!--                        android:text="TextView"-->
-                <!--                        android:textAlignment="center"-->
-                <!--                        android:textColor="@color/green" />-->
-
-                <!--                </LinearLayout>-->
-
-                <!--                <LinearLayout-->
-                <!--                    android:id="@+id/lineLanguageTwo"-->
-                <!--                    android:layout_width="0dp"-->
-                <!--                    android:layout_height="wrap_content"-->
-                <!--                    android:layout_marginTop="8dp"-->
-                <!--                    android:layout_marginBottom="16dp"-->
-                <!--                    android:orientation="horizontal"-->
-                <!--                    app:layout_constraintBottom_toBottomOf="parent"-->
-                <!--                    app:layout_constraintEnd_toEndOf="parent"-->
-                <!--                    app:layout_constraintStart_toStartOf="parent"-->
-                <!--                    app:layout_constraintTop_toBottomOf="@+id/lineLanguageOne">-->
-
-                <!--                    <TextView-->
-                <!--                        android:id="@+id/txtLanguageFour"-->
-                <!--                        android:layout_width="wrap_content"-->
-                <!--                        android:layout_height="wrap_content"-->
-                <!--                        android:layout_marginStart="5dp"-->
-                <!--                        android:layout_marginEnd="5dp"-->
-                <!--                        android:layout_weight="1"-->
-                <!--                        android:background="@drawable/edit_text_round"-->
-                <!--                        android:text="TextView"-->
-                <!--                        android:textAlignment="center"-->
-                <!--                        android:textColor="@color/green" />-->
-
-                <!--                    <TextView-->
-                <!--                        android:id="@+id/txtLanguageFive"-->
-                <!--                        android:layout_width="wrap_content"-->
-                <!--                        android:layout_height="wrap_content"-->
-                <!--                        android:layout_marginStart="5dp"-->
-                <!--                        android:layout_marginEnd="5dp"-->
-                <!--                        android:layout_weight="1"-->
-                <!--                        android:background="@drawable/edit_text_round"-->
-                <!--                        android:text="TextView"-->
-                <!--                        android:textAlignment="center"-->
-                <!--                        android:textColor="@color/green" />-->
-
-                <!--                </LinearLayout>-->
-
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-        </androidx.cardview.widget.CardView>
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/cardAppreciation"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
-            app:cardCornerRadius="16dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/cardLanguage">
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingBottom="10dp">
-
-                <TextView
-                    android:id="@+id/txtAppre"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="16dp"
-                    android:text="Appreciation"
-                    android:textColor="@color/black"
-                    android:textStyle="bold"
-                    app:layout_constraintStart_toEndOf="@+id/imgAppre"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-
-                <View
-                    android:id="@+id/view6"
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginStart="24dp"
-                    android:layout_marginTop="24dp"
-                    android:layout_marginEnd="24dp"
-                    android:background="@color/grey_80"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/txtAppre" />
-
-                <TextView
-                    android:id="@+id/txtAppreciation"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="24dp"
-                    android:layout_marginTop="16dp"
-                    android:text="Wireless Symposium (RWS)"
-                    android:textColor="@color/black"
-                    android:textStyle="bold"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/view6" />
-
-
-                <TextView
-                    android:id="@+id/txtAppreciationInstitue"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="24dp"
-                    android:layout_marginTop="8dp"
-                    android:text="Young Scientist"
-                    android:textColor="@color/green"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/txtAppreciation" />
-
-                <TextView
-                    android:id="@+id/txtAppreciationDate"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="24dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginBottom="16dp"
-                    android:text="2014"
-                    android:textColor="@color/green"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/txtAppreciationInstitue" />
-
-                <ImageView
-                    android:id="@+id/imgAppre"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="24dp"
-                    android:layout_marginTop="16dp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/icon_appreciation" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-        </androidx.cardview.widget.CardView>
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/cardResume"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
-            app:cardCornerRadius="16dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/cardAppreciation">
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingBottom="10dp">
-
-                <TextView
-                    android:id="@+id/txtResu"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="16dp"
-                    android:text="Resume"
-                    android:textColor="@color/black"
-                    android:textStyle="bold"
-                    app:layout_constraintStart_toEndOf="@+id/imgResume"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-
-                <ImageView
-                    android:id="@+id/imgResume"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="24dp"
-                    android:layout_marginTop="16dp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/icon_resume" />
-
-                <View
-                    android:id="@+id/view7"
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginStart="24dp"
-                    android:layout_marginTop="24dp"
-                    android:layout_marginEnd="24dp"
-                    android:background="@color/grey_80"
-
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/txtResu" />
-
-                <ImageView
-                    android:id="@+id/imagePDF"
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginBottom="16dp"
-                    android:src="@drawable/icon_pdf"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/view7" />
-
-                <TextView
-                    android:id="@+id/txtResumeFileName"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="24dp"
-                    android:layout_marginEnd="16dp"
-                    android:text="TextView"
-                    android:textColor="@color/black"
-                    app:layout_constraintEnd_toStartOf="@+id/btnResumeDelete"
-                    app:layout_constraintStart_toEndOf="@+id/imagePDF"
-                    app:layout_constraintTop_toBottomOf="@+id/view7" />
-
-
-                <LinearLayout
-                    android:id="@+id/linearLayout6"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginEnd="16dp"
-                    android:orientation="horizontal"
-                    app:layout_constraintEnd_toStartOf="@+id/btnResumeDelete"
-                    app:layout_constraintStart_toEndOf="@+id/imagePDF"
-                    app:layout_constraintTop_toBottomOf="@+id/txtResumeFileName">
-
-                    <TextView
-                        android:id="@+id/txtResumeInfor"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="TextView" />
-
-
-                </LinearLayout>
-
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-        </androidx.cardview.widget.CardView>
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/cardHourlyCharges"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
-            app:cardCornerRadius="16dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/cardResume">
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingBottom="10dp">
-
-                <TextView
-                    android:id="@+id/txtHourlyCharges"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="16dp"
-                    android:text="Hourly Charges"
-                    android:textColor="@color/black"
-                    android:textStyle="bold"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-
-                <View
-                    android:id="@+id/view8"
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginStart="24dp"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginEnd="24dp"
-                    android:background="@color/grey_80"
-
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/txtHourlyCharges" />
-
-
-                <TextView
-                    android:id="@+id/txtHourlyChargesInfo"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginBottom="8dp"
-                    android:layout_weight="1"
-                    android:text="TextView"
-                    android:textColor="@color/black"
-                    android:textStyle="bold"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="@+id/txtHourlyCharges"
-                    app:layout_constraintTop_toBottomOf="@id/view8" />
-
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-        </androidx.cardview.widget.CardView>
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/cardAvailability"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
-            app:cardCornerRadius="16dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/cardHourlyCharges">
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingBottom="10dp">
-
-                <TextView
-                    android:id="@+id/txtAvailability"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="16dp"
-                    android:text="Availability"
-                    android:textColor="@color/black"
-                    android:textStyle="bold"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-
-                <View
-                    android:id="@+id/view9"
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginStart="24dp"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginEnd="24dp"
-                    android:background="@color/grey_80"
-
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/txtAvailability" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginEnd="8dp"
-                    android:orientation="horizontal"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/view9">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:id="@+id/txtHrsPerWeek"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="30"
-                            android:textAlignment="center"
-                            android:textColor="@color/black"
-                            android:textSize="16sp"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="HRS PER WEEK"
-                            android:textAlignment="center"
-                            android:textSize="12sp"
-                            android:textStyle="bold" />
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:id="@+id/txtHoursResponseTime"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="24"
-                            android:textAlignment="center"
-                            android:textColor="@color/black"
-                            android:textSize="16sp"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="HRS RESPONSE TIME"
-                            android:textAlignment="center"
-                            android:textSize="12sp"
-                            android:textStyle="bold" />
-
-                    </LinearLayout>
-
-                </LinearLayout>
-
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-        </androidx.cardview.widget.CardView>
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/cardChargesWork"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
-
-            app:cardCornerRadius="16dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/cardAvailability">
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingBottom="10dp">
-
-                <TextView
-                    android:id="@+id/txtCharges"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="16dp"
-                    android:text="Charges and Work"
-                    android:textColor="@color/black"
-                    android:textStyle="bold"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-
-                <View
-                    android:id="@+id/view10"
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginStart="24dp"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginEnd="24dp"
-                    android:background="@color/grey_80"
-
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/txtCharges" />
-
-                <LinearLayout
-                    android:id="@+id/lineRateCharges"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginEnd="8dp"
-
-                    android:orientation="horizontal"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/view10">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:id="@+id/txtHourlyRate"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="$ 45.00"
-                            android:textAlignment="center"
-                            android:textColor="@color/black"
-                            android:textSize="16sp"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="Hourly Rate"
-                            android:textAlignment="center"
-                            android:textAllCaps="true"
-                            android:textSize="12sp"
-                            android:textStyle="bold" />
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:id="@+id/txtTotalEarned"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="$ 200k+"
-                            android:textAlignment="center"
-
-                            android:textColor="@color/black"
-                            android:textSize="16sp"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="Total Earned"
-                            android:textAlignment="center"
-                            android:textAllCaps="true"
-                            android:textSize="12sp"
-                            android:textStyle="bold" />
-
-                    </LinearLayout>
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginEnd="8dp"
-                    android:orientation="horizontal"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/lineRateCharges">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:id="@+id/txtJobs"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="70"
-                            android:textAlignment="center"
-                            android:textColor="@color/black"
-                            android:textSize="16sp"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="Jobs"
-                            android:textAlignment="center"
-                            android:textAllCaps="true"
-                            android:textSize="12sp"
-                            android:textStyle="bold" />
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:id="@+id/txtHoursWorked"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="5,270"
-                            android:textAlignment="center"
-
-                            android:textColor="@color/black"
-                            android:textSize="16sp"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="Hours Worked"
-                            android:textAlignment="center"
-                            android:textAllCaps="true"
-                            android:textSize="12sp"
-                            android:textStyle="bold" />
-
-                    </LinearLayout>
-
-                </LinearLayout>
-
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-        </androidx.cardview.widget.CardView>
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/cardWorkFeedback"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
-
-            app:cardCornerRadius="16dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/cardChargesWork">
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingBottom="10dp">
-
-                <TextView
-                    android:id="@+id/txtWorkHistory"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="16dp"
-                    android:text="Work History and Feedback"
-                    android:textColor="@color/black"
-                    android:textStyle="bold"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <ImageView
-                    android:id="@+id/imageView7"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:layout_marginEnd="24dp"
-                    android:src="@drawable/union"
-                    app:layout_constraintBottom_toBottomOf="@+id/txtWorkHistory"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/txtWorkHistory" />
-
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recyclerFeedBack"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginBottom="16dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="@+id/imageView7"
-                    app:layout_constraintStart_toStartOf="@+id/txtWorkHistory"
-                    app:layout_constraintTop_toBottomOf="@+id/txtWorkHistory" />
-
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-        </androidx.cardview.widget.CardView>
-    </androidx.constraintlayout.widget.ConstraintLayout>
+<!--    <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content">-->
+
+<!--        <LinearLayout-->
+<!--            android:id="@+id/lineMainProfile"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="230dp"-->
+<!--            android:layout_marginStart="@dimen/activity_horizontal_margin"-->
+<!--            android:layout_marginTop="@dimen/activity_horizontal_margin"-->
+<!--            android:layout_marginEnd="@dimen/activity_horizontal_margin"-->
+
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toTopOf="parent">-->
+
+<!--            <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:background="@drawable/editprofilebg">-->
+
+<!--                <ImageView-->
+<!--                    android:id="@+id/btnSettingeditprofile"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginTop="24dp"-->
+<!--                    android:layout_marginEnd="24dp"-->
+<!--                    app:layout_constraintEnd_toEndOf="parent"-->
+<!--                    app:layout_constraintTop_toTopOf="parent"-->
+<!--                    app:srcCompat="@drawable/icon_setting" />-->
+
+<!--                <ImageView-->
+<!--                    android:id="@+id/btnShareeditprofile"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginEnd="16dp"-->
+<!--                    app:layout_constraintEnd_toStartOf="@+id/btnSettingeditprofile"-->
+<!--                    app:layout_constraintTop_toTopOf="@+id/btnSettingeditprofile"-->
+<!--                    app:srcCompat="@drawable/icon_shared" />-->
+
+<!--                <de.hdodenhof.circleimageview.CircleImageView-->
+<!--                    android:id="@+id/circleImageView"-->
+<!--                    android:layout_width="60dp"-->
+<!--                    android:layout_height="60dp"-->
+<!--                    android:layout_marginStart="24dp"-->
+<!--                    android:src="@drawable/userimg"-->
+<!--                    app:layout_constraintStart_toStartOf="parent"-->
+<!--                    app:layout_constraintTop_toBottomOf="@+id/btnShareeditprofile" />-->
+
+<!--                <TextView-->
+<!--                    android:id="@+id/txtNameeditProfile"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginTop="16dp"-->
+<!--                    android:text="Orlando Diggs"-->
+<!--                    android:textColor="@color/white"-->
+<!--                    android:textStyle="bold"-->
+<!--                    app:layout_constraintEnd_toEndOf="@+id/circleImageView"-->
+<!--                    app:layout_constraintHorizontal_bias="0.0"-->
+<!--                    app:layout_constraintStart_toStartOf="@+id/circleImageView"-->
+<!--                    app:layout_constraintTop_toBottomOf="@+id/circleImageView" />-->
+
+<!--                <TextView-->
+<!--                    android:id="@+id/txtLocationProfile"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginTop="4dp"-->
+<!--                    android:text="California,USA"-->
+<!--                    android:textColor="@color/white"-->
+<!--                    app:layout_constraintStart_toStartOf="@+id/txtNameeditProfile"-->
+<!--                    app:layout_constraintTop_toBottomOf="@+id/txtNameeditProfile" />-->
+
+<!--                <LinearLayout-->
+<!--                    android:id="@+id/btnEditprofile"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginTop="16dp"-->
+<!--                    android:background="@drawable/bg_edit_profile"-->
+<!--                    android:orientation="horizontal"-->
+<!--                    android:padding="4dp"-->
+<!--                    app:layout_constraintEnd_toEndOf="parent"-->
+<!--                    app:layout_constraintHorizontal_bias="0.5"-->
+<!--                    app:layout_constraintStart_toEndOf="@+id/txtFollowingProfile"-->
+<!--                    app:layout_constraintTop_toBottomOf="@+id/txtLocationProfile">-->
+
+<!--                    <TextView-->
+
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_gravity="center_vertical"-->
+<!--                        android:layout_marginStart="5dp"-->
+<!--                        android:layout_marginEnd="5dp"-->
+<!--                        android:layout_weight="1"-->
+<!--                        android:text="Edit profile"-->
+<!--                        android:textColor="@color/white" />-->
+
+<!--                    <ImageView-->
+
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_gravity="center_vertical"-->
+<!--                        android:layout_marginStart="5dp"-->
+<!--                        android:layout_marginEnd="5dp"-->
+<!--                        android:layout_weight="1"-->
+<!--                        android:tint="@color/white"-->
+<!--                        app:srcCompat="@drawable/ic_edit" />-->
+<!--                </LinearLayout>-->
+
+<!--                <TextView-->
+<!--                    android:id="@+id/txtFollowerProfile"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="@string/follower"-->
+<!--                    android:textColor="@color/white"-->
+
+<!--                    app:layout_constraintEnd_toStartOf="@+id/txtFollowingProfile"-->
+<!--                    app:layout_constraintHorizontal_bias="0.5"-->
+<!--                    app:layout_constraintStart_toStartOf="parent"-->
+<!--                    app:layout_constraintTop_toTopOf="@+id/txtFollowingProfile" />-->
+
+<!--                <TextView-->
+<!--                    android:id="@+id/txtFollowingProfile"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginTop="8dp"-->
+<!--                    android:text="@string/following"-->
+<!--                    android:textColor="@color/white"-->
+
+<!--                    app:layout_constraintEnd_toStartOf="@+id/btnEditprofile"-->
+<!--                    app:layout_constraintHorizontal_bias="0.5"-->
+<!--                    app:layout_constraintStart_toEndOf="@+id/txtFollowerProfile"-->
+<!--                    app:layout_constraintTop_toTopOf="@+id/btnEditprofile" />-->
+
+<!--            </androidx.constraintlayout.widget.ConstraintLayout>-->
+<!--        </LinearLayout>-->
+
+
+<!--        <androidx.cardview.widget.CardView-->
+<!--            android:id="@+id/LineAnalytics"-->
+<!--            android:layout_width="match_parent"-->
+
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginStart="16dp"-->
+<!--            android:layout_marginTop="16dp"-->
+<!--            android:layout_marginEnd="16dp"-->
+<!--            app:cardCornerRadius="16dp"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toBottomOf="@+id/lineMainProfile">-->
+
+<!--            <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:padding="10dp">-->
+
+<!--                <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--                    android:id="@+id/ResponseLayout"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    app:layout_constraintEnd_toStartOf="@+id/OrderLayout"-->
+<!--                    app:layout_constraintHorizontal_bias="0.5"-->
+<!--                    app:layout_constraintStart_toStartOf="parent"-->
+<!--                    tools:layout_editor_absoluteY="10dp">-->
+
+<!--                    <TextView-->
+<!--                        android:id="@+id/txt_Percentage_responseTime"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+
+<!--                        android:textColor="@color/black"-->
+<!--                        android:textStyle="bold"-->
+<!--                        app:layout_constraintBottom_toBottomOf="@+id/progress_bar_ResponseTime"-->
+<!--                        app:layout_constraintEnd_toEndOf="@+id/progress_bar_ResponseTime"-->
+<!--                        app:layout_constraintStart_toStartOf="@+id/progress_bar_ResponseTime"-->
+<!--                        app:layout_constraintTop_toTopOf="@+id/progress_bar_ResponseTime" />-->
+
+<!--&lt;!&ndash;                    <com.budiyev.android.circularprogressbar.CircularProgressBar&ndash;&gt;-->
+<!--&lt;!&ndash;                        android:id="@+id/progress_bar_ResponseTime"&ndash;&gt;-->
+<!--&lt;!&ndash;                        android:layout_width="70dp"&ndash;&gt;-->
+<!--&lt;!&ndash;                        android:layout_height="70dp"&ndash;&gt;-->
+<!--&lt;!&ndash;                        app:animateProgress="true"&ndash;&gt;-->
+<!--&lt;!&ndash;                        app:backgroundStrokeColor="#ff3f51b5"&ndash;&gt;-->
+<!--&lt;!&ndash;                        app:backgroundStrokeWidth="2dp"&ndash;&gt;-->
+<!--&lt;!&ndash;                        app:drawBackgroundStroke="false"&ndash;&gt;-->
+<!--&lt;!&ndash;                        app:foregroundStrokeCap="butt"&ndash;&gt;-->
+<!--&lt;!&ndash;                        app:foregroundStrokeColor="@color/green"&ndash;&gt;-->
+<!--&lt;!&ndash;                        app:foregroundStrokeWidth="8dp"&ndash;&gt;-->
+<!--&lt;!&ndash;                        app:indeterminate="false"&ndash;&gt;-->
+<!--&lt;!&ndash;                        app:indeterminateMinimumAngle="45"&ndash;&gt;-->
+<!--&lt;!&ndash;                        app:indeterminateRotationAnimationDuration="1200"&ndash;&gt;-->
+<!--&lt;!&ndash;                        app:indeterminateSweepAnimationDuration="600"&ndash;&gt;-->
+<!--&lt;!&ndash;                        app:layout_constraintEnd_toEndOf="parent"&ndash;&gt;-->
+<!--&lt;!&ndash;                        app:layout_constraintStart_toStartOf="parent"&ndash;&gt;-->
+<!--&lt;!&ndash;                        app:layout_constraintTop_toTopOf="parent"&ndash;&gt;-->
+<!--&lt;!&ndash;                        app:maximum="100"&ndash;&gt;-->
+<!--&lt;!&ndash;                        app:progress="89"&ndash;&gt;-->
+<!--&lt;!&ndash;                        app:progressAnimationDuration="100"&ndash;&gt;-->
+<!--&lt;!&ndash;                        app:startAngle="270" />&ndash;&gt;-->
+
+<!--                    <TextView-->
+
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:text="Response\nTime"-->
+<!--                        android:textAlignment="center"-->
+<!--                        android:textColor="@color/black"-->
+<!--                        android:textSize="12sp"-->
+<!--                        android:textStyle="bold"-->
+<!--                        app:layout_constraintEnd_toEndOf="@+id/progress_bar_ResponseTime"-->
+<!--                        app:layout_constraintStart_toStartOf="@+id/progress_bar_ResponseTime"-->
+<!--                        app:layout_constraintTop_toBottomOf="@+id/progress_bar_ResponseTime" />-->
+<!--                </androidx.constraintlayout.widget.ConstraintLayout>-->
+
+<!--                <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--                    android:id="@+id/OrderLayout"-->
+<!--                    android:layout_width="wrap_content"-->
+
+<!--                    android:layout_height="wrap_content"-->
+<!--                    app:layout_constraintEnd_toStartOf="@+id/onTimeLayout"-->
+<!--                    app:layout_constraintHorizontal_bias="0.5"-->
+<!--                    app:layout_constraintStart_toEndOf="@+id/ResponseLayout"-->
+<!--                    tools:layout_editor_absoluteY="10dp">-->
+
+<!--                    <TextView-->
+<!--                        android:id="@+id/txt_PercentageOrderCompletion"-->
+<!--                        android:layout_width="wrap_content"-->
+
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:textColor="@color/black"-->
+<!--                        android:textStyle="bold"-->
+<!--                        app:layout_constraintBottom_toBottomOf="@+id/progress_bar_OrderCompletion"-->
+<!--                        app:layout_constraintEnd_toEndOf="@+id/progress_bar_OrderCompletion"-->
+<!--                        app:layout_constraintStart_toStartOf="@+id/progress_bar_OrderCompletion"-->
+<!--                        app:layout_constraintTop_toTopOf="@+id/progress_bar_OrderCompletion" />-->
+
+<!--&lt;!&ndash;                    <com.budiyev.android.circularprogressbar.CircularProgressBar&ndash;&gt;-->
+<!--&lt;!&ndash;                        android:id="@+id/progress_bar_OrderCompletion"&ndash;&gt;-->
+<!--&lt;!&ndash;                        android:layout_width="70dp"&ndash;&gt;-->
+<!--&lt;!&ndash;                        android:layout_height="70dp"&ndash;&gt;-->
+<!--&lt;!&ndash;                        app:animateProgress="true"&ndash;&gt;-->
+<!--&lt;!&ndash;                        app:backgroundStrokeColor="#ff3f51b5"&ndash;&gt;-->
+<!--&lt;!&ndash;                        app:backgroundStrokeWidth="2dp"&ndash;&gt;-->
+<!--&lt;!&ndash;                        app:drawBackgroundStroke="false"&ndash;&gt;-->
+<!--&lt;!&ndash;                        app:foregroundStrokeCap="butt"&ndash;&gt;-->
+<!--&lt;!&ndash;                        app:foregroundStrokeColor="@color/green"&ndash;&gt;-->
+<!--&lt;!&ndash;                        app:foregroundStrokeWidth="8dp"&ndash;&gt;-->
+<!--&lt;!&ndash;                        app:indeterminate="false"&ndash;&gt;-->
+<!--&lt;!&ndash;                        app:indeterminateMinimumAngle="45"&ndash;&gt;-->
+<!--&lt;!&ndash;                        app:indeterminateRotationAnimationDuration="1200"&ndash;&gt;-->
+<!--&lt;!&ndash;                        app:indeterminateSweepAnimationDuration="600"&ndash;&gt;-->
+<!--&lt;!&ndash;                        app:maximum="100"&ndash;&gt;-->
+<!--&lt;!&ndash;                        app:progress="89"&ndash;&gt;-->
+<!--&lt;!&ndash;                        app:progressAnimationDuration="100"&ndash;&gt;-->
+<!--&lt;!&ndash;                        app:startAngle="270" />&ndash;&gt;-->
+
+<!--                    <TextView-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:text="Order\nCompletion"-->
+<!--                        android:textAlignment="center"-->
+<!--                        android:textColor="@color/black"-->
+<!--                        android:textSize="12sp"-->
+<!--                        android:textStyle="bold"-->
+<!--                        app:layout_constraintEnd_toEndOf="@+id/progress_bar_OrderCompletion"-->
+<!--                        app:layout_constraintStart_toStartOf="@+id/progress_bar_OrderCompletion"-->
+<!--                        app:layout_constraintTop_toBottomOf="@+id/progress_bar_OrderCompletion" />-->
+<!--                </androidx.constraintlayout.widget.ConstraintLayout>-->
+
+<!--                <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--                    android:id="@+id/onTimeLayout"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    app:layout_constraintEnd_toStartOf="@+id/positiveLayout"-->
+<!--                    app:layout_constraintHorizontal_bias="0.5"-->
+<!--                    app:layout_constraintStart_toEndOf="@+id/OrderLayout"-->
+<!--                    tools:layout_editor_absoluteY="10dp">-->
+
+<!--                    <TextView-->
+<!--                        android:id="@+id/txt_PercentageOnTimeDelivery"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+
+<!--                        android:textColor="@color/black"-->
+<!--                        android:textStyle="bold"-->
+<!--                        app:layout_constraintBottom_toBottomOf="@+id/progress_bar_OnTimeDelivery"-->
+<!--                        app:layout_constraintEnd_toEndOf="@+id/progress_bar_OnTimeDelivery"-->
+<!--                        app:layout_constraintStart_toStartOf="@+id/progress_bar_OnTimeDelivery"-->
+<!--                        app:layout_constraintTop_toTopOf="@+id/progress_bar_OnTimeDelivery" />-->
+
+<!--&lt;!&ndash;                    <com.budiyev.android.circularprogressbar.CircularProgressBar&ndash;&gt;-->
+<!--&lt;!&ndash;                        android:id="@+id/progress_bar_OnTimeDelivery"&ndash;&gt;-->
+<!--&lt;!&ndash;                        android:layout_width="70dp"&ndash;&gt;-->
+<!--&lt;!&ndash;                        android:layout_height="70dp"&ndash;&gt;-->
+<!--&lt;!&ndash;                        app:animateProgress="true"&ndash;&gt;-->
+<!--&lt;!&ndash;                        app:backgroundStrokeColor="#ff3f51b5"&ndash;&gt;-->
+<!--&lt;!&ndash;                        app:backgroundStrokeWidth="2dp"&ndash;&gt;-->
+<!--&lt;!&ndash;                        app:drawBackgroundStroke="false"&ndash;&gt;-->
+<!--&lt;!&ndash;                        app:foregroundStrokeCap="butt"&ndash;&gt;-->
+<!--&lt;!&ndash;                        app:foregroundStrokeColor="@color/green"&ndash;&gt;-->
+<!--&lt;!&ndash;                        app:foregroundStrokeWidth="8dp"&ndash;&gt;-->
+<!--&lt;!&ndash;                        app:indeterminate="false"&ndash;&gt;-->
+<!--&lt;!&ndash;                        app:indeterminateMinimumAngle="45"&ndash;&gt;-->
+<!--&lt;!&ndash;                        app:indeterminateRotationAnimationDuration="1200"&ndash;&gt;-->
+<!--&lt;!&ndash;                        app:indeterminateSweepAnimationDuration="600"&ndash;&gt;-->
+<!--&lt;!&ndash;                        app:maximum="100"&ndash;&gt;-->
+<!--&lt;!&ndash;                        app:progress="89"&ndash;&gt;-->
+<!--&lt;!&ndash;                        app:progressAnimationDuration="100"&ndash;&gt;-->
+<!--&lt;!&ndash;                        app:startAngle="270" />&ndash;&gt;-->
+
+<!--                    <TextView-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:text="On-Time\nDelivery"-->
+<!--                        android:textAlignment="center"-->
+<!--                        android:textColor="@color/black"-->
+<!--                        android:textSize="12sp"-->
+<!--                        android:textStyle="bold"-->
+<!--                        app:layout_constraintEnd_toEndOf="@+id/progress_bar_OnTimeDelivery"-->
+<!--                        app:layout_constraintStart_toStartOf="@+id/progress_bar_OnTimeDelivery"-->
+<!--                        app:layout_constraintTop_toBottomOf="@+id/progress_bar_OnTimeDelivery" />-->
+<!--                </androidx.constraintlayout.widget.ConstraintLayout>-->
+
+<!--                <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--                    android:id="@+id/positiveLayout"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    app:layout_constraintEnd_toEndOf="parent"-->
+<!--                    app:layout_constraintHorizontal_bias="0.5"-->
+<!--                    app:layout_constraintStart_toEndOf="@+id/onTimeLayout"-->
+<!--                    tools:layout_editor_absoluteY="10dp">-->
+
+<!--                    <TextView-->
+<!--                        android:id="@+id/txt_PercentagePositiveRanking"-->
+<!--                        android:layout_width="wrap_content"-->
+
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:textColor="@color/black"-->
+<!--                        android:textStyle="bold"-->
+<!--                        app:layout_constraintBottom_toBottomOf="@+id/progress_bar_PositiveRanking"-->
+<!--                        app:layout_constraintEnd_toEndOf="@+id/progress_bar_PositiveRanking"-->
+<!--                        app:layout_constraintStart_toStartOf="@+id/progress_bar_PositiveRanking"-->
+<!--                        app:layout_constraintTop_toTopOf="@+id/progress_bar_PositiveRanking" />-->
+
+<!--&lt;!&ndash;                    <com.budiyev.android.circularprogressbar.CircularProgressBar&ndash;&gt;-->
+<!--&lt;!&ndash;                        android:id="@+id/progress_bar_PositiveRanking"&ndash;&gt;-->
+<!--&lt;!&ndash;                        android:layout_width="70dp"&ndash;&gt;-->
+<!--&lt;!&ndash;                        android:layout_height="70dp"&ndash;&gt;-->
+<!--&lt;!&ndash;                        app:animateProgress="true"&ndash;&gt;-->
+<!--&lt;!&ndash;                        app:backgroundStrokeColor="#ff3f51b5"&ndash;&gt;-->
+<!--&lt;!&ndash;                        app:backgroundStrokeWidth="2dp"&ndash;&gt;-->
+<!--&lt;!&ndash;                        app:drawBackgroundStroke="false"&ndash;&gt;-->
+<!--&lt;!&ndash;                        app:foregroundStrokeCap="butt"&ndash;&gt;-->
+<!--&lt;!&ndash;                        app:foregroundStrokeColor="@color/green"&ndash;&gt;-->
+<!--&lt;!&ndash;                        app:foregroundStrokeWidth="8dp"&ndash;&gt;-->
+<!--&lt;!&ndash;                        app:indeterminate="false"&ndash;&gt;-->
+<!--&lt;!&ndash;                        app:indeterminateMinimumAngle="45"&ndash;&gt;-->
+<!--&lt;!&ndash;                        app:indeterminateRotationAnimationDuration="1200"&ndash;&gt;-->
+<!--&lt;!&ndash;                        app:indeterminateSweepAnimationDuration="600"&ndash;&gt;-->
+<!--&lt;!&ndash;                        app:maximum="100"&ndash;&gt;-->
+<!--&lt;!&ndash;                        app:progress="89"&ndash;&gt;-->
+<!--&lt;!&ndash;                        app:progressAnimationDuration="100"&ndash;&gt;-->
+<!--&lt;!&ndash;                        app:startAngle="270" />&ndash;&gt;-->
+
+<!--                    <TextView-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+
+<!--                        android:text="Positive\nRanking"-->
+<!--                        android:textAlignment="center"-->
+<!--                        android:textColor="@color/black"-->
+<!--                        android:textSize="12sp"-->
+<!--                        android:textStyle="bold"-->
+<!--                        app:layout_constraintEnd_toEndOf="@+id/progress_bar_PositiveRanking"-->
+<!--                        app:layout_constraintStart_toStartOf="@+id/progress_bar_PositiveRanking"-->
+<!--                        app:layout_constraintTop_toBottomOf="@+id/progress_bar_PositiveRanking" />-->
+<!--                </androidx.constraintlayout.widget.ConstraintLayout>-->
+
+<!--            </androidx.constraintlayout.widget.ConstraintLayout>-->
+<!--        </androidx.cardview.widget.CardView>-->
+
+<!--        <androidx.cardview.widget.CardView-->
+<!--            android:id="@+id/cardAboutMe"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginStart="16dp"-->
+<!--            android:layout_marginTop="16dp"-->
+<!--            android:layout_marginEnd="16dp"-->
+<!--            android:visibility="gone"-->
+<!--            app:cardCornerRadius="16dp"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toBottomOf="@+id/LineAnalytics">-->
+
+<!--            <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:paddingBottom="10dp">-->
+
+<!--                <ImageView-->
+<!--                    android:id="@+id/img_aboutMe"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginStart="24dp"-->
+<!--                    android:layout_marginTop="@dimen/activity_horizontal_margin"-->
+<!--                    app:layout_constraintStart_toStartOf="parent"-->
+<!--                    app:layout_constraintTop_toTopOf="parent"-->
+<!--                    app:srcCompat="@drawable/icon_about_me" />-->
+
+<!--                <TextView-->
+<!--                    android:id="@+id/txtAboutMe"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginStart="16dp"-->
+<!--                    android:layout_marginTop="@dimen/activity_horizontal_margin"-->
+<!--                    android:text="About me"-->
+<!--                    android:textColor="@color/black"-->
+<!--                    android:textStyle="bold"-->
+<!--                    app:layout_constraintStart_toEndOf="@+id/img_aboutMe"-->
+<!--                    app:layout_constraintTop_toTopOf="parent" />-->
+
+
+<!--                <View-->
+<!--                    android:id="@+id/view1"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="1dp"-->
+<!--                    android:layout_marginStart="24dp"-->
+<!--                    android:layout_marginTop="24dp"-->
+<!--                    android:layout_marginEnd="24dp"-->
+<!--                    android:background="@color/grey_80"-->
+
+<!--                    app:layout_constraintEnd_toEndOf="parent"-->
+<!--                    app:layout_constraintStart_toStartOf="parent"-->
+<!--                    app:layout_constraintTop_toBottomOf="@+id/txtAboutMe" />-->
+
+<!--                <TextView-->
+<!--                    android:id="@+id/txtAboutMeDescription"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginStart="24dp"-->
+<!--                    android:layout_marginTop="16dp"-->
+<!--                    android:layout_marginEnd="24dp"-->
+<!--                    android:layout_marginBottom="16dp"-->
+<!--                    android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lectus id commodo egestas metus interdum dolor."-->
+<!--                    android:textColor="@color/grey_60"-->
+
+
+<!--                    app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                    app:layout_constraintEnd_toEndOf="parent"-->
+<!--                    app:layout_constraintStart_toStartOf="parent"-->
+<!--                    app:layout_constraintTop_toBottomOf="@+id/view1" />-->
+<!--            </androidx.constraintlayout.widget.ConstraintLayout>-->
+
+<!--        </androidx.cardview.widget.CardView>-->
+
+<!--        <androidx.cardview.widget.CardView-->
+<!--            android:id="@+id/cardWorkExperience"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginStart="16dp"-->
+<!--            android:layout_marginTop="16dp"-->
+<!--            android:layout_marginEnd="16dp"-->
+<!--            android:visibility="gone"-->
+<!--            app:cardCornerRadius="16dp"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toBottomOf="@+id/cardAboutMe">-->
+
+<!--            <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:paddingBottom="10dp">-->
+
+<!--                <ImageView-->
+<!--                    android:id="@+id/imgExperience"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginStart="24dp"-->
+<!--                    android:layout_marginTop="16dp"-->
+<!--                    app:layout_constraintStart_toStartOf="parent"-->
+<!--                    app:layout_constraintTop_toTopOf="parent"-->
+<!--                    app:srcCompat="@drawable/icon_workexperience" />-->
+
+<!--                <TextView-->
+<!--                    android:id="@+id/textView59"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginStart="16dp"-->
+<!--                    android:layout_marginTop="16dp"-->
+<!--                    android:text="Work Experience"-->
+<!--                    android:textColor="@color/black"-->
+<!--                    android:textStyle="bold"-->
+<!--                    app:layout_constraintStart_toEndOf="@+id/imgExperience"-->
+<!--                    app:layout_constraintTop_toTopOf="parent" />-->
+
+
+<!--                <View-->
+<!--                    android:id="@+id/view2"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="1dp"-->
+<!--                    android:layout_marginStart="24dp"-->
+<!--                    android:layout_marginTop="16dp"-->
+<!--                    android:layout_marginEnd="24dp"-->
+<!--                    android:background="@color/grey_80"-->
+
+<!--                    app:layout_constraintEnd_toEndOf="parent"-->
+<!--                    app:layout_constraintStart_toStartOf="parent"-->
+<!--                    app:layout_constraintTop_toBottomOf="@+id/textView59" />-->
+
+<!--                <TextView-->
+<!--                    android:id="@+id/txtWorkExperience"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginStart="24dp"-->
+<!--                    android:layout_marginTop="8dp"-->
+<!--                    android:text="Manager"-->
+<!--                    android:textColor="@color/black"-->
+<!--                    android:textStyle="bold"-->
+
+
+<!--                    app:layout_constraintStart_toStartOf="parent"-->
+<!--                    app:layout_constraintTop_toBottomOf="@+id/view2" />-->
+
+
+<!--                <TextView-->
+<!--                    android:id="@+id/txtWorkExperienceCompany"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginStart="24dp"-->
+<!--                    android:layout_marginTop="8dp"-->
+<!--                    android:text="Amazon Inc"-->
+<!--                    android:textColor="@color/green"-->
+
+
+<!--                    app:layout_constraintStart_toStartOf="parent"-->
+<!--                    app:layout_constraintTop_toBottomOf="@+id/txtWorkExperience" />-->
+
+<!--                <TextView-->
+<!--                    android:id="@+id/txtWorkExperienceDate"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginStart="24dp"-->
+<!--                    android:layout_marginTop="8dp"-->
+<!--                    android:text="Jan 2015 - Feb2022"-->
+<!--                    android:textColor="@color/green"-->
+
+
+<!--                    app:layout_constraintStart_toStartOf="parent"-->
+<!--                    app:layout_constraintTop_toBottomOf="@+id/txtWorkExperienceCompany" />-->
+
+<!--                <TextView-->
+<!--                    android:id="@+id/txtWorkExperienceTimePeriod"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginStart="8dp"-->
+<!--                    android:layout_marginBottom="16dp"-->
+<!--                    android:text=". 5 years"-->
+<!--                    android:textColor="@color/green"-->
+
+
+<!--                    app:layout_constraintBottom_toBottomOf="@+id/txtWorkExperienceDate"-->
+<!--                    app:layout_constraintStart_toEndOf="@+id/txtWorkExperienceDate"-->
+<!--                    app:layout_constraintTop_toTopOf="@+id/txtWorkExperienceDate"-->
+<!--                    app:layout_constraintVertical_bias="0.0" />-->
+<!--            </androidx.constraintlayout.widget.ConstraintLayout>-->
+
+<!--        </androidx.cardview.widget.CardView>-->
+
+<!--        <androidx.cardview.widget.CardView-->
+<!--            android:id="@+id/cardEducation"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginStart="16dp"-->
+<!--            android:layout_marginTop="16dp"-->
+<!--            android:layout_marginEnd="16dp"-->
+<!--            android:visibility="gone"-->
+
+<!--            app:cardCornerRadius="16dp"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toBottomOf="@+id/cardWorkExperience">-->
+
+<!--            <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:paddingBottom="10dp">-->
+
+<!--                <ImageView-->
+<!--                    android:id="@+id/imgEducation"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginStart="24dp"-->
+<!--                    android:layout_marginTop="16dp"-->
+<!--                    app:layout_constraintStart_toStartOf="parent"-->
+<!--                    app:layout_constraintTop_toTopOf="parent"-->
+<!--                    app:srcCompat="@drawable/icon_education" />-->
+
+<!--                <TextView-->
+<!--                    android:id="@+id/txtEdu"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginStart="16dp"-->
+<!--                    android:layout_marginTop="16dp"-->
+<!--                    android:text="Education"-->
+<!--                    android:textColor="@color/black"-->
+<!--                    android:textStyle="bold"-->
+<!--                    app:layout_constraintStart_toEndOf="@+id/imgEducation"-->
+<!--                    app:layout_constraintTop_toTopOf="parent" />-->
+
+
+<!--                <View-->
+<!--                    android:id="@+id/view3"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="1dp"-->
+<!--                    android:layout_marginStart="24dp"-->
+<!--                    android:layout_marginTop="24dp"-->
+<!--                    android:layout_marginEnd="24dp"-->
+<!--                    android:background="@color/grey_80"-->
+<!--                    app:layout_constraintEnd_toEndOf="parent"-->
+<!--                    app:layout_constraintStart_toStartOf="parent"-->
+<!--                    app:layout_constraintTop_toBottomOf="@+id/txtEdu" />-->
+
+<!--                <TextView-->
+<!--                    android:id="@+id/txtEducation"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginStart="24dp"-->
+<!--                    android:layout_marginTop="16dp"-->
+<!--                    android:text="Information Technology"-->
+<!--                    android:textColor="@color/black"-->
+<!--                    android:textStyle="bold"-->
+<!--                    app:layout_constraintStart_toStartOf="parent"-->
+<!--                    app:layout_constraintTop_toBottomOf="@+id/view3" />-->
+
+
+<!--                <TextView-->
+<!--                    android:id="@+id/txtEducationInstitue"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginStart="24dp"-->
+<!--                    android:layout_marginTop="8dp"-->
+<!--                    android:text="Amazon Inc"-->
+<!--                    android:textColor="@color/green"-->
+
+<!--                    app:layout_constraintStart_toStartOf="parent"-->
+<!--                    app:layout_constraintTop_toBottomOf="@+id/txtEducation" />-->
+
+<!--                <TextView-->
+<!--                    android:id="@+id/txtEducationDate"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginStart="24dp"-->
+<!--                    android:layout_marginTop="8dp"-->
+<!--                    android:text="Jan 2015 - Feb2022"-->
+<!--                    android:textColor="@color/green"-->
+
+<!--                    app:layout_constraintStart_toStartOf="parent"-->
+<!--                    app:layout_constraintTop_toBottomOf="@+id/txtEducationInstitue" />-->
+
+<!--                <TextView-->
+<!--                    android:id="@+id/txtEducationTimePeriod"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginStart="8dp"-->
+<!--                    android:layout_marginBottom="16dp"-->
+<!--                    android:text=". 5 years"-->
+<!--                    android:textColor="@color/green"-->
+<!--                    android:visibility="gone"-->
+<!--                    app:layout_constraintBottom_toBottomOf="@+id/txtEducationDate"-->
+<!--                    app:layout_constraintStart_toEndOf="@+id/txtEducationDate"-->
+<!--                    app:layout_constraintTop_toTopOf="@+id/txtEducationDate"-->
+<!--                    app:layout_constraintVertical_bias="0.0" />-->
+<!--            </androidx.constraintlayout.widget.ConstraintLayout>-->
+
+<!--        </androidx.cardview.widget.CardView>-->
+
+<!--        <androidx.cardview.widget.CardView-->
+<!--            android:id="@+id/cardSkill"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginStart="16dp"-->
+<!--            android:layout_marginTop="16dp"-->
+<!--            android:layout_marginEnd="16dp"-->
+<!--            android:visibility="gone"-->
+<!--            app:cardCornerRadius="16dp"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toBottomOf="@id/cardEducation">-->
+
+<!--            <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:paddingBottom="10dp">-->
+
+
+<!--                <ImageView-->
+<!--                    android:id="@+id/imgSkill"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginStart="24dp"-->
+<!--                    android:layout_marginTop="16dp"-->
+<!--                    app:layout_constraintStart_toStartOf="parent"-->
+<!--                    app:layout_constraintTop_toTopOf="parent"-->
+<!--                    app:srcCompat="@drawable/icon_skill" />-->
+
+<!--                <TextView-->
+<!--                    android:id="@+id/txtSkill"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginStart="16dp"-->
+<!--                    android:layout_marginTop="16dp"-->
+<!--                    android:text="Skill"-->
+<!--                    android:textColor="@color/black"-->
+<!--                    android:textStyle="bold"-->
+<!--                    app:layout_constraintStart_toEndOf="@+id/imgSkill"-->
+<!--                    app:layout_constraintTop_toTopOf="parent" />-->
+
+
+<!--                <View-->
+<!--                    android:id="@+id/view4"-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_height="1dp"-->
+<!--                    android:layout_marginStart="24dp"-->
+<!--                    android:layout_marginTop="24dp"-->
+<!--                    android:layout_marginEnd="24dp"-->
+<!--                    android:background="@color/grey_80"-->
+
+<!--                    app:layout_constraintEnd_toEndOf="parent"-->
+<!--                    app:layout_constraintStart_toStartOf="parent"-->
+<!--                    app:layout_constraintTop_toBottomOf="@+id/txtSkill" />-->
+
+<!--                &lt;!&ndash;                <LinearLayout&ndash;&gt;-->
+<!--                &lt;!&ndash;                    android:id="@+id/lineSkillOne"&ndash;&gt;-->
+<!--                &lt;!&ndash;                    android:layout_width="0dp"&ndash;&gt;-->
+<!--                &lt;!&ndash;                    android:layout_height="wrap_content"&ndash;&gt;-->
+<!--                &lt;!&ndash;                    android:layout_marginTop="8dp"&ndash;&gt;-->
+<!--                &lt;!&ndash;                    android:orientation="horizontal"&ndash;&gt;-->
+<!--                &lt;!&ndash;                    app:layout_constraintEnd_toEndOf="parent"&ndash;&gt;-->
+<!--                &lt;!&ndash;                    app:layout_constraintHorizontal_bias="0.0"&ndash;&gt;-->
+<!--                &lt;!&ndash;                    app:layout_constraintStart_toStartOf="parent"&ndash;&gt;-->
+<!--                &lt;!&ndash;                    app:layout_constraintTop_toBottomOf="@+id/view4">&ndash;&gt;-->
+
+<!--                &lt;!&ndash;                    <TextView&ndash;&gt;-->
+<!--                &lt;!&ndash;                        android:id="@+id/txtSkillOne"&ndash;&gt;-->
+<!--                &lt;!&ndash;                        android:layout_width="wrap_content"&ndash;&gt;-->
+<!--                &lt;!&ndash;                        android:layout_height="wrap_content"&ndash;&gt;-->
+<!--                &lt;!&ndash;                        android:layout_marginStart="5dp"&ndash;&gt;-->
+<!--                &lt;!&ndash;                        android:layout_marginEnd="5dp"&ndash;&gt;-->
+<!--                &lt;!&ndash;                        android:layout_weight="1"&ndash;&gt;-->
+<!--                &lt;!&ndash;                        android:background="@drawable/edit_text_round"&ndash;&gt;-->
+<!--                &lt;!&ndash;                        android:text="TextView"&ndash;&gt;-->
+<!--                &lt;!&ndash;                        android:textAlignment="center"&ndash;&gt;-->
+<!--                &lt;!&ndash;                        android:textColor="@color/green" />&ndash;&gt;-->
+
+<!--                &lt;!&ndash;                    <TextView&ndash;&gt;-->
+<!--                &lt;!&ndash;                        android:id="@+id/txtSkillTwo"&ndash;&gt;-->
+<!--                &lt;!&ndash;                        android:layout_width="wrap_content"&ndash;&gt;-->
+<!--                &lt;!&ndash;                        android:layout_height="wrap_content"&ndash;&gt;-->
+<!--                &lt;!&ndash;                        android:layout_marginStart="5dp"&ndash;&gt;-->
+<!--                &lt;!&ndash;                        android:layout_marginEnd="5dp"&ndash;&gt;-->
+<!--                &lt;!&ndash;                        android:layout_weight="1"&ndash;&gt;-->
+<!--                &lt;!&ndash;                        android:background="@drawable/edit_text_round"&ndash;&gt;-->
+<!--                &lt;!&ndash;                        android:text="TextView"&ndash;&gt;-->
+<!--                &lt;!&ndash;                        android:textAlignment="center"&ndash;&gt;-->
+<!--                &lt;!&ndash;                        android:textColor="@color/green" />&ndash;&gt;-->
+
+<!--                &lt;!&ndash;                    <TextView&ndash;&gt;-->
+<!--                &lt;!&ndash;                        android:id="@+id/txtSkillThree"&ndash;&gt;-->
+<!--                &lt;!&ndash;                        android:layout_width="wrap_content"&ndash;&gt;-->
+<!--                &lt;!&ndash;                        android:layout_height="wrap_content"&ndash;&gt;-->
+<!--                &lt;!&ndash;                        android:layout_marginStart="5dp"&ndash;&gt;-->
+<!--                &lt;!&ndash;                        android:layout_marginEnd="5dp"&ndash;&gt;-->
+<!--                &lt;!&ndash;                        android:layout_weight="1"&ndash;&gt;-->
+<!--                &lt;!&ndash;                        android:background="@drawable/edit_text_round"&ndash;&gt;-->
+<!--                &lt;!&ndash;                        android:text="TextView"&ndash;&gt;-->
+<!--                &lt;!&ndash;                        android:textAlignment="center"&ndash;&gt;-->
+<!--                &lt;!&ndash;                        android:textColor="@color/green" />&ndash;&gt;-->
+
+<!--                &lt;!&ndash;                </LinearLayout>&ndash;&gt;-->
+
+<!--                &lt;!&ndash;                <LinearLayout&ndash;&gt;-->
+<!--                &lt;!&ndash;                    android:id="@+id/lineSkillTwo"&ndash;&gt;-->
+<!--                &lt;!&ndash;                    android:layout_width="0dp"&ndash;&gt;-->
+<!--                &lt;!&ndash;                    android:layout_height="wrap_content"&ndash;&gt;-->
+<!--                &lt;!&ndash;                    android:layout_marginTop="8dp"&ndash;&gt;-->
+<!--                &lt;!&ndash;                    android:orientation="horizontal"&ndash;&gt;-->
+<!--                &lt;!&ndash;                    app:layout_constraintEnd_toStartOf="@+id/btnSkillmore"&ndash;&gt;-->
+<!--                &lt;!&ndash;                    app:layout_constraintStart_toStartOf="parent"&ndash;&gt;-->
+<!--                &lt;!&ndash;                    app:layout_constraintTop_toBottomOf="@+id/lineSkillOne">&ndash;&gt;-->
+
+<!--                &lt;!&ndash;                    <TextView&ndash;&gt;-->
+<!--                &lt;!&ndash;                        android:id="@+id/txtSkillFour"&ndash;&gt;-->
+<!--                &lt;!&ndash;                        android:layout_width="wrap_content"&ndash;&gt;-->
+<!--                &lt;!&ndash;                        android:layout_height="wrap_content"&ndash;&gt;-->
+<!--                &lt;!&ndash;                        android:layout_marginStart="5dp"&ndash;&gt;-->
+<!--                &lt;!&ndash;                        android:layout_marginEnd="5dp"&ndash;&gt;-->
+<!--                &lt;!&ndash;                        android:layout_weight="1"&ndash;&gt;-->
+<!--                &lt;!&ndash;                        android:background="@drawable/edit_text_round"&ndash;&gt;-->
+<!--                &lt;!&ndash;                        android:text="TextView"&ndash;&gt;-->
+<!--                &lt;!&ndash;                        android:textAlignment="center"&ndash;&gt;-->
+<!--                &lt;!&ndash;                        android:textColor="@color/green" />&ndash;&gt;-->
+
+<!--                &lt;!&ndash;                    <TextView&ndash;&gt;-->
+<!--                &lt;!&ndash;                        android:id="@+id/txtSkillFive"&ndash;&gt;-->
+<!--                &lt;!&ndash;                        android:layout_width="wrap_content"&ndash;&gt;-->
+<!--                &lt;!&ndash;                        android:layout_height="wrap_content"&ndash;&gt;-->
+<!--                &lt;!&ndash;                        android:layout_marginStart="5dp"&ndash;&gt;-->
+<!--                &lt;!&ndash;                        android:layout_marginEnd="5dp"&ndash;&gt;-->
+<!--                &lt;!&ndash;                        android:layout_weight="1"&ndash;&gt;-->
+<!--                &lt;!&ndash;                        android:background="@drawable/edit_text_round"&ndash;&gt;-->
+<!--                &lt;!&ndash;                        android:text="TextView"&ndash;&gt;-->
+<!--                &lt;!&ndash;                        android:textAlignment="center"&ndash;&gt;-->
+<!--                &lt;!&ndash;                        android:textColor="@color/green" />&ndash;&gt;-->
+
+<!--                &lt;!&ndash;                </LinearLayout>&ndash;&gt;-->
+
+<!--                &lt;!&ndash;                <TextView&ndash;&gt;-->
+<!--                &lt;!&ndash;                    android:id="@+id/btnSkillmore"&ndash;&gt;-->
+<!--                &lt;!&ndash;                    android:layout_width="wrap_content"&ndash;&gt;-->
+<!--                &lt;!&ndash;                    android:layout_height="wrap_content"&ndash;&gt;-->
+<!--                &lt;!&ndash;                    android:layout_marginEnd="16dp"&ndash;&gt;-->
+<!--                &lt;!&ndash;                    android:text="+5 more"&ndash;&gt;-->
+<!--                &lt;!&ndash;                    android:textColor="@color/green"&ndash;&gt;-->
+<!--                &lt;!&ndash;                    app:layout_constraintBottom_toBottomOf="@+id/lineSkillTwo"&ndash;&gt;-->
+<!--                &lt;!&ndash;                    app:layout_constraintEnd_toEndOf="parent"&ndash;&gt;-->
+<!--                &lt;!&ndash;                    app:layout_constraintTop_toTopOf="@+id/lineSkillTwo" />&ndash;&gt;-->
+
+
+<!--                &lt;!&ndash;                <LinearLayout&ndash;&gt;-->
+<!--                &lt;!&ndash;                    android:id="@+id/lineSkillthree"&ndash;&gt;-->
+<!--                &lt;!&ndash;                    android:layout_width="0dp"&ndash;&gt;-->
+<!--                &lt;!&ndash;                    android:layout_height="wrap_content"&ndash;&gt;-->
+<!--                &lt;!&ndash;                    android:orientation="vertical"&ndash;&gt;-->
+<!--                &lt;!&ndash;                    app:layout_constraintEnd_toEndOf="parent"&ndash;&gt;-->
+<!--                &lt;!&ndash;                    app:layout_constraintStart_toStartOf="parent"&ndash;&gt;-->
+<!--                &lt;!&ndash;                    app:layout_constraintTop_toBottomOf="@+id/lineSkillTwo">&ndash;&gt;-->
+
+
+<!--                &lt;!&ndash;                    <LinearLayout&ndash;&gt;-->
+<!--                &lt;!&ndash;                        android:id="@+id/lineSkillthreeOne"&ndash;&gt;-->
+<!--                &lt;!&ndash;                        android:layout_width="match_parent"&ndash;&gt;-->
+<!--                &lt;!&ndash;                        android:layout_height="wrap_content"&ndash;&gt;-->
+<!--                &lt;!&ndash;                        android:layout_marginTop="8dp"&ndash;&gt;-->
+<!--                &lt;!&ndash;                        android:orientation="horizontal">&ndash;&gt;-->
+
+<!--                &lt;!&ndash;                        <TextView&ndash;&gt;-->
+<!--                &lt;!&ndash;                            android:id="@+id/txtSkillSix"&ndash;&gt;-->
+<!--                &lt;!&ndash;                            android:layout_width="wrap_content"&ndash;&gt;-->
+<!--                &lt;!&ndash;                            android:layout_height="wrap_content"&ndash;&gt;-->
+<!--                &lt;!&ndash;                            android:layout_marginStart="5dp"&ndash;&gt;-->
+<!--                &lt;!&ndash;                            android:layout_marginEnd="5dp"&ndash;&gt;-->
+<!--                &lt;!&ndash;                            android:layout_weight="1"&ndash;&gt;-->
+<!--                &lt;!&ndash;                            android:background="@drawable/edit_text_round"&ndash;&gt;-->
+<!--                &lt;!&ndash;                            android:text="TextView"&ndash;&gt;-->
+<!--                &lt;!&ndash;                            android:textAlignment="center"&ndash;&gt;-->
+<!--                &lt;!&ndash;                            android:textColor="@color/green" />&ndash;&gt;-->
+
+<!--                &lt;!&ndash;                        <TextView&ndash;&gt;-->
+<!--                &lt;!&ndash;                            android:id="@+id/txtSkillSeven"&ndash;&gt;-->
+<!--                &lt;!&ndash;                            android:layout_width="wrap_content"&ndash;&gt;-->
+<!--                &lt;!&ndash;                            android:layout_height="wrap_content"&ndash;&gt;-->
+<!--                &lt;!&ndash;                            android:layout_marginStart="5dp"&ndash;&gt;-->
+<!--                &lt;!&ndash;                            android:layout_marginEnd="5dp"&ndash;&gt;-->
+<!--                &lt;!&ndash;                            android:layout_weight="1"&ndash;&gt;-->
+<!--                &lt;!&ndash;                            android:background="@drawable/edit_text_round"&ndash;&gt;-->
+<!--                &lt;!&ndash;                            android:text="TextView"&ndash;&gt;-->
+<!--                &lt;!&ndash;                            android:textAlignment="center"&ndash;&gt;-->
+<!--                &lt;!&ndash;                            android:textColor="@color/green" />&ndash;&gt;-->
+
+<!--                &lt;!&ndash;                        <TextView&ndash;&gt;-->
+<!--                &lt;!&ndash;                            android:id="@+id/txtSkillEight"&ndash;&gt;-->
+<!--                &lt;!&ndash;                            android:layout_width="wrap_content"&ndash;&gt;-->
+<!--                &lt;!&ndash;                            android:layout_height="wrap_content"&ndash;&gt;-->
+<!--                &lt;!&ndash;                            android:layout_marginStart="5dp"&ndash;&gt;-->
+<!--                &lt;!&ndash;                            android:layout_marginEnd="5dp"&ndash;&gt;-->
+<!--                &lt;!&ndash;                            android:layout_weight="1"&ndash;&gt;-->
+<!--                &lt;!&ndash;                            android:background="@drawable/edit_text_round"&ndash;&gt;-->
+<!--                &lt;!&ndash;                            android:text="TextView"&ndash;&gt;-->
+<!--                &lt;!&ndash;                            android:textAlignment="center"&ndash;&gt;-->
+<!--                &lt;!&ndash;                            android:textColor="@color/green" />&ndash;&gt;-->
+<!--                &lt;!&ndash;                    </LinearLayout>&ndash;&gt;-->
+
+<!--                &lt;!&ndash;                    <LinearLayout&ndash;&gt;-->
+<!--                &lt;!&ndash;                        android:id="@+id/lineSkillthreetwo"&ndash;&gt;-->
+<!--                &lt;!&ndash;                        android:layout_width="match_parent"&ndash;&gt;-->
+<!--                &lt;!&ndash;                        android:layout_height="wrap_content"&ndash;&gt;-->
+<!--                &lt;!&ndash;                        android:layout_marginTop="8dp"&ndash;&gt;-->
+<!--                &lt;!&ndash;                        android:orientation="horizontal">&ndash;&gt;-->
+
+<!--                &lt;!&ndash;                        <TextView&ndash;&gt;-->
+<!--                &lt;!&ndash;                            android:id="@+id/txtSkillNine"&ndash;&gt;-->
+<!--                &lt;!&ndash;                            android:layout_width="wrap_content"&ndash;&gt;-->
+<!--                &lt;!&ndash;                            android:layout_height="wrap_content"&ndash;&gt;-->
+<!--                &lt;!&ndash;                            android:layout_marginStart="5dp"&ndash;&gt;-->
+<!--                &lt;!&ndash;                            android:layout_marginEnd="5dp"&ndash;&gt;-->
+<!--                &lt;!&ndash;                            android:layout_weight="1"&ndash;&gt;-->
+<!--                &lt;!&ndash;                            android:background="@drawable/edit_text_round"&ndash;&gt;-->
+<!--                &lt;!&ndash;                            android:text="TextView"&ndash;&gt;-->
+<!--                &lt;!&ndash;                            android:textAlignment="center"&ndash;&gt;-->
+<!--                &lt;!&ndash;                            android:textColor="@color/green" />&ndash;&gt;-->
+
+<!--                &lt;!&ndash;                        <TextView&ndash;&gt;-->
+<!--                &lt;!&ndash;                            android:id="@+id/txtSkillTen"&ndash;&gt;-->
+<!--                &lt;!&ndash;                            android:layout_width="wrap_content"&ndash;&gt;-->
+<!--                &lt;!&ndash;                            android:layout_height="wrap_content"&ndash;&gt;-->
+<!--                &lt;!&ndash;                            android:layout_marginStart="5dp"&ndash;&gt;-->
+<!--                &lt;!&ndash;                            android:layout_marginEnd="5dp"&ndash;&gt;-->
+<!--                &lt;!&ndash;                            android:layout_weight="1"&ndash;&gt;-->
+<!--                &lt;!&ndash;                            android:background="@drawable/edit_text_round"&ndash;&gt;-->
+<!--                &lt;!&ndash;                            android:text="TextView"&ndash;&gt;-->
+<!--                &lt;!&ndash;                            android:textAlignment="center"&ndash;&gt;-->
+<!--                &lt;!&ndash;                            android:textColor="@color/green" />&ndash;&gt;-->
+
+
+<!--                &lt;!&ndash;                    </LinearLayout>&ndash;&gt;-->
+<!--                &lt;!&ndash;                </LinearLayout>&ndash;&gt;-->
+
+<!--                &lt;!&ndash;                <TextView&ndash;&gt;-->
+<!--                &lt;!&ndash;                    android:id="@+id/btnSkillSeeMore"&ndash;&gt;-->
+<!--                &lt;!&ndash;                    android:layout_width="wrap_content"&ndash;&gt;-->
+<!--                &lt;!&ndash;                    android:layout_height="wrap_content"&ndash;&gt;-->
+<!--                &lt;!&ndash;                    android:layout_marginTop="8dp"&ndash;&gt;-->
+<!--                &lt;!&ndash;                    android:layout_marginBottom="8dp"&ndash;&gt;-->
+<!--                &lt;!&ndash;                    android:text="See more"&ndash;&gt;-->
+<!--                &lt;!&ndash;                    android:textColor="@color/blue"&ndash;&gt;-->
+<!--                &lt;!&ndash;                    app:layout_constraintBottom_toBottomOf="parent"&ndash;&gt;-->
+<!--                &lt;!&ndash;                    app:layout_constraintEnd_toEndOf="parent"&ndash;&gt;-->
+<!--                &lt;!&ndash;                    app:layout_constraintStart_toStartOf="parent"&ndash;&gt;-->
+<!--                &lt;!&ndash;                    app:layout_constraintTop_toBottomOf="@+id/lineSkillthree" />&ndash;&gt;-->
+
+<!--                <GridView-->
+<!--                    android:id="@+id/listvieww"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginStart="8dp"-->
+<!--                    android:layout_marginEnd="8dp"-->
+
+<!--                    android:layout_marginBottom="5dp"-->
+<!--                    android:numColumns="auto_fit"-->
+<!--                    android:scrollbars="vertical"-->
+<!--                    app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                    app:layout_constraintEnd_toEndOf="parent"-->
+<!--                    app:layout_constraintStart_toStartOf="parent"-->
+<!--                    app:layout_constraintTop_toBottomOf="@+id/view4" />-->
+
+
+<!--            </androidx.constraintlayout.widget.ConstraintLayout>-->
+<!--        </androidx.cardview.widget.CardView>-->
+
+<!--        <androidx.cardview.widget.CardView-->
+<!--            android:id="@+id/cardLanguage"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginStart="16dp"-->
+<!--            android:layout_marginTop="16dp"-->
+<!--            android:layout_marginEnd="16dp"-->
+<!--            android:visibility="gone"-->
+
+<!--            app:cardCornerRadius="16dp"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toBottomOf="@id/cardSkill">-->
+
+<!--            <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:paddingBottom="10dp">-->
+
+
+<!--                <ImageView-->
+<!--                    android:id="@+id/imgLang"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginStart="24dp"-->
+<!--                    android:layout_marginTop="16dp"-->
+<!--                    app:layout_constraintStart_toStartOf="parent"-->
+<!--                    app:layout_constraintTop_toTopOf="parent"-->
+<!--                    app:srcCompat="@drawable/icon_language" />-->
+
+<!--                <TextView-->
+<!--                    android:id="@+id/txtLang"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginStart="16dp"-->
+<!--                    android:layout_marginTop="16dp"-->
+<!--                    android:text="Language"-->
+<!--                    android:textColor="@color/black"-->
+<!--                    android:textStyle="bold"-->
+<!--                    app:layout_constraintStart_toEndOf="@+id/imgLang"-->
+<!--                    app:layout_constraintTop_toTopOf="parent" />-->
+
+
+<!--                <View-->
+<!--                    android:id="@+id/view5"-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_height="1dp"-->
+<!--                    android:layout_marginStart="24dp"-->
+<!--                    android:layout_marginTop="24dp"-->
+<!--                    android:layout_marginEnd="24dp"-->
+<!--                    android:background="@color/grey_80"-->
+<!--                    app:layout_constraintEnd_toEndOf="parent"-->
+<!--                    app:layout_constraintStart_toStartOf="parent"-->
+<!--                    app:layout_constraintTop_toBottomOf="@+id/txtLang" />-->
+
+<!--                <GridView-->
+<!--                    android:id="@+id/grid_language"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginStart="8dp"-->
+<!--                    android:layout_marginEnd="8dp"-->
+
+<!--                    android:layout_marginBottom="5dp"-->
+<!--                    android:numColumns="auto_fit"-->
+<!--                    android:scrollbars="vertical"-->
+<!--                    app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                    app:layout_constraintEnd_toEndOf="parent"-->
+<!--                    app:layout_constraintStart_toStartOf="parent"-->
+<!--                    app:layout_constraintTop_toBottomOf="@+id/view5" />-->
+<!--                &lt;!&ndash;                <LinearLayout&ndash;&gt;-->
+<!--                &lt;!&ndash;                    android:id="@+id/lineLanguageOne"&ndash;&gt;-->
+<!--                &lt;!&ndash;                    android:layout_width="0dp"&ndash;&gt;-->
+<!--                &lt;!&ndash;                    android:layout_height="wrap_content"&ndash;&gt;-->
+<!--                &lt;!&ndash;                    android:layout_marginTop="8dp"&ndash;&gt;-->
+<!--                &lt;!&ndash;                    android:orientation="horizontal"&ndash;&gt;-->
+<!--                &lt;!&ndash;                    app:layout_constraintEnd_toEndOf="parent"&ndash;&gt;-->
+<!--                &lt;!&ndash;                    app:layout_constraintHorizontal_bias="0.0"&ndash;&gt;-->
+<!--                &lt;!&ndash;                    app:layout_constraintStart_toStartOf="parent"&ndash;&gt;-->
+<!--                &lt;!&ndash;                    app:layout_constraintTop_toBottomOf="@+id/view5">&ndash;&gt;-->
+
+<!--                &lt;!&ndash;                    <TextView&ndash;&gt;-->
+<!--                &lt;!&ndash;                        android:id="@+id/txtLanguageOne"&ndash;&gt;-->
+<!--                &lt;!&ndash;                        android:layout_width="wrap_content"&ndash;&gt;-->
+<!--                &lt;!&ndash;                        android:layout_height="wrap_content"&ndash;&gt;-->
+<!--                &lt;!&ndash;                        android:layout_marginStart="5dp"&ndash;&gt;-->
+<!--                &lt;!&ndash;                        android:layout_marginEnd="5dp"&ndash;&gt;-->
+<!--                &lt;!&ndash;                        android:layout_weight="1"&ndash;&gt;-->
+<!--                &lt;!&ndash;                        android:background="@drawable/edit_text_round"&ndash;&gt;-->
+<!--                &lt;!&ndash;                        android:text="TextView"&ndash;&gt;-->
+<!--                &lt;!&ndash;                        android:textAlignment="center"&ndash;&gt;-->
+<!--                &lt;!&ndash;                        android:textColor="@color/green" />&ndash;&gt;-->
+
+<!--                &lt;!&ndash;                    <TextView&ndash;&gt;-->
+<!--                &lt;!&ndash;                        android:id="@+id/txtLanguageTwo"&ndash;&gt;-->
+<!--                &lt;!&ndash;                        android:layout_width="wrap_content"&ndash;&gt;-->
+<!--                &lt;!&ndash;                        android:layout_height="wrap_content"&ndash;&gt;-->
+<!--                &lt;!&ndash;                        android:layout_marginStart="5dp"&ndash;&gt;-->
+<!--                &lt;!&ndash;                        android:layout_marginEnd="5dp"&ndash;&gt;-->
+<!--                &lt;!&ndash;                        android:layout_weight="1"&ndash;&gt;-->
+<!--                &lt;!&ndash;                        android:background="@drawable/edit_text_round"&ndash;&gt;-->
+<!--                &lt;!&ndash;                        android:text="TextView"&ndash;&gt;-->
+<!--                &lt;!&ndash;                        android:textAlignment="center"&ndash;&gt;-->
+<!--                &lt;!&ndash;                        android:textColor="@color/green" />&ndash;&gt;-->
+
+<!--                &lt;!&ndash;                    <TextView&ndash;&gt;-->
+<!--                &lt;!&ndash;                        android:id="@+id/txtLanguageThree"&ndash;&gt;-->
+<!--                &lt;!&ndash;                        android:layout_width="wrap_content"&ndash;&gt;-->
+<!--                &lt;!&ndash;                        android:layout_height="wrap_content"&ndash;&gt;-->
+<!--                &lt;!&ndash;                        android:layout_marginStart="5dp"&ndash;&gt;-->
+<!--                &lt;!&ndash;                        android:layout_marginEnd="5dp"&ndash;&gt;-->
+<!--                &lt;!&ndash;                        android:layout_weight="1"&ndash;&gt;-->
+<!--                &lt;!&ndash;                        android:background="@drawable/edit_text_round"&ndash;&gt;-->
+<!--                &lt;!&ndash;                        android:text="TextView"&ndash;&gt;-->
+<!--                &lt;!&ndash;                        android:textAlignment="center"&ndash;&gt;-->
+<!--                &lt;!&ndash;                        android:textColor="@color/green" />&ndash;&gt;-->
+
+<!--                &lt;!&ndash;                </LinearLayout>&ndash;&gt;-->
+
+<!--                &lt;!&ndash;                <LinearLayout&ndash;&gt;-->
+<!--                &lt;!&ndash;                    android:id="@+id/lineLanguageTwo"&ndash;&gt;-->
+<!--                &lt;!&ndash;                    android:layout_width="0dp"&ndash;&gt;-->
+<!--                &lt;!&ndash;                    android:layout_height="wrap_content"&ndash;&gt;-->
+<!--                &lt;!&ndash;                    android:layout_marginTop="8dp"&ndash;&gt;-->
+<!--                &lt;!&ndash;                    android:layout_marginBottom="16dp"&ndash;&gt;-->
+<!--                &lt;!&ndash;                    android:orientation="horizontal"&ndash;&gt;-->
+<!--                &lt;!&ndash;                    app:layout_constraintBottom_toBottomOf="parent"&ndash;&gt;-->
+<!--                &lt;!&ndash;                    app:layout_constraintEnd_toEndOf="parent"&ndash;&gt;-->
+<!--                &lt;!&ndash;                    app:layout_constraintStart_toStartOf="parent"&ndash;&gt;-->
+<!--                &lt;!&ndash;                    app:layout_constraintTop_toBottomOf="@+id/lineLanguageOne">&ndash;&gt;-->
+
+<!--                &lt;!&ndash;                    <TextView&ndash;&gt;-->
+<!--                &lt;!&ndash;                        android:id="@+id/txtLanguageFour"&ndash;&gt;-->
+<!--                &lt;!&ndash;                        android:layout_width="wrap_content"&ndash;&gt;-->
+<!--                &lt;!&ndash;                        android:layout_height="wrap_content"&ndash;&gt;-->
+<!--                &lt;!&ndash;                        android:layout_marginStart="5dp"&ndash;&gt;-->
+<!--                &lt;!&ndash;                        android:layout_marginEnd="5dp"&ndash;&gt;-->
+<!--                &lt;!&ndash;                        android:layout_weight="1"&ndash;&gt;-->
+<!--                &lt;!&ndash;                        android:background="@drawable/edit_text_round"&ndash;&gt;-->
+<!--                &lt;!&ndash;                        android:text="TextView"&ndash;&gt;-->
+<!--                &lt;!&ndash;                        android:textAlignment="center"&ndash;&gt;-->
+<!--                &lt;!&ndash;                        android:textColor="@color/green" />&ndash;&gt;-->
+
+<!--                &lt;!&ndash;                    <TextView&ndash;&gt;-->
+<!--                &lt;!&ndash;                        android:id="@+id/txtLanguageFive"&ndash;&gt;-->
+<!--                &lt;!&ndash;                        android:layout_width="wrap_content"&ndash;&gt;-->
+<!--                &lt;!&ndash;                        android:layout_height="wrap_content"&ndash;&gt;-->
+<!--                &lt;!&ndash;                        android:layout_marginStart="5dp"&ndash;&gt;-->
+<!--                &lt;!&ndash;                        android:layout_marginEnd="5dp"&ndash;&gt;-->
+<!--                &lt;!&ndash;                        android:layout_weight="1"&ndash;&gt;-->
+<!--                &lt;!&ndash;                        android:background="@drawable/edit_text_round"&ndash;&gt;-->
+<!--                &lt;!&ndash;                        android:text="TextView"&ndash;&gt;-->
+<!--                &lt;!&ndash;                        android:textAlignment="center"&ndash;&gt;-->
+<!--                &lt;!&ndash;                        android:textColor="@color/green" />&ndash;&gt;-->
+
+<!--                &lt;!&ndash;                </LinearLayout>&ndash;&gt;-->
+
+
+<!--            </androidx.constraintlayout.widget.ConstraintLayout>-->
+<!--        </androidx.cardview.widget.CardView>-->
+
+<!--        <androidx.cardview.widget.CardView-->
+<!--            android:id="@+id/cardAppreciation"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginStart="16dp"-->
+<!--            android:layout_marginTop="16dp"-->
+<!--            android:layout_marginEnd="16dp"-->
+<!--            android:visibility="gone"-->
+<!--            app:cardCornerRadius="16dp"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toBottomOf="@id/cardLanguage">-->
+
+<!--            <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:paddingBottom="10dp">-->
+
+<!--                <TextView-->
+<!--                    android:id="@+id/txtAppre"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginStart="16dp"-->
+<!--                    android:layout_marginTop="16dp"-->
+<!--                    android:text="Appreciation"-->
+<!--                    android:textColor="@color/black"-->
+<!--                    android:textStyle="bold"-->
+<!--                    app:layout_constraintStart_toEndOf="@+id/imgAppre"-->
+<!--                    app:layout_constraintTop_toTopOf="parent" />-->
+
+
+<!--                <View-->
+<!--                    android:id="@+id/view6"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="1dp"-->
+<!--                    android:layout_marginStart="24dp"-->
+<!--                    android:layout_marginTop="24dp"-->
+<!--                    android:layout_marginEnd="24dp"-->
+<!--                    android:background="@color/grey_80"-->
+<!--                    app:layout_constraintEnd_toEndOf="parent"-->
+<!--                    app:layout_constraintStart_toStartOf="parent"-->
+<!--                    app:layout_constraintTop_toBottomOf="@+id/txtAppre" />-->
+
+<!--                <TextView-->
+<!--                    android:id="@+id/txtAppreciation"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginStart="24dp"-->
+<!--                    android:layout_marginTop="16dp"-->
+<!--                    android:text="Wireless Symposium (RWS)"-->
+<!--                    android:textColor="@color/black"-->
+<!--                    android:textStyle="bold"-->
+<!--                    app:layout_constraintStart_toStartOf="parent"-->
+<!--                    app:layout_constraintTop_toBottomOf="@+id/view6" />-->
+
+
+<!--                <TextView-->
+<!--                    android:id="@+id/txtAppreciationInstitue"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginStart="24dp"-->
+<!--                    android:layout_marginTop="8dp"-->
+<!--                    android:text="Young Scientist"-->
+<!--                    android:textColor="@color/green"-->
+<!--                    app:layout_constraintStart_toStartOf="parent"-->
+<!--                    app:layout_constraintTop_toBottomOf="@+id/txtAppreciation" />-->
+
+<!--                <TextView-->
+<!--                    android:id="@+id/txtAppreciationDate"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginStart="24dp"-->
+<!--                    android:layout_marginTop="8dp"-->
+<!--                    android:layout_marginBottom="16dp"-->
+<!--                    android:text="2014"-->
+<!--                    android:textColor="@color/green"-->
+<!--                    app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                    app:layout_constraintStart_toStartOf="parent"-->
+<!--                    app:layout_constraintTop_toBottomOf="@+id/txtAppreciationInstitue" />-->
+
+<!--                <ImageView-->
+<!--                    android:id="@+id/imgAppre"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginStart="24dp"-->
+<!--                    android:layout_marginTop="16dp"-->
+<!--                    app:layout_constraintStart_toStartOf="parent"-->
+<!--                    app:layout_constraintTop_toTopOf="parent"-->
+<!--                    app:srcCompat="@drawable/icon_appreciation" />-->
+<!--            </androidx.constraintlayout.widget.ConstraintLayout>-->
+
+<!--        </androidx.cardview.widget.CardView>-->
+
+<!--        <androidx.cardview.widget.CardView-->
+<!--            android:id="@+id/cardResume"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginStart="16dp"-->
+<!--            android:layout_marginTop="16dp"-->
+<!--            android:layout_marginEnd="16dp"-->
+<!--            android:visibility="gone"-->
+<!--            app:cardCornerRadius="16dp"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toBottomOf="@id/cardAppreciation">-->
+
+<!--            <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:paddingBottom="10dp">-->
+
+<!--                <TextView-->
+<!--                    android:id="@+id/txtResu"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginStart="16dp"-->
+<!--                    android:layout_marginTop="16dp"-->
+<!--                    android:text="Resume"-->
+<!--                    android:textColor="@color/black"-->
+<!--                    android:textStyle="bold"-->
+<!--                    app:layout_constraintStart_toEndOf="@+id/imgResume"-->
+<!--                    app:layout_constraintTop_toTopOf="parent" />-->
+
+
+<!--                <ImageView-->
+<!--                    android:id="@+id/imgResume"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginStart="24dp"-->
+<!--                    android:layout_marginTop="16dp"-->
+<!--                    app:layout_constraintStart_toStartOf="parent"-->
+<!--                    app:layout_constraintTop_toTopOf="parent"-->
+<!--                    app:srcCompat="@drawable/icon_resume" />-->
+
+<!--                <View-->
+<!--                    android:id="@+id/view7"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="1dp"-->
+<!--                    android:layout_marginStart="24dp"-->
+<!--                    android:layout_marginTop="24dp"-->
+<!--                    android:layout_marginEnd="24dp"-->
+<!--                    android:background="@color/grey_80"-->
+
+<!--                    app:layout_constraintEnd_toEndOf="parent"-->
+<!--                    app:layout_constraintStart_toStartOf="parent"-->
+<!--                    app:layout_constraintTop_toBottomOf="@+id/txtResu" />-->
+
+<!--                <ImageView-->
+<!--                    android:id="@+id/imagePDF"-->
+<!--                    android:layout_width="60dp"-->
+<!--                    android:layout_height="60dp"-->
+<!--                    android:layout_marginStart="16dp"-->
+<!--                    android:layout_marginTop="16dp"-->
+<!--                    android:layout_marginBottom="16dp"-->
+<!--                    android:src="@drawable/icon_pdf"-->
+<!--                    app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                    app:layout_constraintStart_toStartOf="parent"-->
+<!--                    app:layout_constraintTop_toBottomOf="@id/view7" />-->
+
+<!--                <TextView-->
+<!--                    android:id="@+id/txtResumeFileName"-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginStart="16dp"-->
+<!--                    android:layout_marginTop="24dp"-->
+<!--                    android:layout_marginEnd="16dp"-->
+<!--                    android:text="TextView"-->
+<!--                    android:textColor="@color/black"-->
+<!--                    app:layout_constraintEnd_toStartOf="@+id/btnResumeDelete"-->
+<!--                    app:layout_constraintStart_toEndOf="@+id/imagePDF"-->
+<!--                    app:layout_constraintTop_toBottomOf="@+id/view7" />-->
+
+
+<!--                <LinearLayout-->
+<!--                    android:id="@+id/linearLayout6"-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginStart="16dp"-->
+<!--                    android:layout_marginTop="8dp"-->
+<!--                    android:layout_marginEnd="16dp"-->
+<!--                    android:orientation="horizontal"-->
+<!--                    app:layout_constraintEnd_toStartOf="@+id/btnResumeDelete"-->
+<!--                    app:layout_constraintStart_toEndOf="@+id/imagePDF"-->
+<!--                    app:layout_constraintTop_toBottomOf="@+id/txtResumeFileName">-->
+
+<!--                    <TextView-->
+<!--                        android:id="@+id/txtResumeInfor"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_weight="1"-->
+<!--                        android:text="TextView" />-->
+
+
+<!--                </LinearLayout>-->
+
+
+<!--            </androidx.constraintlayout.widget.ConstraintLayout>-->
+
+<!--        </androidx.cardview.widget.CardView>-->
+
+<!--        <androidx.cardview.widget.CardView-->
+<!--            android:id="@+id/cardHourlyCharges"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginStart="16dp"-->
+<!--            android:layout_marginTop="16dp"-->
+<!--            android:layout_marginEnd="16dp"-->
+<!--android:visibility="gone"-->
+<!--            app:cardCornerRadius="16dp"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toBottomOf="@id/cardResume">-->
+
+<!--            <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:paddingBottom="10dp">-->
+
+<!--                <TextView-->
+<!--                    android:id="@+id/txtHourlyCharges"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginStart="16dp"-->
+<!--                    android:layout_marginTop="16dp"-->
+<!--                    android:text="Hourly Charges"-->
+<!--                    android:textColor="@color/black"-->
+<!--                    android:textStyle="bold"-->
+<!--                    app:layout_constraintStart_toStartOf="parent"-->
+<!--                    app:layout_constraintTop_toTopOf="parent" />-->
+
+
+<!--                <View-->
+<!--                    android:id="@+id/view7"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="1dp"-->
+<!--                    android:layout_marginStart="24dp"-->
+<!--                    android:layout_marginTop="16dp"-->
+<!--                    android:layout_marginEnd="24dp"-->
+<!--                    android:background="@color/grey_80"-->
+
+<!--                    app:layout_constraintEnd_toEndOf="parent"-->
+<!--                    app:layout_constraintStart_toStartOf="parent"-->
+<!--                    app:layout_constraintTop_toBottomOf="@+id/txtHourlyCharges" />-->
+
+
+<!--                <TextView-->
+<!--                    android:id="@+id/txtHourlyChargesInfo"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginStart="16dp"-->
+<!--                    android:layout_marginTop="8dp"-->
+<!--                    android:layout_marginBottom="8dp"-->
+<!--                    android:layout_weight="1"-->
+<!--                    android:text="TextView"-->
+<!--                    android:textColor="@color/black"-->
+<!--                    android:textStyle="bold"-->
+<!--                    app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                    app:layout_constraintStart_toStartOf="@+id/txtHourlyCharges"-->
+<!--                    app:layout_constraintTop_toBottomOf="@id/view7" />-->
+
+
+<!--            </androidx.constraintlayout.widget.ConstraintLayout>-->
+
+<!--        </androidx.cardview.widget.CardView>-->
+
+<!--        <androidx.cardview.widget.CardView-->
+<!--            android:id="@+id/cardAvailability"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginStart="16dp"-->
+<!--            android:layout_marginTop="16dp"-->
+<!--            android:layout_marginEnd="16dp"-->
+<!--android:visibility="gone"-->
+<!--            app:cardCornerRadius="16dp"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toBottomOf="@id/cardHourlyCharges">-->
+
+<!--            <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:paddingBottom="10dp">-->
+
+<!--                <TextView-->
+<!--                    android:id="@+id/txtAvailability"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginStart="16dp"-->
+<!--                    android:layout_marginTop="16dp"-->
+<!--                    android:text="Availability"-->
+<!--                    android:textColor="@color/black"-->
+<!--                    android:textStyle="bold"-->
+<!--                    app:layout_constraintStart_toStartOf="parent"-->
+<!--                    app:layout_constraintTop_toTopOf="parent" />-->
+
+
+<!--                <View-->
+<!--                    android:id="@+id/view7"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="1dp"-->
+<!--                    android:layout_marginStart="24dp"-->
+<!--                    android:layout_marginTop="16dp"-->
+<!--                    android:layout_marginEnd="24dp"-->
+<!--                    android:background="@color/grey_80"-->
+
+<!--                    app:layout_constraintEnd_toEndOf="parent"-->
+<!--                    app:layout_constraintStart_toStartOf="parent"-->
+<!--                    app:layout_constraintTop_toBottomOf="@+id/txtAvailability" />-->
+
+<!--                <LinearLayout-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginStart="8dp"-->
+<!--                    android:layout_marginTop="8dp"-->
+<!--                    android:layout_marginEnd="8dp"-->
+<!--                    android:orientation="horizontal"-->
+<!--                    app:layout_constraintEnd_toEndOf="parent"-->
+<!--                    app:layout_constraintStart_toStartOf="parent"-->
+<!--                    app:layout_constraintTop_toBottomOf="@+id/view7">-->
+
+<!--                    <LinearLayout-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_weight="1"-->
+<!--                        android:orientation="vertical">-->
+
+<!--                        <TextView-->
+<!--                            android:id="@+id/txtHrsPerWeek"-->
+<!--                            android:layout_width="match_parent"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:text="> 30"-->
+<!--                            android:textAlignment="center"-->
+<!--                            android:textColor="@color/black"-->
+<!--                            android:textSize="16sp"-->
+<!--                            android:textStyle="bold" />-->
+
+<!--                        <TextView-->
+<!--                            android:layout_width="match_parent"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:text="HRS PER WEEK"-->
+<!--                            android:textSize="12sp"-->
+<!--                            android:textAlignment="center"-->
+<!--                            android:textStyle="bold" />-->
+
+<!--                    </LinearLayout>-->
+
+<!--                    <LinearLayout-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_weight="1"-->
+<!--                        android:orientation="vertical">-->
+
+<!--                        <TextView-->
+<!--                            android:id="@+id/txtHoursResponseTime"-->
+<!--                            android:layout_width="match_parent"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:text="24"-->
+<!--                            android:textAlignment="center"-->
+<!--                            android:textColor="@color/black"-->
+<!--                            android:textSize="16sp"-->
+<!--                            android:textStyle="bold" />-->
+
+<!--                        <TextView-->
+<!--                            android:layout_width="match_parent"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:text="HRS RESPONSE TIME"-->
+<!--                            android:textSize="12sp"-->
+<!--                            android:textAlignment="center"-->
+<!--                            android:textStyle="bold" />-->
+
+<!--                    </LinearLayout>-->
+
+<!--                </LinearLayout>-->
+
+
+
+<!--            </androidx.constraintlayout.widget.ConstraintLayout>-->
+
+<!--        </androidx.cardview.widget.CardView>-->
+<!--        <androidx.cardview.widget.CardView-->
+<!--            android:id="@+id/cardChargesWork"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginStart="16dp"-->
+<!--            android:layout_marginTop="16dp"-->
+<!--            android:layout_marginEnd="16dp"-->
+
+<!--            app:cardCornerRadius="16dp"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toBottomOf="@id/cardAvailability">-->
+
+<!--            <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:paddingBottom="10dp">-->
+
+<!--                <TextView-->
+<!--                    android:id="@+id/txtCharges"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginStart="16dp"-->
+<!--                    android:layout_marginTop="16dp"-->
+<!--                    android:text="Charges and Work"-->
+<!--                    android:textColor="@color/black"-->
+<!--                    android:textStyle="bold"-->
+<!--                    app:layout_constraintStart_toStartOf="parent"-->
+<!--                    app:layout_constraintTop_toTopOf="parent" />-->
+
+
+<!--                <View-->
+<!--                    android:id="@+id/view7"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="1dp"-->
+<!--                    android:layout_marginStart="24dp"-->
+<!--                    android:layout_marginTop="16dp"-->
+<!--                    android:layout_marginEnd="24dp"-->
+<!--                    android:background="@color/grey_80"-->
+
+<!--                    app:layout_constraintEnd_toEndOf="parent"-->
+<!--                    app:layout_constraintStart_toStartOf="parent"-->
+<!--                    app:layout_constraintTop_toBottomOf="@+id/txtCharges" />-->
+
+<!--                <LinearLayout-->
+<!--                    android:id="@+id/lineRateCharges"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginStart="8dp"-->
+<!--                    android:layout_marginTop="16dp"-->
+<!--                    android:layout_marginEnd="8dp"-->
+
+<!--                    android:orientation="horizontal"-->
+<!--                    app:layout_constraintEnd_toEndOf="parent"-->
+<!--                    app:layout_constraintStart_toStartOf="parent"-->
+<!--                    app:layout_constraintTop_toBottomOf="@+id/view7">-->
+
+<!--                    <LinearLayout-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_weight="1"-->
+<!--                        android:orientation="vertical">-->
+
+<!--                        <TextView-->
+<!--                            android:id="@+id/txtHourlyRate"-->
+<!--                            android:layout_width="match_parent"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:text="$ 45.00"-->
+<!--                            android:textAlignment="center"-->
+<!--                            android:textColor="@color/black"-->
+<!--                            android:textSize="16sp"-->
+<!--                            android:textStyle="bold" />-->
+
+<!--                        <TextView-->
+<!--                            android:layout_width="match_parent"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:text="Hourly Rate"-->
+<!--                            android:textAllCaps="true"-->
+<!--                            android:textAlignment="center"-->
+<!--                            android:textSize="12sp"-->
+<!--                            android:textStyle="bold" />-->
+
+<!--                    </LinearLayout>-->
+
+<!--                    <LinearLayout-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_weight="1"-->
+<!--                        android:orientation="vertical">-->
+
+<!--                        <TextView-->
+<!--                            android:id="@+id/txtTotalEarned"-->
+<!--                            android:layout_width="match_parent"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:text="$ 200k+"-->
+<!--                            android:textAlignment="center"-->
+
+<!--                            android:textColor="@color/black"-->
+<!--                            android:textSize="16sp"-->
+<!--                            android:textStyle="bold" />-->
+
+<!--                        <TextView-->
+<!--                            android:layout_width="match_parent"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:text="Total Earned"-->
+<!--                            android:textSize="12sp"-->
+<!--                            android:textAllCaps="true"-->
+<!--                            android:textAlignment="center"-->
+<!--                            android:textStyle="bold" />-->
+
+<!--                    </LinearLayout>-->
+
+<!--                </LinearLayout>-->
+<!--                <LinearLayout-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginStart="8dp"-->
+<!--                    android:layout_marginTop="16dp"-->
+<!--                    android:layout_marginEnd="8dp"-->
+<!--                    android:orientation="horizontal"-->
+<!--                    app:layout_constraintEnd_toEndOf="parent"-->
+<!--                    app:layout_constraintStart_toStartOf="parent"-->
+<!--                    app:layout_constraintTop_toBottomOf="@+id/lineRateCharges">-->
+
+<!--                    <LinearLayout-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_weight="1"-->
+<!--                        android:orientation="vertical">-->
+
+<!--                        <TextView-->
+<!--                            android:id="@+id/txtHourlyRate"-->
+<!--                            android:layout_width="match_parent"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:text="70"-->
+<!--                            android:textAlignment="center"-->
+<!--                            android:textColor="@color/black"-->
+<!--                            android:textSize="16sp"-->
+<!--                            android:textStyle="bold" />-->
+
+<!--                        <TextView-->
+<!--                            android:layout_width="match_parent"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:text="Jobs"-->
+<!--                            android:textAlignment="center"-->
+<!--                            android:textAllCaps="true"-->
+<!--                            android:textSize="12sp"-->
+<!--                            android:textStyle="bold"-->
+<!--                            android:visibility="gone" />-->
+
+<!--                    </LinearLayout>-->
+
+<!--                    <LinearLayout-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_weight="1"-->
+<!--                        android:orientation="vertical">-->
+
+<!--                        <TextView-->
+<!--                            android:id="@+id/txtTotalEarned"-->
+<!--                            android:layout_width="match_parent"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:text="5,270"-->
+<!--                            android:textAlignment="center"-->
+
+<!--                            android:textColor="@color/black"-->
+<!--                            android:textSize="16sp"-->
+<!--                            android:textStyle="bold" />-->
+
+<!--                        <TextView-->
+<!--                            android:layout_width="match_parent"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:text="Hours Worked"-->
+<!--                            android:textSize="12sp"-->
+<!--                            android:textAllCaps="true"-->
+<!--                            android:textAlignment="center"-->
+<!--                            android:textStyle="bold" />-->
+
+<!--                    </LinearLayout>-->
+
+<!--                </LinearLayout>-->
+
+
+
+<!--            </androidx.constraintlayout.widget.ConstraintLayout>-->
+
+<!--        </androidx.cardview.widget.CardView>-->
+<!--        <androidx.cardview.widget.CardView-->
+<!--            android:id="@+id/cardWorkFeedback"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginStart="16dp"-->
+<!--            android:layout_marginTop="16dp"-->
+<!--            android:layout_marginEnd="16dp"-->
+
+<!--            app:cardCornerRadius="16dp"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toBottomOf="@id/cardChargesWork">-->
+
+<!--            <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:paddingBottom="10dp">-->
+
+<!--                <TextView-->
+<!--                    android:id="@+id/txtAvailability"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginStart="16dp"-->
+<!--                    android:layout_marginTop="16dp"-->
+<!--                    android:text="Work History and Feedback"-->
+<!--                    android:textColor="@color/black"-->
+<!--                    android:textStyle="bold"-->
+<!--                    app:layout_constraintStart_toStartOf="parent"-->
+<!--                    app:layout_constraintTop_toTopOf="parent" />-->
+
+<!--                <ImageView-->
+<!--                    android:layout_width="20dp"-->
+<!--                    android:layout_height="20dp"-->
+<!--                    android:layout_marginEnd="24dp"-->
+<!--                    android:src="@drawable/union"-->
+<!--                    app:layout_constraintBottom_toBottomOf="@+id/txtAvailability"-->
+<!--                    app:layout_constraintEnd_toEndOf="parent"-->
+<!--                    app:layout_constraintTop_toTopOf="@+id/txtAvailability" />-->
+
+
+
+
+
+
+
+<!--            </androidx.constraintlayout.widget.ConstraintLayout>-->
+
+<!--        </androidx.cardview.widget.CardView>-->
+<!--    </androidx.constraintlayout.widget.ConstraintLayout>-->
 </ScrollView>

@@ -211,7 +211,7 @@ public class AddJobsActivity extends AppCompatActivity {
         binding.btnCompany.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getApplicationContext(), CompanyActivity.class));
+
 
             }
         });

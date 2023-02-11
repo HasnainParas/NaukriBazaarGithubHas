@@ -17,16 +17,27 @@
         <entry key="..\:/NaukriBazaarGithubClone/app/src/main/res/layout/fragment_find_jobs_fragments.xml" value="0.17297297297297298" />
         <entry key="..\:/NaukriBazaarGithubClone/app/src/main/res/layout/fragment_job_buttons.xml" value="0.25" />
         <entry key="..\:/NaukriBazaarGithubClone/app/src/main/res/layout/handloading_dialog_layout.xml" value="0.17297297297297298" />
+        <entry key="..\:/NaukriBazaarGithubHas/app/src/main/res/drawable-v21/radiobtnonshape.xml" value="0.1185" />
         <entry key="..\:/NaukriBazaarGithubHas/app/src/main/res/drawable/avatar_placeholder.xml" value="0.1775" />
         <entry key="..\:/NaukriBazaarGithubHas/app/src/main/res/drawable/avatar_placeholder_click.xml" value="0.1775" />
         <entry key="..\:/NaukriBazaarGithubHas/app/src/main/res/drawable/bg4txtview.xml" value="0.1795" />
+        <entry key="..\:/NaukriBazaarGithubHas/app/src/main/res/drawable/custom_radiobutton.xml" value="0.1185" />
+        <entry key="..\:/NaukriBazaarGithubHas/app/src/main/res/drawable/edit_text_round.xml" value="0.161" />
         <entry key="..\:/NaukriBazaarGithubHas/app/src/main/res/drawable/green_circle.xml" value="0.1775" />
+        <entry key="..\:/NaukriBazaarGithubHas/app/src/main/res/drawable/greenradiobtnshape.xml" value="0.1185" />
+        <entry key="..\:/NaukriBazaarGithubHas/app/src/main/res/drawable/gridtextbg.xml" value="0.161" />
         <entry key="..\:/NaukriBazaarGithubHas/app/src/main/res/drawable/ic_add.xml" value="0.1795" />
         <entry key="..\:/NaukriBazaarGithubHas/app/src/main/res/drawable/ic_cancel.xml" value="0.1775" />
         <entry key="..\:/NaukriBazaarGithubHas/app/src/main/res/drawable/ic_job_svg.xml" value="0.1775" />
         <entry key="..\:/NaukriBazaarGithubHas/app/src/main/res/drawable/ic_optiondot.xml" value="0.1795" />
         <entry key="..\:/NaukriBazaarGithubHas/app/src/main/res/drawable/ic_remove.xml" value="0.1775" />
         <entry key="..\:/NaukriBazaarGithubHas/app/src/main/res/drawable/ic_upload.xml" value="0.1775" />
+        <entry key="..\:/NaukriBazaarGithubHas/app/src/main/res/drawable/radio_state.xml" value="0.1185" />
+        <entry key="..\:/NaukriBazaarGithubHas/app/src/main/res/drawable/radiobtnoffshape.xml" value="0.1185" />
+        <entry key="..\:/NaukriBazaarGithubHas/app/src/main/res/drawable/radiobtnonnshape.xml" value="0.1185" />
+        <entry key="..\:/NaukriBazaarGithubHas/app/src/main/res/drawable/radiobtnshape.xml" value="0.1185" />
+        <entry key="..\:/NaukriBazaarGithubHas/app/src/main/res/drawable/radiogreenview.xml" value="0.1185" />
+        <entry key="..\:/NaukriBazaarGithubHas/app/src/main/res/drawable/search_bg.xml" value="0.1185" />
         <entry key="..\:/NaukriBazaarGithubHas/app/src/main/res/drawable/usrbgbtn.xml" value="0.103" />
         <entry key="..\:/NaukriBazaarGithubHas/app/src/main/res/drawable/usrdetailbg.xml" value="0.103" />
         <entry key="..\:/NaukriBazaarGithubHas/app/src/main/res/drawable/viewblackdot.xml" value="0.1775" />
@@ -34,31 +45,46 @@
         <entry key="..\:/NaukriBazaarGithubHas/app/src/main/res/layout-v21/recycler_sample_find_jobs.xml" value="0.2" />
         <entry key="..\:/NaukriBazaarGithubHas/app/src/main/res/layout/aboutmelayout.xml" value="0.2" />
         <entry key="..\:/NaukriBazaarGithubHas/app/src/main/res/layout/activity_aa_for_checking.xml" value="0.2" />
-        <entry key="..\:/NaukriBazaarGithubHas/app/src/main/res/layout/activity_add_instant_job.xml" value="0.25" />
-        <entry key="..\:/NaukriBazaarGithubHas/app/src/main/res/layout/activity_add_jobs.xml" value="0.2" />
+        <entry key="..\:/NaukriBazaarGithubHas/app/src/main/res/layout/activity_add_instant_job.xml" value="0.33" />
+        <entry key="..\:/NaukriBazaarGithubHas/app/src/main/res/layout/activity_add_jobs.xml" value="0.25" />
         <entry key="..\:/NaukriBazaarGithubHas/app/src/main/res/layout/activity_add_posts.xml" value="0.2" />
+        <entry key="..\:/NaukriBazaarGithubHas/app/src/main/res/layout/activity_company.xml" value="0.2" />
         <entry key="..\:/NaukriBazaarGithubHas/app/src/main/res/layout/activity_dialog_notification.xml" value="0.2" />
-        <entry key="..\:/NaukriBazaarGithubHas/app/src/main/res/layout/activity_edit_profile.xml" value="0.5" />
-        <entry key="..\:/NaukriBazaarGithubHas/app/src/main/res/layout/activity_find_jobs.xml" value="0.5" />
+        <entry key="..\:/NaukriBazaarGithubHas/app/src/main/res/layout/activity_disclaimer.xml" value="0.1" />
+        <entry key="..\:/NaukriBazaarGithubHas/app/src/main/res/layout/activity_edit_profile.xml" value="0.25" />
+        <entry key="..\:/NaukriBazaarGithubHas/app/src/main/res/layout/activity_find_jobs.xml" value="0.2" />
+        <entry key="..\:/NaukriBazaarGithubHas/app/src/main/res/layout/activity_full_game.xml" value="0.1" />
         <entry key="..\:/NaukriBazaarGithubHas/app/src/main/res/layout/activity_full_time_job.xml" value="0.2" />
         <entry key="..\:/NaukriBazaarGithubHas/app/src/main/res/layout/activity_full_time_user_jobs.xml" value="0.2" />
         <entry key="..\:/NaukriBazaarGithubHas/app/src/main/res/layout/activity_instant_job.xml" value="0.2" />
+        <entry key="..\:/NaukriBazaarGithubHas/app/src/main/res/layout/activity_job_details.xml" value="0.2" />
+        <entry key="..\:/NaukriBazaarGithubHas/app/src/main/res/layout/activity_job_position.xml" value="0.2" />
         <entry key="..\:/NaukriBazaarGithubHas/app/src/main/res/layout/activity_main.xml" value="0.33" />
-        <entry key="..\:/NaukriBazaarGithubHas/app/src/main/res/layout/activity_njobs_detail.xml" value="0.33" />
+        <entry key="..\:/NaukriBazaarGithubHas/app/src/main/res/layout/activity_njobs_detail.xml" value="0.2" />
         <entry key="..\:/NaukriBazaarGithubHas/app/src/main/res/layout/activity_otpactivity.xml" value="0.33" />
         <entry key="..\:/NaukriBazaarGithubHas/app/src/main/res/layout/activity_paid_jobs.xml" value="0.1" />
         <entry key="..\:/NaukriBazaarGithubHas/app/src/main/res/layout/activity_registration.xml" value="0.22" />
+        <entry key="..\:/NaukriBazaarGithubHas/app/src/main/res/layout/activity_search.xml" value="0.19166666666666668" />
         <entry key="..\:/NaukriBazaarGithubHas/app/src/main/res/layout/activity_user_job_details.xml" value="0.33" />
         <entry key="..\:/NaukriBazaarGithubHas/app/src/main/res/layout/activity_user_name.xml" value="0.2" />
+        <entry key="..\:/NaukriBazaarGithubHas/app/src/main/res/layout/activity_view_profile.xml" value="0.2" />
+        <entry key="..\:/NaukriBazaarGithubHas/app/src/main/res/layout/add_appreciation_layout.xml" value="0.2" />
+        <entry key="..\:/NaukriBazaarGithubHas/app/src/main/res/layout/budgetinstantlayout.xml" value="0.17685185185185184" />
         <entry key="..\:/NaukriBazaarGithubHas/app/src/main/res/layout/datepicker_layout.xml" value="0.2" />
         <entry key="..\:/NaukriBazaarGithubHas/app/src/main/res/layout/dialog_topic_pick.xml" value="0.2" />
+        <entry key="..\:/NaukriBazaarGithubHas/app/src/main/res/layout/grid_item.xml" value="0.33" />
         <entry key="..\:/NaukriBazaarGithubHas/app/src/main/res/layout/handloading_dialog_layout.xml" value="0.2" />
+        <entry key="..\:/NaukriBazaarGithubHas/app/src/main/res/layout/instant_copmany_sample.xml" value="0.25" />
+        <entry key="..\:/NaukriBazaarGithubHas/app/src/main/res/layout/instantpositionlayout.xml" value="0.22" />
+        <entry key="..\:/NaukriBazaarGithubHas/app/src/main/res/layout/instanttimeperiod.xml" value="0.33" />
         <entry key="..\:/NaukriBazaarGithubHas/app/src/main/res/layout/job_list_layout.xml" value="0.2" />
         <entry key="..\:/NaukriBazaarGithubHas/app/src/main/res/layout/jobtitlesample_layout.xml" value="0.33" />
         <entry key="..\:/NaukriBazaarGithubHas/app/src/main/res/layout/menu_toolbar_notification.xml" value="0.2" />
         <entry key="..\:/NaukriBazaarGithubHas/app/src/main/res/layout/njobsample.xml" value="0.25" />
         <entry key="..\:/NaukriBazaarGithubHas/app/src/main/res/layout/post_job_request.xml" value="0.33" />
         <entry key="..\:/NaukriBazaarGithubHas/app/src/main/res/layout/sample_company.xml" value="0.2" />
+        <entry key="..\:/NaukriBazaarGithubHas/app/src/main/res/layout/skills_layout.xml" value="0.2" />
+        <entry key="..\:/NaukriBazaarGithubHas/app/src/main/res/layout/skillsrequiredbottomlayout.xml" value="0.25" />
         <entry key="..\:/NaukriBazaarGithubHas/app/src/main/res/layout/undo_changes_layout.xml" value="0.2" />
         <entry key="..\:/NaukriBazaarGithubHas/app/src/main/res/layout/userjobeyclersample.xml" value="0.2" />
         <entry key="..\:/Users/Faisal/AppData/Local/Android/Sdk/platforms/android-32/data/res/layout/simple_list_item_1.xml" value="0.19583333333333333" />
