@@ -50,6 +50,7 @@ public class JobPosition extends AppCompatActivity implements View.OnClickListen
         adapter.setNotifyOnChange(true);
         binding.listView.setAdapter(adapter);
         binding.btnAddPosition.setOnClickListener(this::onClick);
+
         binding.searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String s) {
@@ -64,7 +65,6 @@ public class JobPosition extends AppCompatActivity implements View.OnClickListen
                     if (data.equals(s)) {
                         binding.btnAddPosition.setVisibility(View.INVISIBLE);
                         adapter.getFilter().filter(s);
-
                         Log.d(TAG, s);
                     } else if (s.equals(""))
                         binding.btnAddPosition.setVisibility(View.INVISIBLE);

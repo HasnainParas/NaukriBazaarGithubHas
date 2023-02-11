@@ -104,7 +104,7 @@ dependencies {
 
     implementation 'com.emredavarci:CircleProgressBar:1.0.8'
     implementation 'com.github.yuriy-budiyev:circular-progress-bar:1.2.3'
-
+    implementation 'com.google.code.gson:gson:2.8.7'
 
 
 

@@ -17,49 +17,47 @@
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/click"
+        android:id="@+id/clickInstant"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:padding="5dp">
 
         <ImageView
-            android:id="@+id/imgGoogle"
+            android:id="@+id/imgGoogleInstant"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/googleic"
-            tools:ignore="MissingConstraints" />
+            tools:ignore="MissingConstraints"
+            tools:layout_editor_absoluteX="13dp" />
 
         <TextView
-            android:id="@+id/companyTitle"
+            android:id="@+id/companyTitleInstant"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
             android:fontFamily="@font/dm_sans"
             android:text="TextView"
             android:textColor="@color/black"
-            app:layout_constraintBottom_toTopOf="@+id/linearLayout5"
-            app:layout_constraintStart_toEndOf="@+id/imgGoogle"
+            app:layout_constraintBottom_toTopOf="@+id/instantLinear"
+            app:layout_constraintStart_toEndOf="@+id/imgGoogleInstant"
             app:layout_constraintTop_toTopOf="parent" />
 
         <LinearLayout
-            android:id="@+id/linearLayout5"
+            android:id="@+id/instantLinear"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
             android:orientation="horizontal"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/companyTitle"
-            app:layout_constraintTop_toBottomOf="@+id/companyTitle">
+            app:layout_constraintStart_toStartOf="@+id/companyTitleInstant"
+            app:layout_constraintTop_toBottomOf="@+id/companyTitleInstant">
 
             <TextView
-                android:id="@+id/company"
+                android:id="@+id/companyInstant"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="5dp"
@@ -67,14 +65,14 @@
                 android:text="Company" />
 
             <View
-                android:id="@+id/view3"
+                android:id="@+id/viewinstant"
                 android:layout_width="2dp"
                 android:layout_height="2dp"
                 android:layout_gravity="center"
                 android:background="@drawable/ellipse101" />
 
             <TextView
-                android:id="@+id/internet"
+                android:id="@+id/internetinstant"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"

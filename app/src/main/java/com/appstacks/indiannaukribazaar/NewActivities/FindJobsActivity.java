@@ -182,6 +182,7 @@ public class FindJobsActivity extends AppCompatActivity {
         dialog.setContentView(bottomsheetView);
         dialog.show();
         dialog.setCancelable(false);
+
         Button jobpostBtn = bottomsheetView.findViewById(R.id.jobPostBtn);
         Button instantJobBtn = bottomsheetView.findViewById(R.id.instantJobBtn);
         Button jobStatus = bottomsheetView.findViewById(R.id.jobStatusBtn);
@@ -191,7 +192,7 @@ public class FindJobsActivity extends AppCompatActivity {
             Intent intent = new Intent(FindJobsActivity.this, AddPostsActivity.class);
             intent.putExtra("username", username);
             intent.putExtra("useraddress", userAddress);
-            if (size >= 3) {
+            if (size >= 10) {
                 Toast.makeText(FindJobsActivity.this, "Your Limit is Finished", Toast.LENGTH_SHORT).show();
             } else {
                 startActivity(intent);
@@ -204,6 +205,7 @@ public class FindJobsActivity extends AppCompatActivity {
 
         instantJobBtn.setOnClickListener(view -> {
             startActivity(new Intent(FindJobsActivity.this, InstantJobActivity.class));
+            dialog.dismiss();
         });
 
 

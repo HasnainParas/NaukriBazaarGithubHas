@@ -13,11 +13,10 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
+        android:contentDescription="its cancel icon"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_remove"
-        android:contentDescription="its cancel icon"
-        />
+        app:srcCompat="@drawable/ic_remove" />
 
     <TextView
         android:id="@+id/postBtnintant"
@@ -46,12 +45,11 @@
         app:layout_constraintTop_toBottomOf="@+id/cancelBtnintant" />
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/jobPositionintant"
-        android:layout_width="match_parent"
+        android:id="@+id/btnCompanyintant"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginEnd="8dp"
         android:clickable="true"
         android:foreground="?android:attr/selectableItemBackground"
         app:cardCornerRadius="10dp"
@@ -68,7 +66,7 @@
             android:padding="5dp">
 
             <TextView
-                android:id="@+id/textView38intant"
+                android:id="@+id/addinstantComtitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
@@ -81,13 +79,12 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/txt_positonintant"
+                android:id="@+id/textCompanyInstant"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginBottom="8dp"
                 android:fontFamily="@font/dm_sans"
-                android:text="ffdsfasfasfd"
                 android:textColor="#524B6B"
                 android:textSize="14sp"
                 android:visibility="gone" />
@@ -127,16 +124,16 @@
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/btnCompanyintant"
+        android:id="@+id/jobPositionintant"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:clickable="true"
         android:foreground="?android:attr/selectableItemBackground"
         app:cardCornerRadius="10dp"
-        app:layout_constraintEnd_toEndOf="@+id/jobPositionintant"
-        app:layout_constraintStart_toStartOf="@+id/jobPositionintant"
-        app:layout_constraintTop_toBottomOf="@+id/jobPositionintant">
+        app:layout_constraintEnd_toEndOf="@+id/btnCompanyintant"
+        app:layout_constraintStart_toStartOf="@+id/btnCompanyintant"
+        app:layout_constraintTop_toBottomOf="@+id/btnCompanyintant">
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -147,7 +144,7 @@
             android:padding="5dp">
 
             <TextView
-                android:id="@+id/textView38intant2"
+                android:id="@+id/instantJobPositon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
@@ -160,13 +157,12 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/txt_positonintant"
+                android:id="@+id/txtPositonInstant"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginBottom="8dp"
                 android:fontFamily="@font/dm_sans"
-                android:text="ffdsfasfasfd"
                 android:textColor="#524B6B"
                 android:textSize="14sp"
                 android:visibility="gone" />
@@ -206,16 +202,16 @@
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/locationBtnintant"
+        android:id="@+id/budgetBtnintant"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:clickable="true"
         android:foreground="?android:attr/selectableItemBackground"
         app:cardCornerRadius="10dp"
-        app:layout_constraintEnd_toEndOf="@+id/btnCompanyintant"
-        app:layout_constraintStart_toStartOf="@+id/btnCompanyintant"
-        app:layout_constraintTop_toBottomOf="@+id/btnCompanyintant">
+        app:layout_constraintEnd_toEndOf="@+id/jobPositionintant"
+        app:layout_constraintStart_toStartOf="@+id/jobPositionintant"
+        app:layout_constraintTop_toBottomOf="@+id/jobPositionintant">
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -226,7 +222,7 @@
             android:padding="5dp">
 
             <TextView
-                android:id="@+id/textView38intant2"
+                android:id="@+id/budget"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
@@ -239,13 +235,12 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/txt_positonintant"
+                android:id="@+id/txtBudgetInstant"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginBottom="8dp"
                 android:fontFamily="@font/dm_sans"
-                android:text="ffdsfasfasfd"
                 android:textColor="#524B6B"
                 android:textSize="14sp"
                 android:visibility="gone" />
@@ -276,7 +271,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center|end"
                 android:layout_marginEnd="8dp"
-                android:visibility="invisible"
+                android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -287,16 +282,16 @@
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/employmentBtnintant"
+        android:id="@+id/timePeriodBtnintant"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:clickable="true"
         android:foreground="?android:attr/selectableItemBackground"
         app:cardCornerRadius="10dp"
-        app:layout_constraintEnd_toEndOf="@+id/locationBtnintant"
-        app:layout_constraintStart_toStartOf="@+id/locationBtnintant"
-        app:layout_constraintTop_toBottomOf="@+id/locationBtnintant">
+        app:layout_constraintEnd_toEndOf="@+id/budgetBtnintant"
+        app:layout_constraintStart_toStartOf="@+id/budgetBtnintant"
+        app:layout_constraintTop_toBottomOf="@+id/budgetBtnintant">
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -307,7 +302,7 @@
             android:padding="5dp">
 
             <TextView
-                android:id="@+id/textView38intant2"
+                android:id="@+id/timeperiond"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
@@ -320,7 +315,7 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/txt_positonintant"
+                android:id="@+id/txtTimePeriodInstant"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
@@ -329,7 +324,7 @@
                 android:text="ffdsfasfasfd"
                 android:textColor="#524B6B"
                 android:textSize="14sp"
-                android:visibility="gone" />
+                android:visibility="visible" />
 
         </LinearLayout>
 
@@ -356,7 +351,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center|end"
                 android:layout_marginEnd="8dp"
-                android:visibility="invisible"
+                android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -366,16 +361,16 @@
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/btnWorkplaceTypeintant"
+        android:id="@+id/skillRequriedIntant"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:clickable="true"
         android:foreground="?android:attr/selectableItemBackground"
         app:cardCornerRadius="10dp"
-        app:layout_constraintEnd_toEndOf="@+id/employmentBtnintant"
-        app:layout_constraintStart_toStartOf="@+id/employmentBtnintant"
-        app:layout_constraintTop_toBottomOf="@+id/employmentBtnintant">
+        app:layout_constraintEnd_toEndOf="@+id/timePeriodBtnintant"
+        app:layout_constraintStart_toStartOf="@+id/timePeriodBtnintant"
+        app:layout_constraintTop_toBottomOf="@+id/timePeriodBtnintant">
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -386,7 +381,7 @@
             android:padding="5dp">
 
             <TextView
-                android:id="@+id/textView38intant2"
+                android:id="@+id/skillrequried"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
@@ -399,7 +394,7 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/txt_positonintant"
+                android:id="@+id/txtSkillInstant"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
@@ -408,7 +403,7 @@
                 android:text="ffdsfasfasfd"
                 android:textColor="#524B6B"
                 android:textSize="14sp"
-                android:visibility="gone" />
+                android:visibility="visible" />
 
         </LinearLayout>
 
@@ -452,9 +447,9 @@
         android:clickable="true"
         android:foreground="?android:attr/selectableItemBackground"
         app:cardCornerRadius="10dp"
-        app:layout_constraintEnd_toEndOf="@+id/btnWorkplaceTypeintant"
-        app:layout_constraintStart_toStartOf="@+id/btnWorkplaceTypeintant"
-        app:layout_constraintTop_toBottomOf="@+id/btnWorkplaceTypeintant">
+        app:layout_constraintEnd_toEndOf="@+id/skillRequriedIntant"
+        app:layout_constraintStart_toStartOf="@+id/skillRequriedIntant"
+        app:layout_constraintTop_toBottomOf="@+id/skillRequriedIntant">
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -465,7 +460,7 @@
             android:padding="5dp">
 
             <TextView
-                android:id="@+id/textView38intant2"
+                android:id="@+id/descriptionInstanttitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
@@ -478,7 +473,7 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/txt_positonintant"
+                android:id="@+id/txtDescriptionInstant"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
@@ -488,7 +483,7 @@
                 android:text="hello this is khan from paksitan and you are the this this this"
                 android:textColor="#524B6B"
                 android:textSize="14sp"
-                android:visibility="gone" />
+                android:visibility="visible" />
 
         </LinearLayout>
 

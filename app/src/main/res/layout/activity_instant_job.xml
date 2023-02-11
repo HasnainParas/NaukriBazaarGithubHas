@@ -7,108 +7,107 @@
     tools:context=".NewActivities.InstantJobActivity">
 
     <ImageView
-        android:id="@+id/ic_bckinstant"
+        android:id="@+id/backBtnisntant"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
+        android:contentDescription="instantbackimage"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_arrow_back_black_24dp" />
 
     <TextView
-        android:id="@+id/postbtninstant"
+        android:id="@+id/postBtnInstant"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:fontFamily="@font/dm_sans"
         android:padding="5dp"
         android:text="Post"
-        android:textColor="#FF9228"
+        android:textColor="#FF5722"
         android:textSize="20sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/ic_bckinstant"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/ic_bckinstant" />
+        app:layout_constraintTop_toTopOf="@+id/backBtnisntant" />
 
     <TextView
-        android:id="@+id/addPostinstant"
+        android:id="@+id/tviewInstant1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="16dp"
         android:fontFamily="@font/dm_sans"
         android:text="Post New Job"
-        android:textColor="@color/green"
+        android:textColor="#689F38"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ic_bckinstant" />
+        app:layout_constraintTop_toBottomOf="@+id/backBtnisntant" />
 
     <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/userpictureinstant"
+        android:id="@+id/userDPinstant"
         android:layout_width="65dp"
         android:layout_height="65dp"
-        android:layout_marginStart="8dp"
         android:layout_marginTop="32dp"
         android:src="@drawable/profileplace"
-        app:layout_constraintStart_toStartOf="@+id/addPostinstant"
-        app:layout_constraintTop_toBottomOf="@+id/addPostinstant" />
+        app:layout_constraintStart_toStartOf="@+id/tviewInstant1"
+        app:layout_constraintTop_toBottomOf="@+id/tviewInstant1"
+        tools:ignore="ImageContrastCheck" />
 
     <TextView
-        android:id="@+id/usernameinstant"
+        android:id="@+id/userNameInstant"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginStart="16dp"
         android:fontFamily="@font/dm_sans"
         android:text="Orlando Diggs"
-        android:textColor="@color/green"
+        android:textColor="#689F38"
         android:textSize="18sp"
         android:textStyle="bold"
-        app:layout_constraintStart_toEndOf="@+id/userpictureinstant"
-        app:layout_constraintTop_toTopOf="@+id/userpictureinstant" />
+        app:layout_constraintBottom_toTopOf="@+id/locationInstant"
+        app:layout_constraintStart_toEndOf="@+id/userDPinstant"
+        app:layout_constraintTop_toTopOf="@+id/userDPinstant" />
 
     <TextView
-        android:id="@+id/useraddressinstant"
-        android:layout_width="0dp"
+        android:id="@+id/locationInstant"
+        android:layout_width="117dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
         android:fontFamily="@font/dm_sans"
         android:text="California, USA"
         android:textSize="14sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@+id/usernameinstant"
-        app:layout_constraintStart_toStartOf="@+id/usernameinstant"
-        app:layout_constraintTop_toBottomOf="@+id/usernameinstant" />
+        app:layout_constraintBottom_toBottomOf="@+id/userDPinstant"
+        app:layout_constraintStart_toStartOf="@+id/userNameInstant"
+        app:layout_constraintTop_toBottomOf="@+id/userNameInstant" />
 
     <TextView
-        android:id="@+id/textView22instant"
+        android:id="@+id/tview2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="32dp"
         android:fontFamily="@font/dm_sans"
         android:text="Job Title"
         android:textColor="@color/green"
         android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="@+id/userpictureinstant"
-        app:layout_constraintTop_toBottomOf="@+id/userpictureinstant" />
+        app:layout_constraintStart_toStartOf="@+id/userDPinstant"
+        app:layout_constraintTop_toBottomOf="@+id/userDPinstant"
+        tools:ignore="TextContrastCheck" />
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/etPostTitleinstant"
-        android:layout_width="0dp"
+        android:id="@+id/cardjobTitle"
+        android:layout_width="395dp"
+
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
-        android:layout_marginEnd="8dp"
         app:cardCornerRadius="10dp"
         app:cardElevation="5dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/textView22instant"
-        app:layout_constraintTop_toBottomOf="@+id/textView22instant">
+        app:layout_constraintStart_toStartOf="@+id/tview2"
+        app:layout_constraintTop_toBottomOf="@+id/tview2">
 
 
         <EditText
-            android:id="@+id/etPostTitleinstant"
+            android:id="@+id/editBoxTitleInstant"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/postbg"
@@ -118,59 +117,60 @@
             android:paddingStart="10dp"
             android:paddingTop="15dp"
             android:paddingEnd="10dp"
-            android:paddingBottom="15dp" />
+            android:paddingBottom="15dp"
+            android:textColorHint="#757575" />
     </androidx.cardview.widget.CardView>
 
     <TextView
-        android:id="@+id/textView23instant"
+        android:id="@+id/tview3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="16dp"
         android:fontFamily="@font/dm_sans"
         android:text="Description"
-        android:textColor="@color/green"
+        android:textColor="#2E7D32"
         android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="@+id/etPostTitleinstant"
-        app:layout_constraintTop_toBottomOf="@+id/etPostTitleinstant" />
+        app:layout_constraintStart_toStartOf="@+id/cardjobTitle"
+        app:layout_constraintTop_toBottomOf="@+id/cardjobTitle" />
 
     <TextView
-        android:id="@+id/textView23instant2"
+        android:id="@+id/tview4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="16dp"
         android:fontFamily="@font/dm_sans"
         android:text="Upload Logo"
-        android:textColor="@color/green"
+        android:textColor="#2E7D32"
         android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="@+id/cardView10"
-        app:layout_constraintTop_toBottomOf="@+id/cardView10" />
+        app:layout_constraintStart_toStartOf="@+id/carddiscriptionInstant"
+        app:layout_constraintTop_toBottomOf="@+id/carddiscriptionInstant" />
 
 
     <ImageView
+        android:id="@+id/uplogoBtnInstant"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:background="@drawable/green_circle"
         android:padding="20dp"
         android:src="@drawable/ic_upload"
-        app:layout_constraintEnd_toEndOf="@+id/cardView10"
-        app:layout_constraintStart_toStartOf="@+id/cardView10"
-        app:layout_constraintTop_toBottomOf="@+id/textView23instant2" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tview4"
+        tools:ignore="ImageContrastCheck" />
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/cardView10"
-        android:layout_width="0dp"
+        android:id="@+id/carddiscriptionInstant"
+        android:layout_width="395dp"
         android:layout_height="140dp"
         android:layout_marginTop="4dp"
         app:cardCornerRadius="10dp"
         app:cardElevation="5dp"
-        app:layout_constraintEnd_toEndOf="@+id/etPostTitleinstant"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/etPostTitleinstant"
-        app:layout_constraintTop_toBottomOf="@+id/textView23instant">
+        app:layout_constraintStart_toStartOf="@+id/tview3"
+        app:layout_constraintTop_toBottomOf="@+id/tview3">
 
         <EditText
-            android:id="@+id/etDescriptioninstant"
+            android:id="@+id/editBoxDiscriptionInstant"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@drawable/postbg"
@@ -180,49 +180,55 @@
             android:inputType="textMultiLine|textPersonName"
             android:maxLines="6"
             android:padding="10dp"
-            android:textAlignment="textStart" />
+            android:textAlignment="textStart"
+            android:textColorHint="#757575" />
 
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
-        android:layout_width="match_parent"
+        android:id="@+id/cardbottomInstant"
+        android:layout_width="411dp"
         android:layout_height="50dp"
         android:focusable="true"
         app:cardCornerRadius="10dp"
         app:cardElevation="5dp"
-        app:layout_constraintBottom_toBottomOf="parent">
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
             <ImageView
-                android:id="@+id/imgCamerainstant"
+                android:id="@+id/filebtnInstant"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center|start"
                 android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
                 android:layout_weight="0.3"
                 android:padding="5dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/ic_camera" />
+                app:srcCompat="@drawable/ic_camera"
+                tools:ignore="ImageContrastCheck" />
 
             <ImageView
-                android:id="@+id/imgGalleryinstant"
+                android:id="@+id/gallerybtninstant"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center|start"
-                android:layout_marginStart="8dp"
                 android:padding="5dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/imgCamerainstant"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/ic_picture" />
+                app:layout_constraintBottom_toBottomOf="@+id/filebtnInstant"
+                app:layout_constraintStart_toEndOf="@+id/filebtnInstant"
+                app:layout_constraintTop_toTopOf="@+id/filebtnInstant"
+                app:srcCompat="@drawable/ic_picture"
+                tools:ignore="ImageContrastCheck" />
 
             <TextView
-                android:id="@+id/hashtagidinstant"
+                android:id="@+id/hashtagTxtInstant"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -230,7 +236,7 @@
                 android:fontFamily="@font/open_sans"
                 android:padding="5dp"
                 android:text="Add hashtag"
-                android:textColor="@color/green"
+                android:textColor="#2E7D32"
                 android:textSize="16sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
