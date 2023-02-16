@@ -107,7 +107,8 @@ dependencies {
     implementation 'com.google.firebase:firebase-messaging'
     implementation 'com.android.volley:volley:1.2.1'
 
-    implementation 'com.facebook.android:facebook-android-sdk:latest.release'
+
+    implementation 'com.facebook.android:facebook-android-sdk:15.2.0'
 
     implementation 'com.emredavarci:CircleProgressBar:1.0.8'
     implementation 'com.github.yuriy-budiyev:circular-progress-bar:1.2.3'

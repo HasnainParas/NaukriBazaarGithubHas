@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -23,6 +24,8 @@ import com.appstacks.indiannaukribazaar.FirebaseModels.PersonalInformationModel;
 import com.appstacks.indiannaukribazaar.NewActivities.Models.UserJobModel;
 import com.appstacks.indiannaukribazaar.R;
 import com.appstacks.indiannaukribazaar.databinding.ActivityFindJobsBinding;
+import com.appstacks.indiannaukribazaar.profile.ProfileEditActivity;
+import com.bumptech.glide.Glide;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -37,13 +40,13 @@ import java.util.List;
 
 public class FindJobsActivity extends AppCompatActivity {
 
-    ActivityFindJobsBinding binding;
-    FirebaseAuth auth;
-    DatabaseReference userRef, userJobRef, allUserJobs;
-    String currentUser;
-    PersonalInformationModel model;
-    String username, userAddress;
-    int size;
+    private ActivityFindJobsBinding binding;
+    private FirebaseAuth auth;
+    private DatabaseReference userRef, userJobRef, allUserJobs;
+    private String currentUser;
+    private PersonalInformationModel model;
+    private String username, userAddress;
+    private int size;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +60,8 @@ public class FindJobsActivity extends AppCompatActivity {
 
         currentUser = auth.getCurrentUser().getUid();
 
+        fetchUserImage();
+
         userRef = FirebaseDatabase.getInstance().getReference();
 
         userJobRef = FirebaseDatabase.getInstance().getReference("userJobs");
@@ -64,6 +69,7 @@ public class FindJobsActivity extends AppCompatActivity {
 
 
         allUserJobs.addValueEventListener(new ValueEventListener() {
+            @SuppressLint("SetTextI18n")
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()) {
@@ -210,6 +216,23 @@ public class FindJobsActivity extends AppCompatActivity {
 
 
         cancenBtn.setOnClickListener(view -> dialog.dismiss());
+
+    }
+
+    private void fetchUserImage() {
+DatabaseReference mRef = FirebaseDatabase.getInstance().getReference(getString(R.string.user_profile));
+        mRef.child(currentUser).child("UserImage").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                String url = snapshot.getValue(String.class);
+                Glide.with(FindJobsActivity.this).load(url).placeholder(R.drawable.profileplace).into(binding.imageView13);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(FindJobsActivity.this, "" + error.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
 
     }
 

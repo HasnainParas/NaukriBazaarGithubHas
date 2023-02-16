@@ -338,7 +338,7 @@ public class AddInstantJobActivity extends AppCompatActivity {
 
                 gridAdapter.notifyDataSetChanged();
 
-            } else if (notExist(skillRequiredList.get(i))) {
+            } else if (!listToAdd.contains(item)) {
                 listToAdd.add(item);
                 gridAdapter.notifyDataSetChanged();
 
@@ -348,18 +348,7 @@ public class AddInstantJobActivity extends AppCompatActivity {
                 Toast.makeText(this, "juuu", Toast.LENGTH_SHORT).show();
             }
 
-            //cop
-//            if (notExist(i)) {
-//                listToAdd.add(item);
-//                gridAdapter.notifyDataSetChanged();
-//
-//            } else if (listToAdd.isEmpty()) {
-//                listToAdd.add(item);
-//                gridAdapter.notifyDataSetChanged();
-//
-//            } else {
-//                Toast.makeText(this, "select any other", Toast.LENGTH_SHORT).show();
-//            }
+
 
         });
 
@@ -370,6 +359,20 @@ public class AddInstantJobActivity extends AppCompatActivity {
         skillsrequiredBinding.gridSkillReq.setAdapter(gridAdapter);
 
 
+    }
+
+
+    private boolean checkExists(String item, ArrayList<String> list){
+        boolean isExist=false;
+
+        for (int i =0 ; i<list.size() ; i++ ){
+
+            if (item.equals(list.get(i)))
+                isExist= false;
+            else
+                return true;
+        }
+     return    isExist;
     }
 
     private boolean notExist(String  item) {

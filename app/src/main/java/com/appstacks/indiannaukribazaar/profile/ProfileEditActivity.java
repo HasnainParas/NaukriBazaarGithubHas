@@ -5,14 +5,17 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.annotation.SuppressLint;
+import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
-import com.appstacks.indiannaukribazaar.NewActivities.EditProfileActivity;
 import com.appstacks.indiannaukribazaar.NewActivities.SettingActivity;
 import com.appstacks.indiannaukribazaar.ProfileModels.AboutMeDescription;
 import com.appstacks.indiannaukribazaar.ProfileModels.AddWorkExperience;
@@ -29,6 +32,7 @@ import com.appstacks.indiannaukribazaar.profile.hourlycharges.AddHourlyChargesAc
 import com.appstacks.indiannaukribazaar.profile.resume.AddResmueActivity;
 import com.appstacks.indiannaukribazaar.profile.resume.Resume;
 import com.appstacks.indiannaukribazaar.profile.skills.SkillsActivity;
+import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -40,8 +44,11 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class ProfileEditActivity extends AppCompatActivity {
@@ -56,6 +63,10 @@ public class ProfileEditActivity extends AppCompatActivity {
     private StorageReference storageReference;
     private Resume resume;
     private Resume resumeData;
+    private final int PICK_IMAGE_REQUEST = 71;
+    private Uri filePath;
+    private StorageReference imageRef;
+    private String downloadUrl;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +75,7 @@ public class ProfileEditActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
         profileUtils = new ProfileUtils(this);
         userRef = FirebaseDatabase.getInstance().getReference("UsersProfile");
+        imageRef = FirebaseStorage.getInstance().getReference("UsersProfile");
         resume = new Resume();
         storageReference = FirebaseStorage.getInstance().getReference("Resumes/");
         userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
@@ -76,6 +88,8 @@ public class ProfileEditActivity extends AppCompatActivity {
         fetchAppreciation();
         fetchResume();
         fetchHourlyCharges();
+
+        fetchUserImage();
 
 
         //
@@ -156,8 +170,20 @@ public class ProfileEditActivity extends AppCompatActivity {
         binding.btnSettingeditprofile.setOnClickListener(view -> {
             startActivity(new Intent(ProfileEditActivity.this, SettingActivity.class));
         });
+
+        binding.btnAddProfileImage.setOnClickListener(view -> {
+            chooseImage();
+        });
     }
 
+    private void chooseImage() {
+
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE_REQUEST);
+
+    }
 
 
     private void fetchHourlyCharges() {
@@ -190,7 +216,7 @@ public class ProfileEditActivity extends AppCompatActivity {
                 if (snapshot.exists()) {
                     binding.btnResumeDelete.setVisibility(View.VISIBLE);
                     binding.btnResumeAdd.setVisibility(View.INVISIBLE);
-                    resumeData  = snapshot.getValue(Resume.class);
+                    resumeData = snapshot.getValue(Resume.class);
                     assert resume != null;
                     binding.txtResumeFileName.setText(resumeData.getPdfTitle());
                     binding.txtResumeInfor.setText(resumeData.getSize() + "." + resumeData.getTime());
@@ -206,15 +232,16 @@ public class ProfileEditActivity extends AppCompatActivity {
             }
         });
     }
+
     private void deleteResume() {
 
-        StorageReference reference = storageReference.child(userId+"/").child("pdf/").child(resumeData.getPdfTitle());
+        StorageReference reference = storageReference.child(userId + "/").child("pdf/").child(resumeData.getPdfTitle());
         reference.delete().addOnSuccessListener(unused -> userRef.child(userId).child("Resume").removeValue().addOnCompleteListener(task -> {
-            if (task.isComplete() && task.isSuccessful()){
+            if (task.isComplete() && task.isSuccessful()) {
                 Toast.makeText(ProfileEditActivity.this, "Deleted Success", Toast.LENGTH_SHORT).show();
                 binding.txtResumeFileName.setText(" ");
             }
-        }).addOnFailureListener(e -> Toast.makeText(ProfileEditActivity.this, ""+e.getLocalizedMessage(), Toast.LENGTH_SHORT).show())).addOnFailureListener(e -> Toast.makeText(ProfileEditActivity.this, ""+e.getLocalizedMessage(), Toast.LENGTH_SHORT).show());
+        }).addOnFailureListener(e -> Toast.makeText(ProfileEditActivity.this, "" + e.getLocalizedMessage(), Toast.LENGTH_SHORT).show())).addOnFailureListener(e -> Toast.makeText(ProfileEditActivity.this, "" + e.getLocalizedMessage(), Toast.LENGTH_SHORT).show());
 
     }
 
@@ -398,5 +425,80 @@ public class ProfileEditActivity extends AppCompatActivity {
                 Toast.makeText(ProfileEditActivity.this, "" + error.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK
+                && data != null && data.getData() != null) {
+            filePath = data.getData();
+            try {
+                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), filePath);
+                binding.circleImageView.setImageBitmap(bitmap);
+                uploadImage();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    private void uploadImage() {
+        if (filePath != null) {
+            final ProgressDialog progressDialog = new ProgressDialog(this);
+
+            StorageReference ref = imageRef.child("images/");
+            ref.putFile(filePath)
+                    .addOnSuccessListener(taskSnapshot -> {
+                        progressDialog.dismiss();
+                        ref.getDownloadUrl().addOnCompleteListener(task -> {
+                            if (task.isComplete() && task.isSuccessful()) {
+                                downloadUrl = task.getResult().toString();
+                                uploadImageData(downloadUrl);
+                            }
+                        }).addOnFailureListener(e -> Toast.makeText(ProfileEditActivity.this, "" + e.getLocalizedMessage(), Toast.LENGTH_SHORT).show());
+
+
+                        Toast.makeText(ProfileEditActivity.this, "Uploaded", Toast.LENGTH_SHORT).show();
+                    })
+                    .addOnFailureListener(e -> {
+                        progressDialog.dismiss();
+                        Toast.makeText(ProfileEditActivity.this, "Failed " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                    })
+                    .addOnProgressListener(taskSnapshot -> {
+                        double progress = (100.0 * taskSnapshot.getBytesTransferred() / taskSnapshot
+                                .getTotalByteCount());
+                        progressDialog.setMessage("Uploaded " + (int) progress + "%");
+                    });
+        }
+    }
+
+    private void uploadImageData(String downloadUrl) {
+
+        userRef.child(userId).child("UserImage").setValue(downloadUrl).addOnCompleteListener(task -> {
+
+            if (task.isComplete() && task.isSuccessful()) {
+                Toast.makeText(this, "Uploaded", Toast.LENGTH_SHORT).show();
+            }
+        }).addOnFailureListener(e -> {
+            Toast.makeText(this, "" + e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+        });
+    }
+
+    private void fetchUserImage() {
+
+        userRef.child(userId).child("UserImage").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                String url = snapshot.getValue(String.class);
+                Glide.with(ProfileEditActivity.this).load(url).into(binding.circleImageView);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(ProfileEditActivity.this, "" + error.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+
     }
 }
