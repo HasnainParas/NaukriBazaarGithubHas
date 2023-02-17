@@ -26,6 +26,7 @@ public class ProfileUtils {
     private static final String EDUCATION = "Education";
     private static final String SKILLS = "Skills";
     private static final String LANGUAGES = "Languages";
+    private static final String SELECTEDSKILLS = "SelectedSkill";
 
     public ProfileUtils(Context context) {
         this.context = context;
@@ -36,6 +37,7 @@ public class ProfileUtils {
         sharedPreferences = context.getSharedPreferences(EDUCATION, Context.MODE_PRIVATE);
         sharedPreferences = context.getSharedPreferences(SKILLS, Context.MODE_PRIVATE);
         sharedPreferences = context.getSharedPreferences(LANGUAGES,Context.MODE_PRIVATE);
+        sharedPreferences = context.getSharedPreferences(SELECTEDSKILLS,Context.MODE_PRIVATE);
     }
 
 
@@ -150,4 +152,30 @@ public class ProfileUtils {
 
         return sharedPreferences.getString(FIELD_OF_STUDY, "");
     }
+
+    public void saveSelectedSkills(ArrayList<String> list) {
+
+        Gson gson = new Gson();
+        String jsonStr = gson.toJson(list);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(SELECTEDSKILLS, jsonStr);
+        editor.apply();
+
+    }
+
+    public ArrayList<String> fetchSelectedSkills() {
+        String str = sharedPreferences.getString(SELECTEDSKILLS, null);
+        Gson gson = new Gson();
+        Type type = new TypeToken<ArrayList<String>>() {
+        }.getType();
+        return gson.fromJson(str, type);
+    }
+
+
+    public void deleteSelectedSkills() {
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.remove(SELECTEDSKILLS);
+        editor.apply();
+    }
+
 }

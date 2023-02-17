@@ -2,7 +2,10 @@ package com.appstacks.indiannaukribazaar.NewActivities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
@@ -14,8 +17,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.RadioButton;
 
+import android.widget.SearchView;
 import android.widget.Toast;
 
+import com.appstacks.indiannaukribazaar.NewActivities.Adapters.CompanyAdapter;
+import com.appstacks.indiannaukribazaar.NewActivities.Adapters.InstantCompanyAdapter;
+import com.appstacks.indiannaukribazaar.NewActivities.JobsActivities.AddInstantJobActivity;
+import com.appstacks.indiannaukribazaar.NewActivities.Models.CompanyModel;
 import com.appstacks.indiannaukribazaar.NewActivities.Models.UserJobModel;
 import com.appstacks.indiannaukribazaar.R;
 import com.appstacks.indiannaukribazaar.databinding.ActivityAddJobsBinding;
@@ -28,6 +36,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Random;
 import java.util.UUID;
@@ -41,6 +50,9 @@ public class AddJobsActivity extends AppCompatActivity {
     UserJobModel userJobModel;
     String userUid;
     AlertDialog loadingDialog;
+    ArrayList<CompanyModel> companyList;
+    CompanyAdapter companyJobAdapter;
+
 
     String uniqueKey;
 
@@ -167,7 +179,7 @@ public class AddJobsActivity extends AppCompatActivity {
                         binding.txtWorkplace.setText(onSitTxt);
                         binding.btnAdd5.setVisibility(View.INVISIBLE);
                         binding.btnEdit5.setVisibility(View.VISIBLE);
-//                        dialog.dismiss();
+                        dialog.dismiss();
                     }
                 });
 
@@ -180,7 +192,7 @@ public class AddJobsActivity extends AppCompatActivity {
                         binding.txtWorkplace.setText(hybridTxt);
                         binding.btnAdd5.setVisibility(View.INVISIBLE);
                         binding.btnEdit5.setVisibility(View.VISIBLE);
-//                        dialog.dismiss();
+                        dialog.dismiss();
 
                     }
                 });
@@ -192,7 +204,7 @@ public class AddJobsActivity extends AppCompatActivity {
                         binding.txtWorkplace.setText(remoteTxt);
                         binding.btnAdd5.setVisibility(View.INVISIBLE);
                         binding.btnEdit5.setVisibility(View.VISIBLE);
-//                        dialog.dismiss();
+                        dialog.dismiss();
                     }
                 });
 
@@ -211,6 +223,7 @@ public class AddJobsActivity extends AppCompatActivity {
         binding.btnCompany.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                companyBottomSheet();
 
 
             }
@@ -390,5 +403,58 @@ public class AddJobsActivity extends AppCompatActivity {
         loadingDialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
 
     }
+
+
+    public void companyBottomSheet(){
+
+        {
+            BottomSheetDialog dialog = new BottomSheetDialog(AddJobsActivity.this, R.style.AppBottomSheetDialogTheme);
+
+            View bottomsheetView = LayoutInflater.from(getApplicationContext()).
+                    inflate(R.layout.activity_company, (CardView) findViewById(R.id.UndoChanges));
+            dialog.setContentView(bottomsheetView);
+            dialog.show();
+            dialog.setCancelable(true);
+            RecyclerView recyclerViewBottomSheet = bottomsheetView.findViewById(R.id.recyclerViewCom);
+            SearchView searchView = bottomsheetView.findViewById(R.id.searchViewCom);
+
+            companyList = new ArrayList<>();
+            companyList.add(new CompanyModel(R.drawable.googleic, "Google", "Internet"));
+            companyList.add(new CompanyModel(R.drawable.ic_apple, "Apple", "Electronic goods"));
+            companyList.add(new CompanyModel(R.drawable.ic_amazon, "Amazon", "Internet"));
+            companyList.add(new CompanyModel(R.drawable.googleic, "Dribble", "Design"));
+            companyList.add(new CompanyModel(R.drawable.googleic, "Twitter", "Internet"));
+            companyList.add(new CompanyModel(R.drawable.googleic, "Facebook", "Internet"));
+            companyList.add(new CompanyModel(R.drawable.googleic, "Microsoft", "Internet"));
+            companyList.add(new CompanyModel(R.drawable.googleic, "Allianz", "Financial Service"));
+            companyList.add(new CompanyModel(R.drawable.googleic, "Adobe", "Computer software"));
+            companyList.add(new CompanyModel(R.drawable.googleic, "AXA", "Insurance"));
+            companyJobAdapter = new CompanyAdapter(companyList, this);
+
+            LinearLayoutManager layoutManager = new LinearLayoutManager(AddJobsActivity.this);
+            recyclerViewBottomSheet.setLayoutManager(layoutManager);
+            recyclerViewBottomSheet.setAdapter(companyJobAdapter);
+
+            searchView.setOnQueryTextListener(new android.widget.SearchView.OnQueryTextListener() {
+                @Override
+                public boolean onQueryTextSubmit(String s) {
+                    return false;
+                }
+
+                @Override
+                public boolean onQueryTextChange(String s) {
+                    companyJobAdapter.getFilter().filter(s);
+                    return false;
+                }
+            });
+
+
+        }
+
+
+    }
+
+
+
 }
 

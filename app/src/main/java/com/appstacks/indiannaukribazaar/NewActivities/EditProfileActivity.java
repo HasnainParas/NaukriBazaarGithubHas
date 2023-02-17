@@ -23,12 +23,13 @@ import com.appstacks.indiannaukribazaar.NewActivities.Adapters.GridAdapter;
 import com.appstacks.indiannaukribazaar.NewActivities.Adapters.LanguageGridAdapter;
 import com.appstacks.indiannaukribazaar.ProfileModels.AboutMeDescription;
 import com.appstacks.indiannaukribazaar.ProfileModels.AddWorkExperience;
-import com.appstacks.indiannaukribazaar.ProfileModels.Appreciation;
-import com.appstacks.indiannaukribazaar.ProfileModels.Education;
-import com.appstacks.indiannaukribazaar.ProfileModels.Resume;
-import com.appstacks.indiannaukribazaar.ProfileModels.SelectedLanguages;
+
 import com.appstacks.indiannaukribazaar.R;
 import com.appstacks.indiannaukribazaar.databinding.ActivityEditProfileBinding;
+import com.appstacks.indiannaukribazaar.profile.Education.Education;
+import com.appstacks.indiannaukribazaar.profile.Lanuages.SelectedLanguages;
+import com.appstacks.indiannaukribazaar.profile.appreciation.Appreciation;
+import com.appstacks.indiannaukribazaar.profile.resume.Resume;
 import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;

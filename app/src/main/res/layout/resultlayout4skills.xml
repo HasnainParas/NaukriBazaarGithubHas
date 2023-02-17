@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/resulttvidd"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="2dp"
+    android:ellipsize="end"
+    android:letterSpacing="0.2"
+    android:maxWidth="89dp"
+    android:maxHeight="24dp"
+    android:maxLength="20"
+    android:maxLines="1"
+    android:minWidth="90dp"
+    android:minEms="1"
+
+    android:padding="5dp"
+    android:text="TextViefsfsfddfsdw"
+    android:textAlignment="textStart"
+    android:textAllCaps="false"
+    android:textColor="@color/black"
+    android:textSize="15sp"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+
+
+    >
+
+
+</TextView>

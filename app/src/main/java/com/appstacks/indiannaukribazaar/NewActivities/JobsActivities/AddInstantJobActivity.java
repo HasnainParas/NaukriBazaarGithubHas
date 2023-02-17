@@ -1,5 +1,6 @@
 package com.appstacks.indiannaukribazaar.NewActivities.JobsActivities;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -40,6 +41,7 @@ import com.appstacks.indiannaukribazaar.databinding.BudgetinstantlayoutBinding;
 import com.appstacks.indiannaukribazaar.databinding.InstantpositionlayoutBinding;
 import com.appstacks.indiannaukribazaar.databinding.InstanttimeperiodBinding;
 import com.appstacks.indiannaukribazaar.databinding.SkillsrequiredbottomlayoutBinding;
+import com.appstacks.indiannaukribazaar.profile.ProfileUtils;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 
 import java.util.ArrayList;
@@ -54,10 +56,15 @@ public class AddInstantJobActivity extends AppCompatActivity {
     private ArrayList<String> positionList;
     private ArrayAdapter<String> positionAdapter;
     private ArrayAdapter<String> gridAdapter;
+    private ArrayAdapter<String> skillresultAdapter;
+
 
     private ArrayList<String> skillRequiredList = new ArrayList<String>();
     private ArrayAdapter<String> skillRequiredAdapter;
     ArrayList<String> listToAdd = new ArrayList<>();
+
+    private ProfileUtils profileUtils;
+    ArrayList<String> selectedSkills;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,18 +73,30 @@ public class AddInstantJobActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         sharedPrefe = new SharedPrefe(AddInstantJobActivity.this);
+        profileUtils = new ProfileUtils(AddInstantJobActivity.this);
+
 
         binding.textCompanyInstant.setText(sharedPrefe.fetchInstantCom());
         binding.txtPositonInstant.setText(sharedPrefe.fetchInstantPos());
         binding.txtBudgetInstant.setText(sharedPrefe.fetchInstantBudget());
         binding.txtTimePeriodInstant.setText(sharedPrefe.fetchInstantTimePeriod());
+        selectedSkills = profileUtils.fetchSelectedSkills();
 
+
+        LinearLayout.LayoutParams lparams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        for (int i = 0; i < selectedSkills.size(); i++) {
+            TextView tv = new TextView(this);
+            tv.setLayoutParams(lparams);
+            tv.setText(selectedSkills.get(i));
+            binding.textlayout.addView(tv);
+        }
 
         iconChange();
 
         binding.cancelBtnintant.setOnClickListener(view -> {
 
             sharedPrefe.deleteCom();
+            profileUtils.deleteSelectedSkills();
             Toast.makeText(getApplicationContext(), "Done", Toast.LENGTH_SHORT).show();
 
         });
@@ -307,7 +326,8 @@ public class AddInstantJobActivity extends AppCompatActivity {
         SkillsrequiredbottomlayoutBinding skillsrequiredBinding = SkillsrequiredbottomlayoutBinding.inflate(getLayoutInflater());
         skillsRequireddialog.setContentView(skillsrequiredBinding.getRoot());
         skillsRequireddialog.show();
-        skillsRequireddialog.setCancelable(true);
+        skillsRequireddialog.setCancelable(false);
+        skillsrequiredBinding.instantskillreqbackbtn.setOnClickListener(view -> skillsRequireddialog.dismiss());
 
 
         skillRequiredList.add("UI/UX Designing");
@@ -321,10 +341,13 @@ public class AddInstantJobActivity extends AppCompatActivity {
         skillRequiredList.add("DevOps");
         skillRequiredList.add("Machine learning");
         skillRequiredList.add("Data analysis");
+        skillRequiredList.add("Data 1");
+        skillRequiredList.add("Data 2");
 
-        skillRequiredAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_multiple_choice, skillRequiredList);
+
+        skillRequiredAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, skillRequiredList);
         skillRequiredAdapter.setNotifyOnChange(true);
-        skillsrequiredBinding.instantSkillReqListView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
+
         skillsrequiredBinding.instantSkillReqListView.setAdapter(skillRequiredAdapter);
 //        skillRequiredList.clear();
 
@@ -332,66 +355,39 @@ public class AddInstantJobActivity extends AppCompatActivity {
         skillsrequiredBinding.instantSkillReqListView.setOnItemClickListener((adapterView, view, i, l) -> {
             String item = skillRequiredList.get(i);
 
-//TODO thewr uihifhsdgfyuasidgsdgaysfv j vwue ridagydeorfusfgd ihas igdjsdadgas yugfastydi
+
+            //TODO thewr uihifhsdgfyuasidgsdgaysfv j vwue ridagydeorfusfgd ihas igdjsdadgas yugfastydi
             if (listToAdd.isEmpty()) {
                 listToAdd.add(item);
-
                 gridAdapter.notifyDataSetChanged();
 
-            } else if (notExist(skillRequiredList.get(i))) {
+            } else if (!listToAdd.contains(item)) {
                 listToAdd.add(item);
                 gridAdapter.notifyDataSetChanged();
-
-            } else if (listToAdd.size() == 10) {
-                Toast.makeText(this, "select any other", Toast.LENGTH_SHORT).show();
             } else {
-                Toast.makeText(this, "juuu", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Already", Toast.LENGTH_SHORT).show();
             }
 
-            //cop
-//            if (notExist(i)) {
-//                listToAdd.add(item);
-//                gridAdapter.notifyDataSetChanged();
-//
-//            } else if (listToAdd.isEmpty()) {
-//                listToAdd.add(item);
-//                gridAdapter.notifyDataSetChanged();
-//
-//            } else {
-//                Toast.makeText(this, "select any other", Toast.LENGTH_SHORT).show();
-//            }
+            if (listToAdd.size() == 10) {
+//                Toast.makeText(this, "Juuu 10 thega", Toast.LENGTH_SHORT).show();
+                skillresultDialog();
+
+            }
 
         });
 
 
+        gridAdapter = new ArrayAdapter<>(this, R.layout.grid_item, R.id.tvidd, listToAdd);
         //  JobPositionData.listJobPosition.addAll(skillRequiredList);
 
-        gridAdapter = new ArrayAdapter<>(this, R.layout.grid_item, R.id.tvidd, listToAdd);
+
         skillsrequiredBinding.gridSkillReq.setAdapter(gridAdapter);
 
+        skillsrequiredBinding.gridSkillReq.setOnItemClickListener((adapterView, view, i, l) -> {
+            listToAdd.remove(i);
+            gridAdapter.notifyDataSetChanged();
+        });
 
-    }
-
-    private boolean notExist(String  item) {
-
-        boolean result = false;
-
-        for (int j = 0; j <listToAdd.size(); ++j) {
-
-
-            if (item.equalsIgnoreCase(listToAdd.get(j))){
-                result =false;
-            }else{
-                result=true;
-            }
-//            if (!skillRequiredList.get(position).equals(listToAdd.get(j))) {
-//                result = true;
-//            } else {
-//                Toast.makeText(this, "Already exists in " + j, Toast.LENGTH_SHORT).show();
-//                result = false;
-//            }
-        }
-        return result;
 
     }
 
@@ -439,6 +435,55 @@ public class AddInstantJobActivity extends AppCompatActivity {
             binding.btnEdit4intant.setVisibility(View.GONE);
             binding.btnAdd4intant.setVisibility(View.VISIBLE);
         }
+        //skill
+        if (!selectedSkills.isEmpty() && selectedSkills == null) {
+            binding.textlayout.setVisibility(View.VISIBLE);
+            binding.btnEdit5intant.setVisibility(View.VISIBLE);
+            binding.btnAdd5intant.setVisibility(View.GONE);
+        } else {
+            binding.textlayout.setVisibility(View.GONE);
+            binding.btnEdit5intant.setVisibility(View.GONE);
+            binding.btnAdd5intant.setVisibility(View.VISIBLE);
+        }
+
+    }
+
+    public void skillresultDialog() {
+        View view = LayoutInflater.from(AddInstantJobActivity.this).inflate(R.layout.skillsresultdialog, null);
+
+        AlertDialog alertDialog = new AlertDialog.Builder(AddInstantJobActivity.this).setView(view).create();
+
+        alertDialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+
+        alertDialog.setCancelable(false);
+
+        alertDialog.show();
+
+        ListView resultlist;
+        Button okBtn, cancelBtn;
+
+        skillresultAdapter = new ArrayAdapter<>(this, R.layout.resultlayout4skills, R.id.resulttvidd, listToAdd);
+        //  JobPositionData.listJobPosition.addAll(skillRequiredList);
+
+        resultlist = view.findViewById(R.id.skillresultslist);
+        cancelBtn = view.findViewById(R.id.cancel_buttonResult);
+        okBtn = view.findViewById(R.id.ok_button);
+
+        cancelBtn.setOnClickListener(view1 -> alertDialog.dismiss());
+
+        okBtn.setOnClickListener(view1 -> {
+            if (!listToAdd.isEmpty()) {
+                profileUtils.saveSelectedSkills(listToAdd);
+                startActivity(new Intent(AddInstantJobActivity.this, AddInstantJobActivity.class));
+                finish();
+            } else {
+                alertDialog.dismiss();
+                Toast.makeText(this, "List is empty", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
+        resultlist.setAdapter(skillresultAdapter);
 
     }
 

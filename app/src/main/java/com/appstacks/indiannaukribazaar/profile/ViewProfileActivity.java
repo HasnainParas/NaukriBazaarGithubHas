@@ -24,14 +24,14 @@ public class ViewProfileActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
 
-        list= new ArrayList<>();
-        list.add(new Feedback("5","17 Feb","Android app development","Mehboob is such a nice guy he did very well and amazing. i will highly recomend him","$ 1,300","$45/Hr","74 Hrs"));
-        list.add(new Feedback("5","17 Feb","Android app development","Mehboob is such a nice guy he did very well and amazing. i will highly recomend him","$ 1,300","$45/Hr","74 Hrs"));
-        list.add(new Feedback("5","17 Feb","Android app development","Mehboob is such a nice guy he did very well and amazing. i will highly recomend him","$ 1,300","$45/Hr","74 Hrs"));
+        list = new ArrayList<>();
+        list.add(new Feedback("5", "17 Feb", "Android app development", "Mehboob is such a nice guy he did very well and amazing. i will highly recomend him", "$ 1,300", "$45/Hr", "74 Hrs"));
+        list.add(new Feedback("5", "17 Feb", "Android app development", "Mehboob is such a nice guy he did very well and amazing. i will highly recomend him", "$ 1,300", "$45/Hr", "74 Hrs"));
+        list.add(new Feedback("5", "17 Feb", "Android app development", "Mehboob is such a nice guy he did very well and amazing. i will highly recomend him", "$ 1,300", "$45/Hr", "74 Hrs"));
 
-        adapter= new FeedbackAdapter(this,list);
-        binding.recyclerFeedBack.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,true));
-        binding.recyclerFeedBack.setAdapter(adapter);
+        adapter = new FeedbackAdapter(this, list);
+//        binding.recyclerFeedBack.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, true));
+//        binding.recyclerFeedBack.setAdapter(adapter);
 
     }
 }

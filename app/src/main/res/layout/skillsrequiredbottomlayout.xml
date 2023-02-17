@@ -84,13 +84,13 @@
                 android:layout_marginEnd="8dp"
                 android:layout_marginBottom="8dp"
                 android:gravity="center"
-                android:numColumns="3"
+                android:horizontalSpacing="5dp"
+                android:numColumns="2"
                 android:paddingTop="5dp"
+                android:paddingBottom="20dp"
                 android:scrollIndicators="start"
                 android:stackFromBottom="false"
-                android:paddingBottom="20dp"
                 android:verticalSpacing="10dp"
-                android:horizontalSpacing="5dp"
                 tools:listitem="@layout/grid_item" />
 
             <ListView
@@ -99,7 +99,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:minHeight="48dp"
-                android:paddingBottom="30dp"
+                android:paddingBottom="50dp"
                 tools:ignore="TouchTargetSizeCheck,TouchTargetSizeCheck,TouchTargetSizeCheck" />
         </LinearLayout>
 
