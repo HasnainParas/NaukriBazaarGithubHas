@@ -27,9 +27,9 @@
     </string>
 
     <!--    Facebook Property-->
-    <string name="facebook_app_id">513903477260610</string>
-    <string name="fb_login_protocol_scheme">fb1234</string>
-    <string name="facebook_client_token">666eed3c80881e08f91a4eb1d5c1e5fb</string>
+    <string name="facebook_app_id">526493356134233</string>
+    <string name="fb_login_protocol_scheme">fb1234</string>\
+    <string name="facebook_client_token">205c35fc118fd293c78578a0ff616171</string>
 
     <string-array name="lanuages">
         <item>Hindi</item>

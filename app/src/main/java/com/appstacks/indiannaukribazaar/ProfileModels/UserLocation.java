@@ -2,8 +2,8 @@ package com.appstacks.indiannaukribazaar.ProfileModels;
 
 public class UserLocation {
 
-    private String latitude;
-    private String longitude;
+    private String latitude="";
+    private String longitude="";
     private String userId;
 
     public UserLocation(String latitude, String longitude, String userId) {

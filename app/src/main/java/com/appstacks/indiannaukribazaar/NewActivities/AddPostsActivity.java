@@ -16,6 +16,7 @@ import android.widget.Toast;
 import com.appstacks.indiannaukribazaar.FirebaseModels.PersonalInformationModel;
 import com.appstacks.indiannaukribazaar.R;
 import com.appstacks.indiannaukribazaar.databinding.ActivityAddPostsBinding;
+import com.bumptech.glide.Glide;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -24,15 +25,17 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.io.IOException;
+import java.util.Objects;
 
 public class AddPostsActivity extends AppCompatActivity {
 
-    ActivityAddPostsBinding binding;
-    SharedPrefe sharedPrefe;
+    private ActivityAddPostsBinding binding;
+    private SharedPrefe sharedPrefe;
     private static final int CAMERA_PIC_REQUEST = 1;
     private static final int GALLERY_PIC_REQUEST = 2;
+    private String userId;
+    private String username, useraddress;
 
-    String username, useraddress;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,60 +43,51 @@ public class AddPostsActivity extends AppCompatActivity {
         binding = ActivityAddPostsBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         sharedPrefe = new SharedPrefe(AddPostsActivity.this);
-
+        userId= Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
         username = getIntent().getStringExtra("username");
         useraddress = getIntent().getStringExtra("useraddress");
 
         binding.username.setText(username);
+
+        fetchUserImage();
+
         binding.useraddress.setText(useraddress);
 
-        binding.icBck.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                finish();
-            }
-        });
+        binding.icBck.setOnClickListener(view -> finish());
 
 
-        binding.imgCamera.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
-                startActivityForResult(cameraIntent, CAMERA_PIC_REQUEST);
-            }
+
+
+        binding.imgCamera.setOnClickListener(view -> {
+            Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+            startActivityForResult(cameraIntent, CAMERA_PIC_REQUEST);
         });
-        binding.imgGallery.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent();
-                intent.setType("image/*");
-                intent.setAction(Intent.ACTION_GET_CONTENT);
-                startActivityForResult(Intent.createChooser(intent, "Select Picture"), GALLERY_PIC_REQUEST);
-            }
+        binding.imgGallery.setOnClickListener(view -> {
+            Intent intent = new Intent();
+            intent.setType("image/*");
+            intent.setAction(Intent.ACTION_GET_CONTENT);
+            startActivityForResult(Intent.createChooser(intent, "Select Picture"), GALLERY_PIC_REQUEST);
         });
 
         binding.hashtagid.setOnClickListener(view -> {
 
         });
-        binding.postbtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (binding.etPostTitleTx.getText().toString().isEmpty()) {
-                    binding.etPostTitleTx.setError("Field Can't be empty");
-                    return;
-                } else if (binding.etDescription.getText().toString().isEmpty()) {
-                    binding.etDescription.setError("Field Can't be empty");
-                    return;
-                } else {
-                    Intent intent = new Intent(getApplicationContext(), AddJobsActivity.class);
-                    String descriptionTxt = binding.etDescription.getText().toString();
-                    String titleTxt = binding.etPostTitleTx.getText().toString();
-                    sharedPrefe.saveDescription(descriptionTxt);
-                    sharedPrefe.saveTitle(titleTxt);
-                    startActivity(intent);
-                }
-
+        binding.postbtn.setOnClickListener(view -> {
+            if (binding.etPostTitleTx.getText().toString().isEmpty()) {
+                binding.etPostTitleTx.setError("Field Can't be empty");
+                return;
+            } else if (binding.etDescription.getText().toString().isEmpty()) {
+                binding.etDescription.setError("Field Can't be empty");
+                return;
+            } else {
+                Intent intent = new Intent(getApplicationContext(), AddJobsActivity.class);
+                String descriptionTxt = binding.etDescription.getText().toString();
+                String titleTxt = binding.etPostTitleTx.getText().toString();
+                sharedPrefe.saveDescription(descriptionTxt);
+                sharedPrefe.saveTitle(titleTxt);
+                startActivity(intent);
             }
+
         });
     }
 
@@ -122,6 +116,22 @@ public class AddPostsActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
         }
+    }
+    private void fetchUserImage() {
+        DatabaseReference mRef = FirebaseDatabase.getInstance().getReference(getString(R.string.user_profile));
+        mRef.child(userId).child("UserImage").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                String url = snapshot.getValue(String.class);
+                Glide.with(AddPostsActivity.this).load(url).placeholder(R.drawable.profileplace).into(binding.userpicture);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(AddPostsActivity.this, "" + error.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+
     }
 
 }

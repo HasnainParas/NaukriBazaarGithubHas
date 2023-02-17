@@ -11,7 +11,9 @@ import android.widget.Toast;
 
 import com.appstacks.indiannaukribazaar.R;
 import com.appstacks.indiannaukribazaar.databinding.ActivitySettingBinding;
+import com.appstacks.indiannaukribazaar.profile.location.MapsActivity;
 import com.appstacks.indiannaukribazaar.profile.paymentmethods.AddPaymentMethodActivity;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -19,6 +21,7 @@ public class SettingActivity extends AppCompatActivity {
     ActivitySettingBinding binding;
     DatabaseReference databaseReference;
     private  String mStoreLink;
+    private String userId;
 
 
 
@@ -26,8 +29,9 @@ public class SettingActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mStoreLink = "market://details?id=" + getApplicationContext().getPackageName();
+        userId=FirebaseAuth.getInstance().getCurrentUser().getUid();
         binding = ActivitySettingBinding.inflate(getLayoutInflater());
-        databaseReference= FirebaseDatabase.getInstance().getReference(getString(R.string.user_profile)).child("Notifications");
+        databaseReference= FirebaseDatabase.getInstance().getReference(getString(R.string.user_profile)).child(userId).child("Notifications");
         setContentView(binding.getRoot());
 
 
@@ -36,8 +40,12 @@ public class SettingActivity extends AppCompatActivity {
         });
 
         binding.btnLocationAccountSetting.setOnClickListener(view -> {
-            startActivity(new Intent(SettingActivity.this, LocationActivity.class));
+//            Fragment fragment = new MapsFragment();
+//            getSupportFragmentManager().beginTransaction()
+//                    .replace(R.id.framelayout, fragment, fragment.getClass().getSimpleName())
+//                    .commit();
 
+            startActivity(new Intent(SettingActivity.this, MapsActivity.class));
         });
 
         binding.switchPushNotifications.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -78,6 +86,15 @@ public class SettingActivity extends AppCompatActivity {
             public void onClick(View view) {
                 rateUsOnGooglePlay();
             }
+        });
+
+        binding.btnLogout.setOnClickListener(view -> {
+            FirebaseAuth.getInstance().signOut();
+
+            startActivity(new Intent(SettingActivity.this,RegistrationActivity.class));
+            Toast.makeText(this, "Logout successfully", Toast.LENGTH_SHORT).show();
+            finishAffinity();
+
         });
     }
 
