@@ -53,7 +53,7 @@ public class InstantCompanyAdapter extends RecyclerView.Adapter<InstantCompanyAd
 
         holder.companyLogo.setImageResource(model.getImage());
         holder.title.setText(model.getTitle());
-        holder.internet.setText(model.getInternet());
+        holder.internet.setText(model.getType());
 
         holder.constraintLayout.setOnClickListener(new View.OnClickListener() {
             @Override

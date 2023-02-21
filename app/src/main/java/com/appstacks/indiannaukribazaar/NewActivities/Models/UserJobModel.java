@@ -4,8 +4,11 @@ public class UserJobModel {
 
     private String jobTitle,jobPosition, company, jobLocation, employmentType, typeOfWorkPlace, description,uniqueKey,userAuthId;
 
+
+
     public UserJobModel() {
     }
+
 
     public UserJobModel(String jobTitle, String jobPosition, String company, String jobLocation, String employmentType, String typeOfWorkPlace, String description, String uniqueKey, String userAuthId) {
         this.jobTitle = jobTitle;

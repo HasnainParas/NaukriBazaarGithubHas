@@ -25,6 +25,7 @@ import com.appstacks.indiannaukribazaar.NewActivities.Models.UserJobModel;
 import com.appstacks.indiannaukribazaar.R;
 import com.appstacks.indiannaukribazaar.databinding.ActivityFindJobsBinding;
 import com.appstacks.indiannaukribazaar.profile.ProfileEditActivity;
+import com.appstacks.indiannaukribazaar.profile.ProfileUtils;
 import com.bumptech.glide.Glide;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.firebase.auth.FirebaseAuth;
@@ -48,6 +49,8 @@ public class FindJobsActivity extends AppCompatActivity {
     private String username, userAddress;
     private int size;
 
+    private ProfileUtils profileUtils;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,15 +61,18 @@ public class FindJobsActivity extends AppCompatActivity {
         //Hashtag
         auth = FirebaseAuth.getInstance();
 
+        profileUtils= new ProfileUtils(this);
+
         currentUser = auth.getCurrentUser().getUid();
 
-        fetchUserImage();
+
 
         userRef = FirebaseDatabase.getInstance().getReference();
 
         userJobRef = FirebaseDatabase.getInstance().getReference("userJobs");
         allUserJobs = FirebaseDatabase.getInstance().getReference("allUserJobs");
 
+        Glide.with(this).load(profileUtils.fetchUserImage()).placeholder(R.drawable.profileplace).into(binding.imageView13);
 
         allUserJobs.addValueEventListener(new ValueEventListener() {
             @SuppressLint("SetTextI18n")
@@ -216,23 +222,6 @@ public class FindJobsActivity extends AppCompatActivity {
 
 
         cancenBtn.setOnClickListener(view -> dialog.dismiss());
-
-    }
-
-    private void fetchUserImage() {
-DatabaseReference mRef = FirebaseDatabase.getInstance().getReference(getString(R.string.user_profile));
-        mRef.child(currentUser).child("UserImage").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                String url = snapshot.getValue(String.class);
-                Glide.with(FindJobsActivity.this).load(url).placeholder(R.drawable.profileplace).into(binding.imageView13);
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(FindJobsActivity.this, "" + error.getMessage(), Toast.LENGTH_SHORT).show();
-            }
-        });
 
     }
 

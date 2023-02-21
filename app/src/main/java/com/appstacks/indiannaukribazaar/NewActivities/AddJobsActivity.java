@@ -118,215 +118,168 @@ public class AddJobsActivity extends AppCompatActivity {
             );
             loadingDialog.show();
 
-            allUserJobs.child(uniqueKey).setValue(userJobModel).addOnSuccessListener(new OnSuccessListener<Void>() {
-                @Override
-                public void onSuccess(Void unused) {
-                    Toast.makeText(AddJobsActivity.this, "JobPosted in AllUserNote...\n;)", Toast.LENGTH_SHORT).show();
-                }
-            });
+            allUserJobs.child(uniqueKey).setValue(userJobModel).addOnSuccessListener(unused -> Toast.makeText(AddJobsActivity.this, "JobPosted in AllUserNote...\n;)", Toast.LENGTH_SHORT).show());
 
-            userJobRef.child(userUid).child(uniqueKey).setValue(userJobModel).addOnSuccessListener(new OnSuccessListener<Void>() {
-                @Override
-                public void onSuccess(Void unused) {
-                    loadingDialog.dismiss();
-                    sharedPrefe.deleteAllsharedPre();
+            userJobRef.child(userUid).child(uniqueKey).setValue(userJobModel).addOnSuccessListener(unused -> {
+                loadingDialog.dismiss();
+                sharedPrefe.deleteAllsharedPre();
 //                    startActivity(new Intent(AddJobsActivity.this, UserJobDetailsActivity.class));
-                    Intent intent = new Intent(AddJobsActivity.this, UserJobDetailsActivity.class);
-                    intent.putExtra("unikey", uniqueKey);
-                    startActivity(intent);
-                    finish();
-                    Toast.makeText(AddJobsActivity.this, "Job submitted Successfully", Toast.LENGTH_SHORT).show();
-                }
-            }).addOnFailureListener(new OnFailureListener() {
-                @Override
-                public void onFailure(@NonNull Exception e) {
-                    loadingDialog.dismiss();
-                    Toast.makeText(AddJobsActivity.this, e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
-                }
+                Intent intent = new Intent(AddJobsActivity.this, UserJobDetailsActivity.class);
+                intent.putExtra("unikey", uniqueKey);
+                startActivity(intent);
+                finish();
+                Toast.makeText(AddJobsActivity.this, "Job submitted Successfully", Toast.LENGTH_SHORT).show();
+            }).addOnFailureListener(e -> {
+                loadingDialog.dismiss();
+                Toast.makeText(AddJobsActivity.this, e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
             });
 
         });
 
-        binding.jobPosition.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(getApplicationContext(), JobPosition.class));
-            }
+        binding.jobPosition.setOnClickListener(view -> startActivity(new Intent(getApplicationContext(), JobPosition.class)));
+
+        binding.btnWorkplaceType.setOnClickListener(view -> {
+
+            BottomSheetDialog dialog = new BottomSheetDialog(AddJobsActivity.this, R.style.AppBottomSheetDialogTheme);
+
+            View bottomsheetView = LayoutInflater.from(getApplicationContext()).
+                    inflate(R.layout.bottom_sheet_workplace, (ConstraintLayout) findViewById(R.id.bottom_sheet_container));
+
+            dialog.setContentView(bottomsheetView);
+            dialog.show();
+
+            RadioButton onsite = bottomsheetView.findViewById(R.id.onSitebtn);
+            RadioButton hybrid = bottomsheetView.findViewById(R.id.hybridBtn);
+            RadioButton remote = bottomsheetView.findViewById(R.id.remoteBtn);
+
+
+            onsite.setOnClickListener(view1 -> {
+                String onSitTxt = onsite.getText().toString();
+
+                binding.txtWorkplace.setText(onSitTxt);
+                binding.btnAdd5.setVisibility(View.INVISIBLE);
+                binding.btnEdit5.setVisibility(View.VISIBLE);
+                dialog.dismiss();
+            });
+
+            hybrid.setOnClickListener(view12 -> {
+
+
+                String hybridTxt = hybrid.getText().toString();
+                binding.txtWorkplace.setText(hybridTxt);
+                binding.btnAdd5.setVisibility(View.INVISIBLE);
+                binding.btnEdit5.setVisibility(View.VISIBLE);
+                dialog.dismiss();
+
+            });
+
+            remote.setOnClickListener(view13 -> {
+                String remoteTxt = remote.getText().toString();
+                binding.txtWorkplace.setText(remoteTxt);
+                binding.btnAdd5.setVisibility(View.INVISIBLE);
+                binding.btnEdit5.setVisibility(View.VISIBLE);
+                dialog.dismiss();
+            });
+
+
         });
 
-        binding.btnWorkplaceType.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        binding.locationBtn.setOnClickListener(view -> startActivity(new Intent(getApplicationContext(), JobLocationActivity.class)));
 
-                BottomSheetDialog dialog = new BottomSheetDialog(AddJobsActivity.this, R.style.AppBottomSheetDialogTheme);
+        binding.btnCompany.setOnClickListener(view ->
+//                companyBottomSheet()
+                startActivity(new Intent(AddJobsActivity.this,CompanyActivity.class))
+        );
 
-                View bottomsheetView = LayoutInflater.from(getApplicationContext()).
-                        inflate(R.layout.bottom_sheet_workplace, (ConstraintLayout) findViewById(R.id.bottom_sheet_container));
+        binding.employmentBtn.setOnClickListener(view -> {
 
-                dialog.setContentView(bottomsheetView);
-                dialog.show();
-
-                RadioButton onsite = bottomsheetView.findViewById(R.id.onSitebtn);
-                RadioButton hybrid = bottomsheetView.findViewById(R.id.hybridBtn);
-                RadioButton remote = bottomsheetView.findViewById(R.id.remoteBtn);
+            bottomSheetDialog = new BottomSheetDialog(AddJobsActivity.this, R.style.AppBottomSheetDialogTheme);
 
 
-                onsite.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        String onSitTxt = onsite.getText().toString();
+            bottomSheetDialog = new BottomSheetDialog(AddJobsActivity.this, R.style.AppBottomSheetDialogTheme);
+            View bottomsheetView = LayoutInflater.from(getApplicationContext()).
+                    inflate(R.layout.bottom_sheet_employment, findViewById(R.id.bottom_sheet_container));
 
-                        binding.txtWorkplace.setText(onSitTxt);
-                        binding.btnAdd5.setVisibility(View.INVISIBLE);
-                        binding.btnEdit5.setVisibility(View.VISIBLE);
-                        dialog.dismiss();
-                    }
-                });
+            bottomSheetDialog.setContentView(bottomsheetView);
+            bottomSheetDialog.show();
 
-                hybrid.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
+            RadioButton fullTime = bottomsheetView.findViewById(R.id.fulltime);
+            RadioButton partTime = bottomsheetView.findViewById(R.id.partTime);
+            RadioButton contract = bottomsheetView.findViewById(R.id.contract);
+            RadioButton temporary = bottomsheetView.findViewById(R.id.temporary);
+            RadioButton volunteer = bottomsheetView.findViewById(R.id.volunteer);
+            RadioButton apprenticeship = bottomsheetView.findViewById(R.id.apprenticeship);
 
-
-                        String hybridTxt = hybrid.getText().toString();
-                        binding.txtWorkplace.setText(hybridTxt);
-                        binding.btnAdd5.setVisibility(View.INVISIBLE);
-                        binding.btnEdit5.setVisibility(View.VISIBLE);
-                        dialog.dismiss();
-
-                    }
-                });
-
-                remote.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        String remoteTxt = remote.getText().toString();
-                        binding.txtWorkplace.setText(remoteTxt);
-                        binding.btnAdd5.setVisibility(View.INVISIBLE);
-                        binding.btnEdit5.setVisibility(View.VISIBLE);
-                        dialog.dismiss();
-                    }
-                });
+            fullTime.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
 
 
-            }
-        });
+                    String fullTimeTxt = fullTime.getText().toString();
 
-        binding.locationBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(getApplicationContext(), JobLocationActivity.class));
+                    binding.employmentTxt.setText(fullTimeTxt);
+                    dialogandimagechange();
 
-            }
-        });
-
-        binding.btnCompany.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                companyBottomSheet();
+                }
+            });
+            partTime.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
 
 
-            }
-        });
+                    String partTimeTxt = partTime.getText().toString();
 
-        binding.employmentBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                bottomSheetDialog = new BottomSheetDialog(AddJobsActivity.this, R.style.AppBottomSheetDialogTheme);
+                    binding.employmentTxt.setText(partTimeTxt);
+                    dialogandimagechange();
 
 
-                bottomSheetDialog = new BottomSheetDialog(AddJobsActivity.this, R.style.AppBottomSheetDialogTheme);
-                View bottomsheetView = LayoutInflater.from(getApplicationContext()).
-                        inflate(R.layout.bottom_sheet_employment, (ConstraintLayout) findViewById(R.id.bottom_sheet_container));
+                }
+            });
 
-                bottomSheetDialog.setContentView(bottomsheetView);
-                bottomSheetDialog.show();
+            contract.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    String contractTxt = contract.getText().toString();
 
-                RadioButton fullTime = bottomsheetView.findViewById(R.id.fulltime);
-                RadioButton partTime = bottomsheetView.findViewById(R.id.partTime);
-                RadioButton contract = bottomsheetView.findViewById(R.id.contract);
-                RadioButton temporary = bottomsheetView.findViewById(R.id.temporary);
-                RadioButton volunteer = bottomsheetView.findViewById(R.id.volunteer);
-                RadioButton apprenticeship = bottomsheetView.findViewById(R.id.apprenticeship);
+                    binding.employmentTxt.setText(contractTxt);
+                    dialogandimagechange();
 
-                fullTime.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
+                }
+            });
 
+            temporary.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
 
-                        String fullTimeTxt = fullTime.getText().toString();
+                    String temporaryTxt = contract.getText().toString();
 
-                        binding.employmentTxt.setText(fullTimeTxt);
-                        dialogandimagechange();
-
-                    }
-                });
-                partTime.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
+                    binding.employmentTxt.setText(temporaryTxt);
+                    dialogandimagechange();
 
 
-                        String partTimeTxt = partTime.getText().toString();
+                }
+            });
+            volunteer.setOnClickListener(view14 -> {
 
-                        binding.employmentTxt.setText(partTimeTxt);
-                        dialogandimagechange();
+                String volunteerTxt = volunteer.getText().toString();
 
-
-                    }
-                });
-
-                contract.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        String contractTxt = contract.getText().toString();
-
-                        binding.employmentTxt.setText(contractTxt);
-                        dialogandimagechange();
-
-                    }
-                });
-
-                temporary.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-
-                        String temporaryTxt = contract.getText().toString();
-
-                        binding.employmentTxt.setText(temporaryTxt);
-                        dialogandimagechange();
+                binding.employmentTxt.setText(volunteerTxt);
+                dialogandimagechange();
 
 
-                    }
-                });
-                volunteer.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
+            });
 
-                        String volunteerTxt = volunteer.getText().toString();
+            apprenticeship.setOnClickListener(view15 -> {
 
-                        binding.employmentTxt.setText(volunteerTxt);
-                        dialogandimagechange();
+                String apprenticeShipTxt = apprenticeship.getText().toString();
+
+                binding.employmentTxt.setText(apprenticeShipTxt);
+                dialogandimagechange();
 
 
-                    }
-                });
-
-                apprenticeship.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-
-                        String apprenticeShipTxt = apprenticeship.getText().toString();
-
-                        binding.employmentTxt.setText(apprenticeShipTxt);
-                        dialogandimagechange();
+            });
 
 
-                    }
-                });
-
-
-            }
         });
 
         binding.cancelBtn.setOnClickListener(view -> finish());

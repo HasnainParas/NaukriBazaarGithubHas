@@ -37,6 +37,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback,
         GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener,
@@ -50,17 +51,17 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private double longitude;
     private double latitude;
     private GoogleApiClient googleApiClient;
-private DatabaseReference databaseReference;
-private String userId;
+    private DatabaseReference databaseReference;
+    private String userId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
 
-        databaseReference=FirebaseDatabase.getInstance().getReference(getString(R.string.user_profile));
+        databaseReference = FirebaseDatabase.getInstance().getReference(getString(R.string.user_profile));
 
-         userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
@@ -85,7 +86,7 @@ private String userId;
 
         // Add a marker in Sydney and move the camera
         LatLng india = new LatLng(-34, 151);
-        mMap.addMarker(new MarkerOptions().position(india).title("Marker in India"));
+        mMap.addMarker(new MarkerOptions().position(india).title("Marker in You location"));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(india));
         mMap.setOnMarkerDragListener(this);
         mMap.setOnMapLongClickListener(this);
@@ -95,12 +96,12 @@ private String userId;
     private void getCurrentLocation() {
         mMap.clear();
         if (ContextCompat.checkSelfPermission(MapsActivity.this,
-                Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED){
+                Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             if (ActivityCompat.shouldShowRequestPermissionRationale(MapsActivity.this,
-                    Manifest.permission.ACCESS_FINE_LOCATION)){
+                    Manifest.permission.ACCESS_FINE_LOCATION)) {
                 ActivityCompat.requestPermissions(MapsActivity.this,
                         new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
-            }else{
+            } else {
                 ActivityCompat.requestPermissions(MapsActivity.this,
                         new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
             }
@@ -110,28 +111,28 @@ private String userId;
             //Getting longitude and latitude
             longitude = location.getLongitude();
             latitude = location.getLatitude();
-            UserLocation userLocation = new UserLocation(String.valueOf(latitude),String.valueOf(longitude),userId);
-        databaseReference.child(userId).child("Location").setValue(userLocation).addOnCompleteListener(new OnCompleteListener<Void>() {
-            @Override
-            public void onComplete(@NonNull Task<Void> task) {
-                if (task.isComplete() && task.isSuccessful()){
-                    Toast.makeText(MapsActivity.this, "Location added", Toast.LENGTH_SHORT).show();
-                }else{
-                    Toast.makeText(MapsActivity.this, "Something went wrong", Toast.LENGTH_SHORT).show();
+            UserLocation userLocation = new UserLocation(String.valueOf(latitude), String.valueOf(longitude), userId);
+            databaseReference.child(userId).child("Location").setValue(userLocation).addOnCompleteListener(new OnCompleteListener<Void>() {
+                @Override
+                public void onComplete(@NonNull Task<Void> task) {
+                    if (task.isComplete() && task.isSuccessful()) {
+                        Toast.makeText(MapsActivity.this, "Location added", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(MapsActivity.this, "Something went wrong", Toast.LENGTH_SHORT).show();
+                    }
                 }
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                Toast.makeText(MapsActivity.this, ""+e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
-            }
-        });
-        Toast.makeText(this, "Current location is " + location.getLatitude() + " - " + location.getLongitude(), Toast.LENGTH_SHORT).show();
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Toast.makeText(MapsActivity.this, "" + e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+                }
+            });
+            Toast.makeText(this, "Current location is " + location.getLatitude() + " - " + location.getLongitude(), Toast.LENGTH_SHORT).show();
 
-    }
-            //moving the map to location
-            moveMap();
         }
+        //moving the map to location
+        moveMap();
+    }
 
 
     private void moveMap() {
@@ -145,7 +146,7 @@ private String userId;
                 .position(latLng)
                 .draggable(true)
                 .title("Marker in India"));
-        
+
 
         mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
         mMap.animateCamera(CameraUpdateFactory.zoomTo(15));
@@ -156,7 +157,7 @@ private String userId;
 
     @Override
     public void onClick(View view) {
-        Log.v(TAG,"view click event");
+        Log.v(TAG, "view click event");
     }
 
     @Override
@@ -218,6 +219,7 @@ private String userId;
         Toast.makeText(MapsActivity.this, "onMarkerClick", Toast.LENGTH_SHORT).show();
         return true;
     }
+
     @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions,
                                            int[] grantResults) {

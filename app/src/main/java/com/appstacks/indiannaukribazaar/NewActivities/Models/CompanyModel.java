@@ -1,16 +1,28 @@
 package com.appstacks.indiannaukribazaar.NewActivities.Models;
 
+import android.net.Uri;
+
 public class CompanyModel {
 
 
     private int image;
     private String title;
-    private String internet;
+    private String type;
+    private Uri filepath;
 
-    public CompanyModel(int image, String title, String internet) {
+    public CompanyModel() {
+    }
+
+    public CompanyModel(int image, String title, String type) {
         this.image = image;
         this.title = title;
-        this.internet = internet;
+        this.type = type;
+    }
+
+    public CompanyModel(String title, String type, Uri filepath) {
+        this.title = title;
+        this.type = type;
+        this.filepath = filepath;
     }
 
     public int getImage() {
@@ -29,11 +41,19 @@ public class CompanyModel {
         this.title = title;
     }
 
-    public String getInternet() {
-        return internet;
+    public String getType() {
+        return type;
     }
 
-    public void setInternet(String internet) {
-        this.internet = internet;
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public Uri getFilepath() {
+        return filepath;
+    }
+
+    public void setFilepath(Uri filepath) {
+        this.filepath = filepath;
     }
 }

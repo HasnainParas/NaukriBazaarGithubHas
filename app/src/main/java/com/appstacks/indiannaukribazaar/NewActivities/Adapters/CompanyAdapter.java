@@ -2,6 +2,8 @@ package com.appstacks.indiannaukribazaar.NewActivities.Adapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,6 +29,7 @@ import com.appstacks.indiannaukribazaar.R;
 import com.appstacks.indiannaukribazaar.adapter.AdapterTopicPick;
 import com.appstacks.indiannaukribazaar.data.SharedPref;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -60,8 +63,17 @@ public class CompanyAdapter extends RecyclerView.Adapter<CompanyAdapter.viewHold
         sharedPrefe = new SharedPrefe(context);
 
         holder.companyLogo.setImageResource(model.getImage());
+        if (model.getFilepath() != null) {
+            Bitmap bitmap = null;
+            try {
+                bitmap = MediaStore.Images.Media.getBitmap(context.getContentResolver(), model.getFilepath());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            holder.companyLogo.setImageBitmap(bitmap);
+        }
         holder.title.setText(model.getTitle());
-        holder.internet.setText(model.getInternet());
+        holder.internet.setText(model.getType());
 
         holder.constraintLayout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -69,9 +81,9 @@ public class CompanyAdapter extends RecyclerView.Adapter<CompanyAdapter.viewHold
                 Intent intent = new Intent(context, AddJobsActivity.class);
                 intent.putExtra("company", model.getImage());
                 intent.putExtra("title", model.getTitle());
-                intent.putExtra("cominternet", model.getInternet());
+                intent.putExtra("cominternet", model.getType());
                 sharedPrefe.saveComTitle(model.getTitle());
-                sharedPrefe.saveCompany(model.getInternet());
+                sharedPrefe.saveCompany(model.getType());
                 context.startActivity(intent);
                 ((AppCompatActivity) context).finish();
 
@@ -87,44 +99,82 @@ public class CompanyAdapter extends RecyclerView.Adapter<CompanyAdapter.viewHold
 
     @Override
     public Filter getFilter() {
-        return filter;
-    }
 
-    Filter filter = new Filter() {
-        @Override
-        protected FilterResults performFiltering(CharSequence keyWord) {
 
-            ArrayList<CompanyModel> filterData = new ArrayList<>();
+        return new Filter() {
+            @Override
+            protected FilterResults performFiltering(CharSequence charSequence) {
+                ArrayList<CompanyModel> filterData = new ArrayList<>();
 
-            if (keyWord.toString().isEmpty()) {
+                if (charSequence.toString().isEmpty()) {
 
-                filterData.addAll(backup);
-            } else {
+                    filterData.addAll(backup);
 
-                for (CompanyModel obj : backup) {
 
-                    if (obj.getTitle().toString().toLowerCase()
-                            .contains(keyWord.toString().toLowerCase())) filterData.add(obj);
+                } else {
+
+                    for (CompanyModel obj : backup) {
+
+                        if (obj.getTitle().toString().toLowerCase()
+                                .contains(charSequence.toString().toLowerCase())) filterData.add(obj);
+
+                    }
 
                 }
+                FilterResults results = new FilterResults();
+                results.values = filterData;
+                return results;
 
             }
-            FilterResults results = new FilterResults();
-            results.values = filterData;
-            return results;
 
-        }
+            @Override
+            protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
 
-        @Override
-        protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
-
-            list.clear();
-            list.addAll((ArrayList<CompanyModel>) filterResults.values);
-            notifyDataSetChanged();
-        }
-    };
+                list.clear();
+                list.addAll((ArrayList<CompanyModel>) filterResults.values);
+                notifyDataSetChanged();
+            }
+        };
+    }
+//
+//    Filter filter = new Filter() {
+//        @Override
+//        protected FilterResults performFiltering(CharSequence keyWord) {
+//
+//            ArrayList<CompanyModel> filterData = new ArrayList<>();
+//
+//            if (keyWord.toString().isEmpty()) {
+//
+//                filterData.addAll(backup);
+//
+//
+//            } else {
+//
+//                for (CompanyModel obj : backup) {
+//
+//                    if (obj.getTitle().toString().toLowerCase()
+//                            .contains(keyWord.toString().toLowerCase())) filterData.add(obj);
+//
+//                }
+//
+//            }
+//            FilterResults results = new FilterResults();
+//            results.values = filterData;
+//            return results;
+//
+//        }
+//
+//        @Override
+//        protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
+//
+//            list.clear();
+//            list.addAll((ArrayList<CompanyModel>) filterResults.values);
+//            notifyDataSetChanged();
+//        }
+//    };
 
     public class viewHolder extends RecyclerView.ViewHolder {
+    
         TextView title, internet;
         ImageView companyLogo;
         ConstraintLayout constraintLayout;

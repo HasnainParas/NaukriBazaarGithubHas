@@ -16,6 +16,7 @@ import android.widget.Toast;
 import com.appstacks.indiannaukribazaar.FirebaseModels.PersonalInformationModel;
 import com.appstacks.indiannaukribazaar.R;
 import com.appstacks.indiannaukribazaar.databinding.ActivityAddPostsBinding;
+import com.appstacks.indiannaukribazaar.profile.ProfileUtils;
 import com.bumptech.glide.Glide;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -37,19 +38,30 @@ public class AddPostsActivity extends AppCompatActivity {
     private String username, useraddress;
 
 
+    private ProfileUtils profileUtils;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         binding = ActivityAddPostsBinding.inflate(getLayoutInflater());
+
         setContentView(binding.getRoot());
+
         sharedPrefe = new SharedPrefe(AddPostsActivity.this);
+
+        profileUtils= new ProfileUtils(this);
+
         userId= Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
+
         username = getIntent().getStringExtra("username");
         useraddress = getIntent().getStringExtra("useraddress");
 
         binding.username.setText(username);
 
-        fetchUserImage();
+        Glide.with(this).load(profileUtils.fetchUserImage()).placeholder(R.drawable.profileplace).into(binding.userpicture);
+
+
 
         binding.useraddress.setText(useraddress);
 
@@ -117,21 +129,6 @@ public class AddPostsActivity extends AppCompatActivity {
             }
         }
     }
-    private void fetchUserImage() {
-        DatabaseReference mRef = FirebaseDatabase.getInstance().getReference(getString(R.string.user_profile));
-        mRef.child(userId).child("UserImage").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                String url = snapshot.getValue(String.class);
-                Glide.with(AddPostsActivity.this).load(url).placeholder(R.drawable.profileplace).into(binding.userpicture);
-            }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(AddPostsActivity.this, "" + error.getMessage(), Toast.LENGTH_SHORT).show();
-            }
-        });
-
-    }
 
 }

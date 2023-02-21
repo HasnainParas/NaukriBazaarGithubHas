@@ -8,29 +8,26 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
+
 import android.widget.ArrayAdapter;
-import android.widget.LinearLayout;
+
 import android.widget.Toast;
 
 
-import com.appstacks.indiannaukribazaar.NewActivities.Adapters.GridAdapter;
+
 import com.appstacks.indiannaukribazaar.NewActivities.SettingActivity;
 import com.appstacks.indiannaukribazaar.ProfileModels.AboutMeDescription;
 import com.appstacks.indiannaukribazaar.ProfileModels.AddWorkExperience;
 import com.appstacks.indiannaukribazaar.R;
 import com.appstacks.indiannaukribazaar.databinding.ActivityUserProfile2Binding;
 import com.appstacks.indiannaukribazaar.profile.Education.Education;
-import com.appstacks.indiannaukribazaar.profile.Lanuages.AddlanguagesActivity;
-import com.appstacks.indiannaukribazaar.profile.Lanuages.LanguagesAdapterFirebase;
+
 import com.appstacks.indiannaukribazaar.profile.Lanuages.SelectedLanguages;
 import com.appstacks.indiannaukribazaar.profile.appreciation.Appreciation;
-import com.appstacks.indiannaukribazaar.profile.appreciation.EditAppreciationActivity;
-import com.appstacks.indiannaukribazaar.profile.resume.AddResmueActivity;
+
 import com.appstacks.indiannaukribazaar.profile.resume.Resume;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.Task;
+
+import com.bumptech.glide.Glide;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -73,6 +70,9 @@ public class UserProfileActivity extends AppCompatActivity {
         fetchAppreciation();
         fetchResume();
         fetchHourlyCharges();
+
+
+
 //     checkForpreferences();
 
 
@@ -131,6 +131,8 @@ public class UserProfileActivity extends AppCompatActivity {
             }
         });
     }
+
+
 
     private void fetchAppreciation() {
 
@@ -308,6 +310,7 @@ public class UserProfileActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        Glide.with(getApplicationContext()).load(profileUtils.fetchUserImage()).placeholder(R.drawable.userimg).into(binding.circleImageView);
 //        checkForpreferences();
     }
 

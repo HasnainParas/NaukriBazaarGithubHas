@@ -2,6 +2,8 @@ package com.appstacks.indiannaukribazaar.profile;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatImageView;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.annotation.SuppressLint;
@@ -12,10 +14,14 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.appstacks.indiannaukribazaar.NewActivities.FindJobsActivity;
 import com.appstacks.indiannaukribazaar.NewActivities.SettingActivity;
 import com.appstacks.indiannaukribazaar.ProfileModels.AboutMeDescription;
 import com.appstacks.indiannaukribazaar.ProfileModels.AddWorkExperience;
@@ -37,6 +43,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -89,7 +96,7 @@ public class ProfileEditActivity extends AppCompatActivity {
         fetchResume();
         fetchHourlyCharges();
 
-        fetchUserImage();
+
 
 
         //
@@ -172,8 +179,40 @@ public class ProfileEditActivity extends AppCompatActivity {
         });
 
         binding.btnAddProfileImage.setOnClickListener(view -> {
-            chooseImage();
+            if (profileUtils.fetchUserImage() == null)
+                chooseImage();
+            else
+                openDialog();
         });
+    }
+
+    private void openDialog() {
+        BottomSheetDialog dialog = new BottomSheetDialog(ProfileEditActivity.this, R.style.AppBottomSheetDialogTheme);
+
+        View bottomsheetView = LayoutInflater.from(getApplicationContext()).
+                inflate(R.layout.add_edit_profileimage, (CardView) findViewById(R.id.UndoChanges));
+        dialog.setContentView(bottomsheetView);
+        dialog.show();
+        dialog.setCancelable(false);
+
+
+//        AppCompatImageView cancel = findViewById(R.id.addProfilePicCancelBtn);
+        ImageView userImage = bottomsheetView.findViewById(R.id.imageOfUser);
+        Button btnCancel =bottomsheetView. findViewById(R.id.btnCancle);
+        Button btnYes =bottomsheetView. findViewById(R.id.btnYes);
+
+
+        Glide.with(this).load(profileUtils.fetchUserImage()).placeholder(R.drawable.userimg).into(userImage);
+        btnCancel.setOnClickListener(view -> {
+            dialog.dismiss();
+        });
+        btnYes.setOnClickListener(view -> {
+            profileUtils.saveUserImage("");
+            chooseImage();
+            dialog.dismiss();
+        });
+
+
     }
 
     private void chooseImage() {
@@ -454,6 +493,7 @@ public class ProfileEditActivity extends AppCompatActivity {
                         ref.getDownloadUrl().addOnCompleteListener(task -> {
                             if (task.isComplete() && task.isSuccessful()) {
                                 downloadUrl = task.getResult().toString();
+                                profileUtils.saveUserImage(downloadUrl);
                                 uploadImageData(downloadUrl);
                             }
                         }).addOnFailureListener(e -> Toast.makeText(ProfileEditActivity.this, "" + e.getLocalizedMessage(), Toast.LENGTH_SHORT).show());
@@ -491,7 +531,8 @@ public class ProfileEditActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 String url = snapshot.getValue(String.class);
-                Glide.with(ProfileEditActivity.this).load(url).into(binding.circleImageView);
+                Glide.with(getApplicationContext()).load(url).into(binding.circleImageView);
+
             }
 
             @Override
@@ -500,5 +541,11 @@ public class ProfileEditActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        fetchUserImage();
     }
 }
