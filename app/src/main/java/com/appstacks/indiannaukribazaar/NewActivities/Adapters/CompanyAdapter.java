@@ -79,12 +79,13 @@ public class CompanyAdapter extends RecyclerView.Adapter<CompanyAdapter.viewHold
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(context, AddJobsActivity.class);
-                intent.putExtra("company", model.getImage());
+                intent.putExtra("company", model.getImageUrl());
                 intent.putExtra("title", model.getTitle());
                 intent.putExtra("cominternet", model.getType());
                 sharedPrefe.saveComTitle(model.getTitle());
                 sharedPrefe.saveCompany(model.getType());
                 context.startActivity(intent);
+
                 ((AppCompatActivity) context).finish();
 
             }

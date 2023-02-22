@@ -486,7 +486,7 @@ public class ProfileEditActivity extends AppCompatActivity {
         if (filePath != null) {
             final ProgressDialog progressDialog = new ProgressDialog(this);
 
-            StorageReference ref = imageRef.child("images/");
+            StorageReference ref = imageRef.child(userId).child("images/");
             ref.putFile(filePath)
                     .addOnSuccessListener(taskSnapshot -> {
                         progressDialog.dismiss();

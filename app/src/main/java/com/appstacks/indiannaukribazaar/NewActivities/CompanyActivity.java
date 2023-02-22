@@ -1,5 +1,6 @@
 package com.appstacks.indiannaukribazaar.NewActivities;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -24,10 +25,21 @@ import com.appstacks.indiannaukribazaar.NewActivities.Models.CompanyModel;
 import com.appstacks.indiannaukribazaar.R;
 import com.appstacks.indiannaukribazaar.databinding.ActivityCompanyBinding;
 import com.appstacks.indiannaukribazaar.databinding.AddCompanyLayoutBinding;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.UUID;
 
 public class CompanyActivity extends AppCompatActivity {
 
@@ -37,18 +49,26 @@ public class CompanyActivity extends AppCompatActivity {
     private CompanyAdapter adapter;
     private final int PICK_IMAGE_REQUEST = 71;
     private Uri filePath;
-   private AddCompanyLayoutBinding addCompanyLayoutBinding;
+    private AddCompanyLayoutBinding addCompanyLayoutBinding;
     ImageView companyLogo;
     ArrayList<CompanyModel> list;
+
+    private DatabaseReference databaseReference;
+    private StorageReference storageReference;
+    private String userId;
+    private String downloadUrl;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityCompanyBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-       list  = new ArrayList<>();
+        list = new ArrayList<>();
         sharedPrefe = new SharedPrefe(this);
-
+        databaseReference = FirebaseDatabase.getInstance().getReference(getString(R.string.user_profile));
+        storageReference = FirebaseStorage.getInstance().getReference(getString(R.string.user_profile));
+        userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
         list.add(new CompanyModel(R.drawable.googleic, "Google", "Internet"));
         list.add(new CompanyModel(R.drawable.ic_apple, "Apple", "Electronic goods"));
@@ -103,7 +123,7 @@ public class CompanyActivity extends AppCompatActivity {
                     binding.layoutNothing.setVisibility(View.VISIBLE);
 
                     binding.btnAdd.setOnClickListener(view -> {
-bottomDialog();
+                        bottomDialog();
                     });
                 } else {
                     binding.layoutNothing.setVisibility(View.GONE);
@@ -126,6 +146,7 @@ bottomDialog();
         finish();
 
     }
+
     @SuppressLint("MissingInflatedId")
     private void bottomDialog() {
         BottomSheetDialog dialog = new BottomSheetDialog(CompanyActivity.this, R.style.AppBottomSheetDialogTheme);
@@ -137,53 +158,74 @@ bottomDialog();
         dialog.show();
         dialog.setCancelable(false);
         Button addCompany = bottomsheetView.findViewById(R.id.btnAddCompany);
-        EditText etCompanyType= bottomsheetView.findViewById(R.id.etCompanyType);
+        EditText etCompanyType = bottomsheetView.findViewById(R.id.etCompanyType);
 
         ImageView cancel = bottomsheetView.findViewById(R.id.addCompanyCancelBtn);
-        EditText etCompanyName= bottomsheetView.findViewById(R.id.etCompanyName);
-         companyLogo=bottomsheetView.findViewById(R.id.uploadCompanyLogo);
+        EditText etCompanyName = bottomsheetView.findViewById(R.id.etCompanyName);
+        companyLogo = bottomsheetView.findViewById(R.id.uploadCompanyLogo);
 
 
         companyLogo.setOnClickListener(view -> {
             chooseImage();
 
-       });
+        });
         cancel.setOnClickListener(view -> {
             dialog.dismiss();
         });
 
-addCompany.setOnClickListener(view -> {
-    if (etCompanyType.getText().toString().isEmpty()){
-        Toast.makeText(this, "Add Company service type", Toast.LENGTH_SHORT).show();
+        addCompany.setOnClickListener(view -> {
+            if (etCompanyType.getText().toString().isEmpty()) {
+                Toast.makeText(this, "Add Company service type", Toast.LENGTH_SHORT).show();
 
-    }else if (etCompanyName.getText().toString().isEmpty()){
-        Toast.makeText(this, "Add company name", Toast.LENGTH_SHORT).show();
+            } else if (etCompanyName.getText().toString().isEmpty()) {
+                Toast.makeText(this, "Add company name", Toast.LENGTH_SHORT).show();
 
-    }else if (filePath== null){
-        Toast.makeText(this, "Add company logo", Toast.LENGTH_SHORT).show();
+            } else if (filePath == null) {
+                Toast.makeText(this, "Add company logo", Toast.LENGTH_SHORT).show();
 
-    }else{
-       addCompany(etCompanyName.getText().toString(),etCompanyType.getText().toString(),filePath,dialog);
-    }
-});
-
-
-
+            } else {
+                addCompany(etCompanyName.getText().toString(), etCompanyType.getText().toString(), filePath, dialog);
+            }
+        });
 
 
     }
 
-    private void addCompany(String companyName, String companyType, Uri filePath,BottomSheetDialog dialog) {
+    private void addCompany(String companyName, String companyType, Uri filePath, BottomSheetDialog dialog) {
 
+    StorageReference ref=    storageReference.child(userId).child("company "+ UUID.randomUUID().toString());
 
-        list.add(new CompanyModel(companyName,companyType,filePath));
-      //  list.notify();
+    ref.putFile(filePath).addOnSuccessListener(taskSnapshot -> ref.getDownloadUrl().addOnCompleteListener(task -> {
+
+        if (task.isComplete() && task.isSuccessful()) {
+            downloadUrl = task.getResult().toString();
+
+            uploadImageData(downloadUrl,companyType,companyName);
+        }
+
+    }).addOnFailureListener(e -> {
+        Toast.makeText(CompanyActivity.this, ""+e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+    })).addOnFailureListener(e -> Toast.makeText(CompanyActivity.this, ""+e.getLocalizedMessage(), Toast.LENGTH_SHORT).show());
+
+        list.add(new CompanyModel(companyName, companyType, filePath));
+        //  list.notify();
         adapter.notifyDataSetChanged();
         dialog.cancel();
         dialog.dismiss();
 
 
+    }
 
+    private void uploadImageData(String downloadUrl, String companyType, String companyName) {
+        CompanyModel data = new CompanyModel(companyName,companyType,downloadUrl);
+
+        databaseReference.child(userId).child("Company").setValue(data).addOnCompleteListener(task -> {
+            if (task.isComplete() && task.isSuccessful()){
+                Toast.makeText(CompanyActivity.this, "Company added", Toast.LENGTH_SHORT).show();
+            }
+        }).addOnFailureListener(e -> {
+            Toast.makeText(this, ""+e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+        });
     }
 
     private void chooseImage() {
@@ -194,6 +236,7 @@ addCompany.setOnClickListener(view -> {
         startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE_REQUEST);
 
     }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -202,7 +245,7 @@ addCompany.setOnClickListener(view -> {
             filePath = data.getData();
             try {
                 Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), filePath);
-               companyLogo .setImageBitmap(bitmap);
+                companyLogo.setImageBitmap(bitmap);
 
             } catch (IOException e) {
                 e.printStackTrace();

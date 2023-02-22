@@ -9,8 +9,17 @@ public class CompanyModel {
     private String title;
     private String type;
     private Uri filepath;
+    private String imageUrl;
 
     public CompanyModel() {
+    }
+
+
+
+    public CompanyModel(String title, String type, String imageUrl) {
+        this.title = title;
+        this.type = type;
+        this.imageUrl = imageUrl;
     }
 
     public CompanyModel(int image, String title, String type) {
@@ -51,6 +60,13 @@ public class CompanyModel {
 
     public Uri getFilepath() {
         return filepath;
+    }
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 
     public void setFilepath(Uri filepath) {

@@ -11,10 +11,12 @@ import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 
 import android.widget.SearchView;
@@ -36,26 +38,27 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Random;
 import java.util.UUID;
 
 public class AddJobsActivity extends AppCompatActivity {
-    SharedPrefe sharedPrefe;
-    ActivityAddJobsBinding binding;
-    BottomSheetDialog bottomSheetDialog;
+    private SharedPrefe sharedPrefe;
+    private ActivityAddJobsBinding binding;
+    private BottomSheetDialog bottomSheetDialog;
     //    int checkRadio;
-    DatabaseReference userJobRef, allUserJobs;
-    UserJobModel userJobModel;
-    String userUid;
-    AlertDialog loadingDialog;
-    ArrayList<CompanyModel> companyList;
-    CompanyAdapter companyJobAdapter;
+    private DatabaseReference userJobRef, allUserJobs;
+    private UserJobModel userJobModel;
+    private String userUid;
+    private AlertDialog loadingDialog;
+    private ArrayList<CompanyModel> companyList;
+    private CompanyAdapter companyJobAdapter;
 
 
-    String uniqueKey;
-
+    private String uniqueKey;
+    private String title, internet, companyLogo;
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -65,8 +68,9 @@ public class AddJobsActivity extends AppCompatActivity {
         binding = ActivityAddJobsBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        String title = getIntent().getStringExtra("title");
-        String internet = getIntent().getStringExtra("cominternet");
+        title = getIntent().getStringExtra("title");
+        internet = getIntent().getStringExtra("cominternet");
+        companyLogo = getIntent().getStringExtra("company");
 
         userUid = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
 
@@ -105,6 +109,8 @@ public class AddJobsActivity extends AppCompatActivity {
         binding.postBtn.setOnClickListener(view -> {
 //            Toast.makeText(AddJobsActivity.this, sharedPrefe.fetchTitle(), Toast.LENGTH_SHORT).show();
 
+
+
             uniqueKey = UUID.randomUUID().toString();
 
             userJobModel = new UserJobModel(sharedPrefe.fetchTitle(),
@@ -114,7 +120,7 @@ public class AddJobsActivity extends AppCompatActivity {
                     binding.employmentTxt.getText().toString(),
                     binding.txtWorkplace.getText().toString(),
                     binding.txtDescription.getText().toString(),
-                    uniqueKey,userUid
+                    uniqueKey, userUid,new CompanyModel(title,internet,companyLogo)
             );
             loadingDialog.show();
 
@@ -188,7 +194,7 @@ public class AddJobsActivity extends AppCompatActivity {
 
         binding.btnCompany.setOnClickListener(view ->
 //                companyBottomSheet()
-                startActivity(new Intent(AddJobsActivity.this,CompanyActivity.class))
+                        startActivity(new Intent(AddJobsActivity.this, CompanyActivity.class))
         );
 
         binding.employmentBtn.setOnClickListener(view -> {
@@ -286,6 +292,17 @@ public class AddJobsActivity extends AppCompatActivity {
 
     }
 
+    private void getImage() {
+        File imgFile = new  File(companyLogo);
+        if(imgFile.exists())
+        {
+            ImageView myImage = new ImageView(this);
+            myImage.setImageURI(Uri.fromFile(imgFile));
+
+        }
+
+    }
+
     private void iconChange() {
 
 
@@ -358,7 +375,7 @@ public class AddJobsActivity extends AppCompatActivity {
     }
 
 
-    public void companyBottomSheet(){
+    public void companyBottomSheet() {
 
         {
             BottomSheetDialog dialog = new BottomSheetDialog(AddJobsActivity.this, R.style.AppBottomSheetDialogTheme);
@@ -406,7 +423,6 @@ public class AddJobsActivity extends AppCompatActivity {
 
 
     }
-
 
 
 }
