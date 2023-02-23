@@ -5,33 +5,16 @@ import android.net.Uri;
 public class CompanyModel {
 
 
-    private int image;
+
     private String title;
     private String type;
-    private Uri filepath;
+
     private String imageUrl;
 
+    private String pushId;
+    private  int image;
+
     public CompanyModel() {
-    }
-
-
-
-    public CompanyModel(String title, String type, String imageUrl) {
-        this.title = title;
-        this.type = type;
-        this.imageUrl = imageUrl;
-    }
-
-    public CompanyModel(int image, String title, String type) {
-        this.image = image;
-        this.title = title;
-        this.type = type;
-    }
-
-    public CompanyModel(String title, String type, Uri filepath) {
-        this.title = title;
-        this.type = type;
-        this.filepath = filepath;
     }
 
     public int getImage() {
@@ -40,6 +23,27 @@ public class CompanyModel {
 
     public void setImage(int image) {
         this.image = image;
+    }
+
+    public CompanyModel(int image , String title, String type) {
+        this.title = title;
+        this.type = type;
+        this.image = image;
+    }
+
+    public CompanyModel(String title, String type, String imageUrl, String pushId) {
+        this.title = title;
+        this.type = type;
+        this.imageUrl = imageUrl;
+        this.pushId = pushId;
+    }
+
+    public String getPushId() {
+        return pushId;
+    }
+
+    public void setPushId(String pushId) {
+        this.pushId = pushId;
     }
 
     public String getTitle() {
@@ -58,9 +62,7 @@ public class CompanyModel {
         this.type = type;
     }
 
-    public Uri getFilepath() {
-        return filepath;
-    }
+
     public String getImageUrl() {
         return imageUrl;
     }
@@ -69,7 +71,5 @@ public class CompanyModel {
         this.imageUrl = imageUrl;
     }
 
-    public void setFilepath(Uri filepath) {
-        this.filepath = filepath;
-    }
+
 }

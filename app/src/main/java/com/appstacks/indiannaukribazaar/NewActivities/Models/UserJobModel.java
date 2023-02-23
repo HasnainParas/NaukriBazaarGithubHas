@@ -2,26 +2,26 @@ package com.appstacks.indiannaukribazaar.NewActivities.Models;
 
 public class UserJobModel {
 
-    private String jobTitle,jobPosition, company, jobLocation, employmentType, typeOfWorkPlace, description,uniqueKey,userAuthId;
-    private CompanyModel companyModel;
+    private String jobTitle,jobPosition, jobLocation, employmentType, typeOfWorkPlace, description,uniqueKey,userAuthId;
+    private String companyName, companyType,companyImage;
 
 
 
     public UserJobModel() {
     }
 
-
-    public UserJobModel(String jobTitle, String jobPosition, String company, String jobLocation, String employmentType, String typeOfWorkPlace, String description, String uniqueKey, String userAuthId, CompanyModel companyModel) {
+    public UserJobModel(String jobTitle, String jobPosition, String jobLocation, String employmentType, String typeOfWorkPlace, String description, String uniqueKey, String userAuthId, String companyName, String companyType, String companyImage) {
         this.jobTitle = jobTitle;
         this.jobPosition = jobPosition;
-        this.company = company;
         this.jobLocation = jobLocation;
         this.employmentType = employmentType;
         this.typeOfWorkPlace = typeOfWorkPlace;
         this.description = description;
         this.uniqueKey = uniqueKey;
         this.userAuthId = userAuthId;
-        this.companyModel = companyModel;
+        this.companyName = companyName;
+        this.companyType = companyType;
+        this.companyImage = companyImage;
     }
 
     public String getJobTitle() {
@@ -38,14 +38,6 @@ public class UserJobModel {
 
     public void setJobPosition(String jobPosition) {
         this.jobPosition = jobPosition;
-    }
-
-    public String getCompany() {
-        return company;
-    }
-
-    public void setCompany(String company) {
-        this.company = company;
     }
 
     public String getJobLocation() {
@@ -96,11 +88,27 @@ public class UserJobModel {
         this.userAuthId = userAuthId;
     }
 
-    public CompanyModel getCompanyModel() {
-        return companyModel;
+    public String getCompanyName() {
+        return companyName;
     }
 
-    public void setCompanyModel(CompanyModel companyModel) {
-        this.companyModel = companyModel;
+    public void setCompanyName(String companyName) {
+        this.companyName = companyName;
+    }
+
+    public String getCompanyType() {
+        return companyType;
+    }
+
+    public void setCompanyType(String companyType) {
+        this.companyType = companyType;
+    }
+
+    public String getCompanyImage() {
+        return companyImage;
+    }
+
+    public void setCompanyImage(String companyImage) {
+        this.companyImage = companyImage;
     }
 }

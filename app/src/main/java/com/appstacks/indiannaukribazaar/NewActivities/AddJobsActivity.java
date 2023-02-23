@@ -31,12 +31,16 @@ import com.appstacks.indiannaukribazaar.R;
 import com.appstacks.indiannaukribazaar.databinding.ActivityAddJobsBinding;
 
 import com.appstacks.indiannaukribazaar.databinding.HandloadingDialogLayoutBinding;
+import com.appstacks.indiannaukribazaar.profile.ProfileUtils;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -49,14 +53,14 @@ public class AddJobsActivity extends AppCompatActivity {
     private ActivityAddJobsBinding binding;
     private BottomSheetDialog bottomSheetDialog;
     //    int checkRadio;
-    private DatabaseReference userJobRef, allUserJobs;
+    private DatabaseReference userJobRef, allUserJobs, databaseReference;
     private UserJobModel userJobModel;
     private String userUid;
     private AlertDialog loadingDialog;
     private ArrayList<CompanyModel> companyList;
     private CompanyAdapter companyJobAdapter;
 
-
+    private ProfileUtils profileUtils;
     private String uniqueKey;
     private String title, internet, companyLogo;
 
@@ -67,16 +71,20 @@ public class AddJobsActivity extends AppCompatActivity {
         sharedPrefe = new SharedPrefe(this);
         binding = ActivityAddJobsBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-
+        profileUtils = new ProfileUtils(this);
         title = getIntent().getStringExtra("title");
         internet = getIntent().getStringExtra("cominternet");
-        companyLogo = getIntent().getStringExtra("company");
+        companyLogo = getIntent().getStringExtra("image");
+
+
+        Toast.makeText(this, "" + companyLogo, Toast.LENGTH_SHORT).show();
 
         userUid = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
 
 
         userJobRef = FirebaseDatabase.getInstance().getReference("userJobs");
         allUserJobs = FirebaseDatabase.getInstance().getReference("allUserJobs");
+        databaseReference = FirebaseDatabase.getInstance().getReference(getString(R.string.user_profile));
 
 
         if (title != null) {
@@ -106,39 +114,11 @@ public class AddJobsActivity extends AppCompatActivity {
         iconChange();
         loadingAlertDialog();
 
+
         binding.postBtn.setOnClickListener(view -> {
 //            Toast.makeText(AddJobsActivity.this, sharedPrefe.fetchTitle(), Toast.LENGTH_SHORT).show();
 
-
-
-            uniqueKey = UUID.randomUUID().toString();
-
-            userJobModel = new UserJobModel(sharedPrefe.fetchTitle(),
-                    binding.txtPositon.getText().toString(),
-                    binding.txtCompany.getText().toString(),
-                    binding.txtLocation.getText().toString(),
-                    binding.employmentTxt.getText().toString(),
-                    binding.txtWorkplace.getText().toString(),
-                    binding.txtDescription.getText().toString(),
-                    uniqueKey, userUid,new CompanyModel(title,internet,companyLogo)
-            );
-            loadingDialog.show();
-
-            allUserJobs.child(uniqueKey).setValue(userJobModel).addOnSuccessListener(unused -> Toast.makeText(AddJobsActivity.this, "JobPosted in AllUserNote...\n;)", Toast.LENGTH_SHORT).show());
-
-            userJobRef.child(userUid).child(uniqueKey).setValue(userJobModel).addOnSuccessListener(unused -> {
-                loadingDialog.dismiss();
-                sharedPrefe.deleteAllsharedPre();
-//                    startActivity(new Intent(AddJobsActivity.this, UserJobDetailsActivity.class));
-                Intent intent = new Intent(AddJobsActivity.this, UserJobDetailsActivity.class);
-                intent.putExtra("unikey", uniqueKey);
-                startActivity(intent);
-                finish();
-                Toast.makeText(AddJobsActivity.this, "Job submitted Successfully", Toast.LENGTH_SHORT).show();
-            }).addOnFailureListener(e -> {
-                loadingDialog.dismiss();
-                Toast.makeText(AddJobsActivity.this, e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
-            });
+            checkValidation();
 
         });
 
@@ -292,10 +272,59 @@ public class AddJobsActivity extends AppCompatActivity {
 
     }
 
+    private void checkValidation() {
+        if (sharedPrefe.fetchComTitle() == null){
+            Toast.makeText(this, "Title not set", Toast.LENGTH_SHORT).show();
+        }else if (  binding.txtPositon.getText().toString().isEmpty()){
+            Toast.makeText(this, "Position is not added", Toast.LENGTH_SHORT).show();
+        }else if ( binding.txtLocation.getText().toString().isEmpty()){
+            Toast.makeText(this, "Location not added", Toast.LENGTH_SHORT).show();
+        }else if (binding.employmentTxt.getText().toString().equals("Click to select")){
+            Toast.makeText(this, "Select employment type", Toast.LENGTH_SHORT).show();
+        }else if (binding.txtWorkplace.getText().toString().equals("Click to select")){
+            Toast.makeText(this, "Select workplace type", Toast.LENGTH_SHORT).show();
+        }else{
+            postJob();
+        }
+    }
+
+    private void postJob() {
+        uniqueKey = UUID.randomUUID().toString();
+
+        userJobModel = new UserJobModel(sharedPrefe.fetchTitle(),
+                binding.txtPositon.getText().toString(),
+
+                binding.txtLocation.getText().toString(),
+                binding.employmentTxt.getText().toString(),
+                binding.txtWorkplace.getText().toString(),
+                binding.txtDescription.getText().toString(),
+                uniqueKey, userUid, binding.comTitle.getText().toString(),
+                binding.txtCompany.getText().toString(), profileUtils.fetchCompanyImage()
+
+        );
+        loadingDialog.show();
+
+        allUserJobs.child(uniqueKey).setValue(userJobModel).addOnSuccessListener(unused -> Toast.makeText(AddJobsActivity.this, "JobPosted in AllUserNote...\n;)", Toast.LENGTH_SHORT).show());
+
+        userJobRef.child(userUid).child(uniqueKey).setValue(userJobModel).addOnSuccessListener(unused -> {
+            loadingDialog.dismiss();
+            sharedPrefe.deleteAllsharedPre();
+//                    startActivity(new Intent(AddJobsActivity.this, UserJobDetailsActivity.class));
+            Intent intent = new Intent(AddJobsActivity.this, UserJobDetailsActivity.class);
+            intent.putExtra("unikey", uniqueKey);
+            startActivity(intent);
+            finish();
+            Toast.makeText(AddJobsActivity.this, "Job submitted Successfully", Toast.LENGTH_SHORT).show();
+        }).addOnFailureListener(e -> {
+            loadingDialog.dismiss();
+            Toast.makeText(AddJobsActivity.this, e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+        });
+
+    }
+
     private void getImage() {
-        File imgFile = new  File(companyLogo);
-        if(imgFile.exists())
-        {
+        File imgFile = new File(companyLogo);
+        if (imgFile.exists()) {
             ImageView myImage = new ImageView(this);
             myImage.setImageURI(Uri.fromFile(imgFile));
 
@@ -375,54 +404,54 @@ public class AddJobsActivity extends AppCompatActivity {
     }
 
 
-    public void companyBottomSheet() {
-
-        {
-            BottomSheetDialog dialog = new BottomSheetDialog(AddJobsActivity.this, R.style.AppBottomSheetDialogTheme);
-
-            View bottomsheetView = LayoutInflater.from(getApplicationContext()).
-                    inflate(R.layout.activity_company, (CardView) findViewById(R.id.UndoChanges));
-            dialog.setContentView(bottomsheetView);
-            dialog.show();
-            dialog.setCancelable(true);
-            RecyclerView recyclerViewBottomSheet = bottomsheetView.findViewById(R.id.recyclerViewCom);
-            SearchView searchView = bottomsheetView.findViewById(R.id.searchViewCom);
-
-            companyList = new ArrayList<>();
-            companyList.add(new CompanyModel(R.drawable.googleic, "Google", "Internet"));
-            companyList.add(new CompanyModel(R.drawable.ic_apple, "Apple", "Electronic goods"));
-            companyList.add(new CompanyModel(R.drawable.ic_amazon, "Amazon", "Internet"));
-            companyList.add(new CompanyModel(R.drawable.googleic, "Dribble", "Design"));
-            companyList.add(new CompanyModel(R.drawable.googleic, "Twitter", "Internet"));
-            companyList.add(new CompanyModel(R.drawable.googleic, "Facebook", "Internet"));
-            companyList.add(new CompanyModel(R.drawable.googleic, "Microsoft", "Internet"));
-            companyList.add(new CompanyModel(R.drawable.googleic, "Allianz", "Financial Service"));
-            companyList.add(new CompanyModel(R.drawable.googleic, "Adobe", "Computer software"));
-            companyList.add(new CompanyModel(R.drawable.googleic, "AXA", "Insurance"));
-            companyJobAdapter = new CompanyAdapter(companyList, this);
-
-            LinearLayoutManager layoutManager = new LinearLayoutManager(AddJobsActivity.this);
-            recyclerViewBottomSheet.setLayoutManager(layoutManager);
-            recyclerViewBottomSheet.setAdapter(companyJobAdapter);
-
-            searchView.setOnQueryTextListener(new android.widget.SearchView.OnQueryTextListener() {
-                @Override
-                public boolean onQueryTextSubmit(String s) {
-                    return false;
-                }
-
-                @Override
-                public boolean onQueryTextChange(String s) {
-                    companyJobAdapter.getFilter().filter(s);
-                    return false;
-                }
-            });
-
-
-        }
-
-
-    }
+//    public void companyBottomSheet() {
+//
+//        {
+//            BottomSheetDialog dialog = new BottomSheetDialog(AddJobsActivity.this, R.style.AppBottomSheetDialogTheme);
+//
+//            View bottomsheetView = LayoutInflater.from(getApplicationContext()).
+//                    inflate(R.layout.activity_company, (CardView) findViewById(R.id.UndoChanges));
+//            dialog.setContentView(bottomsheetView);
+//            dialog.show();
+//            dialog.setCancelable(true);
+//            RecyclerView recyclerViewBottomSheet = bottomsheetView.findViewById(R.id.recyclerViewCom);
+//            SearchView searchView = bottomsheetView.findViewById(R.id.searchViewCom);
+//
+//            companyList = new ArrayList<>();
+//            companyList.add(new CompanyModel(R.drawable.googleic, "Google", "Internet"));
+//            companyList.add(new CompanyModel(R.drawable.ic_apple, "Apple", "Electronic goods"));
+//            companyList.add(new CompanyModel(R.drawable.ic_amazon, "Amazon", "Internet"));
+//            companyList.add(new CompanyModel(R.drawable.googleic, "Dribble", "Design"));
+//            companyList.add(new CompanyModel(R.drawable.googleic, "Twitter", "Internet"));
+//            companyList.add(new CompanyModel(R.drawable.googleic, "Facebook", "Internet"));
+//            companyList.add(new CompanyModel(R.drawable.googleic, "Microsoft", "Internet"));
+//            companyList.add(new CompanyModel(R.drawable.googleic, "Allianz", "Financial Service"));
+//            companyList.add(new CompanyModel(R.drawable.googleic, "Adobe", "Computer software"));
+//            companyList.add(new CompanyModel(R.drawable.googleic, "AXA", "Insurance"));
+//            companyJobAdapter = new CompanyAdapter(companyList, this, "");
+//
+//            LinearLayoutManager layoutManager = new LinearLayoutManager(AddJobsActivity.this);
+//            recyclerViewBottomSheet.setLayoutManager(layoutManager);
+//            recyclerViewBottomSheet.setAdapter(companyJobAdapter);
+//
+//            searchView.setOnQueryTextListener(new android.widget.SearchView.OnQueryTextListener() {
+//                @Override
+//                public boolean onQueryTextSubmit(String s) {
+//                    return false;
+//                }
+//
+//                @Override
+//                public boolean onQueryTextChange(String s) {
+//                    companyJobAdapter.getFilter().filter(s);
+//                    return false;
+//                }
+//            });
+//
+//
+//        }
+//
+//
+//    }
 
 
 }

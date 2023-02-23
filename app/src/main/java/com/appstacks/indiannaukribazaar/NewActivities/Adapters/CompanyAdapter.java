@@ -28,6 +28,7 @@ import com.appstacks.indiannaukribazaar.NewActivities.SharedPrefe;
 import com.appstacks.indiannaukribazaar.R;
 import com.appstacks.indiannaukribazaar.adapter.AdapterTopicPick;
 import com.appstacks.indiannaukribazaar.data.SharedPref;
+import com.bumptech.glide.Glide;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -37,13 +38,15 @@ import java.util.Locale;
 public class CompanyAdapter extends RecyclerView.Adapter<CompanyAdapter.viewHolder> implements Filterable {
 
 
-    ArrayList<CompanyModel> list;
-    Context context;
-    ArrayList<CompanyModel> backup;
-    SharedPrefe sharedPrefe;
+   private ArrayList<CompanyModel> list;
+   private Context context;
+   private ArrayList<CompanyModel> backup;
+   private SharedPrefe sharedPrefe;
+
 
     public CompanyAdapter(ArrayList<CompanyModel> list, Context context) {
         this.list = list;
+
         this.context = context;
         backup = new ArrayList<>(list);
     }
@@ -62,16 +65,17 @@ public class CompanyAdapter extends RecyclerView.Adapter<CompanyAdapter.viewHold
         CompanyModel model = list.get(position);
         sharedPrefe = new SharedPrefe(context);
 
-        holder.companyLogo.setImageResource(model.getImage());
-        if (model.getFilepath() != null) {
-            Bitmap bitmap = null;
-            try {
-                bitmap = MediaStore.Images.Media.getBitmap(context.getContentResolver(), model.getFilepath());
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            holder.companyLogo.setImageBitmap(bitmap);
-        }
+        Glide.with(context).load(model.getImageUrl()).placeholder(R.drawable.profileplace).into(holder.companyLogo);
+       // holder.companyLogo.setImageResource(model.getImage());
+//        if (model.getFilepath() != null) {
+//            Bitmap bitmap = null;
+//            try {
+//                bitmap = MediaStore.Images.Media.getBitmap(context.getContentResolver(), model.getFilepath());
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+//            holder.companyLogo.setImageBitmap(bitmap);
+//        }
         holder.title.setText(model.getTitle());
         holder.internet.setText(model.getType());
 
@@ -79,7 +83,7 @@ public class CompanyAdapter extends RecyclerView.Adapter<CompanyAdapter.viewHold
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(context, AddJobsActivity.class);
-                intent.putExtra("company", model.getImageUrl());
+//                intent.putExtra("image", downloadUrl);
                 intent.putExtra("title", model.getTitle());
                 intent.putExtra("cominternet", model.getType());
                 sharedPrefe.saveComTitle(model.getTitle());

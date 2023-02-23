@@ -74,7 +74,7 @@ public class UserJobDetailsActivity extends AppCompatActivity {
 
                     binding.etDescriptionuser.setText(userJobModel.getDescription());
                     binding.titleTextView.setText(userJobModel.getJobTitle());
-                    binding.jobCompany.setText("Job vacancies from " + userJobModel.getCompany() + " company");
+                    binding.jobCompany.setText("Job vacancies from " + userJobModel.getCompanyName() + " company");
                     binding.userAddress4job.setText(userJobModel.getJobLocation());
                     binding.userWorkPlaceTv.setText(". " + userJobModel.getTypeOfWorkPlace());
 

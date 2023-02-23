@@ -25,14 +25,18 @@ import com.appstacks.indiannaukribazaar.NewActivities.Models.CompanyModel;
 import com.appstacks.indiannaukribazaar.R;
 import com.appstacks.indiannaukribazaar.databinding.ActivityCompanyBinding;
 import com.appstacks.indiannaukribazaar.databinding.AddCompanyLayoutBinding;
+import com.appstacks.indiannaukribazaar.profile.ProfileUtils;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -57,36 +61,40 @@ public class CompanyActivity extends AppCompatActivity {
     private StorageReference storageReference;
     private String userId;
     private String downloadUrl;
+    private CompanyModel data;
+    private ProfileUtils profileUtils;
+    private   CompanyModel companyData;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityCompanyBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-
+        data = new CompanyModel();
         list = new ArrayList<>();
+        profileUtils = new ProfileUtils(this);
         sharedPrefe = new SharedPrefe(this);
         databaseReference = FirebaseDatabase.getInstance().getReference(getString(R.string.user_profile));
         storageReference = FirebaseStorage.getInstance().getReference(getString(R.string.user_profile));
         userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
-        list.add(new CompanyModel(R.drawable.googleic, "Google", "Internet"));
-        list.add(new CompanyModel(R.drawable.ic_apple, "Apple", "Electronic goods"));
-        list.add(new CompanyModel(R.drawable.ic_amazon, "Amazon", "Internet"));
-        list.add(new CompanyModel(R.drawable.googleic, "Dribble", "Design"));
-        list.add(new CompanyModel(R.drawable.googleic, "Twitter", "Internet"));
-        list.add(new CompanyModel(R.drawable.googleic, "Facebook", "Internet"));
-        list.add(new CompanyModel(R.drawable.googleic, "Microsoft", "Internet"));
-        list.add(new CompanyModel(R.drawable.googleic, "Allianz", "Financial Service"));
-        list.add(new CompanyModel(R.drawable.googleic, "Adobe", "Computer software"));
-        list.add(new CompanyModel(R.drawable.googleic, "AXA", "Insurance"));
-
-        adapter = new CompanyAdapter(list, this);
 
 
-        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
-        binding.recyclerViewCom.setLayoutManager(layoutManager);
-        binding.recyclerViewCom.setAdapter(adapter);
+            binding.btnAdd.setOnClickListener(view -> {
+                bottomDialog();
+            });
+
+//        list.add(new CompanyModel(R.drawable.googleic, "Google", "Internet"));
+//        list.add(new CompanyModel(R.drawable.ic_apple, "Apple", "Electronic goods"));
+//        list.add(new CompanyModel(R.drawable.ic_amazon, "Amazon", "Internet"));
+//        list.add(new CompanyModel(R.drawable.googleic, "Dribble", "Design"));
+//        list.add(new CompanyModel(R.drawable.googleic, "Twitter", "Internet"));
+//        list.add(new CompanyModel(R.drawable.googleic, "Facebook", "Internet"));
+//        list.add(new CompanyModel(R.drawable.googleic, "Microsoft", "Internet"));
+//        list.add(new CompanyModel(R.drawable.googleic, "Allianz", "Financial Service"));
+//        list.add(new CompanyModel(R.drawable.googleic, "Adobe", "Computer software"));
+//        list.add(new CompanyModel(R.drawable.googleic, "AXA", "Insurance"));
 
 
 //        binding.searchViewCom.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
@@ -104,11 +112,6 @@ public class CompanyActivity extends AppCompatActivity {
 //            }
 //
 //        });
-        if (adapter.getItemCount() == 0) {
-            binding.layoutNothing.setVisibility(View.VISIBLE);
-        } else {
-            binding.layoutNothing.setVisibility(View.GONE);
-        }
 
         binding.searchViewCom.addTextChangedListener(new TextWatcher() {
             @Override
@@ -119,15 +122,7 @@ public class CompanyActivity extends AppCompatActivity {
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 adapter.getFilter().filter(charSequence);
-                if (adapter.getItemCount() == 0) {
-                    binding.layoutNothing.setVisibility(View.VISIBLE);
 
-                    binding.btnAdd.setOnClickListener(view -> {
-                        bottomDialog();
-                    });
-                } else {
-                    binding.layoutNothing.setVisibility(View.GONE);
-                }
             }
 
             @Override
@@ -174,6 +169,9 @@ public class CompanyActivity extends AppCompatActivity {
         });
 
         addCompany.setOnClickListener(view -> {
+
+            if (profileUtils.fetchCompanyImage() != null)
+                profileUtils.saveUserImage(null);
             if (etCompanyType.getText().toString().isEmpty()) {
                 Toast.makeText(this, "Add Company service type", Toast.LENGTH_SHORT).show();
 
@@ -193,23 +191,21 @@ public class CompanyActivity extends AppCompatActivity {
 
     private void addCompany(String companyName, String companyType, Uri filePath, BottomSheetDialog dialog) {
 
-    StorageReference ref=    storageReference.child(userId).child("company "+ UUID.randomUUID().toString());
+        StorageReference ref = storageReference.child(userId).child("company " + UUID.randomUUID().toString());
 
-    ref.putFile(filePath).addOnSuccessListener(taskSnapshot -> ref.getDownloadUrl().addOnCompleteListener(task -> {
+        ref.putFile(filePath).addOnSuccessListener(taskSnapshot -> ref.getDownloadUrl().addOnCompleteListener(task -> {
 
-        if (task.isComplete() && task.isSuccessful()) {
-            downloadUrl = task.getResult().toString();
+            if (task.isComplete() && task.isSuccessful()) {
+                downloadUrl = task.getResult().toString();
 
-            uploadImageData(downloadUrl,companyType,companyName);
-        }
+                uploadImageData(downloadUrl, companyType, companyName);
+            }
 
-    }).addOnFailureListener(e -> {
-        Toast.makeText(CompanyActivity.this, ""+e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
-    })).addOnFailureListener(e -> Toast.makeText(CompanyActivity.this, ""+e.getLocalizedMessage(), Toast.LENGTH_SHORT).show());
+        }).addOnFailureListener(e -> {
+            Toast.makeText(CompanyActivity.this, "" + e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+        })).addOnFailureListener(e -> Toast.makeText(CompanyActivity.this, "" + e.getLocalizedMessage(), Toast.LENGTH_SHORT).show());
 
-        list.add(new CompanyModel(companyName, companyType, filePath));
-        //  list.notify();
-        adapter.notifyDataSetChanged();
+
         dialog.cancel();
         dialog.dismiss();
 
@@ -217,14 +213,16 @@ public class CompanyActivity extends AppCompatActivity {
     }
 
     private void uploadImageData(String downloadUrl, String companyType, String companyName) {
-        CompanyModel data = new CompanyModel(companyName,companyType,downloadUrl);
+        String pushId = UUID.randomUUID().toString();
+        data = new CompanyModel(companyName, companyType, downloadUrl, pushId);
 
-        databaseReference.child(userId).child("Company").setValue(data).addOnCompleteListener(task -> {
-            if (task.isComplete() && task.isSuccessful()){
+        databaseReference.child(userId).child("Company").child(pushId).setValue(data).addOnCompleteListener(task -> {
+            if (task.isComplete() && task.isSuccessful()) {
+                profileUtils.saveCompanyImage(downloadUrl);
                 Toast.makeText(CompanyActivity.this, "Company added", Toast.LENGTH_SHORT).show();
             }
         }).addOnFailureListener(e -> {
-            Toast.makeText(this, ""+e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "" + e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
         });
     }
 
@@ -251,5 +249,46 @@ public class CompanyActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
         }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        fetchCompanies();
+    }
+
+    private void fetchCompanies() {
+
+        databaseReference.child(userId).child("Company").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()) {
+                    list.clear();
+                    for (DataSnapshot snap : snapshot.getChildren()) {
+                         companyData = snap.getValue(CompanyModel.class);
+                        list.add(companyData);
+                    }
+
+
+                    adapter = new CompanyAdapter(list, CompanyActivity.this);
+
+                    binding.recyclerViewCom.setLayoutManager(new LinearLayoutManager(CompanyActivity.this));
+                    binding.recyclerViewCom.setAdapter(adapter);
+
+
+//                    if (adapter.getItemCount() == 0) {
+//                        binding.layoutNothing.setVisibility(View.VISIBLE);
+//                    } else {
+//                        binding.layoutNothing.setVisibility(View.GONE);
+//                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 }

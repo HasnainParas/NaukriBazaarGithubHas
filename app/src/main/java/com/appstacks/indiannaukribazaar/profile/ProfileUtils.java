@@ -28,9 +28,11 @@ public class ProfileUtils {
     private static final String LANGUAGES = "Languages";
     private static final String SELECTEDSKILLS = "SelectedSkill";
     private static final String USER_IMAGE="UserImage";
+    private static final String COMPANY_IMAGE="Company_Image";
 
     public ProfileUtils(Context context) {
         this.context = context;
+        sharedPreferences= context.getSharedPreferences(COMPANY_IMAGE,Context.MODE_PRIVATE);
         sharedPreferences = context.getSharedPreferences(USER_BIO, Context.MODE_PRIVATE);
         sharedPreferences = context.getSharedPreferences(WORK_EXPERIENCE, Context.MODE_PRIVATE);
         sharedPreferences = context.getSharedPreferences(INSTITUTE_NAME, Context.MODE_PRIVATE);
@@ -42,6 +44,16 @@ public class ProfileUtils {
 
         sharedPreferences= context.getSharedPreferences(USER_IMAGE,Context.MODE_PRIVATE);
 
+    }
+
+    public void saveCompanyImage(String companyImage){
+
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(COMPANY_IMAGE,companyImage).apply();
+
+    }
+    public String fetchCompanyImage(){
+        return  sharedPreferences.getString(COMPANY_IMAGE,null);
     }
     public void saveUserImage(String url){
 

@@ -25,10 +25,11 @@ import java.util.ArrayList;
 
 public class FullTimeJobActivity extends AppCompatActivity {
 
-    ActivityFullTimeJobBinding binding;
-    ArrayList<UserJobModel> jobModelArrayList;
-    JobTitleAdapter jobTitleAdapter;
-    DatabaseReference userJobRef;
+    private ActivityFullTimeJobBinding binding;
+    private ArrayList<UserJobModel> jobModelArrayList;
+    private JobTitleAdapter jobTitleAdapter;
+    private DatabaseReference userJobRef;
+    private UserJobModel data;
 
 
     @Override
@@ -46,20 +47,33 @@ public class FullTimeJobActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()) {
+                    binding.noJobsLayout.setVisibility(View.GONE);
+                    binding.userjobrecycler.setVisibility(View.VISIBLE);
                     for (DataSnapshot s : snapshot.getChildren()) {
-                        UserJobModel data = s.getValue(UserJobModel.class);
+                        data = s.getValue(UserJobModel.class);
 //                        jobModelArrayList.clear();
-                        if (!data.getUserAuthId().equals(FirebaseAuth.getInstance().getUid()))
+                        if (!data.getUserAuthId().equals(FirebaseAuth.getInstance().getUid())) {
                             jobModelArrayList.add(data);
-                        jobTitleAdapter = new JobTitleAdapter(jobModelArrayList, FullTimeJobActivity.this);
-
-                        binding.userjobrecycler.setAdapter(jobTitleAdapter);
-
-                        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(FullTimeJobActivity.this);
-                        binding.userjobrecycler.setLayoutManager(linearLayoutManager);
-//                        binding.loadingFragment.setVisibility(View.GONE);
+                            binding.noJobsLayout.setVisibility(View.GONE);
+                            binding.userjobrecycler.setVisibility(View.VISIBLE);
+                        }else{
+                            binding.noJobsLayout.setVisibility(View.VISIBLE);
+                            binding.userjobrecycler.setVisibility(View.GONE);
+                        }
 
                     }
+
+
+                    jobTitleAdapter = new JobTitleAdapter(jobModelArrayList, FullTimeJobActivity.this);
+
+
+                    binding.userjobrecycler.setLayoutManager(new LinearLayoutManager(FullTimeJobActivity.this));
+                    binding.userjobrecycler.setAdapter(jobTitleAdapter);
+//                        binding.loadingFragment.setVisibility(View.GONE);
+
+                } else {
+                    binding.noJobsLayout.setVisibility(View.VISIBLE);
+                    binding.userjobrecycler.setVisibility(View.GONE);
                 }
             }
 

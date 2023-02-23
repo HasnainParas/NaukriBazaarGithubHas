@@ -22,8 +22,8 @@ import java.util.ArrayList;
 
 public class JobTitleAdapter extends RecyclerView.Adapter<JobTitleAdapter.viewHolder> {
 
-    ArrayList<UserJobModel> userJobModel;
-    Context context;
+   private ArrayList<UserJobModel> userJobModel;
+   private Context context;
 
     public JobTitleAdapter(ArrayList<UserJobModel> userJobModel, Context context) {
         this.userJobModel = userJobModel;
@@ -42,7 +42,7 @@ public class JobTitleAdapter extends RecyclerView.Adapter<JobTitleAdapter.viewHo
         UserJobModel model = userJobModel.get(position);
 
         holder.binding.titlesamjob.setText(model.getJobTitle());
-        holder.binding.companyNdaddress.setText(model.getCompany() + " . " + model.getJobLocation());
+        holder.binding.companyNdaddress.setText(model.getCompanyName() + " . " + model.getJobLocation());
         holder.binding.tview.setText(model.getEmploymentType());
         holder.binding.tview1.setText(model.getJobPosition());
         holder.binding.tview2.setText(model.getTypeOfWorkPlace());
@@ -53,7 +53,7 @@ public class JobTitleAdapter extends RecyclerView.Adapter<JobTitleAdapter.viewHo
                 Toast.makeText(context, model.getUniqueKey(), Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(context, N_JobsDetailActivity.class);
                 intent.putExtra("jobtile", model.getJobTitle());
-                intent.putExtra("company", model.getCompany());
+                intent.putExtra("company", model.getCompanyName());
                 intent.putExtra("location", model.getJobLocation());
                 intent.putExtra("description", model.getDescription());
                 context.startActivity(intent);
