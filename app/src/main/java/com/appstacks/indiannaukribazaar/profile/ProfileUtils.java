@@ -187,6 +187,7 @@ public class ProfileUtils {
         String jsonStr = gson.toJson(list);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString(SELECTEDSKILLS, jsonStr);
+
         editor.apply();
 
     }

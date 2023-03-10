@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -30,7 +31,7 @@ public class FullTimeJobActivity extends AppCompatActivity {
     private JobTitleAdapter jobTitleAdapter;
     private DatabaseReference userJobRef;
     private UserJobModel data;
-
+private static final String TAG="FullTimeActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,13 +53,13 @@ public class FullTimeJobActivity extends AppCompatActivity {
                     for (DataSnapshot s : snapshot.getChildren()) {
                         data = s.getValue(UserJobModel.class);
 //                        jobModelArrayList.clear();
-                        if (!data.getUserAuthId().equals(FirebaseAuth.getInstance().getUid())) {
+                        if (!data.getUserAuthId().equals(FirebaseAuth.getInstance().getCurrentUser().getUid())) {
                             jobModelArrayList.add(data);
-                            binding.noJobsLayout.setVisibility(View.GONE);
-                            binding.userjobrecycler.setVisibility(View.VISIBLE);
+
+                            Log.d(TAG,"Jobs found");
                         }else{
-                            binding.noJobsLayout.setVisibility(View.VISIBLE);
-                            binding.userjobrecycler.setVisibility(View.GONE);
+
+                            Log.d(TAG,"No jobs found");
                         }
 
                     }
@@ -74,6 +75,7 @@ public class FullTimeJobActivity extends AppCompatActivity {
                 } else {
                     binding.noJobsLayout.setVisibility(View.VISIBLE);
                     binding.userjobrecycler.setVisibility(View.GONE);
+                    Toast.makeText(FullTimeJobActivity.this, "no snapshot", Toast.LENGTH_SHORT).show();
                 }
             }
 

@@ -184,6 +184,8 @@ public class FindJobsActivity extends AppCompatActivity {
         binding.recycerviewFindJobs.setAdapter(adapter);
 
 
+
+
     }
 
     private void bottomDialog() {
