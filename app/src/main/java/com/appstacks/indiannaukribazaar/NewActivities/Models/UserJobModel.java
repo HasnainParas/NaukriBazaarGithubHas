@@ -4,13 +4,14 @@ public class UserJobModel {
 
     private String jobTitle,jobPosition, jobLocation, employmentType, typeOfWorkPlace, description,uniqueKey,userAuthId;
     private String companyName, companyType,companyImage;
+    private String jobPostedDate;
 
 
 
     public UserJobModel() {
     }
 
-    public UserJobModel(String jobTitle, String jobPosition, String jobLocation, String employmentType, String typeOfWorkPlace, String description, String uniqueKey, String userAuthId, String companyName, String companyType, String companyImage) {
+    public UserJobModel(String jobTitle, String jobPosition, String jobLocation, String employmentType, String typeOfWorkPlace, String description, String uniqueKey, String userAuthId, String companyName, String companyType, String companyImage, String jobPostedDate) {
         this.jobTitle = jobTitle;
         this.jobPosition = jobPosition;
         this.jobLocation = jobLocation;
@@ -22,6 +23,15 @@ public class UserJobModel {
         this.companyName = companyName;
         this.companyType = companyType;
         this.companyImage = companyImage;
+        this.jobPostedDate = jobPostedDate;
+    }
+
+    public String getJobPostedDate() {
+        return jobPostedDate;
+    }
+
+    public void setJobPostedDate(String jobPostedDate) {
+        this.jobPostedDate = jobPostedDate;
     }
 
     public String getJobTitle() {

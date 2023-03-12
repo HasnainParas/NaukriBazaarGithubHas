@@ -116,13 +116,15 @@ public class AddJobsActivity extends AppCompatActivity {
 
 
         binding.postBtn.setOnClickListener(view -> {
-//            Toast.makeText(AddJobsActivity.this, sharedPrefe.fetchTitle(), Toast.LENGTH_SHORT).show();
-
-            checkValidation();
+checkValidation();
 
         });
 
-        binding.jobPosition.setOnClickListener(view -> startActivity(new Intent(getApplicationContext(), JobPosition.class)));
+        binding.jobPosition.setOnClickListener(view -> {
+
+                    startActivity(new Intent(getApplicationContext(), JobPosition.class));
+                    finish();
+        });
 
         binding.btnWorkplaceType.setOnClickListener(view -> {
 
@@ -143,8 +145,8 @@ public class AddJobsActivity extends AppCompatActivity {
                 String onSitTxt = onsite.getText().toString();
 
                 binding.txtWorkplace.setText(onSitTxt);
-                binding.btnAdd5.setVisibility(View.INVISIBLE);
-                binding.btnEdit5.setVisibility(View.VISIBLE);
+                binding.btnAddTypeOfWorkPlace.setVisibility(View.INVISIBLE);
+                binding.btnEditTypeOfWorkPlace.setVisibility(View.VISIBLE);
                 dialog.dismiss();
             });
 
@@ -153,8 +155,8 @@ public class AddJobsActivity extends AppCompatActivity {
 
                 String hybridTxt = hybrid.getText().toString();
                 binding.txtWorkplace.setText(hybridTxt);
-                binding.btnAdd5.setVisibility(View.INVISIBLE);
-                binding.btnEdit5.setVisibility(View.VISIBLE);
+                binding.btnAddTypeOfWorkPlace.setVisibility(View.INVISIBLE);
+                binding.btnEditTypeOfWorkPlace.setVisibility(View.VISIBLE);
                 dialog.dismiss();
 
             });
@@ -162,8 +164,8 @@ public class AddJobsActivity extends AppCompatActivity {
             remote.setOnClickListener(view13 -> {
                 String remoteTxt = remote.getText().toString();
                 binding.txtWorkplace.setText(remoteTxt);
-                binding.btnAdd5.setVisibility(View.INVISIBLE);
-                binding.btnEdit5.setVisibility(View.VISIBLE);
+                binding.btnAddTypeOfWorkPlace.setVisibility(View.INVISIBLE);
+                binding.btnEditTypeOfWorkPlace.setVisibility(View.VISIBLE);
                 dialog.dismiss();
             });
 
@@ -172,10 +174,11 @@ public class AddJobsActivity extends AppCompatActivity {
 
         binding.locationBtn.setOnClickListener(view -> startActivity(new Intent(getApplicationContext(), JobLocationActivity.class)));
 
-        binding.btnCompany.setOnClickListener(view ->
+        binding.btnCompany.setOnClickListener(view -> {
 //                companyBottomSheet()
-                        startActivity(new Intent(AddJobsActivity.this, CompanyActivity.class))
-        );
+            startActivity(new Intent(AddJobsActivity.this, CompanyActivity.class));
+            finish();
+        });
 
         binding.employmentBtn.setOnClickListener(view -> {
 
@@ -299,7 +302,8 @@ public class AddJobsActivity extends AppCompatActivity {
                 binding.txtWorkplace.getText().toString(),
                 binding.txtDescription.getText().toString(),
                 uniqueKey, userUid, binding.comTitle.getText().toString(),
-                binding.txtCompany.getText().toString(), profileUtils.fetchCompanyImage()
+                binding.txtCompany.getText().toString(), profileUtils.fetchCompanyImage(),String.valueOf(System.currentTimeMillis())
+
 
         );
         loadingDialog.show();
@@ -310,11 +314,12 @@ public class AddJobsActivity extends AppCompatActivity {
             loadingDialog.dismiss();
             sharedPrefe.deleteAllsharedPre();
 //                    startActivity(new Intent(AddJobsActivity.this, UserJobDetailsActivity.class));
+            Toast.makeText(AddJobsActivity.this, "Job submitted Successfully", Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(AddJobsActivity.this, UserJobDetailsActivity.class);
             intent.putExtra("unikey", uniqueKey);
             startActivity(intent);
             finish();
-            Toast.makeText(AddJobsActivity.this, "Job submitted Successfully", Toast.LENGTH_SHORT).show();
+
         }).addOnFailureListener(e -> {
             loadingDialog.dismiss();
             Toast.makeText(AddJobsActivity.this, e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
@@ -337,33 +342,33 @@ public class AddJobsActivity extends AppCompatActivity {
 
         if (binding.txtPositon.length() != 0) {
 
-            binding.btnEdit1.setVisibility(View.VISIBLE);
-            binding.btnAdd1.setVisibility(View.INVISIBLE);
+            binding.btnEditJobPosition.setVisibility(View.VISIBLE);
+            binding.btnAddJobPosition.setVisibility(View.INVISIBLE);
 
 
         } else {
-            binding.btnAdd1.setVisibility(View.VISIBLE);
-            binding.btnEdit1.setVisibility(View.INVISIBLE);
+            binding.btnAddJobPosition.setVisibility(View.VISIBLE);
+            binding.btnEditJobPosition.setVisibility(View.INVISIBLE);
         }
 
         if (binding.txtDescription.length() != 0) {
 
-            binding.btnEdit6.setVisibility(View.VISIBLE);
-            binding.btnAdd6.setVisibility(View.INVISIBLE);
+            binding.btnEditJobDescription.setVisibility(View.VISIBLE);
+            binding.btnAddJobDescription.setVisibility(View.INVISIBLE);
 
         } else {
 
-            binding.btnEdit6.setVisibility(View.INVISIBLE);
-            binding.btnAdd6.setVisibility(View.VISIBLE);
+            binding.btnEditJobDescription.setVisibility(View.INVISIBLE);
+            binding.btnAddJobDescription.setVisibility(View.VISIBLE);
         }
 
         if (binding.txtLocation.length() != 0) {
 
-            binding.btnEdit3.setVisibility(View.VISIBLE);
-            binding.btnAdd3.setVisibility(View.INVISIBLE);
+            binding.btnEditJobLocation.setVisibility(View.VISIBLE);
+            binding.btnAddJobLocation.setVisibility(View.INVISIBLE);
         } else {
-            binding.btnEdit3.setVisibility(View.INVISIBLE);
-            binding.btnAdd3.setVisibility(View.VISIBLE);
+            binding.btnEditJobLocation.setVisibility(View.INVISIBLE);
+            binding.btnAddJobLocation.setVisibility(View.VISIBLE);
 
         }
 
@@ -371,8 +376,8 @@ public class AddJobsActivity extends AppCompatActivity {
     }
 
     public void dialogandimagechange() {
-        binding.btnAdd4.setVisibility(View.INVISIBLE);
-        binding.btnEdit4.setVisibility(View.VISIBLE);
+        binding.btnAddEmpolyment.setVisibility(View.INVISIBLE);
+        binding.btnEditEmployment.setVisibility(View.VISIBLE);
         bottomSheetDialog.dismiss();
     }
 
@@ -404,54 +409,6 @@ public class AddJobsActivity extends AppCompatActivity {
     }
 
 
-//    public void companyBottomSheet() {
-//
-//        {
-//            BottomSheetDialog dialog = new BottomSheetDialog(AddJobsActivity.this, R.style.AppBottomSheetDialogTheme);
-//
-//            View bottomsheetView = LayoutInflater.from(getApplicationContext()).
-//                    inflate(R.layout.activity_company, (CardView) findViewById(R.id.UndoChanges));
-//            dialog.setContentView(bottomsheetView);
-//            dialog.show();
-//            dialog.setCancelable(true);
-//            RecyclerView recyclerViewBottomSheet = bottomsheetView.findViewById(R.id.recyclerViewCom);
-//            SearchView searchView = bottomsheetView.findViewById(R.id.searchViewCom);
-//
-//            companyList = new ArrayList<>();
-//            companyList.add(new CompanyModel(R.drawable.googleic, "Google", "Internet"));
-//            companyList.add(new CompanyModel(R.drawable.ic_apple, "Apple", "Electronic goods"));
-//            companyList.add(new CompanyModel(R.drawable.ic_amazon, "Amazon", "Internet"));
-//            companyList.add(new CompanyModel(R.drawable.googleic, "Dribble", "Design"));
-//            companyList.add(new CompanyModel(R.drawable.googleic, "Twitter", "Internet"));
-//            companyList.add(new CompanyModel(R.drawable.googleic, "Facebook", "Internet"));
-//            companyList.add(new CompanyModel(R.drawable.googleic, "Microsoft", "Internet"));
-//            companyList.add(new CompanyModel(R.drawable.googleic, "Allianz", "Financial Service"));
-//            companyList.add(new CompanyModel(R.drawable.googleic, "Adobe", "Computer software"));
-//            companyList.add(new CompanyModel(R.drawable.googleic, "AXA", "Insurance"));
-//            companyJobAdapter = new CompanyAdapter(companyList, this, "");
-//
-//            LinearLayoutManager layoutManager = new LinearLayoutManager(AddJobsActivity.this);
-//            recyclerViewBottomSheet.setLayoutManager(layoutManager);
-//            recyclerViewBottomSheet.setAdapter(companyJobAdapter);
-//
-//            searchView.setOnQueryTextListener(new android.widget.SearchView.OnQueryTextListener() {
-//                @Override
-//                public boolean onQueryTextSubmit(String s) {
-//                    return false;
-//                }
-//
-//                @Override
-//                public boolean onQueryTextChange(String s) {
-//                    companyJobAdapter.getFilter().filter(s);
-//                    return false;
-//                }
-//            });
-//
-//
-//        }
-//
-//
-//    }
 
 
 }
