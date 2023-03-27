@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.graphics.drawable.DrawableCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -16,10 +17,14 @@ import android.os.Bundle;
 
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 
 import android.widget.SearchView;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.appstacks.indiannaukribazaar.NewActivities.Adapters.CompanyAdapter;
@@ -62,7 +67,60 @@ public class AddJobsActivity extends AppCompatActivity {
 
     private ProfileUtils profileUtils;
     private String uniqueKey;
-    private String title, internet, companyLogo;
+    private String title, internet, companyLogo, jobSalary,jobQualification;
+
+    String[] qualifications = {"Select Qualification","Bachelor's Degree in Computer Science",
+            "Master's Degree in Business Administration",
+            "Certification in Project Management",
+            "Certification in Agile Development",
+            "Bachelor's Degree in Mathematics",
+            "Bachelor's Degree in Physics",
+            "Bachelor's Degree in Chemistry",
+            "Bachelor's Degree in Biology",
+            "Master's Degree in Data Science",
+            "Master's Degree in Information Technology",
+            "Certification in Cloud Computing",
+            "Certification in Cybersecurity",
+            "Bachelor's Degree in Electrical Engineering",
+            "Bachelor's Degree in Mechanical Engineering",
+            "Bachelor's Degree in Civil Engineering",
+            "Master's Degree in Economics",
+            "Certification in Six Sigma",
+            "Certification in Scrum",
+            "Certification in ITIL",
+            "Certification in Lean Manufacturing",
+            "Certification in Quality Management",
+            "Certification in Risk Management",
+            "Certification in Human Resource Management",
+            "Bachelor's Degree in Accounting",
+            "Bachelor's Degree in Finance",
+            "Master's Degree in Marketing",
+            "Certification in Digital Marketing",
+            "Certification in Social Media Marketing",
+            "Certification in Search Engine Optimization",
+            "Certification in Email Marketing",
+            "Certification in Content Marketing",
+            "Certification in Google Analytics",
+            "Certification in Google AdWords",
+            "Certification in Microsoft Office",
+            "Certification in Adobe Creative Suite",
+            "Certification in Salesforce",
+            "Bachelor's Degree in Psychology",
+            "Master's Degree in Counseling",
+            "Certification in Life Coaching",
+            "Certification in NLP",
+            "Certification in Yoga Teaching",
+            "Certification in Pilates Teaching",
+            "Certification in Personal Training",
+            "Certification in Nutrition",
+            "Certification in Massage Therapy",
+            "Certification in Acupuncture",
+            "Certification in Reiki",
+            "Certification in Reflexology",
+            "Certification in Aromatherapy",
+            "Certification in Herbalism",
+            "Certification in Homeopathy",
+            "Certification in Naturopathy"};
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -115,15 +173,115 @@ public class AddJobsActivity extends AppCompatActivity {
         loadingAlertDialog();
 
 
+        binding.BtnSalary.setOnClickListener(view -> {
+
+            if (binding.BtnSalaryADD.getVisibility() == View.GONE) {
+                binding.BtnSalaryADD.setVisibility(View.VISIBLE);
+                binding.btnAddJobSalary.setImageResource(R.drawable.delete);
+            } else {
+                binding.BtnSalaryADD.setVisibility(View.GONE);
+                binding.btnAddJobSalary.setImageResource(R.drawable.addddd);
+            }
+        });
+
+        binding.btnSalaryEnterAmount.setOnClickListener(view -> {
+
+            if (binding.radioGroup.getCheckedRadioButtonId() == -1)
+                Toast.makeText(this, "Select salary type", Toast.LENGTH_SHORT).show();
+            else {
+                // get selected radio button from radioGroup
+                int selectedId = binding.radioGroup.getCheckedRadioButtonId();
+                // find the radiobutton by returned id
+                RadioButton selectedRadioButton = (RadioButton) findViewById(selectedId);
+                BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(AddJobsActivity.this, R.style.AppBottomSheetDialogTheme);
+                View bottomsheetView = LayoutInflater.from(getApplicationContext()).
+                        inflate(R.layout.layout_salary, (ConstraintLayout) findViewById(R.id.bottom_sheet_container));
+
+                bottomSheetDialog.setContentView(bottomsheetView);
+                bottomSheetDialog.show();
+
+                EditText editTextSalary = bottomsheetView.findViewById(R.id.etSalaryJob);
+
+                @SuppressLint({"MissingInflatedId", "LocalSuppress"})
+                Button btnSaveSalary = bottomsheetView.findViewById(R.id.btnSaveSalaryJob);
+                btnSaveSalary.setOnClickListener(view1 -> {
+                    if (editTextSalary.getText().toString().isEmpty())
+                        editTextSalary.setError("Enter amount");
+                    else {
+                        jobSalary = editTextSalary.getText().toString() + " " + selectedRadioButton.getText().toString();
+                        bottomSheetDialog.dismiss();
+                        binding.BtnSalaryADD.setVisibility(View.GONE);
+                        binding.btnAddJobSalary.setImageResource(R.drawable.addddd);
+                        binding.txtSalary.setText(jobSalary);
+
+                    }
+
+                });
+
+            }
+
+        });
+        binding.BtnQualifications.setOnClickListener(view -> {
+            if (binding.BtnQualificationsADD.getVisibility() == View.GONE) {
+
+                binding.BtnQualificationsADD.setVisibility(View.VISIBLE);
+                binding.btnAddJobQualification.setImageResource(R.drawable.delete);
+            } else {
+                binding.BtnQualificationsADD.setVisibility(View.GONE);
+                binding.btnAddJobQualification.setImageResource(R.drawable.addddd);
+            }
+        });
+        binding.btnAddQualification.setOnClickListener(view -> {
+            BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(AddJobsActivity.this, R.style.AppBottomSheetDialogTheme);
+            View bottomsheetView = LayoutInflater.from(getApplicationContext()).
+                    inflate(R.layout.layout_qualification, (ConstraintLayout) findViewById(R.id.bottom_sheet_container));
+
+            bottomSheetDialog.setContentView(bottomsheetView);
+            bottomSheetDialog.show();
+            Spinner spinner = bottomsheetView.findViewById(R.id.spinnerQualifications);
+            Button btnSave = bottomsheetView.findViewById(R.id.btnSaveQualificationJob);
+            ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item,qualifications);
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            spinner.setAdapter(adapter);
+
+            btnSave.setOnClickListener(view1 -> {
+                if(spinner.getSelectedItem().equals("Select Qualification"))
+                    Toast.makeText(this, "Select a valid qualification", Toast.LENGTH_SHORT).show();
+                    else{
+                    jobQualification=    spinner.getSelectedItem().toString();
+                    bottomSheetDialog.dismiss();
+                    binding.BtnQualificationsADD.setVisibility(View.GONE);
+                    binding.btnAddJobQualification.setImageResource(R.drawable.addddd);
+                    binding.txtQualification.setText(jobQualification);
+                }
+            });
+
+
+//            setSpinner();
+
+        });
+
+        binding.BtnSpecialization.setOnClickListener(view -> {
+            if (binding.BtnSpecializationADD.getVisibility() == View.GONE) {
+
+                binding.BtnSpecializationADD.setVisibility(View.VISIBLE);
+                binding.btnAddJobSpecialization.setImageResource(R.drawable.delete);
+            } else {
+                binding.BtnSpecializationADD.setVisibility(View.GONE);
+                binding.btnAddJobSpecialization.setImageResource(R.drawable.addddd);
+            }
+        });
+
+
         binding.postBtn.setOnClickListener(view -> {
-checkValidation();
+            checkValidation();
 
         });
 
         binding.jobPosition.setOnClickListener(view -> {
 
-                    startActivity(new Intent(getApplicationContext(), JobPosition.class));
-                    finish();
+            startActivity(new Intent(getApplicationContext(), JobPosition.class));
+            finish();
         });
 
         binding.btnWorkplaceType.setOnClickListener(view -> {
@@ -275,18 +433,25 @@ checkValidation();
 
     }
 
+    private void setSpinner() {
+
+        ArrayList<String> list = new ArrayList<>();
+
+
+    }
+
     private void checkValidation() {
-        if (sharedPrefe.fetchComTitle() == null){
+        if (sharedPrefe.fetchComTitle() == null) {
             Toast.makeText(this, "Title not set", Toast.LENGTH_SHORT).show();
-        }else if (  binding.txtPositon.getText().toString().isEmpty()){
+        } else if (binding.txtPositon.getText().toString().isEmpty()) {
             Toast.makeText(this, "Position is not added", Toast.LENGTH_SHORT).show();
-        }else if ( binding.txtLocation.getText().toString().isEmpty()){
+        } else if (binding.txtLocation.getText().toString().isEmpty()) {
             Toast.makeText(this, "Location not added", Toast.LENGTH_SHORT).show();
-        }else if (binding.employmentTxt.getText().toString().equals("Click to select")){
+        } else if (binding.employmentTxt.getText().toString().equals("Click to select")) {
             Toast.makeText(this, "Select employment type", Toast.LENGTH_SHORT).show();
-        }else if (binding.txtWorkplace.getText().toString().equals("Click to select")){
+        } else if (binding.txtWorkplace.getText().toString().equals("Click to select")) {
             Toast.makeText(this, "Select workplace type", Toast.LENGTH_SHORT).show();
-        }else{
+        } else {
             postJob();
         }
     }
@@ -302,7 +467,7 @@ checkValidation();
                 binding.txtWorkplace.getText().toString(),
                 binding.txtDescription.getText().toString(),
                 uniqueKey, userUid, binding.comTitle.getText().toString(),
-                binding.txtCompany.getText().toString(), profileUtils.fetchCompanyImage(),String.valueOf(System.currentTimeMillis())
+                binding.txtCompany.getText().toString(), profileUtils.fetchCompanyImage(), String.valueOf(System.currentTimeMillis()), "", "", "", "", "", ""
 
 
         );
@@ -407,8 +572,6 @@ checkValidation();
         loadingDialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
 
     }
-
-
 
 
 }

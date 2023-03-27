@@ -1,10 +1,12 @@
 package com.appstacks.indiannaukribazaar.NewActivities;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -14,6 +16,7 @@ import android.widget.Toast;
 import com.appstacks.indiannaukribazaar.R;
 import com.appstacks.indiannaukribazaar.data.JobPositionData;
 import com.appstacks.indiannaukribazaar.databinding.ActivityJobPositionBinding;
+import com.google.android.material.bottomsheet.BottomSheetDialog;
 
 import java.util.ArrayList;
 
@@ -104,31 +107,18 @@ public class JobPosition extends AppCompatActivity implements View.OnClickListen
 
     @Override
     public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.btnAddPosition:
-                addContentToList();
-                break;
-        }
+
+        BottomSheetDialog dialog = new BottomSheetDialog(JobPosition.this, R.style.AppBottomSheetDialogTheme);
+        View bottomsheetView = LayoutInflater.from(getApplicationContext()).
+                inflate(R.layout.add_company_layout, (CardView) findViewById(R.id.UndoChanges));
+        dialog.setContentView(bottomsheetView);
+
+
+        dialog.show();
+        dialog.setCancelable(false);
+
 
     }
 
-    private void addContentToList() {
 
-       // binding.addItemLayout.setVisibility(View.VISIBLE);
-        binding.btnSubmitItem.setOnClickListener(view -> {
-            if (binding.etAddItme.getText().toString().isEmpty()) {
-                Toast.makeText(this, "Add any item", Toast.LENGTH_SHORT).show();
-            } else {
-                String item = binding.etAddItme.getText().toString();
-                //((list.add(item);
-                JobPositionData.listJobPosition.add(item);
-
-                adapter.setNotifyOnChange(true);
-
-                binding.etAddItme.setText("");
-
-            }
-        });
-
-    }
 }
