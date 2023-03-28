@@ -23,6 +23,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 
+import android.widget.RadioGroup;
 import android.widget.SearchView;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -67,9 +68,10 @@ public class AddJobsActivity extends AppCompatActivity {
 
     private ProfileUtils profileUtils;
     private String uniqueKey;
-    private String title, internet, companyLogo, jobSalary,jobQualification;
+    private String title, internet, companyLogo, jobSalary,jobQualification,jobEligibilities,jobExperience,jobSpecialization,jobFacilities;
+   private String[] jobSpecializations = {"Select Specialization","Software Engineer", "Data Scientist", "UX Designer", "Product Manager", "Marketing Analyst", "Finance Manager", "Human Resources Specialist", "Sales Representative", "Customer Success Manager", "Business Development Manager", "IT Manager", "Operations Manager", "Supply Chain Analyst", "Graphic Designer", "Web Developer", "Mobile Application Developer", "Database Administrator", "Network Administrator", "Systems Analyst", "Project Manager", "Technical Writer", "Content Strategist", "Public Relations Specialist", "Event Planner", "Account Manager", "Brand Manager", "Social Media Manager", "Market Research Analyst", "Investment Banker", "Management Consultant", "Human Factors Engineer", "Industrial Designer", "Mechanical Engineer", "Electrical Engineer", "Chemical Engineer", "Civil Engineer", "Environmental Engineer", "Architect", "Medical Doctor", "Nurse Practitioner", "Physical Therapist", "Occupational Therapist", "Pharmacist", "Dentist", "Veterinarian", "Medical Laboratory Technician", "Medical Technologist", "Radiologic Technologist", "Clinical Research Coordinator", "Clinical Nurse Specialist", "Health Informatics Specialist", "Healthcare Administrator", "Psychologist", "Social Worker", "Counselor", "Interpreter/Translator", "Technical Support Specialist"};
 
-    String[] qualifications = {"Select Qualification","Bachelor's Degree in Computer Science",
+  private   String[] qualifications = {"Select Qualification","Bachelor's Degree in Computer Science",
             "Master's Degree in Business Administration",
             "Certification in Project Management",
             "Certification in Agile Development",
@@ -221,6 +223,83 @@ public class AddJobsActivity extends AppCompatActivity {
             }
 
         });
+
+        binding.BtnEligibility.setOnClickListener(view -> {
+            BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(AddJobsActivity.this, R.style.AppBottomSheetDialogTheme);
+            View bottomsheetView = LayoutInflater.from(getApplicationContext()).
+                    inflate(R.layout.layout_eligibility, (ConstraintLayout) findViewById(R.id.bottom_sheet_container));
+
+            bottomSheetDialog.setContentView(bottomsheetView);
+            bottomSheetDialog.show();
+
+            EditText et1= bottomsheetView.findViewById(R.id.etElgibility1);
+            EditText et2= bottomsheetView.findViewById(R.id.etElgibility2);
+            EditText et3= bottomsheetView.findViewById(R.id.etElgibility3);
+            EditText et4= bottomsheetView.findViewById(R.id.etElgibility4);
+            Button btnSaveEligibilities = bottomsheetView.findViewById(R.id.btnSaveEligibilities);
+
+
+            btnSaveEligibilities.setOnClickListener(view1 -> {
+
+                if (et1.getText().toString().isEmpty() || et2.getText().toString().isEmpty() || et3.getText().toString().isEmpty()|| et4.getText().toString().isEmpty())
+                    Toast.makeText(this, "Add any eligibility", Toast.LENGTH_SHORT).show();
+                else {
+                    jobEligibilities = et1.getText().toString() + " , " + et2.getText().toString() + " , " + et3.getText().toString() + " , " + et4.getText().toString();
+                    binding.txtEligibility.setText(jobEligibilities);
+                    bottomSheetDialog.dismiss();
+                }
+            });
+
+
+        });
+
+        binding.BtnExperience.setOnClickListener(view -> {
+
+            BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(AddJobsActivity.this, R.style.AppBottomSheetDialogTheme);
+            View bottomsheetView = LayoutInflater.from(getApplicationContext()).
+                    inflate(R.layout.layout_experience, (ConstraintLayout) findViewById(R.id.bottom_sheet_container));
+
+            bottomSheetDialog.setContentView(bottomsheetView);
+            bottomSheetDialog.show();
+
+
+            @SuppressLint({"MissingInflatedId", "LocalSuppress"})
+
+            RadioGroup radioGroup = bottomsheetView.findViewById(R.id.radioGroupExperience);
+            RadioButton radioFresher= bottomsheetView.findViewById(R.id.radioBtnFresher);
+            RadioButton radioBtn6Months= bottomsheetView.findViewById(R.id.radioBtn6Months);
+            RadioButton radioBtn1to5Years= bottomsheetView.findViewById(R.id.radioBtn1to5Years);
+            RadioButton radioBtn5to10Years= bottomsheetView.findViewById(R.id.radioBtn5to10Years);
+            RadioButton radioBtn10PlusYears= bottomsheetView.findViewById(R.id.radioBtn10PlusYears);
+
+            radioFresher.setOnClickListener(view1 -> {
+                setExperience(radioFresher.getText().toString());
+                bottomSheetDialog.dismiss();
+            });
+
+            radioBtn6Months.setOnClickListener(view1 -> {
+                setExperience(radioBtn6Months.getText().toString());
+                bottomSheetDialog.dismiss();
+            });
+
+            radioBtn1to5Years.setOnClickListener(view1 -> {
+                setExperience(radioBtn1to5Years.getText().toString());
+                bottomSheetDialog.dismiss();
+            });
+
+            radioBtn5to10Years.setOnClickListener(view1 -> {
+                setExperience(radioBtn5to10Years.getText().toString());
+                bottomSheetDialog.dismiss();
+            });
+
+            radioBtn10PlusYears.setOnClickListener(view1 -> {
+                setExperience(radioBtn10PlusYears.getText().toString());
+                bottomSheetDialog.dismiss();
+            });
+
+
+
+        });
         binding.BtnQualifications.setOnClickListener(view -> {
             if (binding.BtnQualificationsADD.getVisibility() == View.GONE) {
 
@@ -260,7 +339,39 @@ public class AddJobsActivity extends AppCompatActivity {
 //            setSpinner();
 
         });
+binding.BtnFacilities.setOnClickListener(view -> {
+    BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(AddJobsActivity.this, R.style.AppBottomSheetDialogTheme);
+    View bottomsheetView = LayoutInflater.from(getApplicationContext()).
+            inflate(R.layout.layout_facilities, (ConstraintLayout) findViewById(R.id.bottom_sheet_container));
 
+    bottomSheetDialog.setContentView(bottomsheetView);
+    bottomSheetDialog.show();
+
+    @SuppressLint({"MissingInflatedId", "LocalSuppress"})
+    EditText et1= bottomsheetView.findViewById(R.id.etFacility1);
+    @SuppressLint({"MissingInflatedId", "LocalSuppress"})
+    EditText et2= bottomsheetView.findViewById(R.id.etFacility2);
+    @SuppressLint({"MissingInflatedId", "LocalSuppress"})
+    EditText et3= bottomsheetView.findViewById(R.id.etFacility3);
+    @SuppressLint({"MissingInflatedId", "LocalSuppress"})
+    EditText et4= bottomsheetView.findViewById(R.id.etFacility4);
+    @SuppressLint({"MissingInflatedId", "LocalSuppress"}) Button btnSaveEligibilities = bottomsheetView.findViewById(R.id.btnSaveFacilities);
+
+
+    btnSaveEligibilities.setOnClickListener(view1 -> {
+
+        if (et1.getText().toString().isEmpty() || et2.getText().toString().isEmpty() || et3.getText().toString().isEmpty()|| et4.getText().toString().isEmpty())
+            Toast.makeText(this, "Add any eligibility", Toast.LENGTH_SHORT).show();
+        else {
+            jobFacilities = et1.getText().toString() + " , " + et2.getText().toString() + " , " + et3.getText().toString() + " , " + et4.getText().toString();
+            binding.txtFacilities.setText(jobFacilities);
+            bottomSheetDialog.dismiss();
+        }
+    });
+
+
+
+});
         binding.BtnSpecialization.setOnClickListener(view -> {
             if (binding.BtnSpecializationADD.getVisibility() == View.GONE) {
 
@@ -270,8 +381,35 @@ public class AddJobsActivity extends AppCompatActivity {
                 binding.BtnSpecializationADD.setVisibility(View.GONE);
                 binding.btnAddJobSpecialization.setImageResource(R.drawable.addddd);
             }
-        });
 
+
+        });
+        binding.btnAddSpecialization.setOnClickListener(view1 -> {
+            BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(AddJobsActivity.this, R.style.AppBottomSheetDialogTheme);
+            View bottomsheetView = LayoutInflater.from(getApplicationContext()).
+                    inflate(R.layout.layout_specialization, (ConstraintLayout) findViewById(R.id.bottom_sheet_container));
+
+            bottomSheetDialog.setContentView(bottomsheetView);
+            bottomSheetDialog.show();
+            Spinner spinner = bottomsheetView.findViewById(R.id.spinnerSpecialization);
+            Button btnSave = bottomsheetView.findViewById(R.id.btnSaveSpecializationJob);
+            ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item,jobSpecializations);
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            spinner.setAdapter(adapter);
+
+            btnSave.setOnClickListener(view -> {
+                if (spinner.getSelectedItem().equals("Select Specialization"))
+                    Toast.makeText(this, "Select valid specialization", Toast.LENGTH_SHORT).show();
+                else{
+                    jobSpecialization=    spinner.getSelectedItem().toString();
+                    bottomSheetDialog.dismiss();
+                    binding.BtnSpecializationADD.setVisibility(View.GONE);
+                    binding.btnAddJobSpecialization.setImageResource(R.drawable.addddd);
+                    binding.txtSpecialization.setText(jobSpecialization);
+                }
+            });
+
+        });
 
         binding.postBtn.setOnClickListener(view -> {
             checkValidation();
@@ -430,6 +568,13 @@ public class AddJobsActivity extends AppCompatActivity {
         });
 
         binding.cancelBtn.setOnClickListener(view -> finish());
+
+    }
+
+    private void setExperience(String experience) {
+
+        jobExperience= experience;
+        binding.txtExperience.setText(experience);
 
     }
 
