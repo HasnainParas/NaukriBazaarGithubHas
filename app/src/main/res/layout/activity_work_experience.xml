@@ -165,10 +165,9 @@
                     android:layout_marginStart="8dp"
                     android:layout_marginEnd="8dp"
                     android:background="@color/white"
-                    android:gravity="top"
-                    android:hint="Write Additional information here"
-                    android:inputType="textPersonName"
-                    android:maxLength="500"
+                 android:hint="Write Additional information here"
+
+                  style="@style/EditTextStyleMultiLine"
                     android:paddingStart="8dp"
                     android:paddingTop="8dp"
                     android:paddingEnd="8dp"

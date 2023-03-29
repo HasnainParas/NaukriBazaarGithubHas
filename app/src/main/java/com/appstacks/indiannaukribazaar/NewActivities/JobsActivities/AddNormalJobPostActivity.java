@@ -88,6 +88,7 @@ public class AddNormalJobPostActivity extends AppCompatActivity {
                 sharedPrefe.saveDescription(descriptionTxt);
                 sharedPrefe.saveTitle(titleTxt);
                 startActivity(intent);
+                finish();
             }
 
         });

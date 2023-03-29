@@ -49,7 +49,6 @@ public class SkillsActivity extends AppCompatActivity {
         gridSkillsList.clear();
         skillsList.add("Summarizing");
         skillsList.add("Patience");
-        skillsList.add("Storytelling");
         skillsList.add("Editing");
         skillsList.add("Written communication ");
         skillsList.add("Open-mindedness");
@@ -58,6 +57,143 @@ public class SkillsActivity extends AppCompatActivity {
         skillsList.add("Presenting");
         skillsList.add("Summarizing");
         skillsList.add("Documenting");
+        skillsList.add("Active listening");
+        skillsList.add("Clear and concise writing");
+        skillsList.add("Verbal communication");
+        skillsList.add("Nonverbal communication");
+        skillsList.add("Interpersonal communication");
+        skillsList.add("Presentation skills");
+        skillsList.add("Conflict resolution");
+        skillsList.add("Negotiation");
+        skillsList.add("Logical reasoning");
+        skillsList.add("Analytical skills");
+        skillsList.add("Decision-making");
+        skillsList.add("Problem-solving");
+        skillsList.add("Creative thinking");
+        skillsList.add("Innovation");
+        skillsList.add("Conceptual thinking");
+        skillsList.add("Evaluating evidence");
+        skillsList.add("Synthesizing information");
+        skillsList.add("Idea generation");
+        skillsList.add("Brainstorming Imagination");
+        skillsList.add("Artistic ability");
+        skillsList.add("Design skills");
+        skillsList.add("Inventing Curiosity");
+        skillsList.add("Risk-taking");
+        skillsList.add("Collaboration");
+        skillsList.add("Team building");
+        skillsList.add("Team communication");
+        skillsList.add("Conflict resolution");
+        skillsList.add("Leadership");
+        skillsList.add("Diversity and inclusion Delegation");
+        skillsList.add("Trust-building");
+        skillsList.add("Flexibility");
+        skillsList.add("Vision-setting");
+        skillsList.add("Goal-setting");
+        skillsList.add("Strategy development");
+        skillsList.add("Decision-making");
+        skillsList.add("Effective communication");
+        skillsList.add("Conflict resolution");
+        skillsList.add("Empathy");
+        skillsList.add("Time management");
+        skillsList.add("Mentoring and coaching");
+        skillsList.add("Prioritization Planning");
+        skillsList.add("Scheduling Organization");
+        skillsList.add("Delegation Focus");
+        skillsList.add("Self-motivation");
+        skillsList.add("Meeting deadlines");
+        skillsList.add("Multitasking");
+        skillsList.add("Flexibility Resilience");
+        skillsList.add("Openness to change");
+        skillsList.add("Learning agility");
+        skillsList.add("Risk-taking");
+        skillsList.add("Creativity");
+        skillsList.add("Problem-solving");
+        skillsList.add("Cultural awareness");
+        skillsList.add("Cross-functional collaboration");
+        skillsList.add("Analyzing data");
+        skillsList.add("Identifying problems");
+        skillsList.add("Root cause analysis");
+        skillsList.add("Developing solutions");
+        skillsList.add("Decision-making");
+        skillsList.add("Critical thinking");
+        skillsList.add("Strategic thinking");
+        skillsList.add("Evaluating alternatives");
+        skillsList.add("Innovation");
+        skillsList.add("Analyzing data");
+        skillsList.add("Weighing pros and cons");
+        skillsList.add("Identifying alternatives");
+        skillsList.add("Considering risks");
+        skillsList.add("Making informed decisions");
+        skillsList.add("Rational decision-making");
+        skillsList.add("Intuitive decision-making");
+        skillsList.add("Ethical decision-making");
+        skillsList.add("Judgment");
+        skillsList.add("Computer skills");
+        skillsList.add("Coding");
+        skillsList.add("Data analysis");
+        skillsList.add("Programming");
+        skillsList.add("Design skills");
+        skillsList.add("Writing skills");
+        skillsList.add("Marketing skills");
+        skillsList.add("Financial analysis");
+        skillsList.add("Industry-specific knowledge");
+        skillsList.add("Time management");
+        skillsList.add("Planning and scheduling Prioritization");
+        skillsList.add("Multitasking");
+        skillsList.add("Attention to detail");
+        skillsList.add("Record-keeping");
+        skillsList.add("Delegation");
+        skillsList.add("Project management");
+        skillsList.add("Meeting deadlines");
+        skillsList.add("Thoroughness Accuracy");
+        skillsList.add("Precision Focus");
+        skillsList.add("Perfectionism Consistency");
+        skillsList.add("Critical thinking");
+        skillsList.add("Data analysis");
+        skillsList.add("Following procedures");
+        skillsList.add("Emotional intelligence");
+        skillsList.add("Active listening");
+        skillsList.add("Empathy");
+        skillsList.add("Positive attitude");
+        skillsList.add("Conflict resolution");
+        skillsList.add("Relationship building");
+        skillsList.add("Teamwork Collaboration");
+        skillsList.add("Communication");
+        skillsList.add("Communication skills");
+        skillsList.add("Problem-solving");
+        skillsList.add("Patience Empathy");
+        skillsList.add("Active listening");
+        skillsList.add("Conflict resolution");
+        skillsList.add("Attention to detail");
+        skillsList.add("Product knowledge");
+        skillsList.add("Adaptability");
+        skillsList.add("Persuasion Negotiation");
+        skillsList.add("Relationship building");
+        skillsList.add("Product knowledge");
+        skillsList.add("Closing deals");
+        skillsList.add("Follow-up");
+        skillsList.add("Time management");
+        skillsList.add("Goal setting");
+        skillsList.add("Market research");
+        skillsList.add("Customer analysis");
+        skillsList.add("Campaign planning");
+        skillsList.add("Brand management");
+        skillsList.add("Advertising");
+        skillsList.add("Public relations");
+        skillsList.add("Social media management Analytics");
+        skillsList.add("Creative thinking");
+        skillsList.add("Accounting");
+        skillsList.add("Financial analysis");
+        skillsList.add("Budgeting Forecasting");
+        skillsList.add("Reporting");
+        skillsList.add("Tax management");
+        skillsList.add("Investment management");
+        skillsList.add("Risk management");
+        skillsList.add("Cash flow management");
+        skillsList.add("Planning Budgeting");
+        skillsList.add("Risk management");
+        skillsList.add("Resource management");
 
         searchView(skillsList);
 
@@ -69,32 +205,21 @@ public class SkillsActivity extends AppCompatActivity {
             if (gridSkillsList.isEmpty()) {
                 Toast.makeText(this, "Select any skill", Toast.LENGTH_SHORT).show();
             } else {
-//                list = new ArrayList<>();
-//
-//                for (int i = 0; i < gridSkillsList.size(); i++) {
-//                    list.add(new Skills(String.valueOf(i), gridSkillsList.get(i)));
-//                }
+
                 uploadSkills(gridSkillsList);
 
-                //Toast.makeText(this, "Selected", Toast.LENGTH_SHORT).show();
             }
         });
 
 
         binding.listViewSearchData.setOnItemClickListener((adapterView, view15, i, l) -> {
             String instituteName = skillsList.get(i).toString();
-            if (gridSkillsList.isEmpty()) {
+
+            if (gridSkillsList.contains(instituteName)){
+                Toast.makeText(this, "Already added this skill try selecting another one", Toast.LENGTH_SHORT).show();
+            }else {
                 gridSkillsList.add(instituteName);
                 gridAdapter.notifyDataSetChanged();
-
-                gridAdapter.notifyDataSetInvalidated();
-            } else if (notExists(i)) {
-                gridSkillsList.add(instituteName);
-                gridAdapter.notifyDataSetChanged();
-
-                gridAdapter.notifyDataSetInvalidated();
-            } else {
-                Toast.makeText(this, "Already added try selecting different options", Toast.LENGTH_SHORT).show();
             }
 
 

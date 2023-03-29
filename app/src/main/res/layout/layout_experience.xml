@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/bottom_sheet_container"
+    android:background="@drawable/bottom_sheet_background"
+    >
+
+    <View
+        android:id="@+id/view6"
+        android:layout_width="24dp"
+        android:layout_height="4dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/viewforbottomsheet"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView41"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:fontFamily="@font/dm_sans"
+        android:gravity="center"
+        android:text="Choose Experience"
+        android:textColor="#150B3D"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view6" />
+
+  <RadioGroup
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:padding="8dp"
+      android:id="@+id/radioGroupExperience"
+      app:layout_constraintTop_toBottomOf="@id/textView41"
+      android:orientation="vertical">
+      <RadioButton
+          android:layout_width="match_parent"
+          android:padding="8dp"
+          android:layout_margin="3dp"
+          android:id="@+id/radioBtnFresher"
+          android:layout_height="wrap_content"
+          android:text="Fresher"/>
+      <RadioButton
+          android:layout_width="match_parent"
+          android:layout_margin="3dp"
+          android:id="@+id/radioBtn6Months"
+          android:layout_height="wrap_content"
+          android:padding="8dp"
+          android:text="6 Months - 1 Year"/>
+      <RadioButton
+          android:layout_width="match_parent"
+          android:layout_margin="3dp"
+          android:id="@+id/radioBtn1to5Years"
+          android:layout_height="wrap_content"
+          android:padding="8dp"
+          android:text="1-5 Years"/>
+      <RadioButton
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_margin="3dp"
+          android:id="@+id/radioBtn5to10Years"
+          android:padding="8dp"
+          android:text="5-10 Years"/>
+      <RadioButton
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_margin="3dp"
+          android:id="@+id/radioBtn10PlusYears"
+          android:padding="8dp"
+          android:text="More than 10 Years"/>
+  </RadioGroup>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

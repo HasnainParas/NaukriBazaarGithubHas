@@ -3,6 +3,7 @@ package com.appstacks.indiannaukribazaar.NewActivities;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
 
@@ -19,15 +20,14 @@ import com.google.firebase.database.ValueEventListener;
 
 public class UserJobDetailsActivity extends AppCompatActivity {
 
-    ActivityUserJobDetailsBinding binding;
-    DatabaseReference userJobRef, userRef;
-    String currentUser;
-    PersonalInformationModel model;
-    UserJobModel userJobModel;
+    private ActivityUserJobDetailsBinding binding;
+    private DatabaseReference userJobRef, userRef;
+    private String currentUser;
+    private PersonalInformationModel model;
+    private UserJobModel userJobModel;
 
-    String username, userAddress;
-    String uniqueKey;
-
+    private String username, userAddress;
+    private String uniqueKey;
 
 
     @Override
@@ -42,8 +42,9 @@ public class UserJobDetailsActivity extends AppCompatActivity {
         userJobRef = FirebaseDatabase.getInstance().getReference("userJobs");
         userRef = FirebaseDatabase.getInstance().getReference();
 
-
-
+binding.btnFindJobs.setOnClickListener(view -> {
+    onBackPressed();
+});
         // UserProfile
         userRef.child("UsersInfo").child(currentUser).addValueEventListener(new ValueEventListener() {
             @Override
@@ -78,11 +79,9 @@ public class UserJobDetailsActivity extends AppCompatActivity {
                     binding.userAddress4job.setText(userJobModel.getJobLocation());
                     binding.userWorkPlaceTv.setText(". " + userJobModel.getTypeOfWorkPlace());
 
-//                    username = model.getFirstName() + " " + model.getLastName();
-//                    userAddress = model.getUserAddress();
+
                     Toast.makeText(UserJobDetailsActivity.this, "Yes Existed...", Toast.LENGTH_SHORT).show();
-//                    binding.usernameuser.setText(username);
-//                    binding.useraddressuser.setText(userAddress);
+
                 }
 
 
@@ -95,5 +94,13 @@ public class UserJobDetailsActivity extends AppCompatActivity {
         });
 
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
+        Intent intent = new Intent(UserJobDetailsActivity.this, FindJobsActivity.class);
+        startActivity(intent);
     }
 }

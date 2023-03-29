@@ -53,8 +53,8 @@
                 android:ems="8"
                 android:gravity="top"
                 android:hint="Tell me about you"
-                android:inputType="textPersonName"
-                android:maxLength="500"
+
+                style="@style/EditTextStyleMultiLine"
                 android:paddingStart="8dp"
                 android:paddingEnd="8dp"
                 app:layout_constraintBottom_toBottomOf="parent"
