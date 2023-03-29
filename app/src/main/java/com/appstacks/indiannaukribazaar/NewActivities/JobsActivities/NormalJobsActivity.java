@@ -1,4 +1,4 @@
-package com.appstacks.indiannaukribazaar.NewActivities;
+package com.appstacks.indiannaukribazaar.NewActivities.JobsActivities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -8,12 +8,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
-import com.appstacks.indiannaukribazaar.FirebaseAdapters.JobAdapter;
 import com.appstacks.indiannaukribazaar.FirebaseAdapters.JobTitleAdapter;
-import com.appstacks.indiannaukribazaar.FirebaseModels.JobModel;
 import com.appstacks.indiannaukribazaar.NewActivities.Models.UserJobModel;
-import com.appstacks.indiannaukribazaar.R;
-import com.appstacks.indiannaukribazaar.databinding.ActivityFullTimeJobBinding;
+import com.appstacks.indiannaukribazaar.databinding.ActivityNormalJobsBinding;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -23,9 +20,9 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-public class FullTimeJobActivity extends AppCompatActivity {
+public class NormalJobsActivity extends AppCompatActivity {
 
-    private ActivityFullTimeJobBinding binding;
+    private ActivityNormalJobsBinding binding;
     private ArrayList<UserJobModel> jobModelArrayList;
     private JobTitleAdapter jobTitleAdapter;
     private DatabaseReference userJobRef;
@@ -35,7 +32,7 @@ public class FullTimeJobActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = ActivityFullTimeJobBinding.inflate(getLayoutInflater());
+        binding = ActivityNormalJobsBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
 
@@ -56,7 +53,7 @@ public class FullTimeJobActivity extends AppCompatActivity {
                             jobModelArrayList.add(data);
                             binding.noJobsLayout.setVisibility(View.GONE);
                             binding.userjobrecycler.setVisibility(View.VISIBLE);
-                        }else{
+                        } else {
                             binding.noJobsLayout.setVisibility(View.VISIBLE);
                             binding.userjobrecycler.setVisibility(View.GONE);
                         }
@@ -64,10 +61,10 @@ public class FullTimeJobActivity extends AppCompatActivity {
                     }
 
 
-                    jobTitleAdapter = new JobTitleAdapter(jobModelArrayList, FullTimeJobActivity.this);
+                    jobTitleAdapter = new JobTitleAdapter(jobModelArrayList, NormalJobsActivity.this);
 
 
-                    binding.userjobrecycler.setLayoutManager(new LinearLayoutManager(FullTimeJobActivity.this));
+                    binding.userjobrecycler.setLayoutManager(new LinearLayoutManager(NormalJobsActivity.this));
                     binding.userjobrecycler.setAdapter(jobTitleAdapter);
 //                        binding.loadingFragment.setVisibility(View.GONE);
 
@@ -79,7 +76,7 @@ public class FullTimeJobActivity extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(FullTimeJobActivity.this, error.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(NormalJobsActivity.this, error.getMessage(), Toast.LENGTH_SHORT).show();
 
             }
         });

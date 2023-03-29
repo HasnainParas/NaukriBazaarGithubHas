@@ -5,10 +5,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Toast;
 
-import com.appstacks.indiannaukribazaar.NewActivities.DetailsActivity;
 import com.appstacks.indiannaukribazaar.R;
 import com.appstacks.indiannaukribazaar.databinding.ActivityAddAppreciationBinding;
 import com.google.android.gms.tasks.OnCompleteListener;

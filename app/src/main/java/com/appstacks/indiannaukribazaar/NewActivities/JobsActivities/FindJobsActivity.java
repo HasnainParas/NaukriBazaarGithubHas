@@ -1,10 +1,8 @@
-package com.appstacks.indiannaukribazaar.NewActivities;
+package com.appstacks.indiannaukribazaar.NewActivities.JobsActivities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.annotation.SuppressLint;
@@ -16,15 +14,14 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.appstacks.indiannaukribazaar.Activities.ActivityMain;
 import com.appstacks.indiannaukribazaar.FirebaseAdapters.FindjobAdapter;
 import com.appstacks.indiannaukribazaar.FirebaseModels.FindJobModel;
-import com.appstacks.indiannaukribazaar.FirebaseModels.JobModel;
 import com.appstacks.indiannaukribazaar.FirebaseModels.PersonalInformationModel;
+import com.appstacks.indiannaukribazaar.JobsPackages.InstantJobs.SearchNapplyInstantJobActivity;
+import com.appstacks.indiannaukribazaar.JobsPackages.InstantJobs.InstantJobPostActivity;
 import com.appstacks.indiannaukribazaar.NewActivities.Models.UserJobModel;
 import com.appstacks.indiannaukribazaar.R;
 import com.appstacks.indiannaukribazaar.databinding.ActivityFindJobsBinding;
-import com.appstacks.indiannaukribazaar.profile.ProfileEditActivity;
 import com.appstacks.indiannaukribazaar.profile.ProfileUtils;
 import com.bumptech.glide.Glide;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
@@ -37,7 +34,6 @@ import com.google.firebase.database.ValueEventListener;
 
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class FindJobsActivity extends AppCompatActivity {
 
@@ -135,6 +131,9 @@ public class FindJobsActivity extends AppCompatActivity {
         binding.instantJobService.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                startActivity(new Intent(FindJobsActivity.this, SearchNapplyInstantJobActivity.class));
+                finish();
 //                Intent intent = new Intent(FindJobsActivity.this, AddPostsActivity.class);
 //                intent.putExtra("username", username);
 //                intent.putExtra("useraddress", userAddress);
@@ -161,7 +160,7 @@ public class FindJobsActivity extends AppCompatActivity {
         binding.jobsBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(FindJobsActivity.this, FullTimeJobActivity.class));
+                startActivity(new Intent(FindJobsActivity.this, NormalJobsActivity.class));
 
             }
         });
@@ -201,7 +200,7 @@ public class FindJobsActivity extends AppCompatActivity {
         ImageView cancenBtn = bottomsheetView.findViewById(R.id.postjobCancelBtn);
 
         jobpostBtn.setOnClickListener(view1 -> {
-            Intent intent = new Intent(FindJobsActivity.this, AddPostsActivity.class);
+            Intent intent = new Intent(FindJobsActivity.this, AddNormalJobPostActivity.class);
             intent.putExtra("username", username);
             intent.putExtra("useraddress", userAddress);
             if (size >= 10) {
@@ -216,8 +215,14 @@ public class FindJobsActivity extends AppCompatActivity {
         });
 
         instantJobBtn.setOnClickListener(view -> {
-            startActivity(new Intent(FindJobsActivity.this, InstantJobActivity.class));
+            Intent intentin = new Intent(FindJobsActivity.this, InstantJobPostActivity.class);
+            intentin.putExtra("usernameinstant", username);
+            intentin.putExtra("useraddressinstant", userAddress);
+//            startActivity(new Intent(FindJobsActivity.this, InstantJobActivity.class));
+            startActivity(intentin);
             dialog.dismiss();
+            finish();
+
         });
 
 

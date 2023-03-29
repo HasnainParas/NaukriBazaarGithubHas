@@ -5,11 +5,11 @@
     android:installLocation="auto"
     tools:ignore="GoogleAppIndexingWarning">
 
+    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission
         android:name="com.google.android.gms.permission.AD_ID"
         tools:node="remove" />
     <uses-permission android:name="android.permission.VIBRATE" />
-    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
@@ -31,8 +31,46 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:ignore="HardcodedDebugMode">
+        <activity
+            android:name=".NewActivities.JobsActivities.NormalJobCvActivity"
+            android:exported="false"
+            android:theme="@style/noactiondisplay" />
+        <activity
+            android:name=".JobsPackages.InstantJobs.SuccessApplyActivity"
+            android:exported="false"
+            android:theme="@style/noactiondisplay" />
+        <activity
+            android:name=".JobsPackages.InstantJobs.SearchNApplyInJobDetailActivity"
+            android:exported="true"
+            android:theme="@style/noactiondisplay" />
+        <activity
+            android:name=".JobsPackages.InstantJobs.SearchNapplyInstantJobActivity"
+            android:exported="true"
+            android:theme="@style/noactiondisplay">
 
-        <activity android:name=".profile.location.MapsActivity"
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.MAIN" /> -->
+            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+            <!-- </intent-filter> -->
+
+        </activity>
+        <activity
+            android:name=".JobsPackages.InstantJobs.InstantCompanyActivity"
+            android:exported="false"
+            android:theme="@style/noactiondisplay" />
+        <activity
+            android:name=".Activities.ActivitySplash"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:exported="true"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".profile.location.MapsActivity"
             android:exported="true">
             <meta-data
                 android:name="android.app.lib_name"
@@ -129,12 +167,14 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
+
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="${MAPS_API_KEY}" />
+
         <activity
             android:name=".profile.Education.LevelOfEducationActivity"
             android:exported="false">
@@ -169,16 +209,15 @@
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
-        </activity>
-        <activity
-            android:name=".NewActivities.EditProfileActivity"
-            android:exported="false"
-            android:label="@string/title_activity_edit_profile"
-            android:theme="@style/AppTheme.NoActionBar">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
+        </activity> <!-- <activity -->
+        <!-- android:name=".NewActivities.EditProfileActivity" -->
+        <!-- android:exported="false" -->
+        <!-- android:label="@string/title_activity_edit_profile" -->
+        <!-- android:theme="@style/AppTheme.NoActionBar"> -->
+        <!-- <meta-data -->
+        <!-- android:name="android.app.lib_name" -->
+        <!-- android:value="" /> -->
+        <!-- </activity> -->
         <activity
             android:name=".profile.UserProfileActivity"
             android:exported="false">
@@ -187,17 +226,16 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".NewActivities.JobsActivities.AddInstantJobActivity"
+            android:name=".JobsPackages.InstantJobs.AddingInstantJobDetailsActivity"
             android:exported="true"
-            android:theme="@style/noactiondisplay"
-            >
-<!--            <intent-filter>-->
-<!--                <action android:name="android.intent.action.MAIN" />-->
+            android:theme="@style/noactiondisplay">
 
-<!--                <category android:name="android.intent.category.LAUNCHER" />-->
-<!--            </intent-filter>-->
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.MAIN" /> -->
 
 
+            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+            <!-- </intent-filter> -->
         </activity>
         <activity
             android:name=".NewActivities.JobsActivities.N_JobsDetailActivity"
@@ -211,7 +249,7 @@
             android:name=".profile.ViewProfileActivity"
             android:exported="true" />
         <activity
-            android:name=".NewActivities.InstantJobActivity"
+            android:name=".JobsPackages.InstantJobs.InstantJobPostActivity"
             android:exported="false"
             android:theme="@style/noactiondisplay" />
         <activity
@@ -219,7 +257,7 @@
             android:exported="false"
             android:theme="@style/noactiondisplay" />
         <activity
-            android:name=".NewActivities.FullTimeJobActivity"
+            android:name=".NewActivities.JobsActivities.NormalJobsActivity"
             android:exported="false"
             android:theme="@style/noactiondisplay" />
         <activity
@@ -244,7 +282,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".NewActivities.DetailsActivity"
+            android:name=".NewActivities.JobsActivities.DetailsActivity"
             android:exported="false" />
         <activity
             android:name=".AaForChecking"
@@ -255,7 +293,7 @@
             android:exported="false"
             android:theme="@style/noactiondisplay" />
         <activity
-            android:name=".NewActivities.CompanyActivity"
+            android:name=".NewActivities.JobsActivities.CompanyActivity"
             android:exported="false"
             android:theme="@style/noactiondisplay" />
         <activity
@@ -263,23 +301,23 @@
             android:exported="false"
             android:theme="@style/noactiondisplay" />
         <activity
-            android:name=".NewActivities.JobPosition"
+            android:name=".NewActivities.JobsActivities.JobPosition"
             android:exported="false"
             android:theme="@style/noactiondisplay" />
         <activity
-            android:name=".NewActivities.AddPostsActivity"
+            android:name=".NewActivities.JobsActivities.AddNormalJobPostActivity"
             android:exported="false"
             android:theme="@style/noactiondisplay" />
         <activity
-            android:name=".NewActivities.PaidJobsActivity"
+            android:name=".NewActivities.JobsActivities.PaidJobsActivity"
             android:exported="false"
             android:theme="@style/noactiondisplay" />
         <activity
-            android:name=".NewActivities.FindJobsActivity"
+            android:name=".NewActivities.JobsActivities.FindJobsActivity"
             android:exported="true"
             android:theme="@style/noactiondisplay" />
         <activity
-            android:name=".NewActivities.AddJobsActivity"
+            android:name=".NewActivities.JobsActivities.AddJobsActivity"
             android:exported="false"
             android:theme="@style/noactiondisplay" />
         <activity
@@ -311,7 +349,7 @@
             android:name=".NewActivities.KycPaidJobs.KycStartBrowsingActivity"
             android:exported="false" />
         <activity
-            android:name=".NewActivities.JobDetailsActivity"
+            android:name=".NewActivities.JobsActivities.JobDetailsActivity"
             android:exported="false"
             android:theme="@style/noactiondisplay" />
         <activity
@@ -348,17 +386,6 @@
             android:name=".NewActivities.WelcomeActivity"
             android:exported="true"
             android:screenOrientation="portrait" />
-        <activity
-            android:name=".Activities.ActivitySplash"
-            android:configChanges="orientation|keyboardHidden|screenSize"
-            android:exported="true"
-            android:screenOrientation="portrait">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
         <activity
             android:name=".Activities.ActivityMain"
             android:configChanges="orientation|keyboardHidden|screenSize"

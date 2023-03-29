@@ -1,4 +1,4 @@
-package com.appstacks.indiannaukribazaar.NewActivities;
+package com.appstacks.indiannaukribazaar.NewActivities.JobsActivities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -11,6 +11,7 @@ import android.widget.ArrayAdapter;
 import android.widget.SearchView;
 import android.widget.Toast;
 
+import com.appstacks.indiannaukribazaar.NewActivities.SharedPrefe;
 import com.appstacks.indiannaukribazaar.R;
 import com.appstacks.indiannaukribazaar.data.JobPositionData;
 import com.appstacks.indiannaukribazaar.databinding.ActivityJobPositionBinding;

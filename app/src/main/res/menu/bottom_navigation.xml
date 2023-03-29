@@ -9,7 +9,7 @@
         android:title="@string/home" />
     <item
         android:id="@+id/find_job"
-        android:icon="@drawable/search_png"
+        android:icon="@drawable/shopping_bag"
         android:title="@string/find_jobs" />
 
     <item

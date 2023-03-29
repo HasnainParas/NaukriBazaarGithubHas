@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".NewActivities.AddJobsActivity">
+    tools:context=".NewActivities.JobsActivities.AddJobsActivity">
 
 
     <ImageView
@@ -55,42 +55,53 @@
         app:cardCornerRadius="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/textView28"
-        app:layout_constraintTop_toBottomOf="@+id/textView28">
+        app:layout_constraintTop_toBottomOf="@+id/textView28"
+        >
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="3dp"
+            android:gravity="center|start"
+            android:orientation="vertical"
+            android:padding="5dp"
+            >
 
             <TextView
                 android:id="@+id/textView38"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="16dp"
-                android:layout_weight="1"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
                 android:fontFamily="@font/dm_sans"
-                android:text="Job position"
+                android:text="Job Position"
                 android:textColor="@color/black"
                 android:textSize="16sp"
                 android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+
+                />
 
             <TextView
                 android:id="@+id/txt_positon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="16dp"
-                android:layout_weight="1"
+                android:layout_marginStart="8dp"
+                android:layout_marginBottom="8dp"
                 android:fontFamily="@font/dm_sans"
-                android:text=""
                 android:textColor="#524B6B"
                 android:textSize="14sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/textView38"
-                app:layout_constraintTop_toBottomOf="@+id/textView38" />
+                android:visibility="gone"
+                />
 
+
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center|end"
+            >
             <ImageView
                 android:id="@+id/btnAdd1"
                 android:layout_width="wrap_content"
@@ -98,10 +109,9 @@
                 android:layout_gravity="center|end"
                 android:layout_marginEnd="8dp"
                 android:visibility="visible"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/ic_add" />
+                app:srcCompat="@drawable/ic_add"
+
+                />
 
             <ImageView
                 android:id="@+id/btnEdit1"
@@ -109,20 +119,21 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center|end"
                 android:layout_marginEnd="8dp"
-                android:visibility="invisible"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
+                android:visibility="gone"
                 app:srcCompat="@drawable/ic_edit" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </LinearLayout>
+
 
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
         android:id="@+id/btnCompany"
-        android:layout_width="0dp"
-        android:layout_height="90dp"
-        android:layout_marginTop="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
         android:clickable="true"
         android:foreground="?android:attr/selectableItemBackground"
         app:cardCornerRadius="10dp"
@@ -130,59 +141,90 @@
         app:layout_constraintStart_toStartOf="@+id/jobPosition"
         app:layout_constraintTop_toBottomOf="@+id/jobPosition">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="3dp"
+            android:gravity="center|start"
+            android:orientation="vertical"
+            android:padding="5dp"
 
+            >
             <TextView
 
                 android:id="@+id/textView30"
+                android:text="Company"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="16dp"
-                android:layout_weight="1"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
                 android:fontFamily="@font/dm_sans"
-                android:text="Company"
                 android:textColor="@color/black"
                 android:textSize="16sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                android:textStyle="bold"
 
-            <TextView
-                android:id="@+id/comTitle"
+                />
+
+            <LinearLayout
+                android:id="@+id/comlayoutid"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="16dp"
-                android:textColor="#524B6B"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/textView30"
-                app:layout_constraintTop_toBottomOf="@+id/textView30" />
+                android:orientation="horizontal"
+                android:visibility="gone"
+                >
 
-            <View
-                android:id="@+id/view4"
-                android:layout_width="2dp"
-                android:layout_height="2dp"
-                android:layout_gravity="center"
-                android:layout_marginStart="8dp"
-                android:background="@drawable/ellipse101"
-                app:layout_constraintBottom_toBottomOf="@+id/comTitle"
-                app:layout_constraintStart_toEndOf="@+id/comTitle"
-                app:layout_constraintTop_toTopOf="@+id/comTitle" />
+                <TextView
+                    android:id="@+id/comTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:fontFamily="@font/dm_sans"
+                    android:text="----"
+                    android:textColor="#524B6B"
+                    android:textSize="14sp"
 
-            <TextView
-                android:id="@+id/txt_company"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_weight="1"
-                android:fontFamily="@font/dm_sans"
-                android:textColor="#524B6B"
-                android:textSize="14sp"
-                app:layout_constraintBottom_toBottomOf="@+id/comTitle"
-                app:layout_constraintStart_toEndOf="@+id/view4"
-                app:layout_constraintTop_toTopOf="@+id/comTitle" />
+                    android:visibility="visible" />
+
+                <View
+                    android:id="@+id/view4"
+                    android:layout_width="2dp"
+                    android:layout_height="2dp"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="8dp"
+                    android:background="@drawable/ellipse101"
+                    android:visibility="visible"
+                    app:layout_constraintBottom_toBottomOf="@+id/comTitle"
+                    app:layout_constraintStart_toEndOf="@+id/comTitle"
+                    app:layout_constraintTop_toTopOf="@+id/comTitle" />
+
+                <TextView
+                    android:id="@+id/txt_company"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:fontFamily="@font/dm_sans"
+                    android:text="----"
+                    android:textColor="#524B6B"
+                    android:textSize="14sp"
+                    android:visibility="visible" />
+
+
+            </LinearLayout>
+
+
+
+
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center|end"
+
+            >
 
             <ImageView
                 android:id="@+id/btnEdit2"
@@ -190,32 +232,31 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center|end"
                 android:layout_marginEnd="8dp"
-                android:visibility="invisible"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
+                android:visibility="gone"
                 app:srcCompat="@drawable/ic_edit" />
 
             <ImageView
                 android:id="@+id/btnAdd2"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_gravity="center|end"
                 android:layout_marginEnd="8dp"
                 android:visibility="visible"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/ic_add" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                app:srcCompat="@drawable/ic_add"
+
+                />
+
+        </LinearLayout>
 
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
         android:id="@+id/locationBtn"
-        android:layout_width="0dp"
-        android:layout_height="90dp"
-        android:layout_marginTop="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
         android:clickable="true"
         android:foreground="?android:attr/selectableItemBackground"
         app:cardCornerRadius="10dp"
@@ -223,40 +264,51 @@
         app:layout_constraintStart_toStartOf="@+id/btnCompany"
         app:layout_constraintTop_toBottomOf="@+id/btnCompany">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="3dp"
+            android:gravity="center|start"
+            android:orientation="vertical"
+            android:padding="5dp"
+            >
 
             <TextView
                 android:id="@+id/textView51"
+                android:text="Job location "
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="16dp"
-                android:layout_weight="1"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
                 android:fontFamily="@font/dm_sans"
-                android:text="Job location "
                 android:textColor="@color/black"
                 android:textSize="16sp"
                 android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+
+                />
 
             <TextView
                 android:id="@+id/txt_location"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="16dp"
-                android:layout_weight="1"
+                android:layout_marginStart="8dp"
+                android:layout_marginBottom="8dp"
                 android:fontFamily="@font/dm_sans"
-                android:text="Click to select"
                 android:textColor="#524B6B"
                 android:textSize="14sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/textView51"
-                app:layout_constraintTop_toBottomOf="@+id/textView51" />
+                android:visibility="gone"
 
+                />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center|end"
+            >
             <ImageView
                 android:id="@+id/btnAdd3"
 
@@ -265,9 +317,6 @@
                 android:layout_gravity="center|end"
                 android:layout_marginEnd="8dp"
                 android:visibility="visible"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/ic_add" />
 
             <ImageView
@@ -276,14 +325,11 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center|end"
                 android:layout_marginEnd="8dp"
-                android:visibility="invisible"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
+                android:visibility="gone"
+
                 app:srcCompat="@drawable/ic_edit" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
 
-
+        </LinearLayout>
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView

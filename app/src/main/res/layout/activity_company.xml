@@ -7,7 +7,7 @@
     android:layout_marginTop="5dp"
     android:background="@color/white"
     app:cardCornerRadius="10dp"
-    tools:context=".NewActivities.CompanyActivity">
+    tools:context=".NewActivities.JobsActivities.CompanyActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -62,7 +62,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/searchViewCom"
-            tools:listitem="@layout/sample_company" />
+
+            />
 
         <LinearLayout
             android:id="@+id/layoutNothing"

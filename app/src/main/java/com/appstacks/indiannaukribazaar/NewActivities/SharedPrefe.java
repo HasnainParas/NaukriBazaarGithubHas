@@ -20,6 +20,8 @@ public class SharedPrefe {
     public static String INSTANTPOS = "instantPos";
     public static String INSTANTBUDGET = "instantBudget";
     public static String INSTANTTIMEPERIOD = "instantTimePeriod";
+    public static String INSTANTJOBTITLE = "instantJobTitle";
+    public static String INSTANTDESCRIPTION = "instantDescription";
 
 
     public SharedPrefe(Context context) {
@@ -114,6 +116,7 @@ public class SharedPrefe {
 
         return sharedPreferences.getString(INSTANTCOM, null);
     }
+
     public void saveInstantPos(String title) {
 
         SharedPreferences.Editor editor = sharedPreferences.edit();
@@ -148,8 +151,27 @@ public class SharedPrefe {
         return sharedPreferences.getString(INSTANTTIMEPERIOD, null);
     }
 
+    public void saveInstantJobTitle(String title) {
 
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(INSTANTJOBTITLE, title);
+        editor.apply();
+    }
 
+    public String fetchInstantJobTitle() {
+        return sharedPreferences.getString(INSTANTJOBTITLE, null);
+    }
+
+    public void saveInstantDescription(String title) {
+
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(INSTANTDESCRIPTION, title);
+        editor.apply();
+    }
+
+    public String fetchInstantDescription() {
+        return sharedPreferences.getString(INSTANTDESCRIPTION, null);
+    }
 
 
     public void deleteAllsharedPre() {
@@ -162,6 +184,7 @@ public class SharedPrefe {
         editor.remove(COMP);
         editor.apply();
     }
+
     public void deleteCom() {
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.remove(INSTANTCOM);
@@ -170,7 +193,6 @@ public class SharedPrefe {
         editor.remove(INSTANTTIMEPERIOD);
         editor.apply();
     }
-
 
 
 }

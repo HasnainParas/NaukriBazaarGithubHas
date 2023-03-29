@@ -3,13 +3,9 @@ package com.appstacks.indiannaukribazaar.profile.Education;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
-import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.SearchView;
-import android.widget.Toast;
 
-import com.appstacks.indiannaukribazaar.NewActivities.DetailsActivity;
-import com.appstacks.indiannaukribazaar.R;
 import com.appstacks.indiannaukribazaar.databinding.ActivityLevelOfEducationBinding;
 import com.appstacks.indiannaukribazaar.profile.ProfileUtils;
 

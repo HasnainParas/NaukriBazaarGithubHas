@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/frontInstantJobLayoutClick"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="8dp">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/applyINjobiviD"
+        android:layout_width="55dp"
+        android:layout_height="55dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:src="@drawable/ic_google_logo" />
+
+    <TextView
+        android:id="@+id/jobInApplyTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:fontFamily="@font/poppins_bold"
+        android:text="Mid-level UX Designer "
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/applyINcomTv"
+        app:layout_constraintStart_toEndOf="@+id/applyINjobiviD"
+        app:layout_constraintTop_toTopOf="@+id/applyINjobiviD" />
+
+    <TextView
+        android:id="@+id/applyINcomTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins"
+        android:text="Total"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="@+id/applyINjobiviD"
+        app:layout_constraintStart_toStartOf="@+id/jobInApplyTitle"
+        app:layout_constraintTop_toBottomOf="@+id/jobInApplyTitle" />
+
+    <TextView
+        android:id="@+id/applyInJobSkillsTV"
+        android:layout_width="35dp"
+        android:layout_height="16dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/bg4txtview"
+        android:fontFamily="@font/poppins"
+        android:paddingStart="5dp"
+        android:paddingEnd="5dp"
+        android:text="Ui/Ux"
+        android:textAlignment="center"
+        android:textAllCaps="false"
+        android:textColor="@color/black"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/applyINjobiviD"
+        app:layout_constraintTop_toBottomOf="@+id/applyINjobiviD" />
+
+    <TextView
+        android:id="@+id/priceTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:fontFamily="@font/poppins"
+        android:text="$100k - $120k/"
+        android:textColor="@color/black"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="@+id/applyInJobSkillsTV"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/applyInJobSkillsTV" />
+
+    <TextView
+        android:id="@+id/inJobApplyTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:background="#07864B"
+        android:drawableLeft="@drawable/ic_vector"
+        android:drawablePadding="5dp"
+        android:fontFamily="@font/poppins"
+        android:paddingStart="6dp"
+        android:paddingTop="2dp"
+        android:paddingEnd="6dp"
+        android:paddingBottom="2dp"
+        android:text="Applied"
+        android:textColor="@color/white"
+        android:textSize="10sp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@+id/jobInApplyTitle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/jobInApplyTitle" />
+
+    <TextView
+        android:id="@+id/inJobApplyTv2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:background="#DAA400"
+        android:drawableLeft="@drawable/ic_vector_expire"
+        android:drawablePadding="5dp"
+        android:fontFamily="@font/poppins"
+        android:paddingStart="6dp"
+        android:paddingTop="2dp"
+        android:paddingEnd="6dp"
+        android:paddingBottom="2dp"
+        android:text="Expires Soon"
+        android:textColor="@color/white"
+        android:textSize="10sp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@+id/jobInApplyTitle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/jobInApplyTitle" />
+</androidx.constraintlayout.widget.ConstraintLayout>

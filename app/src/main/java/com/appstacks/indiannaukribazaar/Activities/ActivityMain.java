@@ -6,7 +6,7 @@ import android.net.Uri;
 import android.os.Bundle;
 
 import com.appstacks.indiannaukribazaar.AaForChecking;
-import com.appstacks.indiannaukribazaar.NewActivities.FindJobsActivity;
+import com.appstacks.indiannaukribazaar.NewActivities.JobsActivities.FindJobsActivity;
 import com.appstacks.indiannaukribazaar.NewActivities.KycPaidJobs.KycStartBrowsingActivity;
 
 
@@ -55,7 +55,6 @@ import com.appstacks.indiannaukribazaar.room.AppDatabase;
 import com.appstacks.indiannaukribazaar.room.DAO;
 import com.appstacks.indiannaukribazaar.utils.NetworkCheck;
 import com.appstacks.indiannaukribazaar.utils.Tools;
-import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.firebase.auth.FirebaseAuth;
@@ -224,14 +223,6 @@ public class ActivityMain extends AppCompatActivity {
                 case R.id.homeMain:
                     loadFragment(new FragmentHome());
                     break;
-                case R.id.invest:
-                    Toast.makeText(getApplicationContext(), "coming soon", Toast.LENGTH_SHORT).show();
-                    break;
-                case R.id.profile:
-                    startActivity(new Intent(ActivityMain.this, UserProfileActivity.class));
-
-                    break;
-
                 case R.id.find_job:
 //                    loadFragment(new JobButtonsFragment());
                     binding.progressBar4.setVisibility(View.VISIBLE);
@@ -273,7 +264,13 @@ public class ActivityMain extends AppCompatActivity {
 //                    startActivity(intent);
 
 //                   startActivity(new Intent(ActivityMain.this, KycStartBrowsingActivity.class));
-
+                    break;
+                case R.id.invest:
+                    Toast.makeText(getApplicationContext(), "coming soon", Toast.LENGTH_SHORT).show();
+                    break;
+                case R.id.profile:
+                    startActivity(new Intent(ActivityMain.this, UserProfileActivity.class));
+                    break;
 
             }
             return true;
@@ -330,28 +327,28 @@ public class ActivityMain extends AppCompatActivity {
     }
 
 
-    private void loadInterstitialAds() {
-//        if (!AppConfig.ADS_DETAILS_ALL || !NetworkCheck.isConnect(getApplicationContext())) return;
-
-        // interstitial
-        mInterstitialAd = new InterstitialAd(getApplicationContext());
-        mInterstitialAd.setAdUnitId(getString(R.string.interstitial_ad_unit_id));
-//        if (AppConfig.ADS_DETAILS_INTERS)
-        mInterstitialAd.loadAd(new AdRequest.Builder().build());
-        mInterstitialAd.setAdListener(new AdListener() {
-            @Override
-            public void onAdLoaded() {
-                super.onAdLoaded();
-            }
-
-            @Override
-            public void onAdClosed() {
-                super.onAdClosed();
-                if (AppConfig.ADS_DETAILS_INTERS)
-                    mInterstitialAd.loadAd(new AdRequest.Builder().build());
-            }
-        });
-    }
+//    private void loadInterstitialAds() {
+////        if (!AppConfig.ADS_DETAILS_ALL || !NetworkCheck.isConnect(getApplicationContext())) return;
+//
+//        // interstitial
+//        mInterstitialAd = new InterstitialAd(getApplicationContext());
+//        mInterstitialAd.setAdUnitId(getString(R.string.interstitial_ad_unit_id));
+////        if (AppConfig.ADS_DETAILS_INTERS)
+//        mInterstitialAd.loadAd(new AdRequest.Builder().build());
+//        mInterstitialAd.setAdListener(new AdListener() {
+//            @Override
+//            public void onAdLoaded() {
+//                super.onAdLoaded();
+//            }
+//
+//            @Override
+//            public void onAdClosed() {
+//                super.onAdClosed();
+//                if (AppConfig.ADS_DETAILS_INTERS)
+//                    mInterstitialAd.loadAd(new AdRequest.Builder().build());
+//            }
+//        });
+//    }
 
     private void initDrawerMenu() {
         NavigationView nav_view = findViewById(R.id.nav_view);
@@ -668,7 +665,7 @@ public class ActivityMain extends AppCompatActivity {
                 // Check the LogCat to get your test device ID
                 .build();
 
-        mAdView.loadAd(adRequest);
+//        mAdView.loadAd(adRequest);
     }
 
     private void loadImages() {

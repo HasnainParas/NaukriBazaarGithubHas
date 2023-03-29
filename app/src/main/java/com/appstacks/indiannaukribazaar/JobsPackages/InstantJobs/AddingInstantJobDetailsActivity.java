@@ -1,57 +1,52 @@
-package com.appstacks.indiannaukribazaar.NewActivities.JobsActivities;
+package com.appstacks.indiannaukribazaar.JobsPackages.InstantJobs;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
-import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.appstacks.indiannaukribazaar.NewActivities.Adapters.CompanyAdapter;
-import com.appstacks.indiannaukribazaar.NewActivities.Adapters.GridAdapter;
-import com.appstacks.indiannaukribazaar.NewActivities.Adapters.InstantCompanyAdapter;
-import com.appstacks.indiannaukribazaar.NewActivities.AddJobsActivity;
-import com.appstacks.indiannaukribazaar.NewActivities.AddPostsActivity;
-import com.appstacks.indiannaukribazaar.NewActivities.CompanyActivity;
-import com.appstacks.indiannaukribazaar.NewActivities.FindJobsActivity;
-import com.appstacks.indiannaukribazaar.NewActivities.InstantJobActivity;
-import com.appstacks.indiannaukribazaar.NewActivities.Models.CompanyModel;
 import com.appstacks.indiannaukribazaar.NewActivities.SharedPrefe;
 import com.appstacks.indiannaukribazaar.R;
 import com.appstacks.indiannaukribazaar.data.JobPositionData;
 import com.appstacks.indiannaukribazaar.databinding.ActivityAddInstantJobBinding;
-import com.appstacks.indiannaukribazaar.databinding.ActivityInstantJobBinding;
 import com.appstacks.indiannaukribazaar.databinding.BudgetinstantlayoutBinding;
 import com.appstacks.indiannaukribazaar.databinding.InstantpositionlayoutBinding;
 import com.appstacks.indiannaukribazaar.databinding.InstanttimeperiodBinding;
 import com.appstacks.indiannaukribazaar.databinding.SkillsrequiredbottomlayoutBinding;
 import com.appstacks.indiannaukribazaar.profile.ProfileUtils;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
+import java.util.UUID;
 
-public class AddInstantJobActivity extends AppCompatActivity {
+public class AddingInstantJobDetailsActivity extends AppCompatActivity {
 
     ActivityAddInstantJobBinding binding;
-    ArrayList<CompanyModel> list;
-    InstantCompanyAdapter adapter;
+    //    ArrayList<CompanyModel> list;
+//    InstantCompanyAdapter adapter;
     SharedPrefe sharedPrefe;
+
+    DatabaseReference inJobReference;
+    String userAuthId;
+
 
     private ArrayList<String> positionList;
     private ArrayAdapter<String> positionAdapter;
@@ -65,44 +60,101 @@ public class AddInstantJobActivity extends AppCompatActivity {
 
     private ProfileUtils profileUtils;
     ArrayList<String> selectedSkills;
+    InstantAddJobsModel jobsModel;
+    InstantSearchJobFrontModel frontModel;
+
+    private String uniqueId;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityAddInstantJobBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+//        selectedSkills = new ArrayList<>();
+//        inJobReference = FirebaseDatabase.getInstance().getReference("InstantJobsWithUserID");
+        inJobReference = FirebaseDatabase.getInstance().getReference("InstantJobs");
 
-        sharedPrefe = new SharedPrefe(AddInstantJobActivity.this);
-        profileUtils = new ProfileUtils(AddInstantJobActivity.this);
+        userAuthId = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
+
+        sharedPrefe = new SharedPrefe(AddingInstantJobDetailsActivity.this);
+        profileUtils = new ProfileUtils(AddingInstantJobDetailsActivity.this);
+
+
+        Toast.makeText(this, "1: " + sharedPrefe.fetchInstantJobTitle()
+                + "\n2: " + sharedPrefe.fetchInstantDescription(), Toast.LENGTH_SHORT).show();
 
         binding.textCompanyInstant.setText(sharedPrefe.fetchInstantCom());
         binding.txtPositonInstant.setText(sharedPrefe.fetchInstantPos());
         binding.txtBudgetInstant.setText(sharedPrefe.fetchInstantBudget());
         binding.txtTimePeriodInstant.setText(sharedPrefe.fetchInstantTimePeriod());
+        binding.txtDescriptionInstant.setText(sharedPrefe.fetchInstantDescription());
         selectedSkills = profileUtils.fetchSelectedSkills();
 
 
-        LinearLayout.LayoutParams lparams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-        for (int i = 0; i < selectedSkills.size(); i++) {
-            TextView tv = new TextView(this);
-            tv.setLayoutParams(lparams);
-            tv.setText(selectedSkills.get(i));
-            binding.textlayout.addView(tv);
+        if (selectedSkills != null) {
+            LinearLayout.LayoutParams lparams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+            for (int i = 0; i < selectedSkills.size(); i++) {
+                TextView tv = new TextView(this);
+                tv.setLayoutParams(lparams);
+                tv.setText(selectedSkills.get(i));
+                binding.textlayout.addView(tv);
+            }
+        } else {
+            Toast.makeText(this, "null", Toast.LENGTH_SHORT).show();
         }
+
+
+        binding.postBtnintant.setOnClickListener(view -> {
+//            Calendar calendar = Calendar.getInstance();
+//            SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMMM", Locale.getDefault());
+//            String date = dateFormat.format(calendar.getTime());
+
+//            Long tsLong = System.currentTimeMillis()/1000;
+//            String ts = tsLong.toString();
+
+            Date date = new Date();
+            SimpleDateFormat dateFormat = new SimpleDateFormat("dd-M-yyyy hh:mm:ss");
+            String stDate = dateFormat.format(date);
+
+
+            uniqueId = UUID.randomUUID().toString();
+
+            jobsModel = new InstantAddJobsModel(
+                    sharedPrefe.fetchInstantJobTitle(),
+                    sharedPrefe.fetchInstantDescription(),
+                    sharedPrefe.fetchInstantPos(),
+                    sharedPrefe.fetchInstantBudget(),
+                    sharedPrefe.fetchInstantCom(),
+                    sharedPrefe.fetchInstantTimePeriod(),
+                    uniqueId, userAuthId, stDate);
+//            frontModel = new InstantSearchJobFrontModel(
+//                    sharedPrefe.fetchInstantJobTitle(),
+//                    sharedPrefe.fetchInstantPos(),
+//                    sharedPrefe.fetchInstantBudget(),
+//                    sharedPrefe.fetchInstantCom(),
+//                    uniqueId, userAuthId
+//            );
+
+            validation();
+            Toast.makeText(this, "Posted", Toast.LENGTH_SHORT).show();
+
+
+        });
 
         iconChange();
 
         binding.cancelBtnintant.setOnClickListener(view -> {
 
-            sharedPrefe.deleteCom();
-            profileUtils.deleteSelectedSkills();
-            Toast.makeText(getApplicationContext(), "Done", Toast.LENGTH_SHORT).show();
 
         });
 
 
-        binding.btnCompanyintant.setOnClickListener(view -> companyBottomDialog());
+        binding.btnCompanyintant.setOnClickListener(view -> {
+            startActivity(new Intent(AddingInstantJobDetailsActivity.this, InstantCompanyActivity.class));
+            finish();
+        });
 
         binding.jobPositionintant.setOnClickListener(view -> positionBottomDialog());
 
@@ -115,52 +167,70 @@ public class AddInstantJobActivity extends AppCompatActivity {
 
     }
 
-    private void companyBottomDialog() {
-        BottomSheetDialog dialog = new BottomSheetDialog(AddInstantJobActivity.this, R.style.AppBottomSheetDialogTheme);
-
-        View bottomsheetView = LayoutInflater.from(getApplicationContext()).
-                inflate(R.layout.activity_company, (CardView) findViewById(R.id.UndoChanges));
-        dialog.setContentView(bottomsheetView);
-        dialog.show();
-        dialog.setCancelable(true);
-        RecyclerView recyclerViewBottomSheet = bottomsheetView.findViewById(R.id.recyclerViewCom);
-        SearchView searchView = bottomsheetView.findViewById(R.id.searchViewCom);
-
-        list = new ArrayList<>();
-        list.add(new CompanyModel(R.drawable.googleic, "Google", "Internet"));
-        list.add(new CompanyModel(R.drawable.ic_apple, "Apple", "Electronic goods"));
-        list.add(new CompanyModel(R.drawable.ic_amazon, "Amazon", "Internet"));
-        list.add(new CompanyModel(R.drawable.googleic, "Dribble", "Design"));
-        list.add(new CompanyModel(R.drawable.googleic, "Twitter", "Internet"));
-        list.add(new CompanyModel(R.drawable.googleic, "Facebook", "Internet"));
-        list.add(new CompanyModel(R.drawable.googleic, "Microsoft", "Internet"));
-        list.add(new CompanyModel(R.drawable.googleic, "Allianz", "Financial Service"));
-        list.add(new CompanyModel(R.drawable.googleic, "Adobe", "Computer software"));
-        list.add(new CompanyModel(R.drawable.googleic, "AXA", "Insurance"));
-        adapter = new InstantCompanyAdapter(list, this);
-
-        LinearLayoutManager layoutManager = new LinearLayoutManager(AddInstantJobActivity.this);
-        recyclerViewBottomSheet.setLayoutManager(layoutManager);
-        recyclerViewBottomSheet.setAdapter(adapter);
-
-        searchView.setOnQueryTextListener(new android.widget.SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String s) {
-                return false;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String s) {
-                adapter.getFilter().filter(s);
-                return false;
-            }
-        });
-
-
-    }
+//    private void companyBottomDialog() {
+//        BottomSheetDialog dialog = new BottomSheetDialog(AddInstantJobActivity.this, R.style.AppBottomSheetDialogTheme);
+//
+////        View bottomsheetView = LayoutInflater
+////                inflate(R.layout.incompanylayout, (CardView) findViewById(R.id.UndoChanges));
+//        IncompanylayoutBinding incompanylayoutBinding = IncompanylayoutBinding.inflate(getLayoutInflater());
+//        dialog.setContentView(incompanylayoutBinding.getRoot());
+////        dialog.setContentView();
+//
+//        dialog.show();
+//        dialog.setCancelable(true);
+//
+////        RecyclerView recyclerViewBottomSheet = bottomsheetView.findViewById(R.id.recyclerviewInCom);
+////        SearchView searchView = bottomsheetView.findViewById(R.id.searcheditbox);
+//
+//        list = new ArrayList<>();
+////        list.add(new CompanyModel(R.drawable.ic_google_logo, "Google", "Internet"));
+////        list.add(new CompanyModel(R.drawable.ic_apple_logo, "Apple", "Electronic goods"));
+////        list.add(new CompanyModel(R.drawable.ic_amazon_logo, "Amazon", "Internet"));
+////        list.add(new CompanyModel(R.drawable.ic_dribble, "Dribble", "Design"));
+////        list.add(new CompanyModel(R.drawable.ic_twitter, "Twitter", "Internet"));
+////        list.add(new CompanyModel(R.drawable.ic_facebook, "Facebook", "Internet"));
+////        list.add(new CompanyModel(R.drawable.ic_microsoft, "Microsoft", "Internet"));
+////        list.add(new CompanyModel(R.drawable.ic_allianz, "Allianz", "Financial Service"));
+////        list.add(new CompanyModel(R.drawable.ic_adobe, "Adobe", "Computer software"));
+////        list.add(new CompanyModel(R.drawable.ic_axa, "AXA", "Insurance"));
+//
+//        //new
+//        list.add(new CompanyModel(R.drawable.ic_google_logo, "Google", "Internet"));
+//        list.add(new CompanyModel(R.drawable.ic_apple_logo, "Apple", "Electronic goods"));
+//        list.add(new CompanyModel(R.drawable.ic_amazon_logo, "Amazon", "Internet"));
+//        list.add(new CompanyModel(R.drawable.ic_dribbble_logo, "Dribble", "Design"));
+//        list.add(new CompanyModel(R.drawable.ic_twitter_logo, "Twitter", "Internet"));
+//        list.add(new CompanyModel(R.drawable.ic_facebook_logo, "Facebook", "Internet"));
+//        list.add(new CompanyModel(R.drawable.ic_microsoft_logo, "Microsoft", "Internet"));
+//        list.add(new CompanyModel(R.drawable.ic_allianz_logo, "Allianz", "Financial Service"));
+//        list.add(new CompanyModel(R.drawable.ic_adobe_logo, "Adobe", "Computer software"));
+//        list.add(new CompanyModel(R.drawable.ic_axa_logo,"AXA", "Insurance"));
+//
+//        adapter = new InstantCompanyAdapter(list, this);
+//
+//        LinearLayoutManager layoutManager = new LinearLayoutManager(AddInstantJobActivity.this);
+////        recyclerViewBottomSheet.setLayoutManager(layoutManager);
+//        incompanylayoutBinding.recyclerviewInCom.setLayoutManager(layoutManager);
+//        incompanylayoutBinding.recyclerviewInCom.setAdapter(adapter);
+//
+//        incompanylayoutBinding.searcheditbox.setOnQueryTextListener(new android.widget.SearchView.OnQueryTextListener() {
+//            @Override
+//            public boolean onQueryTextSubmit(String s) {
+//                return false;
+//            }
+//
+//            @Override
+//            public boolean onQueryTextChange(String s) {
+//                adapter.getFilter().filter(s);
+//                return false;
+//            }
+//        });
+//
+//
+//    }
 
     private void positionBottomDialog() {
-        BottomSheetDialog positondialog = new BottomSheetDialog(AddInstantJobActivity.this, R.style.AppBottomSheetDialogTheme);
+        BottomSheetDialog positondialog = new BottomSheetDialog(AddingInstantJobDetailsActivity.this, R.style.AppBottomSheetDialogTheme);
 
         InstantpositionlayoutBinding positionBinding = InstantpositionlayoutBinding.inflate(getLayoutInflater());
         positondialog.setContentView(positionBinding.getRoot());
@@ -194,7 +264,7 @@ public class AddInstantJobActivity extends AppCompatActivity {
 //                Intent intent = new Intent(getApplicationContext(), AddInstantJobActivity.class);
                 String tv = positionList.get(i).toString();
                 sharedPrefe.saveInstantPos(tv);
-                startActivity(new Intent(getApplicationContext(), AddInstantJobActivity.class));
+                startActivity(new Intent(getApplicationContext(), AddingInstantJobDetailsActivity.class));
                 finish();
             }
         });
@@ -204,7 +274,7 @@ public class AddInstantJobActivity extends AppCompatActivity {
     private void budgetBottomDialog() {
         BudgetinstantlayoutBinding budgetBinding = BudgetinstantlayoutBinding.inflate(getLayoutInflater());
 
-        BottomSheetDialog dialog = new BottomSheetDialog(AddInstantJobActivity.this, R.style.AppBottomSheetDialogTheme);
+        BottomSheetDialog dialog = new BottomSheetDialog(AddingInstantJobDetailsActivity.this, R.style.AppBottomSheetDialogTheme);
 
         dialog.setContentView(budgetBinding.getRoot());
         dialog.show();
@@ -219,14 +289,14 @@ public class AddInstantJobActivity extends AppCompatActivity {
 
             if (i == EditorInfo.IME_ACTION_DONE) {
                 if (hourlyRate.isEmpty()) {
-                    Toast.makeText(AddInstantJobActivity.this, "Please set hourly rate", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(AddingInstantJobDetailsActivity.this, "Please set hourly rate", Toast.LENGTH_SHORT).show();
                 } else {
                     String allEditBoxTxt = hourlyRate + " + " + dailywork + " + " + noticePeriod;
                     sharedPrefe.saveInstantBudget("$" + hourlyRate);
                     dialog.dismiss();
-                    startActivity(new Intent(getApplicationContext(), AddInstantJobActivity.class));
+                    startActivity(new Intent(getApplicationContext(), AddingInstantJobDetailsActivity.class));
                     finish();
-                    Toast.makeText(AddInstantJobActivity.this, allEditBoxTxt, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(AddingInstantJobDetailsActivity.this, allEditBoxTxt, Toast.LENGTH_SHORT).show();
                 }
             }
             return false;
@@ -238,13 +308,13 @@ public class AddInstantJobActivity extends AppCompatActivity {
             if (i == EditorInfo.IME_ACTION_DONE) {
                 if (maxProjectBudget.isEmpty()) {
 //                        budgetBinding.hourlRateEditBox.setError("Can't be empty");
-                    Toast.makeText(AddInstantJobActivity.this, "Please set hourly rate", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(AddingInstantJobDetailsActivity.this, "Please set hourly rate", Toast.LENGTH_SHORT).show();
                 } else {
                     sharedPrefe.saveInstantBudget("$" + maxProjectBudget);
                     dialog.dismiss();
                     finish();
-                    startActivity(new Intent(getApplicationContext(), AddInstantJobActivity.class));
-                    Toast.makeText(AddInstantJobActivity.this, maxProjectBudget, Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(getApplicationContext(), AddingInstantJobDetailsActivity.class));
+                    Toast.makeText(AddingInstantJobDetailsActivity.this, maxProjectBudget, Toast.LENGTH_SHORT).show();
                 }
             }
 
@@ -275,7 +345,7 @@ public class AddInstantJobActivity extends AppCompatActivity {
     }
 
     private void timePeriodBottomDialog() {
-        BottomSheetDialog timeperioddialog = new BottomSheetDialog(AddInstantJobActivity.this, R.style.AppBottomSheetDialogTheme);
+        BottomSheetDialog timeperioddialog = new BottomSheetDialog(AddingInstantJobDetailsActivity.this, R.style.AppBottomSheetDialogTheme);
 
         InstanttimeperiodBinding instanttimeBinding = InstanttimeperiodBinding.inflate(getLayoutInflater());
         timeperioddialog.setContentView(instanttimeBinding.getRoot());
@@ -289,7 +359,7 @@ public class AddInstantJobActivity extends AppCompatActivity {
             timeperioddialog.dismiss();
             binding.txtTimePeriodInstant.setText(working1to3Months);
             binding.txtTimePeriodInstant.setVisibility(View.VISIBLE);
-            Toast.makeText(AddInstantJobActivity.this, working1to3Months, Toast.LENGTH_SHORT).show();
+            Toast.makeText(AddingInstantJobDetailsActivity.this, working1to3Months, Toast.LENGTH_SHORT).show();
 
         });
 
@@ -300,7 +370,7 @@ public class AddInstantJobActivity extends AppCompatActivity {
             timeperioddialog.dismiss();
             binding.txtTimePeriodInstant.setText(working3to6month);
             binding.txtTimePeriodInstant.setVisibility(View.VISIBLE);
-            Toast.makeText(AddInstantJobActivity.this, working3to6month, Toast.LENGTH_SHORT).show();
+            Toast.makeText(AddingInstantJobDetailsActivity.this, working3to6month, Toast.LENGTH_SHORT).show();
         });
 
         instanttimeBinding.radiobtnMorethnMonths.setOnClickListener(view -> {
@@ -312,7 +382,7 @@ public class AddInstantJobActivity extends AppCompatActivity {
             timeperioddialog.dismiss();
             binding.txtTimePeriodInstant.setText(moreThanMonths);
             binding.txtTimePeriodInstant.setVisibility(View.VISIBLE);
-            Toast.makeText(AddInstantJobActivity.this, moreThanMonths, Toast.LENGTH_SHORT).show();
+            Toast.makeText(AddingInstantJobDetailsActivity.this, moreThanMonths, Toast.LENGTH_SHORT).show();
 
         });
 
@@ -321,7 +391,7 @@ public class AddInstantJobActivity extends AppCompatActivity {
 
     private void skillsRequiredBottomDialog() {
 
-        BottomSheetDialog skillsRequireddialog = new BottomSheetDialog(AddInstantJobActivity.this, R.style.AppBottomSheetDialogTheme);
+        BottomSheetDialog skillsRequireddialog = new BottomSheetDialog(AddingInstantJobDetailsActivity.this, R.style.AppBottomSheetDialogTheme);
 
         SkillsrequiredbottomlayoutBinding skillsrequiredBinding = SkillsrequiredbottomlayoutBinding.inflate(getLayoutInflater());
         skillsRequireddialog.setContentView(skillsrequiredBinding.getRoot());
@@ -354,7 +424,6 @@ public class AddInstantJobActivity extends AppCompatActivity {
 
         skillsrequiredBinding.instantSkillReqListView.setOnItemClickListener((adapterView, view, i, l) -> {
             String item = skillRequiredList.get(i);
-
 
             //TODO thewr uihifhsdgfyuasidgsdgaysfv j vwue ridagydeorfusfgd ihas igdjsdadgas yugfastydi
             if (listToAdd.isEmpty()) {
@@ -390,7 +459,6 @@ public class AddInstantJobActivity extends AppCompatActivity {
 
 
     }
-
 
     private void iconChange() {
 
@@ -436,7 +504,7 @@ public class AddInstantJobActivity extends AppCompatActivity {
             binding.btnAdd4intant.setVisibility(View.VISIBLE);
         }
         //skill
-        if (!selectedSkills.isEmpty() && selectedSkills == null) {
+        if (selectedSkills != null) {
             binding.textlayout.setVisibility(View.VISIBLE);
             binding.btnEdit5intant.setVisibility(View.VISIBLE);
             binding.btnAdd5intant.setVisibility(View.GONE);
@@ -445,13 +513,63 @@ public class AddInstantJobActivity extends AppCompatActivity {
             binding.btnEdit5intant.setVisibility(View.GONE);
             binding.btnAdd5intant.setVisibility(View.VISIBLE);
         }
+        //Description
+        if (binding.txtDescriptionInstant.length() != 0) {
+            binding.txtDescriptionInstant.setVisibility(View.VISIBLE);
+            binding.btnEdit6intant.setVisibility(View.VISIBLE);
+            binding.btnAdd6intant.setVisibility(View.GONE);
+        } else {
+            binding.txtDescriptionInstant.setVisibility(View.GONE);
+            binding.btnEdit6intant.setVisibility(View.GONE);
+            binding.btnAdd6intant.setVisibility(View.VISIBLE);
+        }
+    }
 
+    private void validation() {
+
+
+        if (binding.textCompanyInstant.length() == 0) {
+            toastshort("Can't be Empty");
+        } else if (binding.txtPositonInstant.length() == 0) {
+            toastshort("Can't be Empty");
+        } else if (binding.txtBudgetInstant.length() == 0) {
+            toastshort("Can't be Empty");
+        } else if (binding.txtTimePeriodInstant.length() == 0) {
+            toastshort("Can't be Empty");
+        } else if (selectedSkills == null) {
+            toastshort("Can't be Empty");
+        } else {
+            inJobReference
+                    .child(uniqueId)
+                    .setValue(jobsModel)
+                    .addOnSuccessListener(runnable -> {
+                        inJobReference
+                                .child(uniqueId)
+                                .child("inSkills")
+                                .setValue(profileUtils.fetchSelectedSkills());
+                        sharedPrefe.deleteCom();
+                        profileUtils.deleteSelectedSkills();
+                        startActivity(new Intent(AddingInstantJobDetailsActivity.this, SuccessApplyActivity.class));
+                        finishAffinity();
+                        toastshort("Posted in User");
+
+                    });
+        }
+//        if (binding.txtDescriptionInstant.length() != 0) {
+//            binding.txtDescriptionInstant.setVisibility(View.VISIBLE);
+//            binding.btnEdit6intant.setVisibility(View.VISIBLE);
+//            binding.btnAdd6intant.setVisibility(View.GONE);
+//        } else {
+//            binding.txtDescriptionInstant.setVisibility(View.GONE);
+//            binding.btnEdit6intant.setVisibility(View.GONE);
+//            binding.btnAdd6intant.setVisibility(View.VISIBLE);
+//        }
     }
 
     public void skillresultDialog() {
-        View view = LayoutInflater.from(AddInstantJobActivity.this).inflate(R.layout.skillsresultdialog, null);
+        View view = LayoutInflater.from(AddingInstantJobDetailsActivity.this).inflate(R.layout.skillsresultdialog, null);
 
-        AlertDialog alertDialog = new AlertDialog.Builder(AddInstantJobActivity.this).setView(view).create();
+        AlertDialog alertDialog = new AlertDialog.Builder(AddingInstantJobDetailsActivity.this).setView(view).create();
 
         alertDialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
 
@@ -474,7 +592,7 @@ public class AddInstantJobActivity extends AppCompatActivity {
         okBtn.setOnClickListener(view1 -> {
             if (!listToAdd.isEmpty()) {
                 profileUtils.saveSelectedSkills(listToAdd);
-                startActivity(new Intent(AddInstantJobActivity.this, AddInstantJobActivity.class));
+                startActivity(new Intent(AddingInstantJobDetailsActivity.this, AddingInstantJobDetailsActivity.class));
                 finish();
             } else {
                 alertDialog.dismiss();
@@ -487,5 +605,9 @@ public class AddInstantJobActivity extends AppCompatActivity {
 
     }
 
+
+    public void toastshort(String text) {
+        Toast.makeText(AddingInstantJobDetailsActivity.this, text, Toast.LENGTH_SHORT).show();
+    }
 
 }

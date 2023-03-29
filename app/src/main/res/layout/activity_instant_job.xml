@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".NewActivities.InstantJobActivity">
+    tools:context=".JobsPackages.InstantJobs.InstantJobPostActivity">
 
     <ImageView
         android:id="@+id/backBtnisntant"
@@ -85,6 +85,7 @@
         android:id="@+id/tview2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="32dp"
         android:fontFamily="@font/dm_sans"
         android:text="Job Title"
@@ -96,12 +97,15 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardjobTitle"
-        android:layout_width="395dp"
+        android:layout_width="0dp"
 
         android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
         android:layout_marginTop="4dp"
+        android:layout_marginEnd="8dp"
         app:cardCornerRadius="10dp"
         app:cardElevation="5dp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/tview2"
         app:layout_constraintTop_toBottomOf="@+id/tview2">
 
@@ -116,7 +120,7 @@
             android:inputType="textPersonName"
             android:paddingStart="10dp"
             android:paddingTop="15dp"
-            android:paddingEnd="10dp"
+            android:paddingEnd="20dp"
             android:paddingBottom="15dp"
             android:textColorHint="#757575" />
     </androidx.cardview.widget.CardView>
@@ -137,6 +141,7 @@
         android:id="@+id/tview4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:fontFamily="@font/dm_sans"
         android:text="Upload Logo"
@@ -161,11 +166,13 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/carddiscriptionInstant"
-        android:layout_width="395dp"
+        android:layout_width="0dp"
         android:layout_height="140dp"
         android:layout_marginTop="4dp"
+        android:layout_marginEnd="8dp"
         app:cardCornerRadius="10dp"
         app:cardElevation="5dp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/tview3"
         app:layout_constraintTop_toBottomOf="@+id/tview3">
 
@@ -179,7 +186,10 @@
             android:hint="What do you want to talk about?"
             android:inputType="textMultiLine|textPersonName"
             android:maxLines="6"
-            android:padding="10dp"
+            android:paddingStart="10dp"
+            android:paddingTop="10dp"
+            android:paddingEnd="20dp"
+            android:paddingBottom="10dp"
             android:textAlignment="textStart"
             android:textColorHint="#757575" />
 

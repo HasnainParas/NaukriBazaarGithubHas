@@ -10,11 +10,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.appstacks.indiannaukribazaar.Activities.ActivityMain;
-import com.appstacks.indiannaukribazaar.NewActivities.FindJobsActivity;
 import com.appstacks.indiannaukribazaar.NewActivities.JobsActivities.N_JobsDetailActivity;
 import com.appstacks.indiannaukribazaar.NewActivities.Models.UserJobModel;
-import com.appstacks.indiannaukribazaar.NewActivities.SpinWheelActivity;
 import com.appstacks.indiannaukribazaar.R;
 import com.appstacks.indiannaukribazaar.databinding.JobtitlesampleLayoutBinding;
 
@@ -56,6 +53,8 @@ public class JobTitleAdapter extends RecyclerView.Adapter<JobTitleAdapter.viewHo
                 intent.putExtra("company", model.getCompanyName());
                 intent.putExtra("location", model.getJobLocation());
                 intent.putExtra("description", model.getDescription());
+                intent.putExtra("normaljobID",model.getUniqueKey());
+                intent.putExtra("whoPostedJobUserID",model.getUserAuthId());
                 context.startActivity(intent);
             }
         });

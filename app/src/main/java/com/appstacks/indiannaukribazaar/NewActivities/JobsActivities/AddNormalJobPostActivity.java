@@ -1,36 +1,26 @@
-package com.appstacks.indiannaukribazaar.NewActivities;
+package com.appstacks.indiannaukribazaar.NewActivities.JobsActivities;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.room.Database;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.view.View;
-import android.widget.ImageView;
-import android.widget.Toast;
 
-import com.appstacks.indiannaukribazaar.FirebaseModels.PersonalInformationModel;
+import com.appstacks.indiannaukribazaar.NewActivities.SharedPrefe;
 import com.appstacks.indiannaukribazaar.R;
-import com.appstacks.indiannaukribazaar.databinding.ActivityAddPostsBinding;
+import com.appstacks.indiannaukribazaar.databinding.ActivityAddNormalJobPostBinding;
 import com.appstacks.indiannaukribazaar.profile.ProfileUtils;
 import com.bumptech.glide.Glide;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 import java.io.IOException;
 import java.util.Objects;
 
-public class AddPostsActivity extends AppCompatActivity {
+public class AddNormalJobPostActivity extends AppCompatActivity {
 
-    private ActivityAddPostsBinding binding;
+    private ActivityAddNormalJobPostBinding binding;
     private SharedPrefe sharedPrefe;
     private static final int CAMERA_PIC_REQUEST = 1;
     private static final int GALLERY_PIC_REQUEST = 2;
@@ -44,11 +34,11 @@ public class AddPostsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        binding = ActivityAddPostsBinding.inflate(getLayoutInflater());
+        binding = ActivityAddNormalJobPostBinding.inflate(getLayoutInflater());
 
         setContentView(binding.getRoot());
 
-        sharedPrefe = new SharedPrefe(AddPostsActivity.this);
+        sharedPrefe = new SharedPrefe(AddNormalJobPostActivity.this);
 
         profileUtils= new ProfileUtils(this);
 

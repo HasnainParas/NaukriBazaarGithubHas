@@ -69,7 +69,7 @@ public class GamesActivity extends AppCompatActivity {
 
     private void sliderSet() {
 
-        list.add(new SliderItems(R.drawable.ic_amazon));
+        list.add(new SliderItems(R.drawable.ic_amazon_logo));
         list.add(new SliderItems(R.drawable.document));
         list.add(new SliderItems(R.drawable.badge_shape));
 

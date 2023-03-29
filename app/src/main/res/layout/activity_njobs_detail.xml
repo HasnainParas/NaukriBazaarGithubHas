@@ -21,7 +21,7 @@
             android:id="@+id/job_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="52dp"
             android:fontFamily="@font/dm_sans"
             android:text="TextView"
             android:textColor="@color/black"
@@ -104,11 +104,11 @@
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/com_logo"
-        android:layout_width="54dp"
-        android:layout_height="54dp"
-        android:src="@drawable/profileplace"
-        app:civ_border_color="@color/green"
-        app:civ_border_width="5dp"
+        android:layout_width="74dp"
+        android:layout_height="74dp"
+        android:background="@drawable/njobpic_bg"
+        android:padding="10dp"
+        android:src="@drawable/ic_google_logo"
         app:layout_constraintBottom_toTopOf="@+id/constraintLayout4"
         app:layout_constraintEnd_toEndOf="@+id/constraintLayout4"
         app:layout_constraintStart_toStartOf="@+id/constraintLayout4"
@@ -139,6 +139,63 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/textView67"
         app:layout_constraintTop_toBottomOf="@+id/textView67" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/normalApplyJobBTn"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="16dp"
+        app:cardBackgroundColor="@color/green"
+        app:cardCornerRadius="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/normaljobChatBtn"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <TextView
+            android:id="@+id/textView74"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:fontFamily="@font/dm_sans_bold"
+            android:padding="10dp"
+            android:text="Apply Now"
+            android:textAllCaps="true"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/normaljobChatBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginEnd="8dp"
+        app:cardBackgroundColor="@color/green"
+        app:cardCornerRadius="10dp"
+        app:layout_constraintBottom_toBottomOf="@+id/normalApplyJobBTn"
+        app:layout_constraintEnd_toStartOf="@+id/normaljobBookmarkBTn"
+        app:layout_constraintTop_toTopOf="@+id/normalApplyJobBTn">
+
+        <ImageView
+            android:id="@+id/imageView18"
+            android:layout_width="28dp"
+            android:layout_height="24dp"
+            android:layout_gravity="center"
+            android:layout_margin="15dp"
+            app:srcCompat="@drawable/ic_chat" />
+    </androidx.cardview.widget.CardView>
+
+    <ImageView
+        android:id="@+id/normaljobBookmarkBTn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintBottom_toBottomOf="@+id/normaljobChatBtn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/normaljobChatBtn"
+        app:srcCompat="@drawable/ic_bookmark_green_border" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

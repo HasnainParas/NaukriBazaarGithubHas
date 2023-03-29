@@ -1,11 +1,7 @@
-package com.appstacks.indiannaukribazaar.NewActivities;
+package com.appstacks.indiannaukribazaar.NewActivities.JobsActivities;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
@@ -19,33 +15,27 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 
-import android.widget.SearchView;
 import android.widget.Toast;
 
 import com.appstacks.indiannaukribazaar.NewActivities.Adapters.CompanyAdapter;
-import com.appstacks.indiannaukribazaar.NewActivities.Adapters.InstantCompanyAdapter;
-import com.appstacks.indiannaukribazaar.NewActivities.JobsActivities.AddInstantJobActivity;
+import com.appstacks.indiannaukribazaar.NewActivities.JobLocationActivity;
 import com.appstacks.indiannaukribazaar.NewActivities.Models.CompanyModel;
 import com.appstacks.indiannaukribazaar.NewActivities.Models.UserJobModel;
+import com.appstacks.indiannaukribazaar.NewActivities.SharedPrefe;
+import com.appstacks.indiannaukribazaar.NewActivities.UserJobDetailsActivity;
 import com.appstacks.indiannaukribazaar.R;
-import com.appstacks.indiannaukribazaar.databinding.ActivityAddJobsBinding;
 
+import com.appstacks.indiannaukribazaar.databinding.ActivityAddJobsBinding;
 import com.appstacks.indiannaukribazaar.databinding.HandloadingDialogLayoutBinding;
 import com.appstacks.indiannaukribazaar.profile.ProfileUtils;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Objects;
-import java.util.Random;
 import java.util.UUID;
 
 public class AddJobsActivity extends AppCompatActivity {
@@ -122,7 +112,13 @@ public class AddJobsActivity extends AppCompatActivity {
 
         });
 
-        binding.jobPosition.setOnClickListener(view -> startActivity(new Intent(getApplicationContext(), JobPosition.class)));
+        binding.jobPosition.setOnClickListener(view ->
+                {
+                    startActivity(new Intent(getApplicationContext(), JobPosition.class));
+                    finish();
+
+                }
+        );
 
         binding.btnWorkplaceType.setOnClickListener(view -> {
 
@@ -170,11 +166,17 @@ public class AddJobsActivity extends AppCompatActivity {
 
         });
 
-        binding.locationBtn.setOnClickListener(view -> startActivity(new Intent(getApplicationContext(), JobLocationActivity.class)));
+        binding.locationBtn.setOnClickListener(view -> {
+            startActivity(new Intent(getApplicationContext(), JobLocationActivity.class));
+            finish();
+        });
 
         binding.btnCompany.setOnClickListener(view ->
 //                companyBottomSheet()
-                        startActivity(new Intent(AddJobsActivity.this, CompanyActivity.class))
+                {
+                    startActivity(new Intent(AddJobsActivity.this, CompanyActivity.class));
+                    finish();
+                }
         );
 
         binding.employmentBtn.setOnClickListener(view -> {
@@ -273,17 +275,17 @@ public class AddJobsActivity extends AppCompatActivity {
     }
 
     private void checkValidation() {
-        if (sharedPrefe.fetchComTitle() == null){
+        if (sharedPrefe.fetchComTitle() == null) {
             Toast.makeText(this, "Title not set", Toast.LENGTH_SHORT).show();
-        }else if (  binding.txtPositon.getText().toString().isEmpty()){
+        } else if (binding.txtPositon.getText().toString().isEmpty()) {
             Toast.makeText(this, "Position is not added", Toast.LENGTH_SHORT).show();
-        }else if ( binding.txtLocation.getText().toString().isEmpty()){
+        } else if (binding.txtLocation.getText().toString().isEmpty()) {
             Toast.makeText(this, "Location not added", Toast.LENGTH_SHORT).show();
-        }else if (binding.employmentTxt.getText().toString().equals("Click to select")){
+        } else if (binding.employmentTxt.getText().toString().equals("Click to select")) {
             Toast.makeText(this, "Select employment type", Toast.LENGTH_SHORT).show();
-        }else if (binding.txtWorkplace.getText().toString().equals("Click to select")){
+        } else if (binding.txtWorkplace.getText().toString().equals("Click to select")) {
             Toast.makeText(this, "Select workplace type", Toast.LENGTH_SHORT).show();
-        }else{
+        } else {
             postJob();
         }
     }
@@ -336,42 +338,54 @@ public class AddJobsActivity extends AppCompatActivity {
 
 
         if (binding.txtPositon.length() != 0) {
-
+            binding.txtPositon.setVisibility(View.VISIBLE);
             binding.btnEdit1.setVisibility(View.VISIBLE);
-            binding.btnAdd1.setVisibility(View.INVISIBLE);
+            binding.btnAdd1.setVisibility(View.GONE);
 
 
         } else {
+            binding.txtPositon.setVisibility(View.GONE);
             binding.btnAdd1.setVisibility(View.VISIBLE);
-            binding.btnEdit1.setVisibility(View.INVISIBLE);
+            binding.btnEdit1.setVisibility(View.GONE);
         }
 
         if (binding.txtDescription.length() != 0) {
-
+            binding.txtDescription.setVisibility(View.VISIBLE);
             binding.btnEdit6.setVisibility(View.VISIBLE);
-            binding.btnAdd6.setVisibility(View.INVISIBLE);
+            binding.btnAdd6.setVisibility(View.GONE);
 
         } else {
-
-            binding.btnEdit6.setVisibility(View.INVISIBLE);
+            binding.txtDescription.setVisibility(View.GONE);
+            binding.btnEdit6.setVisibility(View.GONE);
             binding.btnAdd6.setVisibility(View.VISIBLE);
         }
 
         if (binding.txtLocation.length() != 0) {
-
+            binding.txtLocation.setVisibility(View.VISIBLE);
             binding.btnEdit3.setVisibility(View.VISIBLE);
-            binding.btnAdd3.setVisibility(View.INVISIBLE);
+            binding.btnAdd3.setVisibility(View.GONE);
         } else {
-            binding.btnEdit3.setVisibility(View.INVISIBLE);
+            binding.txtLocation.setVisibility(View.GONE);
+            binding.btnEdit3.setVisibility(View.GONE);
             binding.btnAdd3.setVisibility(View.VISIBLE);
 
         }
 
+        if (binding.comTitle.length() != 0) {
+            binding.comlayoutid.setVisibility(View.VISIBLE);
+            binding.btnEdit2.setVisibility(View.VISIBLE);
+            binding.btnAdd2.setVisibility(View.GONE);
+        } else {
+            binding.comlayoutid.setVisibility(View.GONE);
+            binding.btnEdit2.setVisibility(View.GONE);
+            binding.btnAdd2.setVisibility(View.VISIBLE);
+
+        }
 
     }
 
     public void dialogandimagechange() {
-        binding.btnAdd4.setVisibility(View.INVISIBLE);
+        binding.btnAdd4.setVisibility(View.GONE);
         binding.btnEdit4.setVisibility(View.VISIBLE);
         bottomSheetDialog.dismiss();
     }

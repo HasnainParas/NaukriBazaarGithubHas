@@ -15,8 +15,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.appstacks.indiannaukribazaar.NewActivities.AddJobsActivity;
-import com.appstacks.indiannaukribazaar.NewActivities.JobsActivities.AddInstantJobActivity;
+import com.appstacks.indiannaukribazaar.JobsPackages.InstantJobs.AddingInstantJobDetailsActivity;
 import com.appstacks.indiannaukribazaar.NewActivities.Models.CompanyModel;
 import com.appstacks.indiannaukribazaar.NewActivities.SharedPrefe;
 import com.appstacks.indiannaukribazaar.R;
@@ -58,7 +57,7 @@ public class InstantCompanyAdapter extends RecyclerView.Adapter<InstantCompanyAd
         holder.constraintLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(context, AddInstantJobActivity.class);
+                Intent intent = new Intent(context, AddingInstantJobDetailsActivity.class);
 //                intent.putExtra("company", model.getImage());
 //                intent.putExtra("title", model.getTitle());
 //                intent.putExtra("cominternet", model.getInternet());

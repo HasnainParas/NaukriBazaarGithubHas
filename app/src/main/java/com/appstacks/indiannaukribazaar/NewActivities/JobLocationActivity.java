@@ -9,7 +9,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.SearchView;
 
-import com.appstacks.indiannaukribazaar.R;
+import com.appstacks.indiannaukribazaar.NewActivities.JobsActivities.AddJobsActivity;
 import com.appstacks.indiannaukribazaar.databinding.ActivityJobLocationBinding;
 
 import java.util.ArrayList;
@@ -77,7 +77,7 @@ public class JobLocationActivity extends AppCompatActivity {
         binding.listViewLc.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int index, long l) {
-                Intent intent = new Intent(getApplicationContext(),AddJobsActivity.class);
+                Intent intent = new Intent(getApplicationContext(), AddJobsActivity.class);
 
                 String tv = list.get(index).toString();
                 sharedPrefe.saveJobBLocation(tv);

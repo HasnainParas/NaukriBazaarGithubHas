@@ -9,7 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.appstacks.indiannaukribazaar.FirebaseModels.JobModel;
-import com.appstacks.indiannaukribazaar.NewActivities.JobDetailsActivity;
+import com.appstacks.indiannaukribazaar.NewActivities.JobsActivities.JobDetailsActivity;
 import com.appstacks.indiannaukribazaar.R;
 import com.appstacks.indiannaukribazaar.databinding.JobListLayoutBinding;
 import com.bumptech.glide.Glide;

@@ -109,6 +109,7 @@ public class AddResmueActivity extends AppCompatActivity {
                         long size = cursor.getLong(sizeIndex);
                         PdfsizeInString = getReadableFileSize(size);
                         pdfName = cursor.getString(cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME));
+
                         @SuppressLint("SimpleDateFormat")
                         DateFormat df = new SimpleDateFormat("EEE, d MMM yyyy, HH:mm");
                         pdfDate = df.format(Calendar.getInstance().getTime());

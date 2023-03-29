@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_margin="10dp"
+    android:background="@color/green"
+    app:cardBackgroundColor="#F1F9ED"
+    app:cardCornerRadius="10dp">
+
+
+    <TextView
+        android:id="@+id/injobdetailskillTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="2dp"
+        android:fontFamily="@font/rubik_bold"
+        android:gravity="center"
+        android:minHeight="30dp"
+        android:paddingStart="4dp"
+        android:paddingEnd="4dp"
+        android:text="TextView TextView"
+        android:textAlignment="center"
+        android:textColor="@color/green"
+        android:textSize="11sp" />
+
+</androidx.cardview.widget.CardView>

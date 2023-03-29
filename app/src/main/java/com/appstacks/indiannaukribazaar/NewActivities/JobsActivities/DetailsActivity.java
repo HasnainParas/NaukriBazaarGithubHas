@@ -1,4 +1,4 @@
-package com.appstacks.indiannaukribazaar.NewActivities;
+package com.appstacks.indiannaukribazaar.NewActivities.JobsActivities;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -30,6 +30,7 @@ import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.appstacks.indiannaukribazaar.databinding.ActivityDetailsBinding;
 import com.appstacks.indiannaukribazaar.profile.appreciation.Appreciation;
 
 import com.appstacks.indiannaukribazaar.ProfileModels.AboutMeDescription;
@@ -37,7 +38,6 @@ import com.appstacks.indiannaukribazaar.ProfileModels.AddWorkExperience;
 import com.appstacks.indiannaukribazaar.profile.Education.Education;
 import com.appstacks.indiannaukribazaar.profile.resume.Resume;
 import com.appstacks.indiannaukribazaar.R;
-import com.appstacks.indiannaukribazaar.databinding.ActivityDetailsBinding;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
