@@ -42,7 +42,9 @@ public class UserJobDetailsActivity extends AppCompatActivity {
         userJobRef = FirebaseDatabase.getInstance().getReference("userJobs");
         userRef = FirebaseDatabase.getInstance().getReference();
 
-
+binding.btnFindJobs.setOnClickListener(view -> {
+    onBackPressed();
+});
         // UserProfile
         userRef.child("UsersInfo").child(currentUser).addValueEventListener(new ValueEventListener() {
             @Override

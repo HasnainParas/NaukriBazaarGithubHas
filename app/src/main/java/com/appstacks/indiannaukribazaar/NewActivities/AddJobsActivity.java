@@ -355,13 +355,13 @@ binding.BtnFacilities.setOnClickListener(view -> {
     EditText et3= bottomsheetView.findViewById(R.id.etFacility3);
     @SuppressLint({"MissingInflatedId", "LocalSuppress"})
     EditText et4= bottomsheetView.findViewById(R.id.etFacility4);
-    @SuppressLint({"MissingInflatedId", "LocalSuppress"}) Button btnSaveEligibilities = bottomsheetView.findViewById(R.id.btnSaveFacilities);
+    @SuppressLint({"MissingInflatedId", "LocalSuppress"}) Button btnSaveFacility = bottomsheetView.findViewById(R.id.btnSaveFacilities);
 
 
-    btnSaveEligibilities.setOnClickListener(view1 -> {
+    btnSaveFacility.setOnClickListener(view1 -> {
 
         if (et1.getText().toString().isEmpty() || et2.getText().toString().isEmpty() || et3.getText().toString().isEmpty()|| et4.getText().toString().isEmpty())
-            Toast.makeText(this, "Add any eligibility", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Add any Facility", Toast.LENGTH_SHORT).show();
         else {
             jobFacilities = et1.getText().toString() + " , " + et2.getText().toString() + " , " + et3.getText().toString() + " , " + et4.getText().toString();
             binding.txtFacilities.setText(jobFacilities);
@@ -596,6 +596,18 @@ binding.BtnFacilities.setOnClickListener(view -> {
             Toast.makeText(this, "Select employment type", Toast.LENGTH_SHORT).show();
         } else if (binding.txtWorkplace.getText().toString().equals("Click to select")) {
             Toast.makeText(this, "Select workplace type", Toast.LENGTH_SHORT).show();
+        }else if(jobSalary == null) {
+            Toast.makeText(this, "Salary not added", Toast.LENGTH_SHORT).show();
+        }else if(jobQualification==null) {
+            Toast.makeText(this, "Qualification not added", Toast.LENGTH_SHORT).show();
+        }else if(jobEligibilities==null) {
+            Toast.makeText(this, "Eligbilites not added", Toast.LENGTH_SHORT).show();
+        }else if (jobExperience==null) {
+            Toast.makeText(this, "Experience not added", Toast.LENGTH_SHORT).show();
+        }else if (jobSpecialization==null) {
+            Toast.makeText(this, "Specialization not selected", Toast.LENGTH_SHORT).show();
+        }else if (jobFacilities==null){
+            Toast.makeText(this, "Facilities not set for the job", Toast.LENGTH_SHORT).show();
         } else {
             postJob();
         }
@@ -612,7 +624,7 @@ binding.BtnFacilities.setOnClickListener(view -> {
                 binding.txtWorkplace.getText().toString(),
                 binding.txtDescription.getText().toString(),
                 uniqueKey, userUid, binding.comTitle.getText().toString(),
-                binding.txtCompany.getText().toString(), profileUtils.fetchCompanyImage(), String.valueOf(System.currentTimeMillis()), "", "", "", "", "", ""
+                binding.txtCompany.getText().toString(), profileUtils.fetchCompanyImage(), String.valueOf(System.currentTimeMillis()), jobSalary, jobQualification, jobEligibilities, jobExperience, jobSpecialization, jobFacilities
 
 
         );

@@ -217,7 +217,7 @@
                     app:layout_constraintTop_toTopOf="@+id/userAddress4job" />
 
                 <TextView
-                    android:id="@+id/seeDetailsTV"
+                    android:id="@+id/btnFindJobs"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
@@ -227,7 +227,7 @@
                     android:paddingTop="8dp"
                     android:paddingEnd="10dp"
                     android:paddingBottom="8dp"
-                    android:text="Application details"
+                    android:text="Find Jobs"
                     android:textAlignment="center"
                     android:textColor="@color/black"
                     android:textSize="12sp"
