@@ -167,7 +167,7 @@ public class InstantCompanyActivity extends AppCompatActivity {
     private void addCompany(String companyName, String companyType, Uri filePath, BottomSheetDialog dialog) {
 
 
-        list.add(new CompanyModel(companyName, companyType, filePath));
+//        list.add(new CompanyModel(companyName, companyType, filePath));
         //  list.notify();
         adapter.notifyDataSetChanged();
         dialog.cancel();

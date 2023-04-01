@@ -1,4 +1,4 @@
-package com.appstacks.indiannaukribazaar.NewActivities;
+package com.appstacks.indiannaukribazaar.NewActivities.JobsActivities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -22,6 +22,7 @@ import android.widget.Toast;
 
 import com.appstacks.indiannaukribazaar.NewActivities.Adapters.CompanyAdapter;
 import com.appstacks.indiannaukribazaar.NewActivities.Models.CompanyModel;
+import com.appstacks.indiannaukribazaar.NewActivities.SharedPrefe;
 import com.appstacks.indiannaukribazaar.R;
 import com.appstacks.indiannaukribazaar.databinding.ActivityCompanyBinding;
 import com.appstacks.indiannaukribazaar.databinding.AddCompanyLayoutBinding;

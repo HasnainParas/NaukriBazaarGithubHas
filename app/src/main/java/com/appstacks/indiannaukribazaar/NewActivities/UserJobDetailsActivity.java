@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.widget.Toast;
 
 import com.appstacks.indiannaukribazaar.FirebaseModels.PersonalInformationModel;
+import com.appstacks.indiannaukribazaar.NewActivities.JobsActivities.FindJobsActivity;
 import com.appstacks.indiannaukribazaar.NewActivities.Models.UserJobModel;
 import com.appstacks.indiannaukribazaar.R;
 import com.appstacks.indiannaukribazaar.databinding.ActivityUserJobDetailsBinding;

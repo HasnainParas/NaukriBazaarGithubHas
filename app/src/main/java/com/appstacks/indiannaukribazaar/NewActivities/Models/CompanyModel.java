@@ -14,7 +14,7 @@ public class CompanyModel {
     private String pushId;
     private  int image;
 
-    public CompanyModel(String companyName, String companyType, Uri filePath) {
+    public CompanyModel() {
     }
 
     public int getImage() {

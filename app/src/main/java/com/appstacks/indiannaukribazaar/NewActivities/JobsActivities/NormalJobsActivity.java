@@ -1,4 +1,4 @@
-package com.appstacks.indiannaukribazaar.NewActivities;
+package com.appstacks.indiannaukribazaar.NewActivities.JobsActivities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,7 +14,7 @@ import com.appstacks.indiannaukribazaar.FirebaseAdapters.JobTitleAdapter;
 import com.appstacks.indiannaukribazaar.FirebaseModels.JobModel;
 import com.appstacks.indiannaukribazaar.NewActivities.Models.UserJobModel;
 import com.appstacks.indiannaukribazaar.R;
-import com.appstacks.indiannaukribazaar.databinding.ActivityFullTimeJobBinding;
+import com.appstacks.indiannaukribazaar.databinding.ActivityNormalJobsBinding;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -24,19 +24,19 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-public class FullTimeJobActivity extends AppCompatActivity {
+public class NormalJobsActivity extends AppCompatActivity {
 
-    private ActivityFullTimeJobBinding binding;
+    private ActivityNormalJobsBinding binding;
     private ArrayList<UserJobModel> jobModelArrayList;
     private JobTitleAdapter jobTitleAdapter;
     private DatabaseReference userJobRef;
     private UserJobModel data;
-private static final String TAG="FullTimeActivity";
+    private static final String TAG = "FullTimeActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = ActivityFullTimeJobBinding.inflate(getLayoutInflater());
+        binding = ActivityNormalJobsBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
 
@@ -56,32 +56,32 @@ private static final String TAG="FullTimeActivity";
                         if (!data.getUserAuthId().equals(FirebaseAuth.getInstance().getCurrentUser().getUid())) {
                             jobModelArrayList.add(data);
 
-                            Log.d(TAG,"Jobs found");
-                        }else{
+                            Log.d(TAG, "Jobs found");
+                        } else {
 
-                            Log.d(TAG,"No jobs found");
+                            Log.d(TAG, "No jobs found");
                         }
 
                     }
 
 
-                    jobTitleAdapter = new JobTitleAdapter(jobModelArrayList, FullTimeJobActivity.this);
+                    jobTitleAdapter = new JobTitleAdapter(jobModelArrayList, NormalJobsActivity.this);
 
 
-                    binding.userjobrecycler.setLayoutManager(new LinearLayoutManager(FullTimeJobActivity.this));
+                    binding.userjobrecycler.setLayoutManager(new LinearLayoutManager(NormalJobsActivity.this));
                     binding.userjobrecycler.setAdapter(jobTitleAdapter);
 //                        binding.loadingFragment.setVisibility(View.GONE);
 
                 } else {
                     binding.noJobsLayout.setVisibility(View.VISIBLE);
                     binding.userjobrecycler.setVisibility(View.GONE);
-                    Toast.makeText(FullTimeJobActivity.this, "no snapshot", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(NormalJobsActivity.this, "no snapshot", Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(FullTimeJobActivity.this, error.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(NormalJobsActivity.this, error.getMessage(), Toast.LENGTH_SHORT).show();
 
             }
         });

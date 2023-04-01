@@ -1,4 +1,4 @@
-package com.appstacks.indiannaukribazaar.NewActivities;
+package com.appstacks.indiannaukribazaar.NewActivities.JobsActivities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -30,9 +30,12 @@ import android.widget.Toast;
 
 import com.appstacks.indiannaukribazaar.NewActivities.Adapters.CompanyAdapter;
 import com.appstacks.indiannaukribazaar.NewActivities.Adapters.InstantCompanyAdapter;
-import com.appstacks.indiannaukribazaar.NewActivities.JobsActivities.AddInstantJobActivity;
+import com.appstacks.indiannaukribazaar.NewActivities.JobLocationActivity;
+import com.appstacks.indiannaukribazaar.NewActivities.JobsActivities.JobPosition;
 import com.appstacks.indiannaukribazaar.NewActivities.Models.CompanyModel;
 import com.appstacks.indiannaukribazaar.NewActivities.Models.UserJobModel;
+import com.appstacks.indiannaukribazaar.NewActivities.SharedPrefe;
+import com.appstacks.indiannaukribazaar.NewActivities.UserJobDetailsActivity;
 import com.appstacks.indiannaukribazaar.R;
 import com.appstacks.indiannaukribazaar.databinding.ActivityAddJobsBinding;
 

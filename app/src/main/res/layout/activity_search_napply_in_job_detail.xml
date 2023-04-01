@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".JobsPackages.InstantJobs.SearchNApplyInJobDetailActivity"
-    >
+    tools:context=".JobsPackages.InstantJobs.SearchNApplyInJobDetailActivity">
 
 
     <ImageView
@@ -15,36 +13,330 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
+        android:background="?attr/selectableItemBackground"
+        android:clickable="true"
+        android:focusable="true"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_arrow_back_black_24dp"
-        tools:ignore="ContentDescription"
-        android:background="?attr/selectableItemBackground"
-        android:clickable="true"
-
-
-        />
+        tools:ignore="ContentDescription,SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
     <ImageView
         android:id="@+id/heartbtn"
         android:layout_width="25dp"
         android:layout_height="25dp"
+        android:layout_marginTop="8dp"
+
         android:layout_marginEnd="8dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/injobDetailBack"
-        app:srcCompat="@drawable/heartdrawable"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/heartdrawable" />
 
-        />
+    <!--    <androidx.recyclerview.widget.RecyclerView-->
+    <!--        android:id="@+id/inJobDetails_RecyclerV"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="0dp"-->
+    <!--        android:layout_marginTop="8dp"-->
+    <!--        app:layout_constraintBottom_toBottomOf="parent"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent"-->
+    <!--        app:layout_constraintStart_toStartOf="parent"-->
+    <!--        app:layout_constraintTop_toBottomOf="@+id/injobDetailBack" />-->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout444"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="42dp"
+        android:background="@color/colorSeparator"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/injobDetailBack">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/inJobDetails_RecyclerV"
+        <TextView
+            android:id="@+id/job_titleInstant"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="52dp"
+            android:fontFamily="@font/dm_sans"
+            android:text="TextView"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/com_textInstant"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            android:fontFamily="@font/dm_sans"
+            android:text="TextView"
+            android:maxLength="13"
+            android:ellipsize="end"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/view9Instant"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/job_titleInstant" />
+
+        <View
+            android:id="@+id/view9Instant"
+            android:layout_width="7dp"
+            android:layout_height="7dp"
+            android:background="@drawable/viewblackdot"
+            app:layout_constraintBottom_toBottomOf="@+id/com_textInstant"
+            app:layout_constraintEnd_toStartOf="@+id/budgetTextInstant"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/com_textInstant"
+            app:layout_constraintTop_toTopOf="@+id/com_textInstant" />
+
+        <TextView
+            android:id="@+id/budgetTextInstant"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/dm_sans"
+            android:text="$1000"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:maxLength="6"
+            app:layout_constraintBottom_toBottomOf="@+id/com_textInstant"
+            app:layout_constraintEnd_toStartOf="@+id/view10Instant"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/view9Instant"
+            app:layout_constraintTop_toTopOf="@+id/com_textInstant" />
+
+        <View
+            android:id="@+id/view10Instant"
+            android:layout_width="7dp"
+            android:layout_height="7dp"
+            android:background="@drawable/viewblackdot"
+            app:layout_constraintBottom_toBottomOf="@+id/budgetTextInstant"
+            app:layout_constraintEnd_toStartOf="@+id/time_textInstant"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/budgetTextInstant"
+            app:layout_constraintTop_toTopOf="@+id/budgetTextInstant" />
+
+        <TextView
+            android:id="@+id/time_textInstant"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/dm_sans"
+            android:text="29-3-2023 11:34:07"
+            android:textColor="@color/black"
+            android:maxLength="15"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="@+id/budgetTextInstant"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/view10Instant"
+            app:layout_constraintTop_toTopOf="@+id/budgetTextInstant" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/com_logoInstant"
+        android:layout_width="74dp"
+        android:layout_height="74dp"
+        android:background="@drawable/njobpic_bg"
+        android:padding="10dp"
+        android:src="@drawable/ic_google_logo"
+        app:layout_constraintBottom_toTopOf="@+id/constraintLayout444"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/constraintLayout444" />
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/scrollView3"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginTop="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/injobDetailBack" />
+        android:fillViewport="true"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout444">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout10"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            >
+
+            <TextView
+                android:id="@+id/textView67Instant"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/dm_sans"
+                android:text="Job Description"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/descriptiontextInstant"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="8dp"
+                android:lineSpacingExtra="4dp"
+                android:padding="2dp"
+                android:text="h ashfja   fias io   a j fah  afisdasfhao hiofh a a hi fhioa h  h ashfja   fias io   a j fah  afisdasfhao hiofh a a hi fhioa h  h ashfja   fias io   a j fah  afisdasfhao hiofh a a hi fhioa h  h ashfja   fias io   a j fah  afisdasfhao hiofh a a hi fhioa h  h ashfja   fias io   a j fah  afisdasfhao hiofh a a hi fhioa h  h ashfja   fias io   a j fah  afisdasfhao hiofh a a hi fhioa h  h ashfja   fias io   a j fah  afisdasfhao hiofh a a hi fhioa h  h ashfja   fias io   a j fah  afisdasfhao hiofh a a hi fhioa h  h ashfja   fias io   a j fah  afisdasfhao hiofh a a hi fhioa h  "
+                android:textColor="#524B6B"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/textView67Instant"
+                app:layout_constraintTop_toBottomOf="@+id/textView67Instant" />
+
+            <TextView
+                android:id="@+id/textView38"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/dm_sans"
+                android:text="Skills and Expertise"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@+id/descriptiontextInstant"
+                app:layout_constraintTop_toBottomOf="@+id/descriptiontextInstant" />
+
+            <LinearLayout
+                android:id="@+id/linearLayout19"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minHeight="120dp"
+                android:orientation="vertical"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView38">
+
+                <ListView
+                    android:id="@+id/injobdetailsListInstant"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="13dp"
+                    android:layout_marginRight="5dp"
+                    android:divider="@null"
+                    android:dividerHeight="1dp"
+
+                    android:visibility="visible"
+                    tools:listitem="@layout/layoutinjobdetailskill" />
+
+                <com.airbnb.lottie.LottieAnimationView
+                    android:id="@+id/injoblistloaderInstant"
+                    android:layout_width="match_parent"
+                    android:layout_height="90dp"
+                    android:visibility="gone"
+                    app:lottie_autoPlay="true"
+                    app:lottie_loop="true"
+                    app:lottie_rawRes="@raw/listloading" />
+
+                <TextView
+                    android:id="@+id/injoblistloadingTvInstant"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="4dp"
+                    android:fontFamily="@font/rubik_bold"
+                    android:gravity="center"
+                    android:text="Loading.."
+                    android:textColor="@color/green"
+                    android:textSize="14sp"
+                    android:visibility="gone" />
+
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/textView51"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/dm_sans"
+                android:text="Position"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@+id/textView38"
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout19" />
+
+            <TextView
+                android:id="@+id/positionTViewInstant"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:fontFamily="@font/dm_sans"
+                android:text="TextView"
+                android:textColor="#524B6B"
+                android:textSize="12sp"
+                app:layout_constraintStart_toStartOf="@+id/textView51"
+                app:layout_constraintTop_toBottomOf="@+id/textView51" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/ApplyJobBTnInstant"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        app:cardBackgroundColor="@color/green"
+        app:cardCornerRadius="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/jobChatBtnInstant"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <TextView
+            android:id="@+id/textView74Instant"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:fontFamily="@font/dm_sans_bold"
+            android:padding="10dp"
+            android:text="Apply Now"
+            android:textAllCaps="true"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/jobChatBtnInstant"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_marginEnd="8dp"
+        app:cardBackgroundColor="@color/green"
+        app:cardCornerRadius="10dp"
+        app:layout_constraintBottom_toBottomOf="@+id/ApplyJobBTnInstant"
+        app:layout_constraintEnd_toStartOf="@+id/jobBookmarkBTnInstant"
+        app:layout_constraintTop_toTopOf="@+id/ApplyJobBTnInstant">
+
+        <ImageView
+            android:id="@+id/imageView18Instant"
+            android:layout_width="28dp"
+            android:layout_height="24dp"
+            android:layout_gravity="center"
+            android:layout_margin="15dp"
+            app:srcCompat="@drawable/ic_chat" />
+    </androidx.cardview.widget.CardView>
+
+    <ImageView
+        android:id="@+id/jobBookmarkBTnInstant"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintBottom_toBottomOf="@+id/jobChatBtnInstant"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/jobChatBtnInstant"
+        app:srcCompat="@drawable/ic_bookmark_green_border" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

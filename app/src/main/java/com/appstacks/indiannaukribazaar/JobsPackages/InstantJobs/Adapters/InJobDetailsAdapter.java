@@ -62,9 +62,10 @@ public class InJobDetailsAdapter extends RecyclerView.Adapter<InJobDetailsAdapte
 
 //        holder.binding.injobdetailDate.setText("Posted on " + model.getPostedDate());
 
-        String timeago = calculateTimeAgo(model.getPostedDate());
-        holder.binding.injobdetailDate.setText(timeago);
+//        String timeago = calculateTimeAgo(model.getPostedDate());
+//        holder.binding.injobdetailDate.setText(timeago);
 
+        //thiss^
 
 //        String timeaaaage = calculate(model.getPostedDate());
 //        holder.binding.injobdetailDate.setText(timeaaaage);
@@ -145,25 +146,25 @@ public class InJobDetailsAdapter extends RecyclerView.Adapter<InJobDetailsAdapte
 
     }
 
-    private String calculateTimeAgo(String postedDate) {
-
-//        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
-//        sdf.setTimeZone(TimeZone.getTimeZone("GMT"));
-        SimpleDateFormat sdf = new SimpleDateFormat("dd-M-yyyy hh:mm:ss");
-
-        try {
-            long time = sdf.parse(postedDate).getTime();
-            long now = System.currentTimeMillis();
-            CharSequence ago =
-                    DateUtils.getRelativeTimeSpanString(time, now, DateUtils.MINUTE_IN_MILLIS);
-            return ago+"";
-
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-
-        return "";
-    }
+//    private String calculateTimeAgo(String postedDate) {
+//
+////        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+////        sdf.setTimeZone(TimeZone.getTimeZone("GMT"));
+//        SimpleDateFormat sdf = new SimpleDateFormat("dd-M-  hh:mm:ss");
+//
+//        try {
+//            long time = sdf.parse(postedDate).getTime();
+//            long now = System.currentTimeMillis();
+//            CharSequence ago =
+//                    DateUtils.getRelativeTimeSpanString(time, now, DateUtils.MINUTE_IN_MILLIS);
+//            return ago+"";
+//
+//        } catch (ParseException e) {
+//            e.printStackTrace();
+//        }
+//
+//        return "";
+//    }
 
 
     @Override
