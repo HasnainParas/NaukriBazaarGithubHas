@@ -19,6 +19,7 @@ import com.appstacks.indiannaukribazaar.JobsPackages.InstantJobs.AddingInstantJo
 import com.appstacks.indiannaukribazaar.NewActivities.Models.CompanyModel;
 import com.appstacks.indiannaukribazaar.NewActivities.SharedPrefe;
 import com.appstacks.indiannaukribazaar.R;
+import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 
@@ -50,7 +51,11 @@ public class InstantCompanyAdapter extends RecyclerView.Adapter<InstantCompanyAd
         CompanyModel model = list.get(position);
         sharedPrefe = new SharedPrefe(context);
 
-        holder.companyLogo.setImageResource(model.getImage());
+        Glide.with(context)
+                .load(model.getImageUrl())
+                .placeholder(R.drawable.placeholder)
+                .into(holder.companyLogo);
+
         holder.title.setText(model.getTitle());
         holder.internet.setText(model.getType());
 
@@ -63,6 +68,8 @@ public class InstantCompanyAdapter extends RecyclerView.Adapter<InstantCompanyAd
 //                intent.putExtra("cominternet", model.getInternet());
 
                 sharedPrefe.saveInstantCom(model.getTitle());
+                sharedPrefe.saveInstantComType(model.getType());
+                sharedPrefe.saveInstantComImgURL(model.getImageUrl());
                 context.startActivity(intent);
                 ((AppCompatActivity) context).finish();
 

@@ -16,7 +16,7 @@
 
 
         <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/imageView13"
+            android:id="@+id/profileDPFindJob"
             android:layout_width="65dp"
             android:layout_height="65dp"
             android:layout_marginTop="8dp"
@@ -32,12 +32,12 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:fontFamily="@font/dm_sans"
-            android:text="Hasnain Paras"
+            android:text="User Demo Name"
             android:textColor="@color/black"
             android:textSize="20sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView13" />
+            app:layout_constraintTop_toBottomOf="@+id/profileDPFindJob" />
 
         <ImageView
             android:id="@+id/imageView15"
@@ -180,11 +180,11 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/allusrJobSize"
+                        android:id="@+id/instantJobSize"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/dm_sans"
-                        android:text="99k"
+                        android:text="***"
                         android:textColor="@color/black"
                         android:textSize="16sp"
                         android:textStyle="bold" />
@@ -229,11 +229,11 @@
                 <!--                    android:textSize="16sp" />-->
 
                 <TextView
-                    android:id="@+id/textView34"
+                    android:id="@+id/normalJobsSize"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/dm_sans"
-                    android:text="99k"
+                    android:text="***"
                     android:textColor="@color/black"
                     android:textStyle="bold" />
 
@@ -241,7 +241,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/dm_sans"
-                    android:text="Job"
+                    android:text="Normal Jobs"
                     android:textColor="@color/black"
                     android:textSize="16sp" />
             </LinearLayout>
@@ -265,7 +265,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
             app:layout_constraintBottom_toBottomOf="parent"

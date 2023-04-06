@@ -147,6 +147,7 @@
         android:text="Upload Logo"
         android:textColor="#2E7D32"
         android:textSize="18sp"
+        android:visibility="gone"
         app:layout_constraintStart_toStartOf="@+id/carddiscriptionInstant"
         app:layout_constraintTop_toBottomOf="@+id/carddiscriptionInstant" />
 
@@ -159,6 +160,7 @@
         android:background="@drawable/green_circle"
         android:padding="20dp"
         android:src="@drawable/ic_upload"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tview4"
@@ -219,6 +221,7 @@
                 android:layout_marginBottom="8dp"
                 android:layout_weight="0.3"
                 android:padding="5dp"
+                android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -231,6 +234,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center|start"
                 android:padding="5dp"
+                android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="@+id/filebtnInstant"
                 app:layout_constraintStart_toEndOf="@+id/filebtnInstant"
                 app:layout_constraintTop_toTopOf="@+id/filebtnInstant"

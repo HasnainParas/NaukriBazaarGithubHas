@@ -2,66 +2,17 @@ package com.appstacks.indiannaukribazaar.NewActivities.Models;
 
 public class UserJobModel {
 
-    private String jobTitle,jobPosition, jobLocation, employmentType, typeOfWorkPlace, description,uniqueKey,userAuthId;
-    private String companyName, companyType,companyImage;
+    private String jobTitle, jobPosition, jobLocation, employmentType, typeOfWorkPlace, description, uniqueKey, userAuthId;
+    private String companyName, companyType, companyImageURL;
     private String jobPostedDate;
-    private String salary,qualifications,eligibility,experience,specialization,facilities;
-
-
+    //    private String salary,qualifications,eligibility,experience,specialization,facilities;
+    private String salary, qualifications, experience, specialization;
 
 
     public UserJobModel() {
     }
 
-    public String getSalary() {
-        return salary;
-    }
-
-    public void setSalary(String salary) {
-        this.salary = salary;
-    }
-
-    public String getQualifications() {
-        return qualifications;
-    }
-
-    public void setQualifications(String qualifications) {
-        this.qualifications = qualifications;
-    }
-
-    public String getEligibility() {
-        return eligibility;
-    }
-
-    public void setEligibility(String eligibility) {
-        this.eligibility = eligibility;
-    }
-
-    public String getExperience() {
-        return experience;
-    }
-
-    public void setExperience(String experience) {
-        this.experience = experience;
-    }
-
-    public String getSpecialization() {
-        return specialization;
-    }
-
-    public void setSpecialization(String specialization) {
-        this.specialization = specialization;
-    }
-
-    public String getFacilities() {
-        return facilities;
-    }
-
-    public void setFacilities(String facilities) {
-        this.facilities = facilities;
-    }
-
-    public UserJobModel(String jobTitle, String jobPosition, String jobLocation, String employmentType, String typeOfWorkPlace, String description, String uniqueKey, String userAuthId, String companyName, String companyType, String companyImage, String jobPostedDate, String salary, String qualifications, String eligibility, String experience, String specialization, String facilities) {
+    public UserJobModel(String jobTitle, String jobPosition, String jobLocation, String employmentType, String typeOfWorkPlace, String description, String uniqueKey, String userAuthId, String companyName, String companyType, String companyImageURL, String jobPostedDate, String salary, String qualifications, String experience, String specialization) {
         this.jobTitle = jobTitle;
         this.jobPosition = jobPosition;
         this.jobLocation = jobLocation;
@@ -72,22 +23,12 @@ public class UserJobModel {
         this.userAuthId = userAuthId;
         this.companyName = companyName;
         this.companyType = companyType;
-        this.companyImage = companyImage;
+        this.companyImageURL = companyImageURL;
         this.jobPostedDate = jobPostedDate;
         this.salary = salary;
         this.qualifications = qualifications;
-        this.eligibility = eligibility;
         this.experience = experience;
         this.specialization = specialization;
-        this.facilities = facilities;
-    }
-
-    public String getJobPostedDate() {
-        return jobPostedDate;
-    }
-
-    public void setJobPostedDate(String jobPostedDate) {
-        this.jobPostedDate = jobPostedDate;
     }
 
     public String getJobTitle() {
@@ -170,11 +111,51 @@ public class UserJobModel {
         this.companyType = companyType;
     }
 
-    public String getCompanyImage() {
-        return companyImage;
+    public String getCompanyImageURL() {
+        return companyImageURL;
     }
 
-    public void setCompanyImage(String companyImage) {
-        this.companyImage = companyImage;
+    public void setCompanyImageURL(String companyImageURL) {
+        this.companyImageURL = companyImageURL;
+    }
+
+    public String getJobPostedDate() {
+        return jobPostedDate;
+    }
+
+    public void setJobPostedDate(String jobPostedDate) {
+        this.jobPostedDate = jobPostedDate;
+    }
+
+    public String getSalary() {
+        return salary;
+    }
+
+    public void setSalary(String salary) {
+        this.salary = salary;
+    }
+
+    public String getQualifications() {
+        return qualifications;
+    }
+
+    public void setQualifications(String qualifications) {
+        this.qualifications = qualifications;
+    }
+
+    public String getExperience() {
+        return experience;
+    }
+
+    public void setExperience(String experience) {
+        this.experience = experience;
+    }
+
+    public String getSpecialization() {
+        return specialization;
+    }
+
+    public void setSpecialization(String specialization) {
+        this.specialization = specialization;
     }
 }

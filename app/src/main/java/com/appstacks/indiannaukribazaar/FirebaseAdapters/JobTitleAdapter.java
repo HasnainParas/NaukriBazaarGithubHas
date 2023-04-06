@@ -14,6 +14,7 @@ import com.appstacks.indiannaukribazaar.NewActivities.JobsActivities.N_JobsDetai
 import com.appstacks.indiannaukribazaar.NewActivities.Models.UserJobModel;
 import com.appstacks.indiannaukribazaar.R;
 import com.appstacks.indiannaukribazaar.databinding.JobtitlesampleLayoutBinding;
+import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 
@@ -44,10 +45,16 @@ public class JobTitleAdapter extends RecyclerView.Adapter<JobTitleAdapter.viewHo
         holder.binding.tview1.setText(model.getJobPosition());
         holder.binding.tview2.setText(model.getTypeOfWorkPlace());
 
+        Glide.with(context).load(model.getCompanyImageURL())
+                .placeholder(R.drawable.placeholder)
+                .into(holder.binding.jobcompic);
+
+
+
         holder.binding.cardclickerUjOb.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(context, model.getUniqueKey(), Toast.LENGTH_SHORT).show();
+//                Toast.makeText(context, model.getUniqueKey(), Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(context, N_JobsDetailActivity.class);
                 intent.putExtra("jobtile", model.getJobTitle());
                 intent.putExtra("company", model.getCompanyName());

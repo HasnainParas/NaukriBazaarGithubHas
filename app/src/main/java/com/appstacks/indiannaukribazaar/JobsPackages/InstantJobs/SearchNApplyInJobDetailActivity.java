@@ -14,6 +14,7 @@ import android.widget.Toast;
 import com.appstacks.indiannaukribazaar.JobsPackages.InstantJobs.Adapters.InJobDetailsAdapter;
 import com.appstacks.indiannaukribazaar.R;
 import com.appstacks.indiannaukribazaar.databinding.ActivitySearchNapplyInJobDetailBinding;
+import com.bumptech.glide.Glide;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -58,7 +59,12 @@ public class SearchNApplyInJobDetailActivity extends AppCompatActivity {
                         assert model != null;
                         binding.jobTitleInstant.setText(model.getInJobTitle());
                         binding.comTextInstant.setText(model.getInJobCompany());
-                        binding.comTextInstant.setText(model.getInJobCompany());
+
+                        Glide.with(SearchNApplyInJobDetailActivity.this)
+                                .load(model.getInJobCompanyImgURL())
+                                .placeholder(R.drawable.placeholder)
+                                .into(binding.comLogoInstant);
+
 
                         timeago = calculateTimeAgoo(model.getPostedDate());
                         binding.timeTextInstant.setText(timeago);

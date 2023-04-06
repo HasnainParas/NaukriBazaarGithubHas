@@ -27,6 +27,8 @@ public class ProfileUtils {
     private static final String SKILLS = "Skills";
     private static final String LANGUAGES = "Languages";
     private static final String SELECTEDSKILLS = "SelectedSkill";
+    private static final String SELECTEDJOBFACILITIES = "SELECTEDJOBFACILITIES";
+    private static final String SELECTEDJOBELIGIBILITIES = "SELECTEDJOBELIGIBILITIES";
     private static final String USER_IMAGE="UserImage";
     private static final String COMPANY_IMAGE="Company_Image";
 
@@ -41,6 +43,8 @@ public class ProfileUtils {
         sharedPreferences = context.getSharedPreferences(SKILLS, Context.MODE_PRIVATE);
         sharedPreferences = context.getSharedPreferences(LANGUAGES,Context.MODE_PRIVATE);
         sharedPreferences = context.getSharedPreferences(SELECTEDSKILLS,Context.MODE_PRIVATE);
+        sharedPreferences = context.getSharedPreferences(SELECTEDJOBFACILITIES,Context.MODE_PRIVATE);
+        sharedPreferences = context.getSharedPreferences(SELECTEDJOBELIGIBILITIES,Context.MODE_PRIVATE);
 
         sharedPreferences= context.getSharedPreferences(USER_IMAGE,Context.MODE_PRIVATE);
 
@@ -181,13 +185,13 @@ public class ProfileUtils {
         return sharedPreferences.getString(FIELD_OF_STUDY, "");
     }
 
+    //INSTANTSELECTEDLIST
     public void saveSelectedSkills(ArrayList<String> list) {
 
         Gson gson = new Gson();
         String jsonStr = gson.toJson(list);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString(SELECTEDSKILLS, jsonStr);
-
         editor.apply();
 
     }
@@ -199,11 +203,55 @@ public class ProfileUtils {
         }.getType();
         return gson.fromJson(str, type);
     }
+    //NORMALJOBSELECTEDLIST1
+    public void saveSelectedjobFacilities(ArrayList<String> list) {
+
+        Gson gson = new Gson();
+        String jsonStr = gson.toJson(list);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(SELECTEDJOBFACILITIES, jsonStr);
+        editor.apply();
+
+    }
+
+    public ArrayList<String> fetchSelectedjobFacilities() {
+        String str = sharedPreferences.getString(SELECTEDJOBFACILITIES, null);
+        Gson gson = new Gson();
+        Type type = new TypeToken<ArrayList<String>>() {
+        }.getType();
+        return gson.fromJson(str, type);
+    }
+
+    //NORMALJOBSELECTEDLIST2
+    public void saveSelectedjobEligibilities(ArrayList<String> list) {
+
+        Gson gson = new Gson();
+        String jsonStr = gson.toJson(list);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(SELECTEDJOBELIGIBILITIES, jsonStr);
+        editor.apply();
+
+    }
+
+    public ArrayList<String> fetchSelectedjobEligibilities() {
+        String str = sharedPreferences.getString(SELECTEDJOBELIGIBILITIES, null);
+        Gson gson = new Gson();
+        Type type = new TypeToken<ArrayList<String>>() {
+        }.getType();
+        return gson.fromJson(str, type);
+    }
 
 
     public void deleteSelectedSkills() {
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.remove(SELECTEDSKILLS);
+        editor.apply();
+    }
+
+    public void deleteSelectedJobLists() {
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.remove(SELECTEDJOBFACILITIES);
+        editor.remove(SELECTEDJOBELIGIBILITIES);
         editor.apply();
     }
 

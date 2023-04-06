@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView  xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".NewActivities.AddJobsActivity" >
+    tools:context=".NewActivities.JobsActivities.AddJobsActivity">
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -17,6 +18,8 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
+            android:background="?attr/selectableItemBackground"
+            android:clickable="true"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/ic_remove" />
@@ -26,6 +29,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
+            android:background="?attr/selectableItemBackground"
+            android:clickable="true"
             android:fontFamily="@font/dm_sans"
             android:text="Post"
             android:textColor="@color/green"
@@ -158,6 +163,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
+                    android:layout_marginStart="8dp"
                     android:layout_marginBottom="16dp"
                     android:textColor="#524B6B"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -298,9 +304,9 @@
             android:clickable="true"
             android:foreground="?android:attr/selectableItemBackground"
             app:cardCornerRadius="10dp"
-            app:layout_constraintEnd_toEndOf="@+id/locationBtn"
-            app:layout_constraintStart_toStartOf="@+id/locationBtn"
-            app:layout_constraintTop_toBottomOf="@+id/locationBtn">
+            app:layout_constraintEnd_toEndOf="@+id/BtnEligibility"
+            app:layout_constraintStart_toStartOf="@+id/BtnEligibility"
+            app:layout_constraintTop_toBottomOf="@+id/BtnFacilities">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -439,18 +445,21 @@
         <androidx.cardview.widget.CardView
             android:id="@+id/BtnDescription"
             android:layout_width="0dp"
-            android:layout_height="90dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
+            android:layout_marginBottom="32dp"
             android:clickable="true"
             android:foreground="?android:attr/selectableItemBackground"
             app:cardCornerRadius="10dp"
-            app:layout_constraintEnd_toEndOf="@+id/btnWorkplaceType"
-            app:layout_constraintStart_toStartOf="@+id/btnWorkplaceType"
-            app:layout_constraintTop_toBottomOf="@+id/btnWorkplaceType">
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/BtnSpecialization"
+            app:layout_constraintStart_toStartOf="@+id/BtnSpecialization"
+            app:layout_constraintTop_toBottomOf="@+id/BtnSpecializationADD">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
+            <androidx.appcompat.widget.LinearLayoutCompat
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/txtJobDescription"
@@ -471,16 +480,22 @@
                     android:id="@+id/txt_description"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginStart="8dp"
                     android:layout_marginBottom="16dp"
-                    android:layout_weight="1"
+                    android:layout_marginTop="8dp"
                     android:fontFamily="@font/dm_sans"
                     android:text="Click to select"
                     android:textColor="#524B6B"
                     android:textSize="14sp"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="@+id/txtJobDescription"
-                    app:layout_constraintTop_toBottomOf="@+id/txtDescription" />
+                    app:layout_constraintStart_toStartOf="@+id/txtJobDescription" />
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                >
 
                 <ImageView
                     android:id="@+id/btnAddJobDescription"
@@ -513,16 +528,14 @@
             android:id="@+id/BtnSalary"
             android:layout_width="0dp"
             android:layout_height="90dp"
-            android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
-            android:layout_marginEnd="16dp"
             android:clickable="true"
             android:foreground="?android:attr/selectableItemBackground"
-            app:cardCornerRadius="10dp"
 
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/BtnDescription">
+            app:cardCornerRadius="10dp"
+            app:layout_constraintEnd_toEndOf="@+id/btnWorkplaceType"
+            app:layout_constraintStart_toStartOf="@+id/btnWorkplaceType"
+            app:layout_constraintTop_toBottomOf="@+id/btnWorkplaceType">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -582,9 +595,9 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="16dp"
-android:visibility="gone"
             android:clickable="true"
             android:foreground="?android:attr/selectableItemBackground"
+            android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/BtnSalary">
@@ -720,14 +733,16 @@ android:visibility="gone"
             android:id="@+id/BtnQualificationsADD"
             android:layout_width="0dp"
             android:layout_height="90dp"
-            android:layout_marginStart="16dp"
+            android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            android:layout_marginEnd="16dp"
-android:visibility="gone"
+            android:layout_marginEnd="8dp"
             android:clickable="true"
             android:foreground="?android:attr/selectableItemBackground"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            android:visibility="gone"
+            app:cardBackgroundColor="#F0BEBFBD"
+            app:cardCornerRadius="5dp"
+            app:layout_constraintEnd_toEndOf="@+id/BtnQualifications"
+            app:layout_constraintStart_toStartOf="@+id/BtnQualifications"
             app:layout_constraintTop_toBottomOf="@+id/BtnQualifications">
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -769,20 +784,19 @@ android:visibility="gone"
         <androidx.cardview.widget.CardView
             android:id="@+id/BtnEligibility"
             android:layout_width="0dp"
-            android:layout_height="90dp"
-            android:layout_marginStart="16dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:layout_marginEnd="16dp"
             android:clickable="true"
             android:foreground="?android:attr/selectableItemBackground"
             app:cardCornerRadius="10dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/BtnQualificationsADD">
+            app:layout_constraintEnd_toEndOf="@+id/locationBtn"
+            app:layout_constraintStart_toStartOf="@+id/locationBtn"
+            app:layout_constraintTop_toBottomOf="@+id/locationBtn">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
+            <androidx.appcompat.widget.LinearLayoutCompat
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/txtJobEligibility"
@@ -799,10 +813,22 @@ android:visibility="gone"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
+                <LinearLayout
+                    android:id="@+id/textlayoutEligibility"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginBottom="8dp"
+                    android:orientation="vertical"
+                    android:padding="5dp"
+                    android:visibility="gone"/>
+
                 <TextView
                     android:id="@+id/txt_eligibility"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_marginStart="8dp"
                     android:layout_marginTop="8dp"
                     android:layout_marginBottom="16dp"
                     android:layout_weight="1"
@@ -810,9 +836,16 @@ android:visibility="gone"
                     android:text="Click to select"
                     android:textColor="#524B6B"
                     android:textSize="14sp"
+                    android:visibility="visible"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="@+id/txtJobEligibility"
-                    app:layout_constraintTop_toBottomOf="@+id/txtDescription" />
+                    app:layout_constraintStart_toStartOf="@+id/txtJobEligibility" />
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center|end">
 
                 <ImageView
                     android:id="@+id/btnAddJobEligibility"
@@ -832,7 +865,7 @@ android:visibility="gone"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center|end"
                     android:layout_marginEnd="8dp"
-                    android:visibility="invisible"
+                    android:visibility="gone"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
@@ -844,18 +877,19 @@ android:visibility="gone"
         <androidx.cardview.widget.CardView
             android:id="@+id/BtnExperience"
             android:layout_width="0dp"
-            android:layout_height="90dp"
-            android:clickable="true"
+            android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
+            android:clickable="true"
             android:foreground="?android:attr/selectableItemBackground"
             app:cardCornerRadius="10dp"
-            app:layout_constraintEnd_toEndOf="@+id/BtnEligibility"
-            app:layout_constraintStart_toStartOf="@+id/BtnEligibility"
-            app:layout_constraintTop_toBottomOf="@+id/BtnEligibility">
+            app:layout_constraintEnd_toEndOf="@+id/BtnQualifications"
+            app:layout_constraintStart_toStartOf="@+id/BtnQualifications"
+            app:layout_constraintTop_toBottomOf="@+id/BtnQualificationsADD">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
+            <androidx.appcompat.widget.LinearLayoutCompat
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/txtJobExperience"
@@ -863,7 +897,6 @@ android:visibility="gone"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="16dp"
-                    android:layout_weight="1"
                     android:fontFamily="@font/dm_sans"
                     android:text="Experience"
                     android:textColor="@color/black"
@@ -876,16 +909,22 @@ android:visibility="gone"
                     android:id="@+id/txt_experience"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginBottom="16dp"
-                    android:layout_weight="1"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginBottom="8dp"
                     android:fontFamily="@font/dm_sans"
                     android:text="Click to select"
                     android:textColor="#524B6B"
                     android:textSize="14sp"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="@+id/txtJobExperience"
-                    app:layout_constraintTop_toBottomOf="@+id/txtDescription" />
+                    app:layout_constraintStart_toStartOf="@+id/txtJobExperience" />
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center|end">
 
                 <ImageView
                     android:id="@+id/btnAddJobExperience"
@@ -917,20 +956,19 @@ android:visibility="gone"
         <androidx.cardview.widget.CardView
             android:id="@+id/BtnSpecialization"
             android:layout_width="0dp"
-            android:layout_height="90dp"
-            android:layout_marginStart="16dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:layout_marginEnd="16dp"
             android:clickable="true"
             android:foreground="?android:attr/selectableItemBackground"
             app:cardCornerRadius="10dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/BtnExperience"
+            app:layout_constraintStart_toStartOf="@+id/BtnExperience"
             app:layout_constraintTop_toBottomOf="@+id/BtnExperience">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
+            <androidx.appcompat.widget.LinearLayoutCompat
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/txtJobSpecialization"
@@ -951,8 +989,9 @@ android:visibility="gone"
                     android:id="@+id/txt_specialization"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
                     android:layout_marginTop="8dp"
-                    android:layout_marginBottom="16dp"
+                    android:layout_marginBottom="8dp"
                     android:layout_weight="1"
                     android:fontFamily="@font/dm_sans"
                     android:text="Click to select"
@@ -962,20 +1001,20 @@ android:visibility="gone"
                     app:layout_constraintStart_toStartOf="@+id/txtJobSpecialization"
                     app:layout_constraintTop_toBottomOf="@+id/txtDescription" />
 
-                <ImageView
-                    android:id="@+id/btnAddJobSpecialization"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center|end"
-                    android:layout_marginEnd="8dp"
-                    android:visibility="visible"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/ic_add" />
 
+            </androidx.appcompat.widget.LinearLayoutCompat>
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
+            <ImageView
+                android:id="@+id/btnAddJobSpecialization"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center|end"
+                android:layout_marginEnd="8dp"
+                android:visibility="visible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_add" />
 
         </androidx.cardview.widget.CardView>
 
@@ -986,9 +1025,9 @@ android:visibility="gone"
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="16dp"
-android:visibility="gone"
             android:clickable="true"
             android:foreground="?android:attr/selectableItemBackground"
+            android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/BtnSpecialization">
@@ -1032,29 +1071,26 @@ android:visibility="gone"
         <androidx.cardview.widget.CardView
             android:id="@+id/BtnFacilities"
             android:layout_width="0dp"
-            android:layout_height="90dp"
-            android:layout_marginStart="16dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="8dp"
             android:clickable="true"
             android:foreground="?android:attr/selectableItemBackground"
             app:cardCornerRadius="10dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/BtnSpecializationADD">
+            app:layout_constraintEnd_toEndOf="@+id/employmentBtn"
+            app:layout_constraintStart_toStartOf="@+id/BtnEligibility"
+            app:layout_constraintTop_toBottomOf="@+id/BtnEligibility">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
+            <androidx.appcompat.widget.LinearLayoutCompat
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/txtJobFacilities"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
-                    android:layout_marginTop="16dp"
+                    android:layout_marginTop="8dp"
                     android:layout_weight="1"
                     android:fontFamily="@font/dm_sans"
                     android:text="Facilities"
@@ -1064,13 +1100,25 @@ android:visibility="gone"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
+                <LinearLayout
+                    android:id="@+id/facilitiesTxtLayout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginBottom="8dp"
+                    android:orientation="vertical"
+                    android:padding="5dp"
+                    android:visibility="gone"
+                    />
+
                 <TextView
                     android:id="@+id/txt_facilities"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginBottom="16dp"
-                    android:layout_weight="1"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginBottom="8dp"
                     android:fontFamily="@font/dm_sans"
                     android:text="Click to select"
                     android:textColor="#524B6B"
@@ -1078,6 +1126,13 @@ android:visibility="gone"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="@+id/txtJobFacilities"
                     app:layout_constraintTop_toBottomOf="@+id/txtDescription" />
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center|end">
 
                 <ImageView
                     android:id="@+id/btnAddJobFacilities"
@@ -1097,7 +1152,7 @@ android:visibility="gone"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center|end"
                     android:layout_marginEnd="8dp"
-                    android:visibility="invisible"
+                    android:visibility="gone"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"

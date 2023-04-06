@@ -17,8 +17,10 @@ import com.appstacks.indiannaukribazaar.Slider.SliderData;
 import com.appstacks.indiannaukribazaar.databinding.ActivityMainBinding;
 import com.appstacks.indiannaukribazaar.model.DeviceInfo;
 import com.appstacks.indiannaukribazaar.profile.UserProfileActivity;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 
@@ -66,6 +68,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.messaging.FirebaseMessaging;
 import com.smarteist.autoimageslider.IndicatorView.PageIndicatorView;
 import com.smarteist.autoimageslider.SliderAnimations;
 import com.smarteist.autoimageslider.SliderView;
@@ -77,7 +80,7 @@ public class ActivityMain extends AppCompatActivity {
 
     ActivityMainBinding binding;
 
-    private DatabaseReference allUserRef, deviceRefmain;
+    private DatabaseReference allUserRef, deviceRefmain,tokenRef;
     private FirebaseAuth auth;
     private ActionBar actionBar;
     private Toolbar toolbar;
@@ -121,9 +124,13 @@ public class ActivityMain extends AppCompatActivity {
         auth = FirebaseAuth.getInstance();
         currentUserAuth = auth.getCurrentUser().getUid();
         allUserRef = FirebaseDatabase.getInstance().getReference("AllUsers").child(currentUserAuth);
+        tokenRef = FirebaseDatabase.getInstance().getReference("AllUsersToken").child(currentUserAuth);
         deviceRefmain = FirebaseDatabase.getInstance().getReference();
 
         deviceInfo = Tools.getDeviceInfo(this);
+
+
+
 
         deviceDisable();
 
@@ -147,7 +154,34 @@ public class ActivityMain extends AppCompatActivity {
         LinearLayout floating = findViewById(R.id.floatingClick);
 
         floating.setOnClickListener(view -> {
-            startActivity(new Intent(getApplicationContext(), AaForChecking.class));
+//            startActivity(new Intent(getApplicationContext(), AaForChecking.class));
+            FirebaseMessaging.getInstance().getToken()
+                    .addOnCompleteListener(new OnCompleteListener<String>() {
+                        @Override
+                        public void onComplete(@NonNull Task<String> task) {
+                            if (!task.isSuccessful()) {
+//                                Log.w(TAG, "Fetching FCM registration token failed", task.getException());
+                                Toast.makeText(ActivityMain.this, task.getException().toString(), Toast.LENGTH_SHORT).show();
+                                return;
+                            }
+
+                            // Get new FCM registration token
+                            String token = task.getResult();
+                            tokenRef.child("userToken").setValue(token).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    Toast.makeText(ActivityMain.this, "Post Token", Toast.LENGTH_SHORT).show();
+                                }
+                            });
+
+//                            // Log and toast
+//                            String msg = getString(R.string.msg_token_fmt, token);
+//                            Log.d(TAG, msg);
+                            Toast.makeText(ActivityMain.this, token, Toast.LENGTH_SHORT).show();
+
+                        }
+                    });
+
         });
 
         dao = AppDatabase.getDb(this).getDAO();

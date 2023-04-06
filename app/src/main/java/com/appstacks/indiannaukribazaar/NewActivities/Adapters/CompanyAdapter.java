@@ -54,7 +54,7 @@ public class CompanyAdapter extends RecyclerView.Adapter<CompanyAdapter.viewHold
         CompanyModel model = list.get(position);
         sharedPrefe = new SharedPrefe(context);
 
-        Glide.with(context).load(model.getImageUrl()).placeholder(R.drawable.profileplace).into(holder.companyLogo);
+        Glide.with(context).load(model.getImageUrl()).placeholder(R.drawable.placeholder).into(holder.companyLogo);
        // holder.companyLogo.setImageResource(model.getImage());
 //        if (model.getFilepath() != null) {
 //            Bitmap bitmap = null;
@@ -75,8 +75,10 @@ public class CompanyAdapter extends RecyclerView.Adapter<CompanyAdapter.viewHold
 //                intent.putExtra("image", downloadUrl);
                 intent.putExtra("title", model.getTitle());
                 intent.putExtra("cominternet", model.getType());
+                intent.putExtra("comImageUrl", model.getImageUrl());
                 sharedPrefe.saveComTitle(model.getTitle());
                 sharedPrefe.saveCompany(model.getType());
+                sharedPrefe.saveComImageURl(model.getImageUrl());
                 context.startActivity(intent);
 
                 ((AppCompatActivity) context).finish();

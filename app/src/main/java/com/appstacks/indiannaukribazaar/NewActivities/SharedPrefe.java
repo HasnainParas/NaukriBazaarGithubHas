@@ -12,16 +12,21 @@ public class SharedPrefe {
     public static String JOBLOC = "jobloc";
     public static String DESC = "desc";
     public static String TITLE = "title";
-    public static String COMP = "comp";
+    public static String COMP = "COMP";
     public static String COMPTITLE = "COMPTITLE";
+    public static String COMPIMAGEURL = "COMPIMAGEURL";
     public static String EMPLOTYPE = "employType";
 
-    public static String INSTANTCOM = "instantcom";
-    public static String INSTANTPOS = "instantPos";
-    public static String INSTANTBUDGET = "instantBudget";
-    public static String INSTANTTIMEPERIOD = "instantTimePeriod";
-    public static String INSTANTJOBTITLE = "instantJobTitle";
-    public static String INSTANTDESCRIPTION = "instantDescription";
+    public static String INSTANTCOM = "INSTANTCOM";
+
+    public static String INSTANTCOMTYPE = "INSTANTCOMTYPE";
+
+    public static String INSTANTCOMIMAGE = "INSTANTCOMIMAGEURL";
+    public static String INSTANTPOS = "INSTANTPOS";
+    public static String INSTANTBUDGET = "INSTANTBUDGET";
+    public static String INSTANTTIMEPERIOD = "INSTANTTIMEPERIOD";
+    public static String INSTANTJOBTITLE = "INSTANTJOBTITLE";
+    public static String INSTANTDESCRIPTION = "INSTANTDESCRIPTION";
 
 
     public SharedPrefe(Context context) {
@@ -105,6 +110,18 @@ public class SharedPrefe {
         return sharedPreferences.getString(COMPTITLE, null);
     }
 
+    public void saveComImageURl(String title) {
+
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(COMPIMAGEURL, title);
+        editor.apply();
+    }
+
+    public String fetchComImageURl() {
+
+        return sharedPreferences.getString(COMPIMAGEURL, null);
+    }
+
     public void saveInstantCom(String title) {
 
         SharedPreferences.Editor editor = sharedPreferences.edit();
@@ -115,6 +132,28 @@ public class SharedPrefe {
     public String fetchInstantCom() {
 
         return sharedPreferences.getString(INSTANTCOM, null);
+    }
+    public void saveInstantComType(String title) {
+
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(INSTANTCOMTYPE, title);
+        editor.apply();
+    }
+
+    public String fetchInstantComType() {
+
+        return sharedPreferences.getString(INSTANTCOMTYPE, null);
+    }
+    public void saveInstantComImgURL(String title) {
+
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(INSTANTCOMIMAGE, title);
+        editor.apply();
+    }
+
+    public String fetchInstantComImgURL() {
+
+        return sharedPreferences.getString(INSTANTCOMIMAGE, null);
     }
 
     public void saveInstantPos(String title) {
@@ -182,6 +221,7 @@ public class SharedPrefe {
         editor.remove(TITLE);
         editor.remove(COMPTITLE);
         editor.remove(COMP);
+        editor.remove(COMPIMAGEURL);
         editor.apply();
     }
 
@@ -191,6 +231,8 @@ public class SharedPrefe {
         editor.remove(INSTANTPOS);
         editor.remove(INSTANTBUDGET);
         editor.remove(INSTANTTIMEPERIOD);
+        editor.remove(INSTANTCOMTYPE);
+        editor.remove(INSTANTCOMIMAGE);
         editor.apply();
     }
 

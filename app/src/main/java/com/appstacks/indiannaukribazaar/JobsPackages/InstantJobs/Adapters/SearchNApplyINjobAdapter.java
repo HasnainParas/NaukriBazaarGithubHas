@@ -17,6 +17,7 @@ import com.appstacks.indiannaukribazaar.JobsPackages.InstantJobs.InstantSearchJo
 import com.appstacks.indiannaukribazaar.JobsPackages.InstantJobs.SearchNApplyInJobDetailActivity;
 import com.appstacks.indiannaukribazaar.R;
 import com.appstacks.indiannaukribazaar.databinding.ApplyinJobSampleBinding;
+import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 
@@ -46,7 +47,13 @@ public class SearchNApplyINjobAdapter extends RecyclerView.Adapter<SearchNApplyI
         holder.binding.applyINcomTv.setText(model.getInJobCompany());
 //        holder.binding.applyInJobSkillsTV.setText(model.getInJobPosition());
         holder.binding.priceTv.setText(model.getInJobBudget());
-        holder.binding.applyInJobSkillsTV.setText(model.getInJobID());
+        holder.binding.applyInJobSkillsTV.setText(model.getInJobCompanyType());
+
+        Glide.with(context)
+                .load(model.getInJobCompanyImgURL())
+                .placeholder(R.drawable.placeholder)
+                .into(holder.binding.applyINjobiviD);
+
 
         holder.binding.frontInstantJobLayoutClick.setOnClickListener(v -> {
             String id = model.getInJobID();

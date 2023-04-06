@@ -2,13 +2,13 @@ package com.appstacks.indiannaukribazaar.NewActivities.Models;
 
 public class UserDataModel {
 
-    String uuID, mobileNumber, userName, emailAddress, fullName, gender, dateOfBirth, userToken;
+    String uuID, mobileNumber, userName, emailAddress, fullName, gender, dateOfBirth;
 
 
     public UserDataModel() {
     }
 
-    public UserDataModel(String uuID, String mobileNumber, String userName, String emailAddress, String fullName, String gender, String dateOfBirth, String userToken) {
+    public UserDataModel(String uuID, String mobileNumber, String userName, String emailAddress, String fullName, String gender, String dateOfBirth) {
         this.uuID = uuID;
         this.mobileNumber = mobileNumber;
         this.userName = userName;
@@ -16,7 +16,6 @@ public class UserDataModel {
         this.fullName = fullName;
         this.gender = gender;
         this.dateOfBirth = dateOfBirth;
-        this.userToken = userToken;
     }
 
     public String getUuID() {
@@ -73,13 +72,5 @@ public class UserDataModel {
 
     public void setDateOfBirth(String dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
-    }
-
-    public String getUserToken() {
-        return userToken;
-    }
-
-    public void setUserToken(String userToken) {
-        this.userToken = userToken;
     }
 }

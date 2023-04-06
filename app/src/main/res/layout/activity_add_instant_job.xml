@@ -419,7 +419,7 @@
                         android:layout_marginBottom="8dp"
                         android:orientation="vertical"
                         android:padding="5dp"
-                        android:visibility="gone"></LinearLayout>
+                        android:visibility="gone"/>
 
                     <TextView
                         android:id="@+id/txtSkillInstant"

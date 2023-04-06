@@ -43,13 +43,14 @@
 
             android:id="@+id/recyclerviewInCom"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
 
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
             android:paddingBottom="20dp"
             android:visibility="visible"
+            app:layout_constraintBottom_toTopOf="@+id/nothingincom"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/searcheditbox" />
@@ -58,26 +59,20 @@
             android:id="@+id/nothingincom"
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:layout_marginBottom="8dp"
             android:gravity="center"
             android:orientation="vertical"
             android:padding="10dp"
-            android:visibility="gone"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/recyclerviewInCom">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="Nothing to show"
-                android:textAlignment="center" />
+            app:layout_constraintStart_toStartOf="parent">
 
             <Button
                 android:id="@+id/addbtnCom"
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="5dp"
                 android:background="@drawable/btn_add_payment"
                 android:text="Add a company"
                 android:textAllCaps="false"

@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.appstacks.indiannaukribazaar.Activities.ActivityMain;
 import com.appstacks.indiannaukribazaar.FirebaseAdapters.FindjobAdapter;
 import com.appstacks.indiannaukribazaar.FirebaseModels.FindJobModel;
 import com.appstacks.indiannaukribazaar.FirebaseModels.PersonalInformationModel;
@@ -38,11 +39,11 @@ import java.util.ArrayList;
 public class FindJobsActivity extends AppCompatActivity {
 
     private ActivityFindJobsBinding binding;
-    private FirebaseAuth auth;
-    private DatabaseReference userRef, userJobRef, allUserJobs;
+    private DatabaseReference userRef, userProfileRef;
+    private DatabaseReference allUserNormalJobs, instantJobsRef;
     private String currentUser;
     private PersonalInformationModel model;
-    private String username, userAddress;
+    private String username, userAddress, userDpURL;
     private int size;
 
     private ProfileUtils profileUtils;
@@ -53,80 +54,46 @@ public class FindJobsActivity extends AppCompatActivity {
         binding = ActivityFindJobsBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        profileUtils = new ProfileUtils(this);
 
         //Hashtag
-        auth = FirebaseAuth.getInstance();
 
-        profileUtils= new ProfileUtils(this);
+        currentUser = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
-        currentUser = auth.getCurrentUser().getUid();
+        //FirebaseInstance
+        userRef = FirebaseDatabase.getInstance().getReference("UsersInfo");
+
+        userProfileRef = FirebaseDatabase.getInstance().getReference("UsersProfile");
+
+        allUserNormalJobs = FirebaseDatabase.getInstance().getReference("allUserNormalJobs");
+
+        instantJobsRef = FirebaseDatabase.getInstance().getReference("InstantJobs");
 
 
+        //Funtion
+        normalJobSize();
 
-        userRef = FirebaseDatabase.getInstance().getReference();
+        instantJobSize();
 
-        userJobRef = FirebaseDatabase.getInstance().getReference("userJobs");
-        allUserJobs = FirebaseDatabase.getInstance().getReference("allUserJobs");
+        userDetailsFetch();
 
-        Glide.with(this).load(profileUtils.fetchUserImage()).placeholder(R.drawable.profileplace).into(binding.imageView13);
+        recentJobsFetch();
 
-        allUserJobs.addValueEventListener(new ValueEventListener() {
-            @SuppressLint("SetTextI18n")
+        //buttonsClicks
+         binding.addJobBtn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if (snapshot.exists()) {
-                    for (DataSnapshot s : snapshot.getChildren()) {
-                        int size = (int) snapshot.getChildrenCount();
-                        UserJobModel data = s.getValue(UserJobModel.class);
-                        binding.allusrJobSize.setText(Integer.toString(size));
-                    }
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(FindJobsActivity.this, error.getMessage(), Toast.LENGTH_SHORT).show();
+            public void onClick(View view) {
+//                startActivity(new Intent(FindJobsActivity.this, PaidJobsActivity.class));
+                bottomDialog();
 
             }
         });
-
-
-        userJobRef.child(currentUser).addValueEventListener(new ValueEventListener() {
+        binding.jobsBtn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if (snapshot.exists()) {
-                    size = (int) snapshot.getChildrenCount();
-                    if (size > 2) {
-                        Toast.makeText(FindJobsActivity.this, "Size is 2 ", Toast.LENGTH_SHORT).show();
-                    }
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
+            public void onClick(View view) {
+                startActivity(new Intent(FindJobsActivity.this, NormalJobsActivity.class));
             }
         });
-
-
-        userRef.child("UsersInfo").child(currentUser).addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if (snapshot.exists()) {
-                    model = snapshot.getValue(PersonalInformationModel.class);
-                    username = model.getFirstName() + " " + model.getLastName();
-                    userAddress = model.getUserAddress();
-                    Toast.makeText(FindJobsActivity.this, username, Toast.LENGTH_SHORT).show();
-                    binding.usernameid.setText("Hello\n" + username);
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(FindJobsActivity.this, error.getMessage() + "", Toast.LENGTH_SHORT).show();
-            }
-        });
-
 
         binding.instantJobService.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -149,22 +116,11 @@ public class FindJobsActivity extends AppCompatActivity {
             }
         });
 
-        binding.addJobBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-//                startActivity(new Intent(FindJobsActivity.this, PaidJobsActivity.class));
-                bottomDialog();
 
-            }
-        });
-        binding.jobsBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(FindJobsActivity.this, NormalJobsActivity.class));
 
-            }
-        });
+    }
 
+    private void recentJobsFetch() {
 
         ArrayList<FindJobModel> list = new ArrayList<>();
         list.add(new FindJobModel(R.drawable.ic_name,
@@ -181,9 +137,94 @@ public class FindJobsActivity extends AppCompatActivity {
         binding.recycerviewFindJobs.setHasFixedSize(true);
         binding.recycerviewFindJobs.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
         binding.recycerviewFindJobs.setAdapter(adapter);
+    }
 
+    private void userDetailsFetch() {
+        userRef.
+                child(currentUser)
+                .addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        if (snapshot.exists()) {
+                            model = snapshot.getValue(PersonalInformationModel.class);
+                            username = model.getFirstName() + " " + model.getLastName();
+                            userAddress = model.getUserAddress();
+//                    Toast.makeText(FindJobsActivity.this, username, Toast.LENGTH_SHORT).show();
+                            binding.usernameid.setText("Hello\n" + username);
+                        }
+                    }
 
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+                        Toast.makeText(FindJobsActivity.this, error.getMessage() + "", Toast.LENGTH_SHORT).show();
+                    }
+                });
 
+        userProfileRef
+                .child(currentUser)
+                .child("UserImage")
+                .addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        if (snapshot.exists()) {
+                            userDpURL = snapshot.getValue(String.class);
+                            Glide.with(FindJobsActivity.this)
+                                    .load(userDpURL)
+                                    .placeholder(R.drawable.profileplace)
+                                    .into(binding.profileDPFindJob);
+                        } else {
+                            Toast.makeText(FindJobsActivity.this, "ImageURL Not Exist", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+                        Toast.makeText(FindJobsActivity.this, error.getMessage() + "", Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+    }
+
+    private void normalJobSize() {
+        allUserNormalJobs.addValueEventListener(new ValueEventListener() {
+            @SuppressLint("SetTextI18n")
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()) {
+                    for (DataSnapshot s : snapshot.getChildren()) {
+                        int size = (int) snapshot.getChildrenCount();
+                        binding.normalJobsSize.setText(Integer.toString(size));
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(FindJobsActivity.this, error.getMessage(), Toast.LENGTH_SHORT).show();
+
+            }
+        });
+    }
+
+    private void instantJobSize() {
+        instantJobsRef.addValueEventListener(new ValueEventListener() {
+            @SuppressLint("SetTextI18n")
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()) {
+                    for (DataSnapshot s : snapshot.getChildren()) {
+                        int size = (int) snapshot.getChildrenCount();
+                        binding.instantJobSize.setText(Integer.toString(size));
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(FindJobsActivity.this, error.getMessage(), Toast.LENGTH_SHORT).show();
+
+            }
+        });
 
     }
 
@@ -205,6 +246,7 @@ public class FindJobsActivity extends AppCompatActivity {
             Intent intent = new Intent(FindJobsActivity.this, AddNormalJobPostActivity.class);
             intent.putExtra("username", username);
             intent.putExtra("useraddress", userAddress);
+            intent.putExtra("userimage", userDpURL);
             if (size >= 10) {
                 Toast.makeText(FindJobsActivity.this, "Your Limit is Finished", Toast.LENGTH_SHORT).show();
             } else {
@@ -220,10 +262,11 @@ public class FindJobsActivity extends AppCompatActivity {
             Intent intentin = new Intent(FindJobsActivity.this, InstantJobPostActivity.class);
             intentin.putExtra("usernameinstant", username);
             intentin.putExtra("useraddressinstant", userAddress);
+            intentin.putExtra("userImageIn", userDpURL);
+
 //            startActivity(new Intent(FindJobsActivity.this, InstantJobActivity.class));
             startActivity(intentin);
             dialog.dismiss();
-            finish();
 
         });
 
@@ -232,5 +275,11 @@ public class FindJobsActivity extends AppCompatActivity {
 
     }
 
-
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        startActivity(new Intent(FindJobsActivity.this,ActivityMain.class));
+        finishAffinity();
+        
+    }
 }

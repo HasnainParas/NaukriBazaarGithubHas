@@ -107,7 +107,7 @@
             app:layout_constraintTop_toTopOf="@+id/cvView10" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <ImageView
+    <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/cv_Comlogo"
         android:layout_width="74dp"
         android:layout_height="74dp"
@@ -117,7 +117,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/constraintCvLayout"
-        app:srcCompat="@drawable/ic_facebook_logo" />
+        android:src="@drawable/placeholder" />
 
 
     <androidx.constraintlayout.widget.ConstraintLayout

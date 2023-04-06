@@ -4,8 +4,6 @@ import android.net.Uri;
 
 public class CompanyModel {
 
-
-
     private String title;
     private String type;
 

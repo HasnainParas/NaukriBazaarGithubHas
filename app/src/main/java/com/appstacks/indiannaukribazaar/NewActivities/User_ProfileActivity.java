@@ -56,14 +56,14 @@ public class User_ProfileActivity extends AppCompatActivity {
 
         deviceInfo = Tools.getDeviceInfo(this);
 
-        FirebaseMessaging.getInstance()
-                .getToken()
-                .addOnSuccessListener(new OnSuccessListener<String>() {
-                    @Override
-                    public void onSuccess(String token) {
-                        userToken = token;
-                    }
-                });
+//        FirebaseMessaging.getInstance()
+//                .getToken()
+//                .addOnSuccessListener(new OnSuccessListener<String>() {
+//                    @Override
+//                    public void onSuccess(String token) {
+//                        userToken = token;
+//                    }
+//                });
 
 
         userRef = FirebaseDatabase.getInstance().getReference("AllUsers");
@@ -112,7 +112,7 @@ public class User_ProfileActivity extends AppCompatActivity {
                             binding.emailBox.getText().toString(),
                             binding.nameBox.getText().toString(),
                             binding.genderBox.getText().toString(),
-                            binding.maskedDobTv.getText().toString(), userToken
+                            binding.maskedDobTv.getText().toString()
                     );
                     userRef.child(uID).setValue(dataModel).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
@@ -122,7 +122,7 @@ public class User_ProfileActivity extends AppCompatActivity {
                                 loadingDialog.dismiss();
                                 startActivity(new Intent(User_ProfileActivity.this, ActivityMain.class));
                                 finishAffinity();
-                                deviceRef.child(deviceInfo.device_id).child("token").setValue(userToken);
+//                                deviceRef.child(deviceInfo.device_id).child("token").setValue(userToken);
 
                             }
                         }

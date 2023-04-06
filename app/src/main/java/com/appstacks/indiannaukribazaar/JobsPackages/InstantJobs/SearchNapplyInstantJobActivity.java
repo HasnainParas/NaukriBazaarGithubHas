@@ -24,7 +24,7 @@ public class SearchNapplyInstantJobActivity extends AppCompatActivity {
     ActivitySearchNapplyInstantJobBinding binding;
     ArrayList<InstantAddJobsModel> arrayList;
     SearchNApplyINjobAdapter adapter;
-    DatabaseReference inAllJobRef;
+    DatabaseReference instantAllJobRef;
 
 
     @Override
@@ -33,7 +33,7 @@ public class SearchNapplyInstantJobActivity extends AppCompatActivity {
         binding = ActivitySearchNapplyInstantJobBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        inAllJobRef = FirebaseDatabase.getInstance().getReference("InstantJobs");
+        instantAllJobRef = FirebaseDatabase.getInstance().getReference("InstantJobs");
 
 
 //        DatabaseReference child = inJobRef.child(authUserID);
@@ -41,7 +41,7 @@ public class SearchNapplyInstantJobActivity extends AppCompatActivity {
         arrayList = new ArrayList<>();
 
 
-        inAllJobRef.addValueEventListener(new ValueEventListener() {
+        instantAllJobRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()) {

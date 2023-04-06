@@ -29,7 +29,8 @@ public class NormalJobsActivity extends AppCompatActivity {
     private ActivityNormalJobsBinding binding;
     private ArrayList<UserJobModel> jobModelArrayList;
     private JobTitleAdapter jobTitleAdapter;
-    private DatabaseReference userJobRef;
+
+    private DatabaseReference allNormalJobs;
     private UserJobModel data;
     private static final String TAG = "FullTimeActivity";
 
@@ -42,9 +43,9 @@ public class NormalJobsActivity extends AppCompatActivity {
 
         jobModelArrayList = new ArrayList<>();
 
-        userJobRef = FirebaseDatabase.getInstance().getReference("allUserJobs");
+        allNormalJobs = FirebaseDatabase.getInstance().getReference("allUserNormalJobs");
 
-        userJobRef.addValueEventListener(new ValueEventListener() {
+        allNormalJobs.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()) {
@@ -53,14 +54,14 @@ public class NormalJobsActivity extends AppCompatActivity {
                     for (DataSnapshot s : snapshot.getChildren()) {
                         data = s.getValue(UserJobModel.class);
 //                        jobModelArrayList.clear();
-                        if (!data.getUserAuthId().equals(FirebaseAuth.getInstance().getCurrentUser().getUid())) {
-                            jobModelArrayList.add(data);
-
-                            Log.d(TAG, "Jobs found");
-                        } else {
-
-                            Log.d(TAG, "No jobs found");
-                        }
+                        jobModelArrayList.add(data);
+//                        if (!data.getUserAuthId().equals(FirebaseAuth.getInstance().getCurrentUser().getUid())) {
+//
+//                            Log.d(TAG, "Jobs found");
+//                        } else {
+//
+//                            Log.d(TAG, "No jobs found");
+//                        }
 
                     }
 

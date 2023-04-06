@@ -15,7 +15,7 @@ public class InstantJobPostActivity extends AppCompatActivity {
 
     ActivityInstantJobBinding binding;
     private String userId;
-    private String usernamein, useraddressin;
+    private String usernamein, useraddressin,userImageIn;
     private SharedPrefe sharedPrefe;
     private ProfileUtils profileUtils;
 
@@ -31,11 +31,16 @@ public class InstantJobPostActivity extends AppCompatActivity {
 
         usernamein = getIntent().getStringExtra("usernameinstant");
         useraddressin = getIntent().getStringExtra("useraddressinstant");
+        userImageIn = getIntent().getStringExtra("userImageIn");
 
         binding.userNameInstant.setText(usernamein);
         binding.locationInstant.setText(useraddressin);
 
-        Glide.with(this).load(profileUtils.fetchUserImage()).placeholder(R.drawable.profileplace).into(binding.userDPinstant);
+        Glide.with(this)
+                .load(userImageIn)
+                .placeholder(R.drawable.profileplace).into(binding.userDPinstant);
+
+        binding.backBtnisntant.setOnClickListener(v -> finish());
 
 
         binding.postBtnInstant.setOnClickListener(view -> {

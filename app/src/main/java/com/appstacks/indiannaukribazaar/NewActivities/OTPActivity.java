@@ -11,6 +11,7 @@ import android.os.CountDownTimer;
 import android.view.View;
 import android.widget.Toast;
 
+import com.appstacks.indiannaukribazaar.Activities.ActivityMain;
 import com.appstacks.indiannaukribazaar.NewActivities.Models.DeviceDataModel;
 import com.appstacks.indiannaukribazaar.R;
 import com.appstacks.indiannaukribazaar.databinding.ActivityOtpactivityBinding;
@@ -27,6 +28,7 @@ import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthProvider;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 import java.util.concurrent.TimeUnit;
 
@@ -40,7 +42,8 @@ public class OTPActivity extends AppCompatActivity {
     String mobileNumber;
     String verificationID;
     String android_id;
-    DatabaseReference deviceRef;
+    private DatabaseReference deviceRef, allUserTokenRef;
+    ;
     int remaintime = 60;
     CountDownTimer countDownTimer;
     DeviceInfo deviceInfo;
@@ -56,6 +59,7 @@ public class OTPActivity extends AppCompatActivity {
         loadingAlertDialog();
 
         deviceRef = FirebaseDatabase.getInstance().getReference();
+        allUserTokenRef = FirebaseDatabase.getInstance().getReference("AllUsersToken");
 
         mobileNumber = getIntent().getStringExtra("mobileNumber");
         verificationID = getIntent().getStringExtra("verificationId");
@@ -107,10 +111,47 @@ public class OTPActivity extends AppCompatActivity {
                                     deviceInfo.device_name, deviceInfo.app_version, true);
                             loadingDialog.dismiss();
                             if (task.isSuccessful()) {
-                                deviceRef.child("RegDevices").child(android_id).setValue(model);
-                                startActivity(new Intent(OTPActivity.this, UserNameActivity.class));
+                                deviceRef.child("RegDevices").child(android_id).setValue(model)
+                                        .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<Void> task) {
+                                                if (task.isComplete()) {
+                                                    String userAuth = FirebaseAuth.getInstance().getCurrentUser().getUid();
+
+                                                    FirebaseMessaging.getInstance().getToken()
+                                                            .addOnCompleteListener(new OnCompleteListener<String>() {
+                                                                @Override
+                                                                public void onComplete(@NonNull Task<String> task) {
+                                                                    if (!task.isSuccessful()) {
+                                                                        Toast.makeText(OTPActivity.this, task.getException().toString(), Toast.LENGTH_SHORT).show();
+                                                                        return;
+                                                                    }
+                                                                    // Get new FCM registration token
+                                                                    String token = task.getResult();
+
+                                                                    Toast.makeText(OTPActivity.this, token, Toast.LENGTH_SHORT).show();
+                                                                    allUserTokenRef.child(userAuth)
+                                                                            .child("userToken")
+                                                                            .setValue(token).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                                                @Override
+                                                                                public void onComplete(@NonNull Task<Void> task) {
+                                                                                    Toast.makeText(OTPActivity.this, "Post Token", Toast.LENGTH_SHORT).show();
+                                                                                    startActivity(new Intent(OTPActivity.this, UserNameActivity.class));
 //                                Toast.makeText(OTPActivity.this, "Sign in Successful", Toast.LENGTH_SHORT).show();
-                                finish();
+                                                                                    finish();
+                                                                                }
+                                                                            });
+
+
+                                                                }
+                                                            });
+
+
+                                                }
+
+                                            }
+                                        });
+
                             } else {
                                 Toast.makeText(OTPActivity.this, "Verification Code Invalid", Toast.LENGTH_SHORT).show();
                             }

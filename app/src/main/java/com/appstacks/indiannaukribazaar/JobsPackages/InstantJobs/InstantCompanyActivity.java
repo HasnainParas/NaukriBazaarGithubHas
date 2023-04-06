@@ -1,5 +1,6 @@
 package com.appstacks.indiannaukribazaar.JobsPackages.InstantJobs;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -19,14 +20,28 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.appstacks.indiannaukribazaar.NewActivities.Adapters.CompanyAdapter;
 import com.appstacks.indiannaukribazaar.NewActivities.Adapters.InstantCompanyAdapter;
+import com.appstacks.indiannaukribazaar.NewActivities.JobsActivities.CompanyActivity;
 import com.appstacks.indiannaukribazaar.NewActivities.Models.CompanyModel;
+import com.appstacks.indiannaukribazaar.NewActivities.SharedPrefe;
 import com.appstacks.indiannaukribazaar.R;
 import com.appstacks.indiannaukribazaar.databinding.ActivityInstantCompanyBinding;
+import com.appstacks.indiannaukribazaar.databinding.AddCompanyLayoutBinding;
+import com.appstacks.indiannaukribazaar.profile.ProfileUtils;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.UUID;
 
 public class InstantCompanyActivity extends AppCompatActivity {
 
@@ -37,7 +52,16 @@ public class InstantCompanyActivity extends AppCompatActivity {
     private Uri filePath;
     private final int PICK_IMAGE_REQUEST = 71;
 
+    private DatabaseReference databaseReference;
 
+    private CompanyModel data;
+
+    private AddCompanyLayoutBinding addCompanyLayoutBinding;
+    private StorageReference storageReference;
+    private String userId;
+    private String downloadUrl;
+    private ProfileUtils profileUtils;
+    private CompanyModel companyData;
 
 
     @Override
@@ -46,83 +70,129 @@ public class InstantCompanyActivity extends AppCompatActivity {
         binding = ActivityInstantCompanyBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        data = new CompanyModel();
 
-        companyData();
+        profileUtils = new ProfileUtils(this);
+
+        userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+
+        databaseReference = FirebaseDatabase.getInstance().getReference(getString(R.string.user_profile));
+        storageReference = FirebaseStorage.getInstance().getReference(getString(R.string.user_profile));
+
+//        companyData();
+        fetchCompanies();
+
+        binding.addbtnCom.setOnClickListener(v -> bottomDialog());
 
 
     }
 
-    private void companyData() {
 
+    //    private void companyData() {
+//
+//
+//        list = new ArrayList<>();
+//
+//        //new
+////        list.add(new CompanyModel(R.drawable.ic_google_logo, "Google", "Internet"));
+////        list.add(new CompanyModel(R.drawable.ic_apple_logo, "Apple", "Electronic goods"));
+////        list.add(new CompanyModel(R.drawable.ic_amazon_logo, "Amazon", "Internet"));
+////        list.add(new CompanyModel(R.drawable.ic_dribbble_logo, "Dribble", "Design"));
+////        list.add(new CompanyModel(R.drawable.ic_twitter_logo, "Twitter", "Internet"));
+////        list.add(new CompanyModel(R.drawable.ic_facebook_logo, "Facebook", "Internet"));
+////        list.add(new CompanyModel(R.drawable.ic_microsoft_logo, "Microsoft", "Internet"));
+////        list.add(new CompanyModel(R.drawable.ic_allianz_logo, "Allianz", "Financial Service"));
+////        list.add(new CompanyModel(R.drawable.ic_adobe_logo, "Adobe", "Computer software"));
+////        list.add(new CompanyModel(R.drawable.ic_axa_logo, "AXA", "Insurance"));
+//
+//        adapter = new InstantCompanyAdapter(list, this);
+//
+//        LinearLayoutManager layoutManager = new LinearLayoutManager(InstantCompanyActivity.this);
+////        recyclerViewBottomSheet.setLayoutManager(layoutManager);
+//        binding.recyclerviewInCom.setLayoutManager(layoutManager);
+//        binding.recyclerviewInCom.setAdapter(adapter);
+//
+//        binding.searcheditbox.addTextChangedListener(new TextWatcher() {
+//            @Override
+//            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+//
+//            }
+//
+//            @Override
+//            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+//                adapter.getFilter().filter(charSequence);
+//                if (adapter.getItemCount() == 0) {
+//                    binding.nothingincom.setVisibility(View.VISIBLE);
+//
+//                    binding.addbtnCom.setOnClickListener(view -> {
+//                        bottomDialog();
+//                    });
+//                } else {
+//                    binding.nothingincom.setVisibility(View.GONE);
+//                }
+//            }
+//
+//            @Override
+//            public void afterTextChanged(Editable editable) {
+//
+//            }
+//        });
+//
+//
+////        binding.searcheditbox.setOnQueryTextListener(new android.widget.SearchView.OnQueryTextListener() {
+////            @Override
+////            public boolean onQueryTextSubmit(String s) {
+////                return false;
+////            }
+////
+////            @Override
+////            public boolean onQueryTextChange(String s) {
+////                adapter.getFilter().filter(s);
+////                return false;
+////            }
+////        });
+//
+//
+//    }
+    private void fetchCompanies() {
 
         list = new ArrayList<>();
-
-        //new
-        list.add(new CompanyModel(R.drawable.ic_google_logo, "Google", "Internet"));
-        list.add(new CompanyModel(R.drawable.ic_apple_logo, "Apple", "Electronic goods"));
-        list.add(new CompanyModel(R.drawable.ic_amazon_logo, "Amazon", "Internet"));
-        list.add(new CompanyModel(R.drawable.ic_dribbble_logo, "Dribble", "Design"));
-        list.add(new CompanyModel(R.drawable.ic_twitter_logo, "Twitter", "Internet"));
-        list.add(new CompanyModel(R.drawable.ic_facebook_logo, "Facebook", "Internet"));
-        list.add(new CompanyModel(R.drawable.ic_microsoft_logo, "Microsoft", "Internet"));
-        list.add(new CompanyModel(R.drawable.ic_allianz_logo, "Allianz", "Financial Service"));
-        list.add(new CompanyModel(R.drawable.ic_adobe_logo, "Adobe", "Computer software"));
-        list.add(new CompanyModel(R.drawable.ic_axa_logo, "AXA", "Insurance"));
-
-        adapter = new InstantCompanyAdapter(list, this);
-
-        LinearLayoutManager layoutManager = new LinearLayoutManager(InstantCompanyActivity.this);
-//        recyclerViewBottomSheet.setLayoutManager(layoutManager);
-        binding.recyclerviewInCom.setLayoutManager(layoutManager);
-        binding.recyclerviewInCom.setAdapter(adapter);
-
-        binding.searcheditbox.addTextChangedListener(new TextWatcher() {
+        databaseReference.child(userId).child("Company").addValueEventListener(new ValueEventListener() {
             @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()) {
+                    list.clear();
+                    for (DataSnapshot snap : snapshot.getChildren()) {
+                        companyData = snap.getValue(CompanyModel.class);
+                        list.add(companyData);
+                    }
 
-            }
 
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                adapter.getFilter().filter(charSequence);
-                if (adapter.getItemCount() == 0) {
-                    binding.nothingincom.setVisibility(View.VISIBLE);
+                    adapter = new InstantCompanyAdapter(list, InstantCompanyActivity.this);
 
-                    binding.addbtnCom.setOnClickListener(view -> {
-                        bottomDialog();
-                    });
-                } else {
-                    binding.nothingincom.setVisibility(View.GONE);
+                    binding.recyclerviewInCom.setLayoutManager(new LinearLayoutManager(InstantCompanyActivity.this));
+                    binding.recyclerviewInCom.setAdapter(adapter);
+
+
+//                    if (adapter.getItemCount() == 0) {
+//                        binding.layoutNothing.setVisibility(View.VISIBLE);
+//                    } else {
+//                        binding.layoutNothing.setVisibility(View.GONE);
+//                    }
                 }
             }
 
             @Override
-            public void afterTextChanged(Editable editable) {
+            public void onCancelled(@NonNull DatabaseError error) {
 
             }
         });
-
-
-//        binding.searcheditbox.setOnQueryTextListener(new android.widget.SearchView.OnQueryTextListener() {
-//            @Override
-//            public boolean onQueryTextSubmit(String s) {
-//                return false;
-//            }
-//
-//            @Override
-//            public boolean onQueryTextChange(String s) {
-//                adapter.getFilter().filter(s);
-//                return false;
-//            }
-//        });
-
-
     }
+
 
     @SuppressLint("MissingInflatedId")
     private void bottomDialog() {
-        BottomSheetDialog dialog = new BottomSheetDialog(InstantCompanyActivity.this,
-                R.style.AppBottomSheetDialogTheme);
+        BottomSheetDialog dialog = new BottomSheetDialog(InstantCompanyActivity.this, R.style.AppBottomSheetDialogTheme);
         View bottomsheetView = LayoutInflater.from(getApplicationContext()).
                 inflate(R.layout.add_company_layout, (CardView) findViewById(R.id.UndoChanges));
         dialog.setContentView(bottomsheetView);
@@ -147,6 +217,9 @@ public class InstantCompanyActivity extends AppCompatActivity {
         });
 
         addCompany.setOnClickListener(view -> {
+
+            if (profileUtils.fetchCompanyImage() != null)
+                profileUtils.saveUserImage(null);
             if (etCompanyType.getText().toString().isEmpty()) {
                 Toast.makeText(this, "Add Company service type", Toast.LENGTH_SHORT).show();
 
@@ -160,20 +233,41 @@ public class InstantCompanyActivity extends AppCompatActivity {
                 addCompany(etCompanyName.getText().toString(), etCompanyType.getText().toString(), filePath, dialog);
             }
         });
-
-
     }
 
     private void addCompany(String companyName, String companyType, Uri filePath, BottomSheetDialog dialog) {
 
+        StorageReference ref = storageReference.child(userId).child("company " + UUID.randomUUID().toString());
 
-//        list.add(new CompanyModel(companyName, companyType, filePath));
-        //  list.notify();
-        adapter.notifyDataSetChanged();
+        ref.putFile(filePath).addOnSuccessListener(taskSnapshot -> ref.getDownloadUrl().addOnCompleteListener(task -> {
+
+            if (task.isComplete() && task.isSuccessful()) {
+                downloadUrl = task.getResult().toString();
+
+                uploadImageData(downloadUrl, companyType, companyName);
+            }
+
+        }).addOnFailureListener(e -> {
+            Toast.makeText(InstantCompanyActivity.this, "" + e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+        })).addOnFailureListener(e -> Toast.makeText(InstantCompanyActivity.this, "" + e.getLocalizedMessage(), Toast.LENGTH_SHORT).show());
+
         dialog.cancel();
         dialog.dismiss();
 
+    }
 
+    private void uploadImageData(String downloadUrl, String companyType, String companyName) {
+        String pushId = UUID.randomUUID().toString();
+        data = new CompanyModel(companyName, companyType, downloadUrl, pushId);
+
+        databaseReference.child(userId).child("Company").child(pushId).setValue(data).addOnCompleteListener(task -> {
+            if (task.isComplete() && task.isSuccessful()) {
+                profileUtils.saveCompanyImage(downloadUrl);
+                Toast.makeText(InstantCompanyActivity.this, "Company added", Toast.LENGTH_SHORT).show();
+            }
+        }).addOnFailureListener(e -> {
+            Toast.makeText(this, "" + e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+        });
     }
 
     private void chooseImage() {
@@ -201,6 +295,15 @@ public class InstantCompanyActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
+    }
 
-
+    @Override
+    protected void onResume() {
+        super.onResume();
+        fetchCompanies();
+    }
 }

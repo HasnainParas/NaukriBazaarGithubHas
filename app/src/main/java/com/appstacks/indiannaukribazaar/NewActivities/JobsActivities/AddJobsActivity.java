@@ -21,11 +21,13 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 
 import android.widget.RadioGroup;
 import android.widget.SearchView;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.appstacks.indiannaukribazaar.NewActivities.Adapters.CompanyAdapter;
@@ -52,29 +54,30 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.io.File;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Objects;
 import java.util.Random;
 import java.util.UUID;
 
 public class AddJobsActivity extends AppCompatActivity {
     private SharedPrefe sharedPrefe;
+    private ProfileUtils profileUtils;
     private ActivityAddJobsBinding binding;
     private BottomSheetDialog bottomSheetDialog;
     //    int checkRadio;
-    private DatabaseReference userJobRef, allUserJobs, databaseReference;
+    private DatabaseReference allUserNormalJobs;
     private UserJobModel userJobModel;
     private String userUid;
     private AlertDialog loadingDialog;
     private ArrayList<CompanyModel> companyList;
     private CompanyAdapter companyJobAdapter;
-
-    private ProfileUtils profileUtils;
     private String uniqueKey;
-    private String title, internet, companyLogo, jobSalary,jobQualification,jobEligibilities,jobExperience,jobSpecialization,jobFacilities;
-   private String[] jobSpecializations = {"Select Specialization","Software Engineer", "Data Scientist", "UX Designer", "Product Manager", "Marketing Analyst", "Finance Manager", "Human Resources Specialist", "Sales Representative", "Customer Success Manager", "Business Development Manager", "IT Manager", "Operations Manager", "Supply Chain Analyst", "Graphic Designer", "Web Developer", "Mobile Application Developer", "Database Administrator", "Network Administrator", "Systems Analyst", "Project Manager", "Technical Writer", "Content Strategist", "Public Relations Specialist", "Event Planner", "Account Manager", "Brand Manager", "Social Media Manager", "Market Research Analyst", "Investment Banker", "Management Consultant", "Human Factors Engineer", "Industrial Designer", "Mechanical Engineer", "Electrical Engineer", "Chemical Engineer", "Civil Engineer", "Environmental Engineer", "Architect", "Medical Doctor", "Nurse Practitioner", "Physical Therapist", "Occupational Therapist", "Pharmacist", "Dentist", "Veterinarian", "Medical Laboratory Technician", "Medical Technologist", "Radiologic Technologist", "Clinical Research Coordinator", "Clinical Nurse Specialist", "Health Informatics Specialist", "Healthcare Administrator", "Psychologist", "Social Worker", "Counselor", "Interpreter/Translator", "Technical Support Specialist"};
+    private String jobSalary, jobQualification, jobExperience, jobSpecialization;
+    private String[] jobSpecializations = {"Select Specialization", "Software Engineer", "Data Scientist", "UX Designer", "Product Manager", "Marketing Analyst", "Finance Manager", "Human Resources Specialist", "Sales Representative", "Customer Success Manager", "Business Development Manager", "IT Manager", "Operations Manager", "Supply Chain Analyst", "Graphic Designer", "Web Developer", "Mobile Application Developer", "Database Administrator", "Network Administrator", "Systems Analyst", "Project Manager", "Technical Writer", "Content Strategist", "Public Relations Specialist", "Event Planner", "Account Manager", "Brand Manager", "Social Media Manager", "Market Research Analyst", "Investment Banker", "Management Consultant", "Human Factors Engineer", "Industrial Designer", "Mechanical Engineer", "Electrical Engineer", "Chemical Engineer", "Civil Engineer", "Environmental Engineer", "Architect", "Medical Doctor", "Nurse Practitioner", "Physical Therapist", "Occupational Therapist", "Pharmacist", "Dentist", "Veterinarian", "Medical Laboratory Technician", "Medical Technologist", "Radiologic Technologist", "Clinical Research Coordinator", "Clinical Nurse Specialist", "Health Informatics Specialist", "Healthcare Administrator", "Psychologist", "Social Worker", "Counselor", "Interpreter/Translator", "Technical Support Specialist"};
 
-  private   String[] qualifications = {"Select Qualification","Bachelor's Degree in Computer Science",
+    private String[] qualifications = {"Select Qualification", "Bachelor's Degree in Computer Science",
             "Master's Degree in Business Administration",
             "Certification in Project Management",
             "Certification in Agile Development",
@@ -127,38 +130,49 @@ public class AddJobsActivity extends AppCompatActivity {
             "Certification in Homeopathy",
             "Certification in Naturopathy"};
 
+    ArrayList<String> jobEligibilitiesList = new ArrayList<>();
+    ArrayList<String> jobFacilitiesList = new ArrayList<>();
+
+    ArrayList<String> selectedEligibilities;
+    ArrayList<String> selectedFacilities;
+
+
     @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         sharedPrefe = new SharedPrefe(this);
+        profileUtils = new ProfileUtils(AddJobsActivity.this);
         binding = ActivityAddJobsBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        profileUtils = new ProfileUtils(this);
-        title = getIntent().getStringExtra("title");
-        internet = getIntent().getStringExtra("cominternet");
-        companyLogo = getIntent().getStringExtra("image");
+
+//        title = getIntent().getStringExtra("title");
+//        internet = getIntent().getStringExtra("cominternet");
+//        companyLogo = getIntent().getStringExtra("image");
 
 
-        Toast.makeText(this, "" + companyLogo, Toast.LENGTH_SHORT).show();
+//        Toast.makeText(this, "" + companyLogo, Toast.LENGTH_SHORT).show();
 
         userUid = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
 
 
-        userJobRef = FirebaseDatabase.getInstance().getReference("userJobs");
-        allUserJobs = FirebaseDatabase.getInstance().getReference("allUserJobs");
-        databaseReference = FirebaseDatabase.getInstance().getReference(getString(R.string.user_profile));
+//        userJobRef = FirebaseDatabase.getInstance().getReference("userJobs");
+        allUserNormalJobs = FirebaseDatabase.getInstance().getReference("allUserNormalJobs");
+
+        binding.textView28.setOnClickListener(v -> {
+            profileUtils.deleteSelectedJobLists();
+        });
 
 
-        if (title != null) {
-            binding.comTitle.setText(title);
+//        if (title != null) {
+//            binding.comTitle.setText(title);
+//
+//        }
+//        if (internet != null) {
+//            binding.txtCompany.setText(internet);
+//        }
 
-        }
-        if (internet != null) {
-            binding.txtCompany.setText(internet);
-        }
-
-        Intent i = getIntent();
+//        Intent i = getIntent();
         //job position
         binding.txtPositon.setText(sharedPrefe.fetchJobPosition());
         //job location
@@ -173,10 +187,14 @@ public class AddJobsActivity extends AppCompatActivity {
         binding.comTitle.setText(sharedPrefe.fetchComTitle());
         binding.txtCompany.setText(sharedPrefe.fetchCompany());
 
+        selectedEligibilities = profileUtils.fetchSelectedjobEligibilities();
+        selectedFacilities = profileUtils.fetchSelectedjobFacilities();
+
 
         iconChange();
-        loadingAlertDialog();
+        fetchListofSelected();
 
+        loadingAlertDialog();
 
         binding.BtnSalary.setOnClickListener(view -> {
 
@@ -235,25 +253,30 @@ public class AddJobsActivity extends AppCompatActivity {
             bottomSheetDialog.setContentView(bottomsheetView);
             bottomSheetDialog.show();
 
-            EditText et1= bottomsheetView.findViewById(R.id.etElgibility1);
-            EditText et2= bottomsheetView.findViewById(R.id.etElgibility2);
-            EditText et3= bottomsheetView.findViewById(R.id.etElgibility3);
-            EditText et4= bottomsheetView.findViewById(R.id.etElgibility4);
+            EditText et1 = bottomsheetView.findViewById(R.id.etElgibility1);
+            EditText et2 = bottomsheetView.findViewById(R.id.etElgibility2);
+            EditText et3 = bottomsheetView.findViewById(R.id.etElgibility3);
+            EditText et4 = bottomsheetView.findViewById(R.id.etElgibility4);
             Button btnSaveEligibilities = bottomsheetView.findViewById(R.id.btnSaveEligibilities);
 
 
             btnSaveEligibilities.setOnClickListener(view1 -> {
 
-                if (et1.getText().toString().isEmpty() || et2.getText().toString().isEmpty() || et3.getText().toString().isEmpty()|| et4.getText().toString().isEmpty())
+                if (et1.getText().toString().isEmpty() || et2.getText().toString().isEmpty() || et3.getText().toString().isEmpty() || et4.getText().toString().isEmpty())
                     Toast.makeText(this, "Add any eligibility", Toast.LENGTH_SHORT).show();
                 else {
-                    jobEligibilities = et1.getText().toString() + " , " + et2.getText().toString() + " , " + et3.getText().toString() + " , " + et4.getText().toString();
-                    binding.txtEligibility.setText(jobEligibilities);
+//                    jobEligibilities = et1.getText().toString() + " , " + et2.getText().toString() + " , " + et3.getText().toString() + " , " + et4.getText().toString();
+                    jobEligibilitiesList.add(et1.getText().toString());
+                    jobEligibilitiesList.add(et2.getText().toString());
+                    jobEligibilitiesList.add(et3.getText().toString());
+                    jobEligibilitiesList.add(et4.getText().toString());
+                    profileUtils.saveSelectedjobEligibilities(jobEligibilitiesList);
+//                    binding.txtEligibility.setText(jobEligibilities);
                     bottomSheetDialog.dismiss();
+                    startActivity(new Intent(AddJobsActivity.this,AddJobsActivity.class));
+                    finish();
                 }
             });
-
-
         });
 
         binding.BtnExperience.setOnClickListener(view -> {
@@ -269,11 +292,11 @@ public class AddJobsActivity extends AppCompatActivity {
             @SuppressLint({"MissingInflatedId", "LocalSuppress"})
 
             RadioGroup radioGroup = bottomsheetView.findViewById(R.id.radioGroupExperience);
-            RadioButton radioFresher= bottomsheetView.findViewById(R.id.radioBtnFresher);
-            RadioButton radioBtn6Months= bottomsheetView.findViewById(R.id.radioBtn6Months);
-            RadioButton radioBtn1to5Years= bottomsheetView.findViewById(R.id.radioBtn1to5Years);
-            RadioButton radioBtn5to10Years= bottomsheetView.findViewById(R.id.radioBtn5to10Years);
-            RadioButton radioBtn10PlusYears= bottomsheetView.findViewById(R.id.radioBtn10PlusYears);
+            RadioButton radioFresher = bottomsheetView.findViewById(R.id.radioBtnFresher);
+            RadioButton radioBtn6Months = bottomsheetView.findViewById(R.id.radioBtn6Months);
+            RadioButton radioBtn1to5Years = bottomsheetView.findViewById(R.id.radioBtn1to5Years);
+            RadioButton radioBtn5to10Years = bottomsheetView.findViewById(R.id.radioBtn5to10Years);
+            RadioButton radioBtn10PlusYears = bottomsheetView.findViewById(R.id.radioBtn10PlusYears);
 
             radioFresher.setOnClickListener(view1 -> {
                 setExperience(radioFresher.getText().toString());
@@ -301,7 +324,6 @@ public class AddJobsActivity extends AppCompatActivity {
             });
 
 
-
         });
         binding.BtnQualifications.setOnClickListener(view -> {
             if (binding.BtnQualificationsADD.getVisibility() == View.GONE) {
@@ -322,15 +344,15 @@ public class AddJobsActivity extends AppCompatActivity {
             bottomSheetDialog.show();
             Spinner spinner = bottomsheetView.findViewById(R.id.spinnerQualifications);
             Button btnSave = bottomsheetView.findViewById(R.id.btnSaveQualificationJob);
-            ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item,qualifications);
+            ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, qualifications);
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             spinner.setAdapter(adapter);
 
             btnSave.setOnClickListener(view1 -> {
-                if(spinner.getSelectedItem().equals("Select Qualification"))
+                if (spinner.getSelectedItem().equals("Select Qualification"))
                     Toast.makeText(this, "Select a valid qualification", Toast.LENGTH_SHORT).show();
-                    else{
-                    jobQualification=    spinner.getSelectedItem().toString();
+                else {
+                    jobQualification = spinner.getSelectedItem().toString();
                     bottomSheetDialog.dismiss();
                     binding.BtnQualificationsADD.setVisibility(View.GONE);
                     binding.btnAddJobQualification.setImageResource(R.drawable.addddd);
@@ -342,39 +364,52 @@ public class AddJobsActivity extends AppCompatActivity {
 //            setSpinner();
 
         });
-binding.BtnFacilities.setOnClickListener(view -> {
-    BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(AddJobsActivity.this, R.style.AppBottomSheetDialogTheme);
-    View bottomsheetView = LayoutInflater.from(getApplicationContext()).
-            inflate(R.layout.layout_facilities, (ConstraintLayout) findViewById(R.id.bottom_sheet_container));
+        binding.BtnFacilities.setOnClickListener(view -> {
+            BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(AddJobsActivity.this, R.style.AppBottomSheetDialogTheme);
+            View bottomsheetView = LayoutInflater.from(getApplicationContext()).
+                    inflate(R.layout.layout_facilities, (ConstraintLayout) findViewById(R.id.bottom_sheet_container));
 
-    bottomSheetDialog.setContentView(bottomsheetView);
-    bottomSheetDialog.show();
+            bottomSheetDialog.setContentView(bottomsheetView);
+            bottomSheetDialog.show();
 
-    @SuppressLint({"MissingInflatedId", "LocalSuppress"})
-    EditText et1= bottomsheetView.findViewById(R.id.etFacility1);
-    @SuppressLint({"MissingInflatedId", "LocalSuppress"})
-    EditText et2= bottomsheetView.findViewById(R.id.etFacility2);
-    @SuppressLint({"MissingInflatedId", "LocalSuppress"})
-    EditText et3= bottomsheetView.findViewById(R.id.etFacility3);
-    @SuppressLint({"MissingInflatedId", "LocalSuppress"})
-    EditText et4= bottomsheetView.findViewById(R.id.etFacility4);
-    @SuppressLint({"MissingInflatedId", "LocalSuppress"}) Button btnSaveFacility = bottomsheetView.findViewById(R.id.btnSaveFacilities);
-
-
-    btnSaveFacility.setOnClickListener(view1 -> {
-
-        if (et1.getText().toString().isEmpty() || et2.getText().toString().isEmpty() || et3.getText().toString().isEmpty()|| et4.getText().toString().isEmpty())
-            Toast.makeText(this, "Add any Facility", Toast.LENGTH_SHORT).show();
-        else {
-            jobFacilities = et1.getText().toString() + " , " + et2.getText().toString() + " , " + et3.getText().toString() + " , " + et4.getText().toString();
-            binding.txtFacilities.setText(jobFacilities);
-            bottomSheetDialog.dismiss();
-        }
-    });
+//            @SuppressLint({"MissingInflatedId", "LocalSuppress"})
+            EditText et11 = bottomsheetView.findViewById(R.id.etFacility1);
+//            @SuppressLint({"MissingInflatedId", "LocalSuppress"})
+            EditText et22 = bottomsheetView.findViewById(R.id.etFacility2);
+//            @SuppressLint({"MissingInflatedId", "LocalSuppress"})
+            EditText et33 = bottomsheetView.findViewById(R.id.etFacility3);
+//            @SuppressLint({"MissingInflatedId", "LocalSuppress"})
+            EditText et44 = bottomsheetView.findViewById(R.id.etFacility4);
+//            @SuppressLint({"MissingInflatedId", "LocalSuppress"})
+            Button btnSaveFacility = bottomsheetView.findViewById(R.id.btnSaveFacilities);
 
 
+            btnSaveFacility.setOnClickListener(view1 -> {
 
-});
+                if (et11.getText().toString().isEmpty() || et22.getText().toString().isEmpty() || et33.getText().toString().isEmpty() || et44.getText().toString().isEmpty())
+                    Toast.makeText(this, "Add any Facility", Toast.LENGTH_SHORT).show();
+                else {
+//                    jobFacilities =
+//                            et1.getText().toString()  + " , " +
+//                            et2.getText().toString() + " , " +
+//                                    et3.getText().toString() + " , " +
+//                                    et4.getText().toString();
+                    jobFacilitiesList.add(et11.getText().toString());
+                    jobFacilitiesList.add(et22.getText().toString());
+                    jobFacilitiesList.add(et33.getText().toString());
+                    jobFacilitiesList.add(et44.getText().toString());
+                    profileUtils.saveSelectedjobFacilities(jobFacilitiesList);
+
+//                    binding.txtFacilities.setText(jobFacilities);
+                    bottomSheetDialog.dismiss();
+                    startActivity(new Intent(AddJobsActivity.this,AddJobsActivity.class));
+                    finish();
+
+                }
+            });
+
+
+        });
         binding.BtnSpecialization.setOnClickListener(view -> {
             if (binding.BtnSpecializationADD.getVisibility() == View.GONE) {
 
@@ -396,26 +431,21 @@ binding.BtnFacilities.setOnClickListener(view -> {
             bottomSheetDialog.show();
             Spinner spinner = bottomsheetView.findViewById(R.id.spinnerSpecialization);
             Button btnSave = bottomsheetView.findViewById(R.id.btnSaveSpecializationJob);
-            ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item,jobSpecializations);
+            ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, jobSpecializations);
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             spinner.setAdapter(adapter);
 
             btnSave.setOnClickListener(view -> {
                 if (spinner.getSelectedItem().equals("Select Specialization"))
                     Toast.makeText(this, "Select valid specialization", Toast.LENGTH_SHORT).show();
-                else{
-                    jobSpecialization=    spinner.getSelectedItem().toString();
+                else {
+                    jobSpecialization = spinner.getSelectedItem().toString();
                     bottomSheetDialog.dismiss();
                     binding.BtnSpecializationADD.setVisibility(View.GONE);
                     binding.btnAddJobSpecialization.setImageResource(R.drawable.addddd);
                     binding.txtSpecialization.setText(jobSpecialization);
                 }
             });
-
-        });
-
-        binding.postBtn.setOnClickListener(view -> {
-            checkValidation();
 
         });
 
@@ -570,13 +600,47 @@ binding.BtnFacilities.setOnClickListener(view -> {
 
         });
 
+        binding.postBtn.setOnClickListener(view -> {
+            checkValidation();
+
+        });
+
         binding.cancelBtn.setOnClickListener(view -> finish());
+
+    }
+
+    private void fetchListofSelected() {
+        //EligibilitiesListTextSet
+        if (selectedEligibilities != null) {
+            LinearLayout.LayoutParams lparams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+            for (int i = 0; i < selectedEligibilities.size(); i++) {
+                TextView tv = new TextView(AddJobsActivity.this);
+                tv.setLayoutParams(lparams);
+                tv.setText(selectedEligibilities.get(i));
+                binding.textlayoutEligibility.addView(tv);
+            }
+        } else {
+            Toast.makeText(this, "null", Toast.LENGTH_SHORT).show();
+        }
+
+        //FacilitiesListTextSet
+        if (selectedFacilities != null) {
+            LinearLayout.LayoutParams lparamse = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+            for (int i1 = 0; i1 < selectedFacilities.size(); i1++) {
+                TextView tv2 = new TextView(AddJobsActivity.this);
+                tv2.setLayoutParams(lparamse);
+                tv2.setText(selectedFacilities.get(i1));
+                binding.facilitiesTxtLayout.addView(tv2);
+            }
+        } else {
+            Toast.makeText(this, "null", Toast.LENGTH_SHORT).show();
+        }
 
     }
 
     private void setExperience(String experience) {
 
-        jobExperience= experience;
+        jobExperience = experience;
         binding.txtExperience.setText(experience);
 
     }
@@ -599,17 +663,17 @@ binding.BtnFacilities.setOnClickListener(view -> {
             Toast.makeText(this, "Select employment type", Toast.LENGTH_SHORT).show();
         } else if (binding.txtWorkplace.getText().toString().equals("Click to select")) {
             Toast.makeText(this, "Select workplace type", Toast.LENGTH_SHORT).show();
-        }else if(jobSalary == null) {
+        } else if (jobSalary == null) {
             Toast.makeText(this, "Salary not added", Toast.LENGTH_SHORT).show();
-        }else if(jobQualification==null) {
+        } else if (jobQualification == null) {
             Toast.makeText(this, "Qualification not added", Toast.LENGTH_SHORT).show();
-        }else if(jobEligibilities==null) {
+        } else if (jobEligibilitiesList == null) {
             Toast.makeText(this, "Eligbilites not added", Toast.LENGTH_SHORT).show();
-        }else if (jobExperience==null) {
+        } else if (jobExperience == null) {
             Toast.makeText(this, "Experience not added", Toast.LENGTH_SHORT).show();
-        }else if (jobSpecialization==null) {
+        } else if (jobSpecialization == null) {
             Toast.makeText(this, "Specialization not selected", Toast.LENGTH_SHORT).show();
-        }else if (jobFacilities==null){
+        } else if (jobFacilitiesList == null) {
             Toast.makeText(this, "Facilities not set for the job", Toast.LENGTH_SHORT).show();
         } else {
             postJob();
@@ -618,59 +682,81 @@ binding.BtnFacilities.setOnClickListener(view -> {
 
     private void postJob() {
         uniqueKey = UUID.randomUUID().toString();
-
-        userJobModel = new UserJobModel(sharedPrefe.fetchTitle(),
+        Date date = new Date();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-M-yyyy hh:mm:ss");
+        String stDate = dateFormat.format(date);
+        userJobModel = new UserJobModel(
+                sharedPrefe.fetchTitle(),
                 binding.txtPositon.getText().toString(),
-
                 binding.txtLocation.getText().toString(),
                 binding.employmentTxt.getText().toString(),
                 binding.txtWorkplace.getText().toString(),
                 binding.txtDescription.getText().toString(),
-                uniqueKey, userUid, binding.comTitle.getText().toString(),
-                binding.txtCompany.getText().toString(), profileUtils.fetchCompanyImage(), String.valueOf(System.currentTimeMillis()), jobSalary, jobQualification, jobEligibilities, jobExperience, jobSpecialization, jobFacilities
-
-
+                uniqueKey,
+                userUid,
+                binding.comTitle.getText().toString(),
+                binding.txtCompany.getText().toString(),
+                sharedPrefe.fetchComImageURl(),
+                stDate,
+                jobSalary,
+                jobQualification,
+                jobExperience,
+                jobSpecialization
         );
         loadingDialog.show();
 
-        allUserJobs.child(uniqueKey).setValue(userJobModel).addOnSuccessListener(unused -> Toast.makeText(AddJobsActivity.this, "JobPosted in AllUserNote...\n;)", Toast.LENGTH_SHORT).show());
+//        allUserNormalJobs.child(uniqueKey).setValue(userJobModel).addOnSuccessListener(unused ->
+//                Toast.makeText(AddJobsActivity.this, "JobPosted in AllUserNote...\n;)", Toast.LENGTH_SHORT).show());
 
-        userJobRef.child(userUid).child(uniqueKey).setValue(userJobModel).addOnSuccessListener(unused -> {
-            loadingDialog.dismiss();
-            sharedPrefe.deleteAllsharedPre();
+        allUserNormalJobs
+                .child(uniqueKey)
+                .setValue(userJobModel)
+                .addOnSuccessListener(unused -> {
+
+                    allUserNormalJobs
+                            .child(uniqueKey).child("jobEligibilities")
+                            .setValue(profileUtils.fetchSelectedjobEligibilities());
+                    allUserNormalJobs
+                            .child(uniqueKey).child("jobFacilities")
+                            .setValue(profileUtils.fetchSelectedjobFacilities()).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void unused) {
+                                    loadingDialog.dismiss();
+                                    sharedPrefe.deleteAllsharedPre();
+                                    profileUtils.deleteSelectedJobLists();
 //                    startActivity(new Intent(AddJobsActivity.this, UserJobDetailsActivity.class));
-            Toast.makeText(AddJobsActivity.this, "Job submitted Successfully", Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(AddJobsActivity.this, UserJobDetailsActivity.class);
-            intent.putExtra("unikey", uniqueKey);
-            startActivity(intent);
-            finish();
+                                    Toast.makeText(AddJobsActivity.this, "Job submitted Successfully", Toast.LENGTH_SHORT).show();
+                                    Intent intent = new Intent(AddJobsActivity.this, UserJobDetailsActivity.class);
+                                    intent.putExtra("unikey", uniqueKey);
+                                    startActivity(intent);
+                                    finish();
+                                }
+                            });
 
-        }).addOnFailureListener(e -> {
-            loadingDialog.dismiss();
-            Toast.makeText(AddJobsActivity.this, e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
-        });
 
-    }
-
-    private void getImage() {
-        File imgFile = new File(companyLogo);
-        if (imgFile.exists()) {
-            ImageView myImage = new ImageView(this);
-            myImage.setImageURI(Uri.fromFile(imgFile));
-
-        }
+                }).addOnFailureListener(e -> {
+                    loadingDialog.dismiss();
+                    Toast.makeText(AddJobsActivity.this, e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+                });
 
     }
+
+//    private void getImage() {
+//        File imgFile = new File(companyLogo);
+//        if (imgFile.exists()) {
+//            ImageView myImage = new ImageView(this);
+//            myImage.setImageURI(Uri.fromFile(imgFile));
+//
+//        }
+//
+//    }
 
     private void iconChange() {
 
 
         if (binding.txtPositon.length() != 0) {
-
             binding.btnEditJobPosition.setVisibility(View.VISIBLE);
             binding.btnAddJobPosition.setVisibility(View.INVISIBLE);
-
-
         } else {
             binding.btnAddJobPosition.setVisibility(View.VISIBLE);
             binding.btnEditJobPosition.setVisibility(View.INVISIBLE);
@@ -688,12 +774,29 @@ binding.BtnFacilities.setOnClickListener(view -> {
         }
 
         if (binding.txtLocation.length() != 0) {
-
             binding.btnEditJobLocation.setVisibility(View.VISIBLE);
             binding.btnAddJobLocation.setVisibility(View.INVISIBLE);
         } else {
             binding.btnEditJobLocation.setVisibility(View.INVISIBLE);
             binding.btnAddJobLocation.setVisibility(View.VISIBLE);
+
+        }
+        //eligibilities
+        if (selectedEligibilities != null) {
+            binding.textlayoutEligibility.setVisibility(View.VISIBLE);
+            binding.txtEligibility.setVisibility(View.GONE);
+        } else {
+            binding.textlayoutEligibility.setVisibility(View.GONE);
+            binding.txtEligibility.setVisibility(View.VISIBLE);
+
+        }
+        //facilities
+        if (selectedFacilities != null) {
+            binding.facilitiesTxtLayout.setVisibility(View.VISIBLE);
+            binding.txtFacilities.setVisibility(View.GONE);
+        } else {
+            binding.facilitiesTxtLayout.setVisibility(View.GONE);
+            binding.txtFacilities.setVisibility(View.VISIBLE);
 
         }
 

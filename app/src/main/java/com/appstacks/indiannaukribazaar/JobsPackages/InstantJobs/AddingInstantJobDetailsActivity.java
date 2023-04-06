@@ -82,10 +82,10 @@ public class AddingInstantJobDetailsActivity extends AppCompatActivity {
         profileUtils = new ProfileUtils(AddingInstantJobDetailsActivity.this);
 
 
-        Toast.makeText(this, "1: " + sharedPrefe.fetchInstantJobTitle()
-                + "\n2: " + sharedPrefe.fetchInstantDescription(), Toast.LENGTH_SHORT).show();
+//        Toast.makeText(this, "1: " + sharedPrefe.fetchInstantJobTitle()
+//                + "\n2: " + sharedPrefe.fetchInstantDescription(), Toast.LENGTH_SHORT).show();
 
-        binding.textCompanyInstant.setText(sharedPrefe.fetchInstantCom());
+        binding.textCompanyInstant.setText(sharedPrefe.fetchInstantCom() +" . "+sharedPrefe.fetchInstantComType());
         binding.txtPositonInstant.setText(sharedPrefe.fetchInstantPos());
         binding.txtBudgetInstant.setText(sharedPrefe.fetchInstantBudget());
         binding.txtTimePeriodInstant.setText(sharedPrefe.fetchInstantTimePeriod());
@@ -127,6 +127,8 @@ public class AddingInstantJobDetailsActivity extends AppCompatActivity {
                     sharedPrefe.fetchInstantPos(),
                     sharedPrefe.fetchInstantBudget(),
                     sharedPrefe.fetchInstantCom(),
+                    sharedPrefe.fetchInstantComType(),
+                    sharedPrefe.fetchInstantComImgURL(),
                     sharedPrefe.fetchInstantTimePeriod(),
                     uniqueId, userAuthId, stDate);
 //            frontModel = new InstantSearchJobFrontModel(

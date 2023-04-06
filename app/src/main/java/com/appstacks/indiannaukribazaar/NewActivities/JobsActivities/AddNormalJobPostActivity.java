@@ -25,7 +25,7 @@ public class AddNormalJobPostActivity extends AppCompatActivity {
     private static final int CAMERA_PIC_REQUEST = 1;
     private static final int GALLERY_PIC_REQUEST = 2;
     private String userId;
-    private String username, useraddress;
+    private String username, useraddress, profileDP;
 
 
     private ProfileUtils profileUtils;
@@ -46,10 +46,14 @@ public class AddNormalJobPostActivity extends AppCompatActivity {
 
         username = getIntent().getStringExtra("username");
         useraddress = getIntent().getStringExtra("useraddress");
+        profileDP = getIntent().getStringExtra("userimage");
 
         binding.username.setText(username);
 
-        Glide.with(this).load(profileUtils.fetchUserImage()).placeholder(R.drawable.profileplace).into(binding.userpicture);
+        Glide.with(this)
+                .load(profileDP)
+                .placeholder(R.drawable.profileplace)
+                .into(binding.userpicture);
 
 
 

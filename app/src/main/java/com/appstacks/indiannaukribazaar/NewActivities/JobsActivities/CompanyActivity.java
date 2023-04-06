@@ -57,12 +57,12 @@ public class CompanyActivity extends AppCompatActivity {
     private AddCompanyLayoutBinding addCompanyLayoutBinding;
     ImageView companyLogo;
     ArrayList<CompanyModel> list;
+    private CompanyModel data;
 
     private DatabaseReference databaseReference;
     private StorageReference storageReference;
     private String userId;
     private String downloadUrl;
-    private CompanyModel data;
     private ProfileUtils profileUtils;
     private   CompanyModel companyData;
 
@@ -72,10 +72,12 @@ public class CompanyActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityCompanyBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
         data = new CompanyModel();
         list = new ArrayList<>();
         profileUtils = new ProfileUtils(this);
         sharedPrefe = new SharedPrefe(this);
+
         databaseReference = FirebaseDatabase.getInstance().getReference(getString(R.string.user_profile));
         storageReference = FirebaseStorage.getInstance().getReference(getString(R.string.user_profile));
         userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
