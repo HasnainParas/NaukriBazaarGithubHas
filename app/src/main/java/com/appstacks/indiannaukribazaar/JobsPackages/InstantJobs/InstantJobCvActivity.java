@@ -273,7 +273,7 @@ public class InstantJobCvActivity extends AppCompatActivity {
         dialog.setCancelable(false);
         dialog.show();
 
-        StorageReference reference = storageReference.child(jobid).child("Cv/" + pdfName);
+        StorageReference reference = storageReference.child(currentUserAuth).child(jobid).child("Cv/" + pdfName);
         reference.putFile(uri)
                 .addOnSuccessListener(taskSnapshot -> {
                     Task<Uri> uriTask = taskSnapshot.getStorage().getDownloadUrl();
@@ -294,7 +294,7 @@ public class InstantJobCvActivity extends AppCompatActivity {
 
     private void uploadPdfData(String downloadUrl, String pdfName) {
         resume = new Resume(downloadUrl, pdfName, PdfsizeInString, pdfDate);
-        appliedInstantJobsRef.child(jobid).child("cv").setValue(resume)
+        appliedInstantJobsRef.child(currentUserAuth).child(jobid).child("cv").setValue(resume)
                 .addOnCompleteListener(task -> {
                     if (task.isComplete() && task.isSuccessful()) {
                         appliedInstantJobsRef.child(jobid)

@@ -18,6 +18,12 @@ import com.appstacks.indiannaukribazaar.JobsPackages.InstantJobs.SearchNApplyInJ
 import com.appstacks.indiannaukribazaar.R;
 import com.appstacks.indiannaukribazaar.databinding.ApplyinJobSampleBinding;
 import com.bumptech.glide.Glide;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
@@ -25,6 +31,10 @@ public class SearchNApplyINjobAdapter extends RecyclerView.Adapter<SearchNApplyI
 
     ArrayList<InstantAddJobsModel> modelArrayList;
     Context context;
+
+    DatabaseReference appliedInstantJob;
+    String currenUser;
+
 
     public SearchNApplyINjobAdapter(ArrayList<InstantAddJobsModel> modelArrayList, Context context) {
         this.modelArrayList = modelArrayList;
@@ -41,7 +51,9 @@ public class SearchNApplyINjobAdapter extends RecyclerView.Adapter<SearchNApplyI
     @Override
     public void onBindViewHolder(@NonNull viewHolder holder, int position) {
         InstantAddJobsModel model = modelArrayList.get(position);
-
+        appliedInstantJob = FirebaseDatabase.getInstance().getReference("UsersAppliedInstantJobs");
+        currenUser = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        String jobid = model.getInJobID();
 
         holder.binding.jobInApplyTitle.setText(model.getInJobTitle());
         holder.binding.applyINcomTv.setText(model.getInJobCompany());
@@ -61,12 +73,27 @@ public class SearchNApplyINjobAdapter extends RecyclerView.Adapter<SearchNApplyI
 //            Toast.makeText(context, id, Toast.LENGTH_SHORT).show();
             Intent in = new Intent(context.getApplicationContext(), SearchNApplyInJobDetailActivity.class);
             in.putExtra("randomid", id);
-            in.putExtra("jobuserAuth",userjobauth );
+            in.putExtra("jobuserAuth", userjobauth);
 
             context.startActivity(in);
 //            ((Activity) context).finish();
         });
 
+        appliedInstantJob.child(currenUser).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.child(jobid).exists()) {
+                    holder.binding.inJobApplyTv.setVisibility(View.VISIBLE);
+                } else {
+                    holder.binding.inJobApplyTv.setVisibility(View.GONE);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(context, error.getMessage() + "", Toast.LENGTH_SHORT).show();
+            }
+        });
 
     }
 
