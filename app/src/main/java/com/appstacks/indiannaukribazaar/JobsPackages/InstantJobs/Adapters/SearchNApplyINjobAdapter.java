@@ -57,9 +57,11 @@ public class SearchNApplyINjobAdapter extends RecyclerView.Adapter<SearchNApplyI
 
         holder.binding.frontInstantJobLayoutClick.setOnClickListener(v -> {
             String id = model.getInJobID();
+            String userjobauth = model.getUserAuthID();
 //            Toast.makeText(context, id, Toast.LENGTH_SHORT).show();
             Intent in = new Intent(context.getApplicationContext(), SearchNApplyInJobDetailActivity.class);
             in.putExtra("randomid", id);
+            in.putExtra("jobuserAuth",userjobauth );
 
             context.startActivity(in);
 //            ((Activity) context).finish();

@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.text.format.DateUtils;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Toast;
 
 import com.appstacks.indiannaukribazaar.JobsPackages.InstantJobs.InstantAddJobsModel;
 import com.appstacks.indiannaukribazaar.NewActivities.Adapters.AdapterForListview;
@@ -82,10 +83,9 @@ public class N_JobsDetailActivity extends AppCompatActivity {
                             .into(binding.comLogo);
                     timeagoNormalJob = calculateTimeAgoNormalJob(model.getJobPostedDate());
                     binding.timeText.setText(timeagoNormalJob);
-
                     binding.jobTitle.setText(model.getJobTitle());
                     binding.comText.setText(model.getCompanyName());
-                    binding.locationText.setText(model.getJobLocation());
+                    binding.locationText.setText("$" + model.getSalary());
                     binding.descriptiontext.setText(model.getDescription());
 
                     binding.locationTxtNormaljob.setText(model.getJobLocation());
@@ -101,7 +101,7 @@ public class N_JobsDetailActivity extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
+                Toast.makeText(N_JobsDetailActivity.this, error.getMessage() + " ", Toast.LENGTH_SHORT).show();
             }
         });
 

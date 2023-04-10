@@ -39,6 +39,7 @@ import com.google.firebase.storage.UploadTask;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Objects;
 
 public class NormalJobCvActivity extends AppCompatActivity {
 
@@ -47,10 +48,10 @@ public class NormalJobCvActivity extends AppCompatActivity {
     DatabaseReference normaljobRef;
     private static final int REQUEST_CODE = 1;
     private Uri uri;
-    private String PdfsizeInString, pdfDate, pdfName,token, currentUserAuth;
+    private String PdfsizeInString, pdfDate, pdfName, token, currentUserAuth, currentUserName;
     private ProgressDialog dialog;
 
-    private DatabaseReference appliedJobsRef, allUserTokenRef;
+    private DatabaseReference appliedJobsRef, allUserTokenRef, alluserRef;
     private StorageReference storageReference;
     private Resume resume;
     private UserDataModel model;
@@ -61,29 +62,43 @@ public class NormalJobCvActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityNormalJobCvBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        // Normal job activity
 
         dialog = new ProgressDialog(this);
 
         jobid = getIntent().getStringExtra("jobid");
         userauthid = getIntent().getStringExtra("postedUserAuth");
 
-        currentUserAuth = FirebaseAuth.getInstance().getCurrentUser().getDisplayName();
+        currentUserAuth = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
 
         normaljobRef = FirebaseDatabase.getInstance().getReference("allUserNormalJobs");
         appliedJobsRef = FirebaseDatabase.getInstance().getReference("UsersAppliedNormalJobs");
         allUserTokenRef = FirebaseDatabase.getInstance().getReference("AllUsersToken");
+        alluserRef = FirebaseDatabase.getInstance().getReference("AllUsers");
 
         storageReference = FirebaseStorage.getInstance().getReference("normalJobsUsersCv/");
 
 
         timeText = getIntent().getStringExtra("normalJobTime");
 
+        fetchCurrentUsername();
+
+
 //        binding.textView75.setText("JobID:-} " + jobid + " {\n");
 //        binding.textView78.setText("\nAuthID:-} " + userauthid + " {");
+
+        binding.cvJobtitle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(NormalJobCvActivity.this, currentUserAuth, Toast.LENGTH_SHORT).show();
+            }
+        });
+
 
         fetchDetails();
         fetchToken();
         binding.cvTimeText.setText(timeText);
+
 
         binding.cvComlogo.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -91,7 +106,7 @@ public class NormalJobCvActivity extends AppCompatActivity {
                 FcmNotificationsSender notificationsSender = new FcmNotificationsSender(
                         token,
                         "Normal Jobs",
-                        currentUserAuth + " Applied for Paid Jobs", getApplicationContext(), NormalJobCvActivity.this
+                        currentUserName + " : " + " Applied for Paid Jobs", getApplicationContext(), NormalJobCvActivity.this
                 );
                 notificationsSender.SendNotifications();
             }
@@ -143,15 +158,15 @@ public class NormalJobCvActivity extends AppCompatActivity {
 
     }
 
-    private void fetchToken() {
-        if (userauthid !=null){
-            allUserTokenRef.child(userauthid).child("userToken").addValueEventListener(new ValueEventListener() {
+    private void fetchCurrentUsername() {
+        if (currentUserAuth != null) {
+            alluserRef.child(currentUserAuth).child("fullName").addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     if (snapshot.exists()) {
 //                        model = snapshot.getValue(UserDataModel.class);
-                        token = snapshot.getValue(String.class);
-                        Toast.makeText(NormalJobCvActivity.this,token, Toast.LENGTH_SHORT).show();
+                        currentUserName = snapshot.getValue(String.class);
+                        Toast.makeText(NormalJobCvActivity.this, "CurrentNAme: " + currentUserName, Toast.LENGTH_SHORT).show();
                     }
                 }
 
@@ -161,7 +176,32 @@ public class NormalJobCvActivity extends AppCompatActivity {
                 }
             });
 
-        }else {
+        } else {
+            Toast.makeText(NormalJobCvActivity.this, "User Auth ID Not Found", Toast.LENGTH_SHORT).show();
+        }
+
+
+    }
+
+    private void fetchToken() {
+        if (userauthid != null) {
+            allUserTokenRef.child(userauthid).child("userToken").addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    if (snapshot.exists()) {
+//                        model = snapshot.getValue(UserDataModel.class);
+                        token = snapshot.getValue(String.class);
+                        Toast.makeText(NormalJobCvActivity.this, token, Toast.LENGTH_SHORT).show();
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+                    Toast.makeText(NormalJobCvActivity.this, error.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            });
+
+        } else {
             Toast.makeText(NormalJobCvActivity.this, "User Auth ID Not Found", Toast.LENGTH_SHORT).show();
         }
 
@@ -182,7 +222,7 @@ public class NormalJobCvActivity extends AppCompatActivity {
 
                     binding.cvJobtitle.setText(model.getJobTitle());
                     binding.cvComText.setText(model.getCompanyName());
-                    binding.cvLocationText.setText(model.getJobLocation());
+                    binding.cvLocationText.setText("$" + model.getSalary());
                     binding.cvJobtitle.setText(model.getJobTitle());
 
 
@@ -283,7 +323,7 @@ public class NormalJobCvActivity extends AppCompatActivity {
         dialog.setCancelable(false);
         dialog.show();
 
-        StorageReference reference = storageReference.child(jobid + "/").child("Cv/" + pdfName);
+        StorageReference reference = storageReference.child(jobid).child("Cv/" + pdfName);
         reference.putFile(uri)
                 .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                     @Override
@@ -321,7 +361,7 @@ public class NormalJobCvActivity extends AppCompatActivity {
                                             FcmNotificationsSender notificationsSender = new FcmNotificationsSender(
                                                     token,
                                                     "Normal Jobs",
-                                                    currentUserAuth + " Applied for Paid Jobs", getApplicationContext(), NormalJobCvActivity.this
+                                                    currentUserName + " : " + " Applied for Paid Jobs", getApplicationContext(), NormalJobCvActivity.this
                                             );
                                             notificationsSender.SendNotifications();
                                             binding.successFullLayout.setVisibility(View.VISIBLE);

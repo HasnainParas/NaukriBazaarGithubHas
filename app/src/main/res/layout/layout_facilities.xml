@@ -44,59 +44,62 @@
             android:id="@+id/etFacility1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textPersonName"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
             android:background="@drawable/edit_text_round"
-            android:drawableStart="@drawable/dot"
-
+            android:drawableStart="@drawable/blackdotfor_editbox"
             android:drawablePadding="8dp"
+
+            android:inputType="textPersonName"
             app:layout_constraintEnd_toEndOf="parent"
 
             />
+
         <EditText
             android:id="@+id/etFacility2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textPersonName"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
             android:background="@drawable/edit_text_round"
-            android:drawableStart="@drawable/dot"
-
+            android:drawableStart="@drawable/blackdotfor_editbox"
             android:drawablePadding="8dp"
+
+            android:inputType="textPersonName"
             app:layout_constraintEnd_toEndOf="parent"
 
             />
+
         <EditText
             android:id="@+id/etFacility3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textPersonName"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
             android:background="@drawable/edit_text_round"
-            android:drawableStart="@drawable/dot"
-
+            android:drawableStart="@drawable/blackdotfor_editbox"
             android:drawablePadding="8dp"
+
+            android:inputType="textPersonName"
             app:layout_constraintEnd_toEndOf="parent"
 
             />
+
         <EditText
             android:id="@+id/etFacility4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textPersonName"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
             android:background="@drawable/edit_text_round"
-            android:drawableStart="@drawable/dot"
-
+            android:drawableStart="@drawable/blackdotfor_editbox"
             android:drawablePadding="8dp"
+
+            android:inputType="textPersonName"
             app:layout_constraintEnd_toEndOf="parent"
 
             />

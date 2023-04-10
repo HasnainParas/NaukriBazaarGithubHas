@@ -253,8 +253,8 @@ public class FindJobsActivity extends AppCompatActivity {
                 startActivity(intent);
                 dialog.dismiss();
             }
-            Toast.makeText(FindJobsActivity.this, Integer.toString(size), Toast.LENGTH_SHORT).show();
-            binding.textView49.setText(Integer.toString(size));
+//            Toast.makeText(FindJobsActivity.this, Integer.toString(size), Toast.LENGTH_SHORT).show();
+//            binding.textView49.setText(Integer.toString(size));
 
         });
 

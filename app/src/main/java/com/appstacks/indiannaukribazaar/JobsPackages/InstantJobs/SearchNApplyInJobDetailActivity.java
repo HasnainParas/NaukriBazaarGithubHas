@@ -12,6 +12,8 @@ import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
 import com.appstacks.indiannaukribazaar.JobsPackages.InstantJobs.Adapters.InJobDetailsAdapter;
+import com.appstacks.indiannaukribazaar.NewActivities.JobsActivities.N_JobsDetailActivity;
+import com.appstacks.indiannaukribazaar.NewActivities.JobsActivities.NormalJobCvActivity;
 import com.appstacks.indiannaukribazaar.R;
 import com.appstacks.indiannaukribazaar.databinding.ActivitySearchNapplyInJobDetailBinding;
 import com.bumptech.glide.Glide;
@@ -28,10 +30,12 @@ import java.util.ArrayList;
 public class SearchNApplyInJobDetailActivity extends AppCompatActivity {
 
     ActivitySearchNapplyInJobDetailBinding binding;
-    String randomId;
+
+    private String randomIdJob,jobUserAuth;
     DatabaseReference inAllIntantJobsRef, skillRef;
     String timeago;
     private ArrayAdapter<String> adapter;
+
 
 
 
@@ -44,13 +48,28 @@ public class SearchNApplyInJobDetailActivity extends AppCompatActivity {
         binding = ActivitySearchNapplyInJobDetailBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        randomId = getIntent().getStringExtra("randomid");
+        randomIdJob = getIntent().getStringExtra("randomid");
+        jobUserAuth = getIntent().getStringExtra("jobuserAuth");
 //        binding.checkingtext.setText(randomId);
 
         inAllIntantJobsRef = FirebaseDatabase.getInstance().getReference("InstantJobs");
 
-        if (randomId != null) {
-            inAllIntantJobsRef.child(randomId).addValueEventListener(new ValueEventListener() {
+
+        Toast.makeText(this, jobUserAuth +" ", Toast.LENGTH_SHORT).show();
+
+        binding.ApplyJobBTnInstant.setOnClickListener(v -> {
+            if (randomIdJob != null){
+                Intent in = new Intent(SearchNApplyInJobDetailActivity.this, InstantJobCvActivity.class);
+                in.putExtra("instantJobID", randomIdJob);
+                in.putExtra("instantJobUserAuth", jobUserAuth);
+                in.putExtra("instantJobTime", binding.timeTextInstant.getText().toString());
+                startActivity(in);
+            }
+        });
+
+
+        if (randomIdJob != null) {
+            inAllIntantJobsRef.child(randomIdJob).addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     if (snapshot.exists()) {
@@ -64,8 +83,7 @@ public class SearchNApplyInJobDetailActivity extends AppCompatActivity {
                                 .load(model.getInJobCompanyImgURL())
                                 .placeholder(R.drawable.placeholder)
                                 .into(binding.comLogoInstant);
-
-
+//                        jobUserAuth = model.getUserAuthID();
                         timeago = calculateTimeAgoo(model.getPostedDate());
                         binding.timeTextInstant.setText(timeago);
 
@@ -81,6 +99,7 @@ public class SearchNApplyInJobDetailActivity extends AppCompatActivity {
                 }
             });
         }
+
 
         binding.injobDetailBack.setOnClickListener(v -> onBackPressed());
 
@@ -124,7 +143,7 @@ public class SearchNApplyInJobDetailActivity extends AppCompatActivity {
     }
 
     private String skills() {
-        inAllIntantJobsRef.child(randomId)
+        inAllIntantJobsRef.child(randomIdJob)
                 .child("inSkills")
                 .addValueEventListener(new ValueEventListener() {
                     @Override
