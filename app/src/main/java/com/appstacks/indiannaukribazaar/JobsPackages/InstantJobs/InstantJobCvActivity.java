@@ -273,7 +273,10 @@ public class InstantJobCvActivity extends AppCompatActivity {
         dialog.setCancelable(false);
         dialog.show();
 
-        StorageReference reference = storageReference.child(currentUserAuth).child(jobid).child("Cv/" + pdfName);
+        StorageReference reference = storageReference
+                .child(jobid)
+                .child(currentUserAuth)
+                .child("Cv/" + pdfName);
         reference.putFile(uri)
                 .addOnSuccessListener(taskSnapshot -> {
                     Task<Uri> uriTask = taskSnapshot.getStorage().getDownloadUrl();
@@ -294,28 +297,33 @@ public class InstantJobCvActivity extends AppCompatActivity {
 
     private void uploadPdfData(String downloadUrl, String pdfName) {
         resume = new Resume(downloadUrl, pdfName, PdfsizeInString, pdfDate);
-        appliedInstantJobsRef.child(currentUserAuth).child(jobid).child("cv").setValue(resume)
+        JobAppliedModel appliedModel = new JobAppliedModel(
+                binding.editTextInstant.getText().toString(),
+                currentUserAuth);
+        appliedInstantJobsRef
+                .child(jobid)
+                .child(currentUserAuth)
+                .setValue(appliedModel)
                 .addOnCompleteListener(task -> {
                     if (task.isComplete() && task.isSuccessful()) {
-                        appliedInstantJobsRef.child(jobid)
-                                .child("information")
-                                .setValue(binding.editTextInstant.getText().toString()).addOnSuccessListener(new OnSuccessListener<Void>() {
-                                    @Override
-                                    public void onSuccess(Void unused) {
-                                        dialog.dismiss();
-                                        FcmNotificationsSender notificationsSender = new FcmNotificationsSender(
-                                                token,
-                                                "Instant Jobs",
-                                                currentUserName + " : " + " Applied for Instant Job", getApplicationContext(), InstantJobCvActivity.this
-                                        );
-                                        notificationsSender.SendNotifications();
-                                        binding.successFullLayoutinstant.setVisibility(View.VISIBLE);
-                                        binding.constraintLayout9instant.setVisibility(View.GONE);
-                                        binding.cvAftercompleteNameinstant.setText(pdfName);
-                                        binding.cvAftercompleteInfoinstant.setText(pdfDate);
-                                        Toast.makeText(InstantJobCvActivity.this, "Cv Added", Toast.LENGTH_SHORT).show();
+                        appliedInstantJobsRef
+                                .child(jobid)
+                                .child(currentUserAuth)
+                                .child("cv").setValue(resume)
+                                .addOnSuccessListener(unused -> {
+                                    dialog.dismiss();
+                                    FcmNotificationsSender notificationsSender = new FcmNotificationsSender(
+                                            token,
+                                            "Instant Jobs",
+                                            currentUserName + " : " + " Applied for Instant Job", getApplicationContext(), InstantJobCvActivity.this
+                                    );
+                                    notificationsSender.SendNotifications();
+                                    binding.successFullLayoutinstant.setVisibility(View.VISIBLE);
+                                    binding.constraintLayout9instant.setVisibility(View.GONE);
+                                    binding.cvAftercompleteNameinstant.setText(pdfName);
+                                    binding.cvAftercompleteInfoinstant.setText(pdfDate);
+                                    Toast.makeText(InstantJobCvActivity.this, "Cv Added", Toast.LENGTH_SHORT).show();
 
-                                    }
                                 }).addOnFailureListener(new OnFailureListener() {
                                     @Override
                                     public void onFailure(@NonNull Exception e) {

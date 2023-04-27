@@ -20,6 +20,7 @@ import com.appstacks.indiannaukribazaar.FirebaseModels.FindJobModel;
 import com.appstacks.indiannaukribazaar.FirebaseModels.PersonalInformationModel;
 import com.appstacks.indiannaukribazaar.JobsPackages.InstantJobs.SearchNapplyInstantJobActivity;
 import com.appstacks.indiannaukribazaar.JobsPackages.InstantJobs.InstantJobPostActivity;
+import com.appstacks.indiannaukribazaar.NewActivities.JobStatusActivies.JobStatusActivity;
 import com.appstacks.indiannaukribazaar.NewActivities.Models.UserJobModel;
 import com.appstacks.indiannaukribazaar.R;
 import com.appstacks.indiannaukribazaar.databinding.ActivityFindJobsBinding;
@@ -68,6 +69,8 @@ public class FindJobsActivity extends AppCompatActivity {
         allUserNormalJobs = FirebaseDatabase.getInstance().getReference("allUserNormalJobs");
 
         instantJobsRef = FirebaseDatabase.getInstance().getReference("InstantJobs");
+
+
 
 
         //Funtion
@@ -241,6 +244,14 @@ public class FindJobsActivity extends AppCompatActivity {
         Button instantJobBtn = bottomsheetView.findViewById(R.id.instantJobBtn);
         Button jobStatus = bottomsheetView.findViewById(R.id.jobStatusBtn);
         ImageView cancenBtn = bottomsheetView.findViewById(R.id.postjobCancelBtn);
+
+        jobStatus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(FindJobsActivity.this, JobStatusActivity.class));
+                dialog.dismiss();
+            }
+        });
 
         jobpostBtn.setOnClickListener(view1 -> {
             Intent intent = new Intent(FindJobsActivity.this, AddNormalJobPostActivity.class);

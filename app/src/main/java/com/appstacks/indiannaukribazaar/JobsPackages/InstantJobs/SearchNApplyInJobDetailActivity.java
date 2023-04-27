@@ -26,17 +26,16 @@ import com.google.firebase.database.ValueEventListener;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class SearchNApplyInJobDetailActivity extends AppCompatActivity {
 
     ActivitySearchNapplyInJobDetailBinding binding;
 
-    private String randomIdJob,jobUserAuth;
+    private String randomIdJob, jobUserAuth;
     DatabaseReference inAllIntantJobsRef, skillRef;
     String timeago;
     private ArrayAdapter<String> adapter;
-
-
 
 
 //    ArrayList<InstantAddJobsModel> detaislarrayList;
@@ -55,10 +54,10 @@ public class SearchNApplyInJobDetailActivity extends AppCompatActivity {
         inAllIntantJobsRef = FirebaseDatabase.getInstance().getReference("InstantJobs");
 
 
-        Toast.makeText(this, jobUserAuth +" ", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, jobUserAuth + " ", Toast.LENGTH_SHORT).show();
 
         binding.ApplyJobBTnInstant.setOnClickListener(v -> {
-            if (randomIdJob != null){
+            if (randomIdJob != null) {
                 Intent in = new Intent(SearchNApplyInJobDetailActivity.this, InstantJobCvActivity.class);
                 in.putExtra("instantJobID", randomIdJob);
                 in.putExtra("instantJobUserAuth", jobUserAuth);
@@ -154,20 +153,14 @@ public class SearchNApplyInJobDetailActivity extends AppCompatActivity {
                             for (DataSnapshot snap : snapshot.getChildren()) {
                                 String obj = snap.getValue(String.class);
                                 list1.add(obj);
-                        binding.injobdetailsListInstant.setVisibility(View.VISIBLE);
-                        binding.injoblistloaderInstant.setVisibility(View.GONE);
-                        binding.injoblistloadingTvInstant.setVisibility(View.GONE);
+                                binding.injobdetailsListInstant.setVisibility(View.VISIBLE);
+                                binding.injoblistloaderInstant.setVisibility(View.GONE);
+                                binding.injoblistloadingTvInstant.setVisibility(View.GONE);
 //                        holder.binding.injobdetailsList.setVerticalScrollBarEnabled(true);
-
                             }
-
                             adapter = new ArrayAdapter<String>(getApplicationContext(), R.layout.layoutinjobdetailskill, R.id.injobdetailskillTv, list1);
-
                             binding.injobdetailsListInstant.setAdapter(adapter);
-
                         }
-
-
                     }
 
                     @Override
@@ -180,7 +173,8 @@ public class SearchNApplyInJobDetailActivity extends AppCompatActivity {
     }
 
     private String calculateTimeAgoo(String postedDate) {
-        SimpleDateFormat sdf = new SimpleDateFormat("dd-M-yyyy hh:mm:ss");
+        SimpleDateFormat sdf = new SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss", Locale.getDefault());
+//        SimpleDateFormat sdf = new SimpleDateFormat("dd-M-yyyy hh:mm:ss");
 
         try {
             long time = sdf.parse(postedDate).getTime();

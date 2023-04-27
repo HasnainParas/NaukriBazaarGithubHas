@@ -3,6 +3,7 @@ package com.appstacks.indiannaukribazaar.fragment;
 import android.os.Bundle;
 import android.os.Handler;
 import androidx.annotation.DrawableRes;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -35,6 +36,7 @@ import com.appstacks.indiannaukribazaar.utils.NetworkCheck;
 import com.facebook.shimmer.ShimmerFrameLayout;
 
 import java.util.List;
+import java.util.Objects;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -265,5 +267,12 @@ public class FragmentHome extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
+        Objects.requireNonNull(((AppCompatActivity) getActivity()).getSupportActionBar()).show();
+
+    }
+    @Override
+    public void onStop() {
+        super.onStop();
+        Objects.requireNonNull(((AppCompatActivity) getActivity()).getSupportActionBar()).hide();
     }
 }

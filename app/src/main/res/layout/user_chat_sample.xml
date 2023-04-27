@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/userConstraintLayoutClick"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="8dp"
+    android:padding="5dp"
+    android:clickable="true"
+    android:background="?attr/selectableItemBackground"
+    android:focusable="true">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/chatUserProfilePic"
+        android:layout_width="62dp"
+        android:layout_height="62dp"
+        android:src="@drawable/profileplace"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/chatUserName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginEnd="24dp"
+        android:fontFamily="@font/dm_sans_bold"
+        android:text="Andy Robertson"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/chatUserLastMessage"
+        app:layout_constraintEnd_toStartOf="@+id/chatUserTimetxt"
+        app:layout_constraintStart_toEndOf="@+id/chatUserProfilePic"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/chatUserLastMessage"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:fontFamily="@font/dm_sans"
+        android:text="Hello sir, Good Morning"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="@+id/chatUserProfilePic"
+        app:layout_constraintEnd_toStartOf="@+id/chatUserTimetxt"
+        app:layout_constraintStart_toStartOf="@+id/chatUserName"
+        app:layout_constraintTop_toBottomOf="@+id/chatUserName" />
+
+    <TextView
+        android:id="@+id/chatUserTimetxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:text="5m ago"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/chatUserName" />
+</androidx.constraintlayout.widget.ConstraintLayout>

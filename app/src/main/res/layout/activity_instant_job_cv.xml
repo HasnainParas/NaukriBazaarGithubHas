@@ -136,13 +136,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
+            android:layout_marginTop="16dp"
             android:layout_marginEnd="24dp"
-            android:layout_marginBottom="32dp"
             app:cardBackgroundColor="@color/green"
             app:cardCornerRadius="8dp"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent">
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cardView12instant">
 
             <TextView
                 android:id="@+id/textView85instant"
@@ -336,12 +336,13 @@
                 android:layout_height="wrap_content"
                 android:background="@null"
                 android:ems="10"
+                android:paddingBottom="10dp"
                 android:gravity="start"
                 android:hint="Explain why you are the right person for this job"
                 android:inputType="textMultiLine|textPersonName"
                 android:letterSpacing="0.1"
                 android:lineSpacingExtra="4dp"
-                android:minHeight="180dp"
+
                 android:paddingStart="10dp"
                 android:paddingTop="10dp"
                 android:paddingEnd="10dp"

@@ -9,6 +9,9 @@
      On mission to eradicate extreme poverty from the world using the super power of technology!
     </string>
 
+    //FirebaseNotes
+
+
     <!--ADMOB property -->
     <!--    <string name="admob_app_id">ca-app-pub-55208113232525~97</string>-->
     <string name="admob_app_id">ca-app-pub-3940256099942544/3419835294</string>
@@ -283,6 +286,7 @@
     <string name="home">Home</string>
     <string name="find_jobs">Jobs</string>
     <string name="invest">Invest</string>
+    <string name="chat">Messages</string>
     <string name="orderhistory">OrderHistory</string>
     <string name="profile">Profile</string>
     <!-- TODO: Remove or change this placeholder text -->

@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
@@ -11,6 +12,7 @@ import android.widget.Toast;
 import com.appstacks.indiannaukribazaar.JobsPackages.InstantJobs.Adapters.SearchNApplyINjobAdapter;
 import com.appstacks.indiannaukribazaar.NewActivities.JobsActivities.FindJobsActivity;
 import com.appstacks.indiannaukribazaar.databinding.ActivitySearchNapplyInstantJobBinding;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -25,7 +27,6 @@ public class SearchNapplyInstantJobActivity extends AppCompatActivity {
     ArrayList<InstantAddJobsModel> arrayList;
     SearchNApplyINjobAdapter adapter;
     DatabaseReference instantAllJobRef;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,13 +43,14 @@ public class SearchNapplyInstantJobActivity extends AppCompatActivity {
 
 
         instantAllJobRef.addValueEventListener(new ValueEventListener() {
+            @SuppressLint("SetTextI18n")
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()) {
                     for (DataSnapshot s : snapshot.getChildren()) {
                         InstantAddJobsModel data = s.getValue(InstantAddJobsModel.class);
 //                        jobModelArrayList.clear();
-//                        if (!data.getUserAuthId().equals(FirebaseAuth.getInstance().getUid()))
+                        if (!data.getUserAuthID().equals(FirebaseAuth.getInstance().getUid()))
                         arrayList.add(data);
                         adapter = new SearchNApplyINjobAdapter(arrayList, SearchNapplyInstantJobActivity.this);
 

@@ -43,8 +43,10 @@ import com.appstacks.indiannaukribazaar.databinding.ActivityAddJobsBinding;
 
 import com.appstacks.indiannaukribazaar.databinding.HandloadingDialogLayoutBinding;
 import com.appstacks.indiannaukribazaar.profile.ProfileUtils;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -67,7 +69,7 @@ public class AddJobsActivity extends AppCompatActivity {
     private ActivityAddJobsBinding binding;
     private BottomSheetDialog bottomSheetDialog;
     //    int checkRadio;
-    private DatabaseReference allUserNormalJobs;
+    private DatabaseReference allUserNormalJobs, userJobsRef;
     private UserJobModel userJobModel;
     private String userUid;
     private AlertDialog loadingDialog;
@@ -156,7 +158,7 @@ public class AddJobsActivity extends AppCompatActivity {
         userUid = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
 
 
-//        userJobRef = FirebaseDatabase.getInstance().getReference("userJobs");
+        userJobsRef = FirebaseDatabase.getInstance().getReference("NormalJobsWithAuthID");
         allUserNormalJobs = FirebaseDatabase.getInstance().getReference("allUserNormalJobs");
 
         binding.textView28.setOnClickListener(v -> {
@@ -228,20 +230,20 @@ public class AddJobsActivity extends AppCompatActivity {
 //                @SuppressLint({"MissingInflatedId", "LocalSuppress"})
 //                Button btnSaveSalary = bottomsheetView.findViewById(R.id.btnSaveSalaryJob);
 //                btnSaveSalary.setOnClickListener(view1 -> {
-                    if (binding.txtEnterAmount.getText().toString().isEmpty())
-                        binding.txtEnterAmount.setError("Enter amount");
-                    else {
-                        jobSalary = binding.txtEnterAmount.getText().toString() + " " + selectedRadioButton.getText().toString();
+                if (binding.txtEnterAmount.getText().toString().isEmpty())
+                    binding.txtEnterAmount.setError("Enter amount");
+                else {
+                    jobSalary = binding.txtEnterAmount.getText().toString() + " " + selectedRadioButton.getText().toString();
 //                        bottomSheetDialog.dismiss();
-                        binding.BtnSalaryADD.setVisibility(View.GONE);
-                        binding.txtEnterAmount.getText().clear();
-                        binding.txtSalary.setText(jobSalary);
-                        binding.txtSalary.setVisibility(View.VISIBLE);
-                        if (binding.txtSalary.length() != 0){
-                            binding.btnAddJobSalary.setImageResource(R.drawable.ic_edit);
-                        }
-
+                    binding.BtnSalaryADD.setVisibility(View.GONE);
+                    binding.txtEnterAmount.getText().clear();
+                    binding.txtSalary.setText(jobSalary);
+                    binding.txtSalary.setVisibility(View.VISIBLE);
+                    if (binding.txtSalary.length() != 0) {
+                        binding.btnAddJobSalary.setImageResource(R.drawable.ic_edit);
                     }
+
+                }
 
 //                });
 
@@ -697,32 +699,42 @@ public class AddJobsActivity extends AppCompatActivity {
 //        allUserNormalJobs.child(uniqueKey).setValue(userJobModel).addOnSuccessListener(unused ->
 //                Toast.makeText(AddJobsActivity.this, "JobPosted in AllUserNote...\n;)", Toast.LENGTH_SHORT).show());
 
+
+        //Posting in AllUsers Ref
         allUserNormalJobs
                 .child(uniqueKey)
                 .setValue(userJobModel)
                 .addOnSuccessListener(unused -> {
-
                     allUserNormalJobs
                             .child(uniqueKey).child("jobEligibilities")
                             .setValue(profileUtils.fetchSelectedjobEligibilities());
                     allUserNormalJobs
                             .child(uniqueKey).child("jobFacilities")
-                            .setValue(profileUtils.fetchSelectedjobFacilities()).addOnSuccessListener(new OnSuccessListener<Void>() {
-                                @Override
-                                public void onSuccess(Void unused) {
-                                    loadingDialog.dismiss();
-                                    sharedPrefe.deleteAllsharedPre();
-                                    profileUtils.deleteSelectedJobLists();
+                            .setValue(profileUtils.fetchSelectedjobFacilities())
+                            .addOnSuccessListener(unused1 ->
+                                    //Posting in CurrentUser Ref
+                                    userJobsRef.child(userUid)
+                                            .child(uniqueKey)
+                                            .setValue(userJobModel)
+                                            .addOnCompleteListener(task -> {
+                                                if (task.isComplete()) {
+                                                    loadingDialog.dismiss();
+                                                    sharedPrefe.deleteAllsharedPre();
+                                                    profileUtils.deleteSelectedJobLists();
 //                    startActivity(new Intent(AddJobsActivity.this, UserJobDetailsActivity.class));
-                                    Toast.makeText(AddJobsActivity.this, "Job submitted Successfully", Toast.LENGTH_SHORT).show();
-                                    Intent intent = new Intent(AddJobsActivity.this, UserJobDetailsActivity.class);
-                                    intent.putExtra("unikey", uniqueKey);
-                                    startActivity(intent);
-                                    finish();
-                                }
+                                                    Toast.makeText(AddJobsActivity.this, "Job submitted Successfully", Toast.LENGTH_SHORT).show();
+                                                    Intent intent = new Intent(AddJobsActivity.this, UserJobDetailsActivity.class);
+                                                    intent.putExtra("unikey", uniqueKey);
+                                                    startActivity(intent);
+                                                    finish();
+                                                }
+                                            }).addOnFailureListener(e -> {
+                                                loadingDialog.dismiss();
+                                                Toast.makeText(AddJobsActivity.this, e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+                                            })).addOnFailureListener(e -> {
+                                loadingDialog.dismiss();
+                                Toast.makeText(AddJobsActivity.this, e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
                             });
-
-
                 }).addOnFailureListener(e -> {
                     loadingDialog.dismiss();
                     Toast.makeText(AddJobsActivity.this, e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();

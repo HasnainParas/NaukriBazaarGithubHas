@@ -32,7 +32,18 @@
         android:usesCleartextTraffic="true"
         tools:ignore="HardcodedDebugMode"
         tools:targetApi="m">
-
+        <activity
+            android:name=".NewActivities.JobStatusActivies.ProposalsActivity"
+            android:exported="false"
+            android:theme="@style/noactiondisplay" />
+        <activity
+            android:name=".NewActivities.JobStatusActivies.JobStatusActivity"
+            android:exported="false"
+            android:theme="@style/noactiondisplay" />
+        <activity
+            android:name=".ChatActivities.MessagesActivity"
+            android:exported="false"
+            android:theme="@style/noactiondisplay" />
         <activity
             android:name=".NewActivities.JobsActivities.NormalJobCvActivity"
             android:exported="false"
@@ -64,7 +75,6 @@
             android:name=".JobsPackages.InstantJobs.InstantJobCvActivity"
             android:exported="false"
             android:theme="@style/noactiondisplay" />
-
         <activity
             android:name=".Activities.ActivitySplash"
             android:configChanges="orientation|keyboardHidden|screenSize"

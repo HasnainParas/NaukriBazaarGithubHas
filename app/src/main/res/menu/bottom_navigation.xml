@@ -13,9 +13,9 @@
         android:title="@string/find_jobs" />
 
     <item
-        android:id="@+id/invest"
-        android:icon="@drawable/ic_investment"
-        android:title="@string/invest" />
+        android:id="@+id/chat_messages"
+        android:icon="@drawable/chat_icon"
+        android:title="@string/chat" />
 <!--    <item-->
 <!--        android:id="@+id/orderHistory"-->
 <!--        android:title="@string/orderhistory"-->

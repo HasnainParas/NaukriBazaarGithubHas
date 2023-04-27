@@ -1,11 +1,12 @@
 package com.appstacks.indiannaukribazaar.Activities;
 
+import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 
-import com.appstacks.indiannaukribazaar.AaForChecking;
+import com.appstacks.indiannaukribazaar.ChatActivities.Fragments.MessagesFragment;
 import com.appstacks.indiannaukribazaar.NewActivities.JobsActivities.FindJobsActivity;
 import com.appstacks.indiannaukribazaar.NewActivities.KycPaidJobs.KycStartBrowsingActivity;
 
@@ -80,7 +81,7 @@ public class ActivityMain extends AppCompatActivity {
 
     ActivityMainBinding binding;
 
-    private DatabaseReference allUserRef, deviceRefmain,tokenRef;
+    private DatabaseReference allUserRef, deviceRefmain, tokenRef;
     private FirebaseAuth auth;
     private ActionBar actionBar;
     private Toolbar toolbar;
@@ -130,8 +131,6 @@ public class ActivityMain extends AppCompatActivity {
         deviceInfo = Tools.getDeviceInfo(this);
 
 
-
-
         deviceDisable();
 
 //        bottomNav = findViewById(R.id.bottomNav);
@@ -167,12 +166,7 @@ public class ActivityMain extends AppCompatActivity {
 
                             // Get new FCM registration token
                             String token = task.getResult();
-                            tokenRef.child("userToken").setValue(token).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                @Override
-                                public void onComplete(@NonNull Task<Void> task) {
-                                    Toast.makeText(ActivityMain.this, "Post Token", Toast.LENGTH_SHORT).show();
-                                }
-                            });
+                            tokenRef.child("userToken").setValue(token).addOnCompleteListener(task1 -> Toast.makeText(ActivityMain.this, "Post Token", Toast.LENGTH_SHORT).show());
 
 //                            // Log and toast
 //                            String msg = getString(R.string.msg_token_fmt, token);
@@ -256,6 +250,7 @@ public class ActivityMain extends AppCompatActivity {
 
                 case R.id.homeMain:
                     loadFragment(new FragmentHome());
+                    binding.floatingClick.setVisibility(View.VISIBLE);
                     break;
                 case R.id.find_job:
 //                    loadFragment(new JobButtonsFragment());
@@ -299,8 +294,10 @@ public class ActivityMain extends AppCompatActivity {
 
 //                   startActivity(new Intent(ActivityMain.this, KycStartBrowsingActivity.class));
                     break;
-                case R.id.invest:
-                    Toast.makeText(getApplicationContext(), "coming soon", Toast.LENGTH_SHORT).show();
+                case R.id.chat_messages:
+//                    startActivity(new Intent(ActivityMain.this, MessagesActivity.class));
+                    loadFragmentNew(new MessagesFragment());
+                    binding.floatingClick.setVisibility(View.GONE);
                     break;
                 case R.id.profile:
                     startActivity(new Intent(ActivityMain.this, UserProfileActivity.class));
@@ -447,6 +444,7 @@ public class ActivityMain extends AppCompatActivity {
         });
     }
 
+    @SuppressLint("NonConstantResourceId")
     public void onDrawerMenuClick(View view) {
         Fragment fragment = null;
         String title = actionBar.getTitle().toString();
@@ -497,8 +495,20 @@ public class ActivityMain extends AppCompatActivity {
 
     private void loadFragment(Fragment fragment) {
         // load fragment
+        binding.frameContainer.setVisibility(View.VISIBLE);
+        binding.frameContainer2.setVisibility(View.GONE);
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.frame_container, fragment);
+        transaction.addToBackStack(null);
+        transaction.commitAllowingStateLoss();
+    }
+
+    private void loadFragmentNew(Fragment fragment) {
+        // load fragment
+        binding.frameContainer2.setVisibility(View.VISIBLE);
+        binding.frameContainer.setVisibility(View.GONE);
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.frame_container2, fragment);
         transaction.addToBackStack(null);
         transaction.commitAllowingStateLoss();
     }
@@ -608,6 +618,11 @@ public class ActivityMain extends AppCompatActivity {
     private long exitTime = 0;
 
     public void doExitApp() {
+//        if (binding.frameContainer != null) {
+//            loadFragment(new FragmentHome());
+//
+//        }
+
         if ((System.currentTimeMillis() - exitTime) > 2000) {
             Toast.makeText(this, R.string.press_again_exit_app, Toast.LENGTH_SHORT).show();
             exitTime = System.currentTimeMillis();

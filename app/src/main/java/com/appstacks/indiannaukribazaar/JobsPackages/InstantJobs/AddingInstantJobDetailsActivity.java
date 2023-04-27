@@ -1,8 +1,10 @@
 package com.appstacks.indiannaukribazaar.JobsPackages.InstantJobs;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -25,6 +27,10 @@ import com.appstacks.indiannaukribazaar.databinding.InstantpositionlayoutBinding
 import com.appstacks.indiannaukribazaar.databinding.InstanttimeperiodBinding;
 import com.appstacks.indiannaukribazaar.databinding.SkillsrequiredbottomlayoutBinding;
 import com.appstacks.indiannaukribazaar.profile.ProfileUtils;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
@@ -44,7 +50,7 @@ public class AddingInstantJobDetailsActivity extends AppCompatActivity {
 //    InstantCompanyAdapter adapter;
     SharedPrefe sharedPrefe;
 
-    DatabaseReference inJobReference;
+    private DatabaseReference inJobReference, inJobUserRef;
     String userAuthId;
 
 
@@ -65,6 +71,8 @@ public class AddingInstantJobDetailsActivity extends AppCompatActivity {
 
     private String uniqueId;
 
+    ProgressDialog dialog;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,7 +80,11 @@ public class AddingInstantJobDetailsActivity extends AppCompatActivity {
         binding = ActivityAddInstantJobBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 //        selectedSkills = new ArrayList<>();
-//        inJobReference = FirebaseDatabase.getInstance().getReference("InstantJobsWithUserID");
+        dialog = new ProgressDialog(this);
+        dialog.setTitle("Posting Instant Job");
+        dialog.setMessage("Please wait...");
+        dialog.setCancelable(false);
+        inJobUserRef = FirebaseDatabase.getInstance().getReference("InstantJobsWithAuthID");
         inJobReference = FirebaseDatabase.getInstance().getReference("InstantJobs");
 
         userAuthId = FirebaseAuth.getInstance().getCurrentUser().getUid();
@@ -85,7 +97,7 @@ public class AddingInstantJobDetailsActivity extends AppCompatActivity {
 //        Toast.makeText(this, "1: " + sharedPrefe.fetchInstantJobTitle()
 //                + "\n2: " + sharedPrefe.fetchInstantDescription(), Toast.LENGTH_SHORT).show();
 
-        binding.textCompanyInstant.setText(sharedPrefe.fetchInstantCom() +" . "+sharedPrefe.fetchInstantComType());
+        binding.textCompanyInstant.setText(sharedPrefe.fetchInstantCom() + " . " + sharedPrefe.fetchInstantComType());
         binding.txtPositonInstant.setText(sharedPrefe.fetchInstantPos());
         binding.txtBudgetInstant.setText(sharedPrefe.fetchInstantBudget());
         binding.txtTimePeriodInstant.setText(sharedPrefe.fetchInstantTimePeriod());
@@ -115,7 +127,8 @@ public class AddingInstantJobDetailsActivity extends AppCompatActivity {
 //            String ts = tsLong.toString();
 
             Date date = new Date();
-            SimpleDateFormat dateFormat = new SimpleDateFormat("dd-M-yyyy hh:mm:ss");
+//            SimpleDateFormat dateFormat = new SimpleDateFormat("dd-M-yyyy hh:mm:ss");
+            SimpleDateFormat dateFormat = new SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss", Locale.getDefault());
             String stDate = dateFormat.format(date);
 
 
@@ -427,7 +440,7 @@ public class AddingInstantJobDetailsActivity extends AppCompatActivity {
         skillsrequiredBinding.instantSkillReqListView.setOnItemClickListener((adapterView, view, i, l) -> {
             String item = skillRequiredList.get(i);
 
-            //TODO thewr uihifhsdgfyuasidgsdgaysfv j vwue ridagydeorfusfgd ihas igdjsdadgas yugfastydi
+            //TODO skill list issues
             if (listToAdd.isEmpty()) {
                 listToAdd.add(item);
                 gridAdapter.notifyDataSetChanged();
@@ -439,7 +452,7 @@ public class AddingInstantJobDetailsActivity extends AppCompatActivity {
                 Toast.makeText(this, "Already", Toast.LENGTH_SHORT).show();
             }
 
-            if (listToAdd.size() == 10) {
+            if (listToAdd.size() == 3) {
 //                Toast.makeText(this, "Juuu 10 thega", Toast.LENGTH_SHORT).show();
                 skillresultDialog();
 
@@ -529,7 +542,6 @@ public class AddingInstantJobDetailsActivity extends AppCompatActivity {
 
     private void validation() {
 
-
         if (binding.textCompanyInstant.length() == 0) {
             toastshort("Can't be Empty");
         } else if (binding.txtPositonInstant.length() == 0) {
@@ -541,6 +553,7 @@ public class AddingInstantJobDetailsActivity extends AppCompatActivity {
         } else if (selectedSkills == null) {
             toastshort("Can't be Empty");
         } else {
+            dialog.show();
             inJobReference
                     .child(uniqueId)
                     .setValue(jobsModel)
@@ -548,13 +561,28 @@ public class AddingInstantJobDetailsActivity extends AppCompatActivity {
                         inJobReference
                                 .child(uniqueId)
                                 .child("inSkills")
-                                .setValue(profileUtils.fetchSelectedSkills());
-                        sharedPrefe.deleteCom();
-                        profileUtils.deleteSelectedSkills();
-                        startActivity(new Intent(AddingInstantJobDetailsActivity.this, SuccessApplyActivity.class));
-                        finishAffinity();
-                        toastshort("Posted in User");
+                                .setValue(profileUtils.fetchSelectedSkills()).addOnCompleteListener(task -> {
+                                    inJobUserRef.child(userAuthId).child(uniqueId)
+                                            .setValue(jobsModel).addOnSuccessListener(unused -> {
 
+                                        sharedPrefe.deleteCom();
+                                        profileUtils.deleteSelectedSkills();
+                                        dialog.dismiss();
+                                        startActivity(new Intent(AddingInstantJobDetailsActivity.this, SuccessApplyActivity.class));
+                                        finishAffinity();
+                                        toastshort("Posted in User");
+
+                                    }).addOnFailureListener(e -> {
+                                        dialog.dismiss();
+                                        toastshort(e.getLocalizedMessage());
+                                    });
+                                }).addOnFailureListener(e -> {
+                                    dialog.dismiss();
+                                    toastshort(e.getLocalizedMessage());
+                                });
+                    }).addOnFailureListener(e -> {
+                        dialog.dismiss();
+                        toastshort(e.getLocalizedMessage());
                     });
         }
 //        if (binding.txtDescriptionInstant.length() != 0) {
