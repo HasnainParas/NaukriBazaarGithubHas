@@ -70,7 +70,7 @@ public class UserProfileActivity extends AppCompatActivity {
         fetchAppreciation();
         fetchResume();
         fetchHourlyCharges();
-
+fetchUserImage();
 
 
 //     checkForpreferences();
@@ -362,6 +362,23 @@ public class UserProfileActivity extends AppCompatActivity {
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
                 Log.d(TAG, error.getMessage());
+            }
+        });
+
+    }
+    private void fetchUserImage() {
+
+        userRef.child(userId).child("UserImage").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                String url = snapshot.getValue(String.class);
+                Glide.with(getApplicationContext()).load(url).into(binding.circleImageView);
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(UserProfileActivity.this, "" + error.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
 

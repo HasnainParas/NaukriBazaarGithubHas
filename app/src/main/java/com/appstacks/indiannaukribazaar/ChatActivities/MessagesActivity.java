@@ -34,20 +34,20 @@ import java.util.Objects;
 public class MessagesActivity extends AppCompatActivity {
 
 
-    ActivityMessagesBinding binding;
+   private ActivityMessagesBinding binding;
     private String username, userpic;
     //    private String receiverUid;
     private String proposalSenderUID;
     private String proposalUIDFromAllUser;
-    private DatabaseReference chatRef, chatContactsRef;
+    private DatabaseReference chatRef, chatContactsRef,userProfile;
     private FirebaseDatabase database;
-    MessageAdapter adapter;
-    ArrayList<MessageModel> messagess;
-    String sendUID;
+   private MessageAdapter adapter;
+private     ArrayList<MessageModel> messagess;
+  private   String sendUID;
 
-    String senderRoom;
-    String receiverRoom;
-
+  private   String senderRoom;
+ private    String receiverRoom;
+private String userImage;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,6 +58,7 @@ public class MessagesActivity extends AppCompatActivity {
         userpic = getIntent().getStringExtra("UserPic");
         proposalSenderUID = getIntent().getStringExtra("proposalSendedUID");
         proposalUIDFromAllUser = getIntent().getStringExtra("proposalUIdFromAllUser");
+
         sendUID = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
 
 //        if (proposalSenderUID == null) {
@@ -66,14 +67,12 @@ public class MessagesActivity extends AppCompatActivity {
 
         chatRef = FirebaseDatabase.getInstance().getReference("chats");
         chatContactsRef = FirebaseDatabase.getInstance().getReference("UserChatContacts");
+        userProfile=FirebaseDatabase.getInstance().getReference("UsersProfile");
 //        chatContactsRef = FirebaseDatabase.getInstance().getReference();
 
         database = FirebaseDatabase.getInstance();
 
-        Glide.with(this)
-                .load(userpic)
-                .placeholder(R.drawable.profileplace)
-                .into(binding.msgChatDP);
+getProfilePic(proposalSenderUID);
 
         binding.msgChatUsername.setText(username);
         Toast.makeText(this, proposalSenderUID, Toast.LENGTH_SHORT).show();
@@ -245,7 +244,30 @@ public class MessagesActivity extends AppCompatActivity {
         transaction.addToBackStack(null);
         transaction.commitAllowingStateLoss();
     }
+    private void getProfilePic(String userId) {
 
+        userProfile.child(userId).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()) {
+                    userImage = snapshot.child("UserImage").getValue(String.class);
+//                    String budget = snapshot.child("Hourly Charges").getValue(String.class);
+                    Glide.with(MessagesActivity.this)
+                            .load(userImage)
+                            .placeholder(R.drawable.profileplace)
+                            .into(binding.msgChatDP);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                // Toast.makeText(context, error.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
+
+    }
 //    @Override
 //    public void onBackPressed() {
 //        super.onBackPressed();

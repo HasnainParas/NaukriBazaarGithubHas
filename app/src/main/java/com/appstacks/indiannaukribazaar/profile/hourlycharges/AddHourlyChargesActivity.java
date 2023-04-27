@@ -74,7 +74,7 @@ public class AddHourlyChargesActivity extends AppCompatActivity {
     private void uploadHourlyCharges(String charges) {
 
 
-        databaseReference.child(userId).child("Hourly Charges").setValue(charges)
+        databaseReference.child(userId).child("HourlyCharges").setValue(charges)
                 .addOnCompleteListener(task -> {
                     if (task.isComplete() && task.isSuccessful()) {
                         finish();

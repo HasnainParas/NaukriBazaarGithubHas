@@ -81,28 +81,16 @@
 
 
                 <LinearLayout
-                    android:id="@+id/btnEditprofile"
+                    android:id="@+id/btnFollowProfile"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="32dp"
                     android:layout_marginTop="16dp"
                     android:background="@drawable/bg_edit_profile"
                     android:orientation="horizontal"
                     android:padding="4dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toEndOf="@+id/txtFollowingProfile"
+                    app:layout_constraintStart_toEndOf="@+id/txtFollowerProfile"
                     app:layout_constraintTop_toBottomOf="@+id/txtLocationProfile">
-
-                    <TextView
-
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginStart="5dp"
-                        android:layout_marginEnd="5dp"
-                        android:layout_weight="1"
-                        android:text="Edit profile"
-                        android:textColor="@color/white" />
 
                     <ImageView
 
@@ -113,7 +101,20 @@
                         android:layout_marginEnd="5dp"
                         android:layout_weight="1"
                         android:tint="@color/white"
-                        app:srcCompat="@drawable/ic_edit" />
+                        app:srcCompat="@drawable/ic_person" />
+
+                    <TextView
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginEnd="5dp"
+                        android:layout_weight="1"
+                        android:text="Follow"
+                        android:textColor="@color/white" />
+
+
                 </LinearLayout>
 
                 <TextView
@@ -121,25 +122,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/follower"
+
                     android:textColor="@color/white"
+                    app:layout_constraintBottom_toBottomOf="@+id/btnFollowProfile"
+                    app:layout_constraintStart_toStartOf="@+id/txtLocationProfile"
+                    app:layout_constraintTop_toTopOf="@+id/btnFollowProfile" />
 
-                    app:layout_constraintEnd_toStartOf="@+id/txtFollowingProfile"
-                    app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/txtFollowingProfile" />
-
-                <TextView
-                    android:id="@+id/txtFollowingProfile"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:text="@string/following"
-                    android:textColor="@color/white"
-
-                    app:layout_constraintEnd_toStartOf="@+id/btnEditprofile"
-                    app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toEndOf="@+id/txtFollowerProfile"
-                    app:layout_constraintTop_toTopOf="@+id/btnEditprofile" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </LinearLayout>
