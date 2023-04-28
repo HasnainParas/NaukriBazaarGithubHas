@@ -96,10 +96,14 @@ public class ProposalsAdapter extends RecyclerView.Adapter<ProposalsAdapter.view
                 if (snapshot.exists()) {
                     userPic = snapshot.child("UserImage").getValue(String.class);
 //                    String budget = snapshot.child("Hourly Charges").getValue(String.class);
-                    Glide.with(context)
-                            .load(userPic)
-                            .placeholder(R.drawable.placeholder)
-                            .into(holder.binding.proposalPic);
+                    try {
+                        Glide.with(context)
+                                .load(userPic)
+                                .placeholder(R.drawable.placeholder)
+                                .into(holder.binding.proposalPic);
+                    }catch (IllegalArgumentException e){
+
+                    }
 //                    holder.binding.statususerbudgetTview.setText(budget);
 
                 } else {

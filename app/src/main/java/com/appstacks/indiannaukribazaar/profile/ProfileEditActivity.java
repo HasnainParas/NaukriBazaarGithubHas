@@ -20,6 +20,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.appstacks.indiannaukribazaar.FirebaseModels.PersonalInformationModel;
 import com.appstacks.indiannaukribazaar.NewActivities.SettingActivity;
 import com.appstacks.indiannaukribazaar.ProfileModels.AboutMeDescription;
 import com.appstacks.indiannaukribazaar.ProfileModels.AddWorkExperience;
@@ -53,7 +54,7 @@ import java.util.ArrayList;
 public class ProfileEditActivity extends AppCompatActivity {
     private ActivityProfileEditBinding binding;
     private ProfileUtils profileUtils;
-    private DatabaseReference userRef;
+    private DatabaseReference userRef,allUser;
     private String userId;
     private ArrayAdapter<String> adapter;
     private ArrayList<String> list;
@@ -75,6 +76,7 @@ public class ProfileEditActivity extends AppCompatActivity {
         profileUtils = new ProfileUtils(this);
         userRef = FirebaseDatabase.getInstance().getReference("UsersProfile");
         imageRef = FirebaseStorage.getInstance().getReference("UsersProfile");
+        allUser = FirebaseDatabase.getInstance().getReference("UsersInfo");
         resume = new Resume();
         storageReference = FirebaseStorage.getInstance().getReference("Resumes/");
         userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
@@ -87,6 +89,9 @@ public class ProfileEditActivity extends AppCompatActivity {
         fetchAppreciation();
         fetchResume();
         fetchHourlyCharges();
+        fetchNameAddress();
+        fetchFollowers();
+        fetchFollowing();
 
 
 
@@ -215,8 +220,60 @@ public class ProfileEditActivity extends AppCompatActivity {
         startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE_REQUEST);
 
     }
+    private void fetchFollowing() {
+        userRef.child(userId).child("Following").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()) {
+                    int follower = (int) (snapshot.getChildrenCount());
+                    binding.txtFollowingProfile.setText(follower + " Following");
+                }else{
+                    binding.txtFollowingProfile.setText(0 + " Following");
+                }
+            }
 
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
 
+            }
+        });
+    }
+    private void fetchFollowers() {
+        userRef.child(userId).child("Followers").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()) {
+                    int follower = (int) (snapshot.getChildrenCount());
+                    binding.txtFollowerProfile.setText(follower + " Follower");
+                }else{
+                    binding.txtFollowerProfile.setText(0 + " Follower");
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+    private void fetchNameAddress() {
+        allUser.child(userId).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()) {
+                    PersonalInformationModel model = snapshot.getValue(PersonalInformationModel.class);
+
+                    binding.txtNameeditProfile.setText(model.getFirstName()+ " " +model.getLastName());
+                    binding.txtLocationProfile.setText(model.getCity());
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
     private void fetchHourlyCharges() {
         userRef.child(userId).addValueEventListener(new ValueEventListener() {
             @Override
