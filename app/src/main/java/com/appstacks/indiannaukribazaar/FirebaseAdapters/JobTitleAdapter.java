@@ -20,8 +20,8 @@ import java.util.ArrayList;
 
 public class JobTitleAdapter extends RecyclerView.Adapter<JobTitleAdapter.viewHolder> {
 
-   private ArrayList<UserJobModel> userJobModel;
-   private Context context;
+    private ArrayList<UserJobModel> userJobModel;
+    private Context context;
 
     public JobTitleAdapter(ArrayList<UserJobModel> userJobModel, Context context) {
         this.userJobModel = userJobModel;

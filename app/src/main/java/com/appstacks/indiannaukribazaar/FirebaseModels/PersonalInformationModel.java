@@ -1,9 +1,9 @@
 package com.appstacks.indiannaukribazaar.FirebaseModels;
 
 public class PersonalInformationModel {
-    String firstName, lastName, userAddress, city, zipCode, gst, uniqueKey,userId,select;
+private     String firstName, lastName, userAddress, city, zipCode, gst, uniqueKey,userId,select;
 
-    String frontImage,backImage;
+  private   String frontImage,backImage;
 
 
     public PersonalInformationModel() {

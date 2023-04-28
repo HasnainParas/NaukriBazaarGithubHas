@@ -2,16 +2,25 @@ package com.appstacks.indiannaukribazaar.JobsPackages.InstantJobs;
 
 public class JobAppliedModel {
 
-    String information, appliedUserAuthID;
+   private String information, appliedUserAuthID;
+   private String userImage;
 
     public JobAppliedModel() {
     }
 
 
-
-    public JobAppliedModel(String information, String appliedUserAuthID) {
+    public JobAppliedModel(String information, String appliedUserAuthID, String userImage) {
         this.information = information;
         this.appliedUserAuthID = appliedUserAuthID;
+        this.userImage = userImage;
+    }
+
+    public String getUserImage() {
+        return userImage;
+    }
+
+    public void setUserImage(String userImage) {
+        this.userImage = userImage;
     }
 
     public String getInformation() {

@@ -65,6 +65,7 @@ public class InstantJobCvActivity extends AppCompatActivity {
     private Resume resume;
 
     private UserDataModel model;
+    private String userImage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -299,7 +300,7 @@ public class InstantJobCvActivity extends AppCompatActivity {
         resume = new Resume(downloadUrl, pdfName, PdfsizeInString, pdfDate);
         JobAppliedModel appliedModel = new JobAppliedModel(
                 binding.editTextInstant.getText().toString(),
-                currentUserAuth);
+                currentUserAuth,getProfilePic(currentUserAuth));
         appliedInstantJobsRef
                 .child(jobid)
                 .child(currentUserAuth)
@@ -341,7 +342,30 @@ public class InstantJobCvActivity extends AppCompatActivity {
                     }
                 });
     }
+    private String getProfilePic(String userId) {
 
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("UsersProfile");
+        reference.child(userId).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()) {
+                    userImage = snapshot.child("UserImage").getValue(String.class);
+//                    String budget = snapshot.child("Hourly Charges").getValue(String.class);
+                    Toast.makeText(InstantJobCvActivity.this, "Image is exist hahahaha " , Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                // Toast.makeText(context, error.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(InstantJobCvActivity.this, "Image is not exist hahahaha " , Toast.LENGTH_SHORT).show();
+
+            }
+        });
+
+
+        return userImage;
+    }
     @Override
     public void onBackPressed() {
         super.onBackPressed();

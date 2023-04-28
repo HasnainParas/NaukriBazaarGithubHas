@@ -14,7 +14,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
 
-
+import com.appstacks.indiannaukribazaar.FirebaseModels.PersonalInformationModel;
 import com.appstacks.indiannaukribazaar.NewActivities.SettingActivity;
 import com.appstacks.indiannaukribazaar.ProfileModels.AboutMeDescription;
 import com.appstacks.indiannaukribazaar.ProfileModels.AddWorkExperience;
@@ -42,7 +42,7 @@ public class UserProfileActivity extends AppCompatActivity {
     private ActivityUserProfile2Binding binding;
     private ProfileUtils profileUtils;
     private static final String TAG = "UserProfileActivity";
-    private DatabaseReference userRef;
+    private DatabaseReference userRef,allUser;
     private String userId;
     private ArrayList<Feedback> list;
    private FeedbackAdapter adapter;
@@ -59,7 +59,7 @@ public class UserProfileActivity extends AppCompatActivity {
         });
 
         userRef = FirebaseDatabase.getInstance().getReference(getString(R.string.user_profile));
-
+        allUser = FirebaseDatabase.getInstance().getReference("UsersInfo");
         userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
         fetchBio();
@@ -70,9 +70,11 @@ public class UserProfileActivity extends AppCompatActivity {
         fetchAppreciation();
         fetchResume();
         fetchHourlyCharges();
+fetchUserImage();
 
-
-
+fetchNameAddress();
+fetchFollowers();
+fetchFollowing();
 //     checkForpreferences();
 
 
@@ -92,6 +94,25 @@ public class UserProfileActivity extends AppCompatActivity {
         });
     }
 
+
+    private void fetchNameAddress() {
+        allUser.child(userId).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()) {
+                    PersonalInformationModel model = snapshot.getValue(PersonalInformationModel.class);
+
+                    binding.txtNameeditProfile.setText(model.getFirstName()+ " " +model.getLastName());
+                    binding.txtLocationProfile.setText(model.getCity());
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
     private void fetchHourlyCharges() {
         userRef.child(userId).addValueEventListener(new ValueEventListener() {
             @Override
@@ -112,6 +133,42 @@ public class UserProfileActivity extends AppCompatActivity {
         });
     }
 
+    private void fetchFollowing() {
+        userRef.child(userId).child("Following").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()) {
+                    int follower = (int) (snapshot.getChildrenCount());
+                    binding.txtFollowingProfile.setText(follower + " Following");
+                }else{
+                    binding.txtFollowingProfile.setText(0 + " Following");
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+    private void fetchFollowers() {
+        userRef.child(userId).child("Followers").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()) {
+                    int follower = (int) (snapshot.getChildrenCount());
+                    binding.txtFollowerProfile.setText(follower + " Follower");
+                }else{
+                    binding.txtFollowerProfile.setText(0 + " Follower");
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
     private void fetchResume() {
         userRef.child(userId).child("Resume").addValueEventListener(new ValueEventListener() {
             @SuppressLint("SetTextI18n")
@@ -362,6 +419,23 @@ public class UserProfileActivity extends AppCompatActivity {
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
                 Log.d(TAG, error.getMessage());
+            }
+        });
+
+    }
+    private void fetchUserImage() {
+
+        userRef.child(userId).child("UserImage").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                String url = snapshot.getValue(String.class);
+                Glide.with(getApplicationContext()).load(url).into(binding.circleImageView);
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(UserProfileActivity.this, "" + error.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
 
