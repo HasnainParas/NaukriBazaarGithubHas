@@ -38,6 +38,10 @@ public class MessagesFragment extends Fragment {
     private String currentUser;
 
     AllUserAdapter adapter;
+    AllUserAdapter statusadapter;
+    private DatabaseReference chatPresence;
+
+
     ArrayList<ChatContactModel> modelArrayList;
 
     public MessagesFragment() {
@@ -54,6 +58,8 @@ public class MessagesFragment extends Fragment {
 
         allUsersRef = FirebaseDatabase.getInstance().getReference("AllUsers");
         chatContactRef = FirebaseDatabase.getInstance().getReference("UserChatContacts");
+        chatPresence = FirebaseDatabase.getInstance().getReference("chatPresence");
+
 
         modelArrayList = new ArrayList<>();
 
@@ -74,17 +80,19 @@ public class MessagesFragment extends Fragment {
 
                 if (snapshot.exists()) {
                     Toast.makeText(getContext(), "YesExist", Toast.LENGTH_SHORT).show();
-                for (DataSnapshot s : snapshot.getChildren()){
-                    ChatContactModel chatContactModel = s.getValue(ChatContactModel.class);
-                    modelArrayList.add(chatContactModel);
-                    adapter = new AllUserAdapter(modelArrayList,getContext());
+                    for (DataSnapshot s : snapshot.getChildren()) {
+                        ChatContactModel chatContactModel = s.getValue(ChatContactModel.class);
+                        assert chatContactModel != null;
+                        if (!chatContactModel.getUserUUID().equals(FirebaseAuth.getInstance().getUid()))
+                            modelArrayList.add(chatContactModel);
+                        adapter = new AllUserAdapter(modelArrayList, getContext());
 
-                    LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
-                    binding.allUserRec.setAdapter(adapter);
-                    binding.allUserRec.setHasFixedSize(true);
-                    binding.allUserRec.setLayoutManager(linearLayoutManager);
+                        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
+                        binding.allUserRec.setAdapter(adapter);
+                        binding.allUserRec.setHasFixedSize(true);
+                        binding.allUserRec.setLayoutManager(linearLayoutManager);
 
-                }
+                    }
 
 
 //                    holder.binding.proposaName.setText(userDataModel.getFullName());
@@ -95,7 +103,6 @@ public class MessagesFragment extends Fragment {
 //                    holder.binding.proposaName.setText("Not exist");
                     Toast.makeText(getContext(), "oPPs", Toast.LENGTH_SHORT).show();
                 }
-
 
 
             }
@@ -136,9 +143,24 @@ public class MessagesFragment extends Fragment {
         return binding.getRoot();
     }
 
+    private void statusCheck(String statusTxt) {
+        String currentId = FirebaseAuth.getInstance().getUid();
+        assert currentId != null;
+        chatPresence.child(currentId).setValue(statusTxt);
+
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        statusCheck("Offline");
+        Objects.requireNonNull(((AppCompatActivity) getActivity()).getSupportActionBar()).show();
+    }
+
     @Override
     public void onResume() {
         super.onResume();
+        statusCheck("Online");
         Objects.requireNonNull(((AppCompatActivity) getActivity()).getSupportActionBar()).hide();
 
     }

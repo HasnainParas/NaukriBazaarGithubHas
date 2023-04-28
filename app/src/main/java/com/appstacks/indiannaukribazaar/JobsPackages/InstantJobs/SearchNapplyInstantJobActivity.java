@@ -51,7 +51,8 @@ public class SearchNapplyInstantJobActivity extends AppCompatActivity {
                         InstantAddJobsModel data = s.getValue(InstantAddJobsModel.class);
 //                        jobModelArrayList.clear();
                         if (!data.getUserAuthID().equals(FirebaseAuth.getInstance().getUid()))
-                        arrayList.add(data);
+
+                            arrayList.add(data);
                         adapter = new SearchNApplyINjobAdapter(arrayList, SearchNapplyInstantJobActivity.this);
 
                         binding.recyclerViewInJob.setAdapter(adapter);

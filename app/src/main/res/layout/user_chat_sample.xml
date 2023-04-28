@@ -1,23 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/userConstraintLayoutClick"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginTop="8dp"
-    android:padding="5dp"
-    android:clickable="true"
     android:background="?attr/selectableItemBackground"
-    android:focusable="true">
+    android:clickable="true"
+    android:focusable="true"
+    android:padding="5dp">
 
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/chatUserProfilePic"
+    <RelativeLayout
+        android:id="@+id/dotlayout"
         android:layout_width="62dp"
         android:layout_height="62dp"
-        android:src="@drawable/profileplace"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginStart="2dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/chatUserProfilePic"
+            android:layout_width="62dp"
+            android:layout_height="62dp"
+            android:src="@drawable/profileplace" />
+
+        <ImageView
+            android:id="@+id/onlineDot"
+            android:layout_width="10dp"
+            android:layout_height="10dp"
+            android:visibility="gone"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginEnd="10dp"
+            android:src="@drawable/ic_online" />
+
+    </RelativeLayout>
+
+
 
     <TextView
         android:id="@+id/chatUserName"
@@ -31,7 +51,7 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/chatUserLastMessage"
         app:layout_constraintEnd_toStartOf="@+id/chatUserTimetxt"
-        app:layout_constraintStart_toEndOf="@+id/chatUserProfilePic"
+        app:layout_constraintStart_toEndOf="@+id/dotlayout"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
@@ -42,7 +62,7 @@
         android:fontFamily="@font/dm_sans"
         android:text="Hello sir, Good Morning"
         android:textSize="12sp"
-        app:layout_constraintBottom_toBottomOf="@+id/chatUserProfilePic"
+        app:layout_constraintBottom_toBottomOf="@+id/dotlayout"
         app:layout_constraintEnd_toStartOf="@+id/chatUserTimetxt"
         app:layout_constraintStart_toStartOf="@+id/chatUserName"
         app:layout_constraintTop_toBottomOf="@+id/chatUserName" />
