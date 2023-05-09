@@ -16,8 +16,11 @@ import android.widget.Toast;
 
 import com.appstacks.indiannaukribazaar.Activities.ActivityMain;
 import com.appstacks.indiannaukribazaar.FirebaseAdapters.FindjobAdapter;
+import com.appstacks.indiannaukribazaar.FirebaseAdapters.JobTitleAdapter;
 import com.appstacks.indiannaukribazaar.FirebaseModels.FindJobModel;
 import com.appstacks.indiannaukribazaar.FirebaseModels.PersonalInformationModel;
+import com.appstacks.indiannaukribazaar.JobsPackages.InstantJobs.Adapters.SearchNApplyINjobAdapter;
+import com.appstacks.indiannaukribazaar.JobsPackages.InstantJobs.InstantAddJobsModel;
 import com.appstacks.indiannaukribazaar.JobsPackages.InstantJobs.SearchNapplyInstantJobActivity;
 import com.appstacks.indiannaukribazaar.JobsPackages.InstantJobs.InstantJobPostActivity;
 import com.appstacks.indiannaukribazaar.NewActivities.JobStatusActivies.JobStatusActivity;
@@ -36,6 +39,7 @@ import com.google.firebase.database.ValueEventListener;
 
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class FindJobsActivity extends AppCompatActivity {
 
@@ -48,6 +52,8 @@ public class FindJobsActivity extends AppCompatActivity {
     private int size;
 
     private ProfileUtils profileUtils;
+    ArrayList<InstantAddJobsModel> instantJobsList = new ArrayList<>();
+    ArrayList<UserJobModel> normalJobsList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,8 +77,6 @@ public class FindJobsActivity extends AppCompatActivity {
         instantJobsRef = FirebaseDatabase.getInstance().getReference("InstantJobs");
 
 
-
-
         //Funtion
         normalJobSize();
 
@@ -83,7 +87,7 @@ public class FindJobsActivity extends AppCompatActivity {
         recentJobsFetch();
 
         //buttonsClicks
-         binding.addJobBtn.setOnClickListener(new View.OnClickListener() {
+        binding.addJobBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 //                startActivity(new Intent(FindJobsActivity.this, PaidJobsActivity.class));
@@ -118,7 +122,6 @@ public class FindJobsActivity extends AppCompatActivity {
 
             }
         });
-
 
 
     }
@@ -195,9 +198,15 @@ public class FindJobsActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()) {
                     for (DataSnapshot s : snapshot.getChildren()) {
-                        int size = (int) snapshot.getChildrenCount();
-                        binding.normalJobsSize.setText(Integer.toString(size));
+                        UserJobModel datanormal = s.getValue(UserJobModel.class);
+                        assert datanormal != null;
+                        if (!datanormal.getUserAuthId().equals(currentUser))
+                            normalJobsList.add(datanormal);
+                        int totalnormal = instantJobsList.size();
+                        binding.normalJobsSize.setText(Integer.toString(totalnormal));
                     }
+                } else {
+                    binding.normalJobsSize.setText("0");
                 }
             }
 
@@ -216,16 +225,21 @@ public class FindJobsActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()) {
                     for (DataSnapshot s : snapshot.getChildren()) {
-                        int size = (int) snapshot.getChildrenCount();
-                        binding.instantJobSize.setText(Integer.toString(size));
+                        InstantAddJobsModel data = s.getValue(InstantAddJobsModel.class);
+                        assert data != null;
+                        if (!data.getUserAuthID().equals(currentUser))
+                            instantJobsList.add(data);
+                        int total = instantJobsList.size();
+                        binding.instantJobSize.setText(Integer.toString(total));
                     }
+                } else {
+                    binding.instantJobSize.setText("0");
                 }
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
                 Toast.makeText(FindJobsActivity.this, error.getMessage(), Toast.LENGTH_SHORT).show();
-
             }
         });
 
@@ -289,8 +303,8 @@ public class FindJobsActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        startActivity(new Intent(FindJobsActivity.this,ActivityMain.class));
+        startActivity(new Intent(FindJobsActivity.this, ActivityMain.class));
         finishAffinity();
-        
+
     }
 }

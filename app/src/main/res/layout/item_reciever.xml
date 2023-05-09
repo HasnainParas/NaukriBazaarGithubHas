@@ -5,25 +5,40 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_margin="10dp"
-    android:layout_marginLeft="10dp"
+    android:layout_marginStart="10dp"
     android:layout_marginBottom="5dp">
 
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/recieverDpPic"
+        android:layout_width="34dp"
+        android:layout_height="34dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginBottom="4dp"
+        android:src="@drawable/profileplace"
+        app:layout_constraintBottom_toBottomOf="@+id/linearLayout20"
+        app:layout_constraintStart_toStartOf="parent" />
+
     <LinearLayout
+        android:id="@+id/linearLayout20"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="3dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="1dp"
         android:background="@drawable/reciever_drawable"
         android:orientation="vertical"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/recMsgTime"
+        app:layout_constraintStart_toEndOf="@+id/recieverDpPic"
         app:layout_constraintTop_toTopOf="parent">
 
-<!--        <ImageView-->
-<!--            android:id="@+id/imageReceiverAttach"-->
-<!--            android:layout_width="300dp"-->
-<!--            android:layout_height="300dp"-->
-<!--            android:layout_margin="8dp"-->
-<!--            android:scaleType="centerCrop"-->
-<!--            android:visibility="gone"-->
-<!--            app:srcCompat="@drawable/avatar" />-->
+        <!--        <ImageView-->
+        <!--            android:id="@+id/imageReceiverAttach"-->
+        <!--            android:layout_width="300dp"-->
+        <!--            android:layout_height="300dp"-->
+        <!--            android:layout_margin="8dp"-->
+        <!--            android:scaleType="centerCrop"-->
+        <!--            android:visibility="gone"-->
+        <!--            app:srcCompat="@drawable/avatar" />-->
 
         <TextView
             android:id="@+id/recieverText"
@@ -33,9 +48,22 @@
             android:maxWidth="200dp"
             android:minWidth="50dp"
             android:padding="10dp"
-            android:text="Hello world"
+            android:text="There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet "
             android:textColor="@color/white"
             android:visibility="visible" />
+
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/recMsgTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="2dp"
+        android:text="10;00 am"
+        android:textSize="10sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/linearLayout20"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout20" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

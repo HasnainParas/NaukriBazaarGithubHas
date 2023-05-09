@@ -6,12 +6,15 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 
 import com.appstacks.indiannaukribazaar.ChatActivities.Adapters.MessageAdapter;
@@ -22,6 +25,7 @@ import com.appstacks.indiannaukribazaar.NewActivities.JobsActivities.FindJobsAct
 import com.appstacks.indiannaukribazaar.R;
 import com.appstacks.indiannaukribazaar.databinding.ActivityMessagesBinding;
 import com.bumptech.glide.Glide;
+import com.google.android.gms.common.util.ScopeUtil;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -33,8 +37,12 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Locale;
 import java.util.Objects;
 
 public class MessagesActivity extends AppCompatActivity {
@@ -151,42 +159,38 @@ public class MessagesActivity extends AppCompatActivity {
         binding.recyclerViewChat.setHasFixedSize(true);
         binding.recyclerViewChat.setLayoutManager(linearLayoutManager);
 
-        chatContactsRef.child(sendUID).child(proposalSenderUID).addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if (snapshot.exists()) {
-                    Toast.makeText(MessagesActivity.this, "Exists", Toast.LENGTH_SHORT).show();
-                    binding.sendBtnCard.setVisibility(View.VISIBLE);
-                    binding.sendBtnCard2.setVisibility(View.GONE);
-                } else {
-                    binding.sendBtnCard2.setVisibility(View.VISIBLE);
-                    binding.sendBtnCard.setVisibility(View.GONE);
-
-                }
-//                    Toast.makeText(MessagesActivity.this, sendUID, Toast.LENGTH_SHORT).show();
-//                    for (DataSnapshot s : snapshot.getChildren()) {
-//                        ChatContactModel model = s.getValue(ChatContactModel.class);
-//                        assert model != null;
-//                        if (model.getUserUUID().equals(proposalSenderUID))
+//        chatContactsRef.child(sendUID).child(proposalSenderUID).addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                if (snapshot.exists()) {
+//                    Toast.makeText(MessagesActivity.this, "Exists", Toast.LENGTH_SHORT).show();
+//                    binding.sendBtnCard.setVisibility(View.VISIBLE);
+//                    binding.sendBtnCard2.setVisibility(View.GONE);
+//                } else {
+//                    binding.sendBtnCard2.setVisibility(View.VISIBLE);
+//                    binding.sendBtnCard.setVisibility(View.GONE);
 //
-//                    }
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(MessagesActivity.this, "Ksss", Toast.LENGTH_SHORT).show();
-            }
-        });
+//                }
+////                    Toast.makeText(MessagesActivity.this, sendUID, Toast.LENGTH_SHORT).show();
+////                    for (DataSnapshot s : snapshot.getChildren()) {
+////                        ChatContactModel model = s.getValue(ChatContactModel.class);
+////                        assert model != null;
+////                        if (model.getUserUUID().equals(proposalSenderUID))
+////
+////                    }
+//
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError error) {
+//                Toast.makeText(MessagesActivity.this, "Ksss", Toast.LENGTH_SHORT).show();
+//            }
+//        });
 
 
         chatRef.child(senderRoom)
-                        .
-
-                child("messages")
-                        .
-
-                addValueEventListener(new ValueEventListener() {
+                .child("messages").addValueEventListener(new ValueEventListener() {
+                    @SuppressLint("NotifyDataSetChanged")
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         messagess.clear();
@@ -207,8 +211,26 @@ public class MessagesActivity extends AppCompatActivity {
 
         binding.sendBtnCard.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View viewSendbtn) {
+
                 String messageTxt = binding.msgChatEditBox.getText().toString();
+                //for LastMsgTime
+
+                Date date = new Date();
+//            SimpleDateFormat dateFormat = new SimpleDateFormat("dd-M-yyyy hh:mm:ss");
+                SimpleDateFormat dateFormat = new SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss", Locale.getDefault());
+                String stDate = dateFormat.format(date);
+                //for LastMsgTime
+
+
+                //for chatTIme
+                Calendar calendar = Calendar.getInstance();
+
+//                 Format the time in 12-hour format with AM/PM
+                SimpleDateFormat timeFormat = new SimpleDateFormat("dd/MM/yyyy hh:mm a", Locale.getDefault());
+                String formattedTime2 = timeFormat.format(calendar.getTime());
+                //for chatTime
+
 
                 if (messageTxt.isEmpty()) {
                     binding.msgChatEditBox.setError("Field can't be empty");
@@ -216,7 +238,14 @@ public class MessagesActivity extends AppCompatActivity {
 
                     String randomKey = database.getReference().push().getKey();
 
-                    MessageModel message = new MessageModel(messageTxt, sendUID);
+
+                    MessageModel message = new MessageModel(messageTxt, sendUID, formattedTime2);
+
+                    HashMap<String, Object> lastMsgObj = new HashMap<>();
+                    lastMsgObj.put("lastMsg", message.getMessage());
+                    lastMsgObj.put("lastMsgTime", stDate);
+                    chatRef.child(senderRoom).updateChildren(lastMsgObj);
+                    chatRef.child(receiverRoom).updateChildren(lastMsgObj);
 
 
                     if (randomKey != null) {
@@ -233,8 +262,10 @@ public class MessagesActivity extends AppCompatActivity {
                                                 .setValue(message).addOnSuccessListener(new OnSuccessListener<Void>() {
                                                     @Override
                                                     public void onSuccess(Void unused) {
-
+//                                                        chatRef.child(senderRoom).child("msgcount").push().setValue("count");
+                                                        chatRef.child(receiverRoom).child("msgcount").push().setValue("count");
                                                         binding.msgChatEditBox.getText().clear();
+                                                        hideKeyboarddd(viewSendbtn);
                                                         Toast.makeText(MessagesActivity.this, "Juu", Toast.LENGTH_SHORT).show();
                                                     }
                                                 });
@@ -251,24 +282,44 @@ public class MessagesActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                // old code
-//                String stenderRoom = sendUID + "-" + proposalSenderUID;
-//                String rteceiverRoom = proposalSenderUID + "-" + sendUID;
-//
-//
-//                chatContactsRef.child(stenderRoom).setValue(sendUID);
-//                chatContactsRef.child(rteceiverRoom).setValue(proposalSenderUID);
-//                /*
                 String messageTxt = binding.msgChatEditBox.getText().toString();
                 ChatContactModel sendContactModel = new ChatContactModel(proposalSenderUID);
                 ChatContactModel receiverContactModel = new ChatContactModel(sendUID);
+                //for LastMsgTime
+                Date date = new Date();
+//            SimpleDateFormat dateFormat = new SimpleDateFormat("dd-M-yyyy hh:mm:ss");
+                SimpleDateFormat dateFormat = new SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss", Locale.getDefault());
+                String stDate = dateFormat.format(date);
+                //for LastMsgTime
+
+                //chatime
+
+                Calendar calendar = Calendar.getInstance();
+                int hour = calendar.get(Calendar.HOUR);
+                int minute = calendar.get(Calendar.MINUTE);
+                int am_pm = calendar.get(Calendar.AM_PM);
+
+//                 Format the time in 12-hour format with AM/PM
+                SimpleDateFormat timeFormat = new SimpleDateFormat("dd/MM/yyyy hh:mm a", Locale.getDefault());
+                String formattedTime1 = timeFormat.format(calendar.getTime());
+                //chattime
+
+
                 if (messageTxt.isEmpty()) {
                     binding.msgChatEditBox.setError("Field can't be empty");
                 } else {
                     String randomKey = database.getReference().push().getKey();
 
-                    MessageModel message = new MessageModel(messageTxt, sendUID);
+                    MessageModel message = new MessageModel(messageTxt, sendUID, formattedTime1);
 
+                    HashMap<String, Object> lastMsgObj = new HashMap<>();
+                    lastMsgObj.put("lastMsg", message.getMessage());
+                    lastMsgObj.put("lastMsgTime", stDate);
+                    chatRef.child(senderRoom).updateChildren(lastMsgObj);
+                    chatRef.child(receiverRoom).updateChildren(lastMsgObj);
+
+//                    chatRef.child(senderRoom).child("msgcount").push();
+//                    chatRef.child(receiverRoom).child("msgcount").push();
 
                     if (randomKey != null) {
                         chatRef.child(senderRoom)
@@ -284,29 +335,38 @@ public class MessagesActivity extends AppCompatActivity {
                                                 .setValue(message).addOnSuccessListener(new OnSuccessListener<Void>() {
                                                     @Override
                                                     public void onSuccess(Void unused) {
-                                                        chatContactsRef.child(sendUID).child(proposalSenderUID).setValue(sendContactModel).addOnCompleteListener(task -> {
-                                                            if (task.isComplete()) {
-                                                                chatContactsRef.child(proposalSenderUID).child(sendUID).setValue(receiverContactModel).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                                                    @Override
-                                                                    public void onComplete(@NonNull Task<Void> task) {
-                                                                        if (task.isComplete()) {
-                                                                            binding.msgChatEditBox.getText().clear();
-                                                                            Toast.makeText(MessagesActivity.this, "Juu2", Toast.LENGTH_SHORT).show();
-                                                                        }
+                                                        chatContactsRef
+                                                                .child(sendUID)
+                                                                .child(proposalSenderUID)
+                                                                .setValue(sendContactModel)
+                                                                .addOnCompleteListener(task -> {
+                                                                    if (task.isComplete()) {
+                                                                        chatContactsRef
+                                                                                .child(proposalSenderUID)
+                                                                                .child(sendUID)
+                                                                                .setValue(receiverContactModel)
+                                                                                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                                                    @Override
+                                                                                    public void onComplete(@NonNull Task<Void> task) {
+                                                                                        if (task.isComplete()) {
+                                                                                            binding.msgChatEditBox.getText().clear();
+                                                                                            Toast.makeText(MessagesActivity.this, "Juu2", Toast.LENGTH_SHORT).show();
+                                                                                        }
+                                                                                    }
+                                                                                }).addOnFailureListener(new OnFailureListener() {
+                                                                                    @Override
+                                                                                    public void onFailure(@NonNull Exception e) {
+                                                                                        Toast.makeText(MessagesActivity.this, e.getLocalizedMessage() + "", Toast.LENGTH_SHORT).show();
+                                                                                    }
+                                                                                });
                                                                     }
                                                                 }).addOnFailureListener(new OnFailureListener() {
                                                                     @Override
                                                                     public void onFailure(@NonNull Exception e) {
+                                                                        Toast.makeText(MessagesActivity.this, e.getLocalizedMessage() + "", Toast.LENGTH_SHORT).show();
 
                                                                     }
                                                                 });
-                                                            }
-                                                        }).addOnFailureListener(new OnFailureListener() {
-                                                            @Override
-                                                            public void onFailure(@NonNull Exception e) {
-
-                                                            }
-                                                        });
 
 
                                                     }
@@ -331,7 +391,14 @@ public class MessagesActivity extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-
+//                binding.offerBtn.setVisibility(View.GONE);
+                if (binding.msgChatEditBox.getText().toString().isEmpty()){
+                    binding.offerBtn.setVisibility(View.VISIBLE);
+                    binding.attachBtn.setVisibility(View.VISIBLE);
+                }else {
+                    binding.offerBtn.setVisibility(View.GONE);
+                    binding.attachBtn.setVisibility(View.GONE);
+                }
             }
 
             @Override
@@ -352,6 +419,11 @@ public class MessagesActivity extends AppCompatActivity {
 
     }
 
+    private void hideKeyboarddd(View view) {
+        InputMethodManager inputMethodManager =(InputMethodManager)getSystemService(Activity.INPUT_METHOD_SERVICE);
+        inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
+    }
+
 
     private void statusCheck(String statusTxt) {
         String currentId = FirebaseAuth.getInstance().getUid();
@@ -364,6 +436,7 @@ public class MessagesActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         statusCheck("Online");
+        chatContact();
     }
 
     @Override
@@ -376,11 +449,7 @@ public class MessagesActivity extends AppCompatActivity {
 
     }
 
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-
+    private void chatContact() {
         chatContactsRef.child(sendUID).child(proposalSenderUID).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -408,6 +477,42 @@ public class MessagesActivity extends AppCompatActivity {
                 Toast.makeText(MessagesActivity.this, "Ksss", Toast.LENGTH_SHORT).show();
             }
         });
+
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        chatContact();
+
+//        chatContactsRef.child(sendUID).child(proposalSenderUID).addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                if (snapshot.exists()) {
+//                    Toast.makeText(MessagesActivity.this, "Exists", Toast.LENGTH_SHORT).show();
+//                    binding.sendBtnCard.setVisibility(View.VISIBLE);
+//                    binding.sendBtnCard2.setVisibility(View.GONE);
+//                } else {
+//                    binding.sendBtnCard2.setVisibility(View.VISIBLE);
+//                    binding.sendBtnCard.setVisibility(View.GONE);
+//
+//                }
+////                    Toast.makeText(MessagesActivity.this, sendUID, Toast.LENGTH_SHORT).show();
+////                    for (DataSnapshot s : snapshot.getChildren()) {
+////                        ChatContactModel model = s.getValue(ChatContactModel.class);
+////                        assert model != null;
+////                        if (model.getUserUUID().equals(proposalSenderUID))
+////
+////                    }
+//
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError error) {
+//                Toast.makeText(MessagesActivity.this, "Ksss", Toast.LENGTH_SHORT).show();
+//            }
+//        });
 
 
 //        chatContactsRef.child(sendUID).addValueEventListener(new ValueEventListener() {
@@ -433,6 +538,7 @@ public class MessagesActivity extends AppCompatActivity {
 //                Toast.makeText(MessagesActivity.this, "Ksss", Toast.LENGTH_SHORT).show();
 //            }
 //        });
+        chatRef.child(senderRoom).child("msgcount").removeValue();
 
     }
 

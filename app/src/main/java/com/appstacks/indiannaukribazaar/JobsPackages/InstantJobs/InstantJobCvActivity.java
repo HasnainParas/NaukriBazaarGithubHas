@@ -92,6 +92,7 @@ public class InstantJobCvActivity extends AppCompatActivity {
 
         fetchDetails();
         fetchToken();
+        fetchCurrentUserName();
         binding.cvTimeTextinstant.setText(timeText);
 
         binding.cvuploadClickBtninstant.setOnClickListener(v -> pickPdf());
@@ -139,6 +140,23 @@ public class InstantJobCvActivity extends AppCompatActivity {
         });
 
     }
+
+    private void fetchCurrentUserName() {
+
+        alluserRef.child(currentUserAuth).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists())
+                    currentUserName = snapshot.child("fullName").getValue(String.class);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
 
     private void fetchToken() {
         if (userauthid != null) {
@@ -300,7 +318,7 @@ public class InstantJobCvActivity extends AppCompatActivity {
         resume = new Resume(downloadUrl, pdfName, PdfsizeInString, pdfDate);
         JobAppliedModel appliedModel = new JobAppliedModel(
                 binding.editTextInstant.getText().toString(),
-                currentUserAuth,getProfilePic(currentUserAuth));
+                currentUserAuth, getProfilePic(currentUserAuth));
         appliedInstantJobsRef
                 .child(jobid)
                 .child(currentUserAuth)
@@ -342,6 +360,7 @@ public class InstantJobCvActivity extends AppCompatActivity {
                     }
                 });
     }
+
     private String getProfilePic(String userId) {
 
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("UsersProfile");
@@ -351,14 +370,14 @@ public class InstantJobCvActivity extends AppCompatActivity {
                 if (snapshot.exists()) {
                     userImage = snapshot.child("UserImage").getValue(String.class);
 //                    String budget = snapshot.child("Hourly Charges").getValue(String.class);
-                    Toast.makeText(InstantJobCvActivity.this, "Image is exist hahahaha " , Toast.LENGTH_SHORT).show();
+                    Toast.makeText(InstantJobCvActivity.this, "Image is exist hahahaha ", Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
                 // Toast.makeText(context, error.getMessage(), Toast.LENGTH_SHORT).show();
-                Toast.makeText(InstantJobCvActivity.this, "Image is not exist hahahaha " , Toast.LENGTH_SHORT).show();
+                Toast.makeText(InstantJobCvActivity.this, "Image is not exist hahahaha ", Toast.LENGTH_SHORT).show();
 
             }
         });
@@ -366,6 +385,7 @@ public class InstantJobCvActivity extends AppCompatActivity {
 
         return userImage;
     }
+
     @Override
     public void onBackPressed() {
         super.onBackPressed();

@@ -3,6 +3,8 @@ package com.appstacks.indiannaukribazaar.ChatActivities.Adapters;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Typeface;
+import android.text.format.DateUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,7 +27,10 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Locale;
 import java.util.Objects;
 
 public class AllUserAdapter extends RecyclerView.Adapter<AllUserAdapter.viewHolder> {
@@ -62,6 +67,67 @@ public class AllUserAdapter extends RecyclerView.Adapter<AllUserAdapter.viewHold
 
 //        holder.binding.chatUserName.setText(model.getUserUUID());
         receiverUUid = model.getUserUUID();
+
+        String senderID = FirebaseAuth.getInstance().getUid();
+
+        String senderROOM = senderID + model.getUserUUID();
+        String receiveROOM = model.getUserUUID() + senderID;
+
+        FirebaseDatabase.getInstance().getReference().
+                child("chats").
+                child(senderROOM).
+                addValueEventListener(new ValueEventListener() {
+                    @SuppressLint("SetTextI18n")
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        if (snapshot.exists()) {
+                            String lastMsg = snapshot.child("lastMsg").getValue(String.class);
+                            String lastMsgTime = snapshot.child("lastMsgTime").getValue(String.class);
+//                            holder.binding.userConstraintLayoutClick.setOnClickListener(v -> {
+//                                Toast.makeText(context, lastMsgTime, Toast.LENGTH_SHORT).show();
+//                            });
+                            holder.binding.chatUserLastMessage.setText(lastMsg);
+                            String totaltime = calculateTimeAgoo(lastMsgTime);
+                            holder.binding.chatUserTimetxt.setText(totaltime);
+                        } else {
+                            holder.binding.chatUserLastMessage.setText("Tap to chat");
+                        }
+
+
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+
+
+        FirebaseDatabase.getInstance().getReference().
+                child("chats").
+                child(senderROOM).child("msgcount").
+                addValueEventListener(new ValueEventListener() {
+                    @SuppressLint("SetTextI18n")
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        if (snapshot.exists()) {
+                            holder.binding.chatUserLastMessage.setTypeface(Typeface.DEFAULT_BOLD);
+                            holder.binding.textView98.setVisibility(View.VISIBLE);
+                            int countsize = (int) snapshot.getChildrenCount();
+                            holder.binding.textView98.setText(countsize + "");
+
+                        } else {
+                            holder.binding.textView98.setVisibility(View.GONE);
+                            holder.binding.chatUserLastMessage.setTypeface(Typeface.DEFAULT);
+                            Toast.makeText(context, "Juuu", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
 
 
         holder.binding.userConstraintLayoutClick.setOnClickListener(new View.OnClickListener() {
@@ -157,6 +223,25 @@ public class AllUserAdapter extends RecyclerView.Adapter<AllUserAdapter.viewHold
             }
         });
 
+
+    }
+
+    private String calculateTimeAgoo(String lastMsgTime) {
+        SimpleDateFormat sdf = new SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss", Locale.getDefault());
+//        SimpleDateFormat sdf = new SimpleDateFormat("dd-M-yyyy hh:mm:ss");
+
+        try {
+            long time = sdf.parse(lastMsgTime).getTime();
+            long now = System.currentTimeMillis();
+            CharSequence ago =
+                    DateUtils.getRelativeTimeSpanString(time, now, DateUtils.MINUTE_IN_MILLIS);
+            return ago + "";
+
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        return "";
 
     }
 

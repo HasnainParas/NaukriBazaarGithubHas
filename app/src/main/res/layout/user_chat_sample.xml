@@ -29,14 +29,13 @@
             android:id="@+id/onlineDot"
             android:layout_width="10dp"
             android:layout_height="10dp"
-            android:visibility="gone"
             android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
             android:layout_marginEnd="10dp"
-            android:src="@drawable/ic_online" />
+            android:src="@drawable/ic_online"
+            android:visibility="gone" />
 
     </RelativeLayout>
-
 
 
     <TextView
@@ -46,7 +45,6 @@
         android:layout_marginStart="12dp"
         android:layout_marginEnd="24dp"
         android:fontFamily="@font/dm_sans_bold"
-        android:text="Andy Robertson"
         android:textColor="@color/black"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/chatUserLastMessage"
@@ -58,21 +56,37 @@
         android:id="@+id/chatUserLastMessage"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
+        android:layout_marginEnd="32dp"
+        android:ellipsize="end"
         android:fontFamily="@font/dm_sans"
-        android:text="Hello sir, Good Morning"
+        android:maxLines="1"
         android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="@+id/dotlayout"
-        app:layout_constraintEnd_toStartOf="@+id/chatUserTimetxt"
+        app:layout_constraintEnd_toStartOf="@+id/textView98"
         app:layout_constraintStart_toStartOf="@+id/chatUserName"
         app:layout_constraintTop_toBottomOf="@+id/chatUserName" />
+
+    <TextView
+        android:id="@+id/textView98"
+        android:layout_width="15dp"
+        android:layout_height="15dp"
+        android:layout_marginEnd="4dp"
+        android:background="@drawable/msgcount_bg"
+        android:gravity="center"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="9sp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@+id/chatUserLastMessage"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/chatUserLastMessage" />
 
     <TextView
         android:id="@+id/chatUserTimetxt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
-        android:text="5m ago"
+        android:text=""
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/chatUserName" />
 </androidx.constraintlayout.widget.ConstraintLayout>

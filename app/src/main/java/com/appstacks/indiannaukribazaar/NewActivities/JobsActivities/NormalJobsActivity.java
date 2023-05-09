@@ -54,7 +54,9 @@ public class NormalJobsActivity extends AppCompatActivity {
                     for (DataSnapshot s : snapshot.getChildren()) {
                         data = s.getValue(UserJobModel.class);
 //                        jobModelArrayList.clear();
-                        jobModelArrayList.add(data);
+                        assert data != null;
+                        if (!data.getUserAuthId().equals(FirebaseAuth.getInstance().getUid()))
+                            jobModelArrayList.add(data);
 //                        if (!data.getUserAuthId().equals(FirebaseAuth.getInstance().getCurrentUser().getUid())) {
 //
 //                            Log.d(TAG, "Jobs found");
