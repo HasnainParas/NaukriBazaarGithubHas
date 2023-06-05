@@ -1159,8 +1159,6 @@
                 android:background="@drawable/spring_dot_stroke_background">
 
                 <TextView
-
-
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
@@ -1168,7 +1166,6 @@
                     android:fontFamily="@font/dm_sans"
                     android:text="Enter Specialization"
                     android:textColor="@color/black"
-
                     android:textSize="16sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"

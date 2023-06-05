@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
+import com.appstacks.indiannaukribazaar.ChatActivities.MessagesActivity;
 import com.appstacks.indiannaukribazaar.JobsPackages.InstantJobs.Adapters.InJobDetailsAdapter;
 import com.appstacks.indiannaukribazaar.NewActivities.JobsActivities.N_JobsDetailActivity;
 import com.appstacks.indiannaukribazaar.NewActivities.JobsActivities.NormalJobCvActivity;
@@ -55,6 +56,13 @@ public class SearchNApplyInJobDetailActivity extends AppCompatActivity {
 
 
         Toast.makeText(this, jobUserAuth + " ", Toast.LENGTH_SHORT).show();
+
+        binding.jobChatBtnInstant.setOnClickListener(v -> {
+            Intent intent = new Intent(SearchNApplyInJobDetailActivity.this, MessagesActivity.class);
+            intent.putExtra("proposalSendedUID",jobUserAuth);
+            startActivity(intent);
+        });
+
 
         binding.ApplyJobBTnInstant.setOnClickListener(v -> {
             if (randomIdJob != null) {

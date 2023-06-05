@@ -137,6 +137,7 @@ public class AllUserAdapter extends RecyclerView.Adapter<AllUserAdapter.viewHold
 //                in.putExtra("UserPic",model.getUserUUID());
                 in.putExtra("UserName", holder.binding.chatUserName.getText().toString());
                 in.putExtra("proposalSendedUID", model.getUserUUID());
+                in.putExtra("jobIDProposal", model.getJobID());
 //                in.putExtra("proposalUIdFromAllUser",model.getUserUUID());
                 context.startActivity(in);
 

@@ -2,68 +2,361 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="10dp"
     android:layout_marginStart="10dp"
     android:layout_marginBottom="5dp">
 
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/recieverDpPic"
-        android:layout_width="34dp"
-        android:layout_height="34dp"
-        android:layout_marginStart="4dp"
-        android:layout_marginBottom="4dp"
-        android:src="@drawable/profileplace"
-        app:layout_constraintBottom_toBottomOf="@+id/linearLayout20"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <LinearLayout
-        android:id="@+id/linearLayout20"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="3dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="1dp"
-        android:background="@drawable/reciever_drawable"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toTopOf="@+id/recMsgTime"
-        app:layout_constraintStart_toEndOf="@+id/recieverDpPic"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/msgLayoutRec"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <!--        <ImageView-->
-        <!--            android:id="@+id/imageReceiverAttach"-->
-        <!--            android:layout_width="300dp"-->
-        <!--            android:layout_height="300dp"-->
-        <!--            android:layout_margin="8dp"-->
-        <!--            android:scaleType="centerCrop"-->
-        <!--            android:visibility="gone"-->
-        <!--            app:srcCompat="@drawable/avatar" />-->
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/recieverDpPic"
+            android:layout_width="34dp"
+            android:layout_height="34dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginBottom="3dp"
+            android:src="@drawable/profileplace"
+            app:layout_constraintBottom_toBottomOf="@+id/linearLayout20"
+            app:layout_constraintStart_toStartOf="parent" />
 
-        <TextView
-            android:id="@+id/recieverText"
+        <LinearLayout
+            android:id="@+id/linearLayout20"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:inputType="textLongMessage|textMultiLine"
-            android:maxWidth="200dp"
-            android:minWidth="50dp"
-            android:padding="10dp"
-            android:text="There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet "
-            android:textColor="@color/white"
-            android:visibility="visible" />
+            android:layout_marginStart="3dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="3dp"
+            android:background="@drawable/reciever_drawable"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toTopOf="@+id/recMsgTime"
+            app:layout_constraintStart_toEndOf="@+id/recieverDpPic"
+            app:layout_constraintTop_toTopOf="parent">
 
-    </LinearLayout>
+            <!--        <ImageView-->
+            <!--            android:id="@+id/imageReceiverAttach"-->
+            <!--            android:layout_width="300dp"-->
+            <!--            android:layout_height="300dp"-->
+            <!--            android:layout_margin="8dp"-->
+            <!--            android:scaleType="centerCrop"-->
+            <!--            android:visibility="gone"-->
+            <!--            app:srcCompat="@drawable/avatar" />-->
 
-    <TextView
-        android:id="@+id/recMsgTime"
-        android:layout_width="wrap_content"
+            <TextView
+                android:id="@+id/recieverText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="textLongMessage|textMultiLine"
+                android:maxWidth="200dp"
+                android:minWidth="50dp"
+                android:padding="10dp"
+                android:text="There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet "
+                android:textColor="@color/white"
+                android:visibility="visible" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/recMsgTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="3dp"
+            android:layout_marginBottom="3dp"
+            android:text="10:00 am"
+            android:textSize="10sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/linearLayout20"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout20" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/offerLayoutReceiver"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="2dp"
-        android:text="10;00 am"
-        android:textSize="10sp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="72dp"
+        android:layout_marginBottom="8dp"
+        android:visibility="gone"
+        app:cardCornerRadius="4dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/linearLayout20"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout20" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="5dp">
+
+            <TextView
+                android:id="@+id/offerJobTitleRec"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/dm_sans_bold"
+                android:text="---"
+                android:textColor="@color/black"
+                android:textSize="12sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardmsgoffer"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="8dp"
+                app:cardCornerRadius="4dp"
+                app:cardElevation="4dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/offerJobTitleRec">
+
+                <LinearLayout
+                    android:id="@+id/dealLayoutRec"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:visibility="gone">
+
+                    <ImageView
+                        android:id="@+id/deaLiMgRec"
+                        android:layout_width="68dp"
+                        android:layout_height="52dp"
+                        android:layout_gravity="center"
+                        android:visibility="visible"
+                        app:srcCompat="@drawable/deal_cancel_png1" />
+
+                    <TextView
+                        android:id="@+id/dealDetailTxtRec"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/dm_sans_bold"
+                        android:text="Deal Cancel"
+                        android:textColor="@color/black"
+                        android:visibility="visible" />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/offerDescriptionTxtRec"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_margin="20dp"
+                    android:fontFamily="@font/dm_sans"
+                    android:text="Your offer was accepted."
+                    android:textColor="@color/black"
+                    android:textSize="8sp" />
+            </androidx.cardview.widget.CardView>
+
+            <LinearLayout
+                android:id="@+id/linearLayout22"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:gravity="center|start"
+                android:orientation="horizontal"
+                app:layout_constraintStart_toStartOf="@+id/cardmsgoffer"
+                app:layout_constraintTop_toBottomOf="@+id/cardmsgoffer">
+
+                <TextView
+                    android:id="@+id/budgettxtViewforshow"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/dm_sans_bold"
+                    android:text="Budget :"
+                    android:textColor="@color/black"
+                    android:textSize="8sp" />
+
+                <TextView
+                    android:id="@+id/offerJobBudgetReceiver"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:fontFamily="@font/dm_sans"
+                    android:text="---"
+                    android:textColor="@color/black"
+                    android:textSize="8sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:gravity="center|start"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="@+id/cardmsgoffer"
+                app:layout_constraintTop_toBottomOf="@+id/cardmsgoffer">
+
+                <TextView
+                    android:id="@+id/jobdeliveryTxtonlyforShow"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/dm_sans_bold"
+                    android:text="Delivery Time :"
+                    android:textColor="@color/black"
+                    android:textSize="8sp" />
+
+                <TextView
+                    android:id="@+id/offerJobDeliveryTime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="5dp"
+                    android:fontFamily="@font/dm_sans"
+                    android:text="-- Days"
+                    android:textColor="@color/black"
+                    android:textSize="8sp" />
+            </LinearLayout>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/acceptndRejectBtnLayoutReceiver"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:visibility="gone"
+                app:cardBackgroundColor="#E9EBEF"
+                app:cardCornerRadius="7dp"
+                app:layout_constraintEnd_toEndOf="@+id/cardmsgoffer"
+                app:layout_constraintStart_toStartOf="@+id/cardmsgoffer"
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout22">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="2dp">
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/acceptOfferbtnRec"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center|start"
+                        android:layout_marginStart="2dp"
+                        app:cardBackgroundColor="@color/greenOfferChat"
+                        app:cardCornerRadius="7dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <TextView
+                            android:id="@+id/textView10445"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/dm_sans"
+                            android:paddingStart="10dp"
+                            android:paddingTop="2dp"
+                            android:paddingEnd="10dp"
+                            android:paddingBottom="2dp"
+                            android:text="Accept"
+                            android:textColor="@color/white"
+                            android:textSize="8sp" />
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/offerRejectBtnRec"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center|end"
+                        android:layout_marginEnd="2dp"
+                        app:cardBackgroundColor="@color/redOfferChat"
+                        app:cardCornerRadius="7dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <TextView
+                            android:id="@+id/textView10ff7"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/dm_sans"
+                            android:paddingStart="10dp"
+                            android:paddingTop="2dp"
+                            android:paddingEnd="10dp"
+                            android:paddingBottom="2dp"
+                            android:text="Reject"
+                            android:textColor="@color/white"
+                            android:textSize="8sp" />
+                    </androidx.cardview.widget.CardView>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <LinearLayout
+                android:id="@+id/paymentLayoutReceiver"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="24dp"
+                android:layout_marginBottom="4dp"
+                android:orientation="vertical"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/cardmsgoffer"
+                app:layout_constraintStart_toStartOf="@+id/cardmsgoffer"
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout22">
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/gotoPaymentBtnRec"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    app:cardBackgroundColor="@color/greenOfferChat"
+                    app:cardCornerRadius="13dp"
+                    app:cardElevation="4dp">
+
+                    <TextView
+                        android:id="@+id/textView1r088"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:fontFamily="@font/dm_sans_bold"
+                        android:paddingTop="3dp"
+                        android:paddingBottom="3dp"
+                        android:text="Go To Payments"
+                        android:textColor="@color/white"
+                        android:textSize="8sp" />
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cancelBtnRec"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="4dp"
+                    app:cardBackgroundColor="@color/redOfferChat"
+                    app:cardCornerRadius="13dp"
+                    app:cardElevation="4dp">
+
+                    <TextView
+                        android:id="@+id/textView1f08"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:fontFamily="@font/dm_sans_bold"
+                        android:paddingTop="3dp"
+                        android:paddingBottom="3dp"
+                        android:text="Cancel"
+                        android:textColor="@color/white"
+                        android:textSize="8sp" />
+                </androidx.cardview.widget.CardView>
+
+            </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

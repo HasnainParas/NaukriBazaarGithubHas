@@ -350,6 +350,7 @@ public class AddJobsActivity extends AppCompatActivity {
             bottomSheetDialog.show();
             Spinner spinner = bottomsheetView.findViewById(R.id.spinnerQualifications);
             Button btnSave = bottomsheetView.findViewById(R.id.btnSaveQualificationJob);
+
             ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, qualifications);
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             spinner.setAdapter(adapter);

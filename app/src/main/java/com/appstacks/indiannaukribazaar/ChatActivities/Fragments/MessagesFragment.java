@@ -79,7 +79,7 @@ public class MessagesFragment extends Fragment {
 //                }
 
                 if (snapshot.exists()) {
-                    Toast.makeText(getContext(), "YesExist", Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(getContext(), "YesExist", Toast.LENGTH_SHORT).show();
                     for (DataSnapshot s : snapshot.getChildren()) {
                         ChatContactModel chatContactModel = s.getValue(ChatContactModel.class);
                         assert chatContactModel != null;
@@ -112,33 +112,6 @@ public class MessagesFragment extends Fragment {
                 Toast.makeText(getContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
-
-
-//        chatContactRef.child(chatConatact).addValueEventListener(new ValueEventListener() {
-//            @SuppressLint("SetTextI18n")
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                if (snapshot.exists()) {
-//                    ChatContactModel chatContactModel = snapshot.getValue(ChatContactModel.class);
-//                    modelArrayList.add(chatContactModel);
-//
-//
-////                    holder.binding.proposaName.setText(userDataModel.getFullName());
-////                    holder.binding.statusUserEmailTxt.setText(userDataModel.getEmailAddress());
-////                    proposalSenderUID = userDataModel.getUuID();
-//
-//                } else {
-////                    holder.binding.proposaName.setText("Not exist");
-//                    Toast.makeText(getContext(), "", Toast.LENGTH_SHORT).show();
-//                }
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError error) {
-//                Toast.makeText(getContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
-//            }
-//        });
-
 
         return binding.getRoot();
     }

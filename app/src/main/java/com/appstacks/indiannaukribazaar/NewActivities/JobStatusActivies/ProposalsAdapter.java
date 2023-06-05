@@ -4,7 +4,6 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,7 +17,6 @@ import com.appstacks.indiannaukribazaar.JobsPackages.InstantJobs.JobAppliedModel
 import com.appstacks.indiannaukribazaar.NewActivities.Models.UserDataModel;
 import com.appstacks.indiannaukribazaar.ProfileModels.AboutMeDescription;
 import com.appstacks.indiannaukribazaar.ProfileModels.AddWorkExperience;
-import com.appstacks.indiannaukribazaar.ProfileModels.WholeProfileModel;
 import com.appstacks.indiannaukribazaar.R;
 import com.appstacks.indiannaukribazaar.databinding.PropasalLayoutBinding;
 import com.appstacks.indiannaukribazaar.profile.ViewProfileActivity;
@@ -39,9 +37,10 @@ public class ProposalsAdapter extends RecyclerView.Adapter<ProposalsAdapter.view
     private String userPic;
     UserDataModel userDataModel;
     private String proposalSenderUID;
-  private   AboutMeDescription aboutme=null;
-  private String userImage;
-  private AddWorkExperience workExperience=null;
+
+    private AboutMeDescription aboutme = null;
+    private String userImage;
+    private AddWorkExperience workExperience = null;
     private DatabaseReference allUserRef, appliedUserProfileRef;
 
     public ProposalsAdapter(ArrayList<JobAppliedModel> modelArrayList, Context context) {
@@ -101,7 +100,7 @@ public class ProposalsAdapter extends RecyclerView.Adapter<ProposalsAdapter.view
                                 .load(userPic)
                                 .placeholder(R.drawable.placeholder)
                                 .into(holder.binding.proposalPic);
-                    }catch (IllegalArgumentException e){
+                    } catch (IllegalArgumentException e) {
 
                     }
 //                    holder.binding.statususerbudgetTview.setText(budget);
@@ -117,36 +116,35 @@ public class ProposalsAdapter extends RecyclerView.Adapter<ProposalsAdapter.view
             }
         });
 
-
-
-
-
+        //heklo
 
         holder.binding.statusUserChatBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(context, model.getAppliedUserAuthID()+" ", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(context, model.getAppliedUserAuthID() + " ", Toast.LENGTH_SHORT).show();
                 Intent in = new Intent(context, MessagesActivity.class);
-               // in.putExtra("UserPic", getProfilePic(model.getAppliedUserAuthID()));
+                // in.putExtra("UserPic", getProfilePic(model.getAppliedUserAuthID()));
+
+                Toast.makeText(context, model.getJobID(), Toast.LENGTH_SHORT).show();
 
                 in.putExtra("UserName", holder.binding.proposaName.getText().toString());
                 in.putExtra("proposalSendedUID", model.getAppliedUserAuthID());
+                in.putExtra("jobIDProposal", model.getJobID());
                 context.startActivity(in);
-                ((Activity)context).finish();
+                ((Activity) context).finish();
 
             }
         });
 
         holder.binding.statusUserDetailsBtn.setOnClickListener(view -> {
 
-            Intent intent= new Intent(context, ViewProfileActivity.class);
-            intent.putExtra("userId",model.getAppliedUserAuthID());
+            Intent intent = new Intent(context, ViewProfileActivity.class);
+            intent.putExtra("userId", model.getAppliedUserAuthID());
             context.startActivity(intent);
 
         });
 
     }
-
 
 
     @Override
@@ -164,8 +162,6 @@ public class ProposalsAdapter extends RecyclerView.Adapter<ProposalsAdapter.view
 
         }
     }
-
-
 
 
 }

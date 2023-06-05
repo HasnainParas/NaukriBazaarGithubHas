@@ -62,16 +62,83 @@
 
     </LinearLayout>
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/jobproposalLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/msg_chatDP">
+
+        <View
+            android:id="@+id/view17"
+            android:layout_width="wrap_content"
+            android:layout_height="1dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:background="@color/grey4txtbg"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/proposaljobImg"
+            android:layout_width="55dp"
+            android:layout_height="55dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:src="@drawable/placeholder"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/view17" />
+
+        <TextView
+            android:id="@+id/proposalJobTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:fontFamily="@font/dm_sans_bold"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toTopOf="@+id/proposalJobCompany"
+            app:layout_constraintStart_toEndOf="@+id/proposaljobImg"
+            app:layout_constraintTop_toTopOf="@+id/proposaljobImg" />
+
+        <TextView
+            android:id="@+id/proposalJobCompany"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="@+id/proposalJobTitle"
+            app:layout_constraintTop_toBottomOf="@+id/proposalJobTitle" />
+
+        <TextView
+            android:id="@+id/proposalJobBudget"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:fontFamily="@font/dm_sans_bold"
+            android:textColor="@color/proposaljobcolor"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/proposalJobCompany"
+            app:layout_constraintTop_toBottomOf="@+id/proposalJobCompany" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewChat"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="4dp"
         android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toTopOf="@+id/editViewCard"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/msg_chatDP" />
+        app:layout_constraintTop_toBottomOf="@+id/jobproposalLayout">
+
+    </androidx.recyclerview.widget.RecyclerView>
 
     <androidx.cardview.widget.CardView
         android:id="@+id/editViewCard"

@@ -318,7 +318,9 @@ public class InstantJobCvActivity extends AppCompatActivity {
         resume = new Resume(downloadUrl, pdfName, PdfsizeInString, pdfDate);
         JobAppliedModel appliedModel = new JobAppliedModel(
                 binding.editTextInstant.getText().toString(),
-                currentUserAuth, getProfilePic(currentUserAuth));
+                currentUserAuth,jobid,
+                getProfilePic(currentUserAuth));
+
         appliedInstantJobsRef
                 .child(jobid)
                 .child(currentUserAuth)

@@ -88,10 +88,10 @@ public class ActiveUserJobsAdapter extends RecyclerView.Adapter<ActiveUserJobsAd
 //            if (size == 0) {
 //                Toast.makeText(context, "No one Applied Yet!", Toast.LENGTH_SHORT).show();
 //            } else {
-                Intent intent = new Intent(context, ProposalsActivity.class);
-                intent.putExtra("statusjobID", model.getInJobID());
-                context.startActivity(intent);
-                Toast.makeText(context, model.getInJobID(), Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(context, ProposalsActivity.class);
+            intent.putExtra("statusjobID", model.getInJobID());
+            context.startActivity(intent);
+//            Toast.makeText(context, model.getInJobID(), Toast.LENGTH_SHORT).show();
 //            }
         });
 

@@ -36,6 +36,7 @@ public class ProposalsActivity extends AppCompatActivity {
         jobID = getIntent().getStringExtra("statusjobID");
         appliedRef = FirebaseDatabase.getInstance().getReference("UsersAppliedInstantJobs");
 
+
         if (jobID != null) {
 //            Toast.makeText(this, jobID, Toast.LENGTH_SHORT).show();
 //            binding.textView96.setText(jobID);

@@ -55,13 +55,17 @@ public class MessagesActivity extends AppCompatActivity {
     //    private String proposalUIDFromAllUser;
     private DatabaseReference chatRef, chatContactsRef, profileRef;
     private DatabaseReference chatPresence;
+    private DatabaseReference jobRef, jobRefInReceiverRoom;
     private FirebaseDatabase database;
-    MessageAdapter adapter;
+    private MessageAdapter adapter;
     ArrayList<MessageModel> messagess;
-    String sendUID;
+    private String sendUID;
+    private String jobTitle,jobCompany;
 
-    String senderRoom;
-    String receiverRoom;
+    private String senderRoom;
+    private String receiverRoom;
+    private String jobIDProposal;
+    private String jobIDReceiverRoom;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,29 +73,35 @@ public class MessagesActivity extends AppCompatActivity {
         binding = ActivityMessagesBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+
+        //StringIntent
         username = getIntent().getStringExtra("UserName");
-//        userpic = getIntent().getStringExtra("UserPic");
+        jobIDProposal = getIntent().getStringExtra("jobIDProposal");
         proposalSenderUID = getIntent().getStringExtra("proposalSendedUID");
-//        proposalUIDFromAllUser = getIntent().getStringExtra("proposalUIdFromAllUser");
+
+        //FirebaseReference
         profileRef = FirebaseDatabase.getInstance().getReference("UsersProfile");
         chatPresence = FirebaseDatabase.getInstance().getReference("chatPresence");
+        jobRef = FirebaseDatabase.getInstance().getReference("InstantJobs");
 
         sendUID = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
 
-//        if (proposalSenderUID == null) {
-//            proposalSenderUID = proposalUIDFromAllUser;
-//        }
-
         chatRef = FirebaseDatabase.getInstance().getReference("chats");
+        jobRefInReceiverRoom = FirebaseDatabase.getInstance().getReference("chats");
         chatContactsRef = FirebaseDatabase.getInstance().getReference("UserChatContacts");
-//        chatContactsRef = FirebaseDatabase.getInstance().getReference();
+
 
         database = FirebaseDatabase.getInstance();
 
-//        Glide.with(this)
-//                .load(userpic)
-//                .placeholder(R.drawable.profileplace)
-//                .into(binding.msgChatDP);
+        senderRoom = sendUID + proposalSenderUID;
+        receiverRoom = proposalSenderUID + sendUID;
+
+        if (jobIDProposal != null) {
+            proposalJobNote(jobIDProposal);
+        }
+
+
+        binding.msgBackBTn.setOnClickListener(v -> onBackPressed());
 
         chatPresence.child(proposalSenderUID).addValueEventListener(new ValueEventListener() {
             @Override
@@ -111,11 +121,31 @@ public class MessagesActivity extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
+                Toast.makeText(MessagesActivity.this, error.getMessage() + "", Toast.LENGTH_SHORT).show();
             }
         });
 
 
+//        Toast.makeText(this, proposalSenderUID, Toast.LENGTH_SHORT).show();
+
+        binding.offerBtn.setOnClickListener(v -> {
+            Intent offetIntent = new Intent(MessagesActivity.this,OfferActivity.class);
+            offetIntent.putExtra("recevierIDForOffer",proposalSenderUID);
+            offetIntent.putExtra("jobIDForOffer",jobIDProposal);
+            offetIntent.putExtra("jobTitleForOffer",jobTitle);
+            offetIntent.putExtra("jobCompanyForOffer",jobCompany);
+
+            startActivity(offetIntent);
+        });
+
+        userPicAndNameRetrieve();
+        messagesRetrieve();
+        sendMsgAndSendBtnFunction();
+        editBoxNote();
+
+    }
+
+    private void userPicAndNameRetrieve() {
         profileRef.child(proposalSenderUID).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -141,51 +171,16 @@ public class MessagesActivity extends AppCompatActivity {
 
 
         binding.msgChatUsername.setText(username);
-        Toast.makeText(this, proposalSenderUID, Toast.LENGTH_SHORT).show();
+    }
 
-        senderRoom = sendUID + proposalSenderUID;
-        receiverRoom = proposalSenderUID + sendUID;
-
-//        ChatContactModel sendContactModel = new ChatContactModel(proposalSenderUID);
-//        ChatContactModel receiverContactModel = new ChatContactModel(sendUID);
-//
-
-
+    private void messagesRetrieve() {
         messagess = new ArrayList<>();
-        adapter = new MessageAdapter(this, messagess);
+        adapter = new MessageAdapter(this, messagess,senderRoom,receiverRoom);
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         binding.recyclerViewChat.setAdapter(adapter);
         binding.recyclerViewChat.setHasFixedSize(true);
         binding.recyclerViewChat.setLayoutManager(linearLayoutManager);
-
-//        chatContactsRef.child(sendUID).child(proposalSenderUID).addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                if (snapshot.exists()) {
-//                    Toast.makeText(MessagesActivity.this, "Exists", Toast.LENGTH_SHORT).show();
-//                    binding.sendBtnCard.setVisibility(View.VISIBLE);
-//                    binding.sendBtnCard2.setVisibility(View.GONE);
-//                } else {
-//                    binding.sendBtnCard2.setVisibility(View.VISIBLE);
-//                    binding.sendBtnCard.setVisibility(View.GONE);
-//
-//                }
-////                    Toast.makeText(MessagesActivity.this, sendUID, Toast.LENGTH_SHORT).show();
-////                    for (DataSnapshot s : snapshot.getChildren()) {
-////                        ChatContactModel model = s.getValue(ChatContactModel.class);
-////                        assert model != null;
-////                        if (model.getUserUUID().equals(proposalSenderUID))
-////
-////                    }
-//
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError error) {
-//                Toast.makeText(MessagesActivity.this, "Ksss", Toast.LENGTH_SHORT).show();
-//            }
-//        });
 
 
         chatRef.child(senderRoom)
@@ -207,8 +202,11 @@ public class MessagesActivity extends AppCompatActivity {
 
                     }
                 });
+    }
 
+    private void sendMsgAndSendBtnFunction() {
 
+        //sendBtn1Function
         binding.sendBtnCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View viewSendbtn) {
@@ -239,7 +237,7 @@ public class MessagesActivity extends AppCompatActivity {
                     String randomKey = database.getReference().push().getKey();
 
 
-                    MessageModel message = new MessageModel(messageTxt, sendUID, formattedTime2);
+                    MessageModel message = new MessageModel(messageTxt, sendUID, formattedTime2,randomKey);
 
                     HashMap<String, Object> lastMsgObj = new HashMap<>();
                     lastMsgObj.put("lastMsg", message.getMessage());
@@ -266,7 +264,7 @@ public class MessagesActivity extends AppCompatActivity {
                                                         chatRef.child(receiverRoom).child("msgcount").push().setValue("count");
                                                         binding.msgChatEditBox.getText().clear();
                                                         hideKeyboarddd(viewSendbtn);
-                                                        Toast.makeText(MessagesActivity.this, "Juu", Toast.LENGTH_SHORT).show();
+//                                                        Toast.makeText(MessagesActivity.this, "Juu", Toast.LENGTH_SHORT).show();
                                                     }
                                                 });
 
@@ -278,13 +276,16 @@ public class MessagesActivity extends AppCompatActivity {
 
             }
         });
+
+
+        //sendBtn2Function
         binding.sendBtnCard2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 String messageTxt = binding.msgChatEditBox.getText().toString();
-                ChatContactModel sendContactModel = new ChatContactModel(proposalSenderUID);
-                ChatContactModel receiverContactModel = new ChatContactModel(sendUID);
+                ChatContactModel sendContactModel = new ChatContactModel(proposalSenderUID, jobIDProposal);
+                ChatContactModel receiverContactModel = new ChatContactModel(sendUID, jobIDProposal);
                 //for LastMsgTime
                 Date date = new Date();
 //            SimpleDateFormat dateFormat = new SimpleDateFormat("dd-M-yyyy hh:mm:ss");
@@ -295,9 +296,6 @@ public class MessagesActivity extends AppCompatActivity {
                 //chatime
 
                 Calendar calendar = Calendar.getInstance();
-                int hour = calendar.get(Calendar.HOUR);
-                int minute = calendar.get(Calendar.MINUTE);
-                int am_pm = calendar.get(Calendar.AM_PM);
 
 //                 Format the time in 12-hour format with AM/PM
                 SimpleDateFormat timeFormat = new SimpleDateFormat("dd/MM/yyyy hh:mm a", Locale.getDefault());
@@ -310,7 +308,7 @@ public class MessagesActivity extends AppCompatActivity {
                 } else {
                     String randomKey = database.getReference().push().getKey();
 
-                    MessageModel message = new MessageModel(messageTxt, sendUID, formattedTime1);
+                    MessageModel message = new MessageModel(messageTxt, sendUID, formattedTime1,randomKey);
 
                     HashMap<String, Object> lastMsgObj = new HashMap<>();
                     lastMsgObj.put("lastMsg", message.getMessage());
@@ -345,30 +343,21 @@ public class MessagesActivity extends AppCompatActivity {
                                                                                 .child(proposalSenderUID)
                                                                                 .child(sendUID)
                                                                                 .setValue(receiverContactModel)
-                                                                                .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                                                                    @Override
-                                                                                    public void onComplete(@NonNull Task<Void> task) {
-                                                                                        if (task.isComplete()) {
-                                                                                            binding.msgChatEditBox.getText().clear();
-                                                                                            Toast.makeText(MessagesActivity.this, "Juu2", Toast.LENGTH_SHORT).show();
-                                                                                        }
+                                                                                .addOnCompleteListener(task1 -> {
+                                                                                    if (task1.isComplete()) {
+//                                                                                        if (jobIDProposal != null) {
+//                                                                                            jobRefInReceiverRoom.child(receiverRoom).child("jobIDRef").setValue(jobIDProposal);
+//                                                                                        }
+                                                                                        binding.msgChatEditBox.getText().clear();
+                                                                                        Toast.makeText(MessagesActivity.this, "Juu2", Toast.LENGTH_SHORT).show();
                                                                                     }
-                                                                                }).addOnFailureListener(new OnFailureListener() {
-                                                                                    @Override
-                                                                                    public void onFailure(@NonNull Exception e) {
-                                                                                        Toast.makeText(MessagesActivity.this, e.getLocalizedMessage() + "", Toast.LENGTH_SHORT).show();
-                                                                                    }
-                                                                                });
+                                                                                })
+                                                                                .addOnFailureListener(e ->
+                                                                                        Toast.makeText(MessagesActivity.this, e.getLocalizedMessage() + "", Toast.LENGTH_SHORT).show());
                                                                     }
-                                                                }).addOnFailureListener(new OnFailureListener() {
-                                                                    @Override
-                                                                    public void onFailure(@NonNull Exception e) {
-                                                                        Toast.makeText(MessagesActivity.this, e.getLocalizedMessage() + "", Toast.LENGTH_SHORT).show();
-
-                                                                    }
-                                                                });
-
-
+                                                                })
+                                                                .addOnFailureListener(e ->
+                                                                        Toast.makeText(MessagesActivity.this, e.getLocalizedMessage() + "", Toast.LENGTH_SHORT).show());
                                                     }
                                                 });
 
@@ -382,6 +371,9 @@ public class MessagesActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    private void editBoxNote() {
         final Handler handler = new Handler();
         binding.msgChatEditBox.addTextChangedListener(new TextWatcher() {
             @Override
@@ -392,10 +384,10 @@ public class MessagesActivity extends AppCompatActivity {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
 //                binding.offerBtn.setVisibility(View.GONE);
-                if (binding.msgChatEditBox.getText().toString().isEmpty()){
+                if (binding.msgChatEditBox.getText().toString().isEmpty()) {
                     binding.offerBtn.setVisibility(View.VISIBLE);
                     binding.attachBtn.setVisibility(View.VISIBLE);
-                }else {
+                } else {
                     binding.offerBtn.setVisibility(View.GONE);
                     binding.attachBtn.setVisibility(View.GONE);
                 }
@@ -415,12 +407,43 @@ public class MessagesActivity extends AppCompatActivity {
                 }
             };
         });
+    }
+
+
+    private void proposalJobNote(String jobIDD) {
+
+        jobRef.child(jobIDD).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()) {
+                    binding.jobproposalLayout.setVisibility(View.VISIBLE);
+                    jobTitle = snapshot.child("inJobTitle").getValue(String.class);
+                    jobCompany = snapshot.child("inJobCompany").getValue(String.class);
+                    String jobBudget = snapshot.child("inJobBudget").getValue(String.class);
+                    String jobImg = snapshot.child("inJobCompanyImgURL").getValue(String.class);
+
+                    binding.proposalJobTitle.setText(jobTitle);
+                    binding.proposalJobCompany.setText(jobCompany);
+                    binding.proposalJobBudget.setText(jobBudget);
+
+                    Glide.with(MessagesActivity.this)
+                            .load(jobImg).placeholder(R.drawable.placeholder).into(binding.proposaljobImg);
+                } else {
+                    binding.jobproposalLayout.setVisibility(View.GONE);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(MessagesActivity.this, error.getMessage() + "", Toast.LENGTH_SHORT).show();
+            }
+        });
 
 
     }
 
     private void hideKeyboarddd(View view) {
-        InputMethodManager inputMethodManager =(InputMethodManager)getSystemService(Activity.INPUT_METHOD_SERVICE);
+        InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
         inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
 
@@ -454,7 +477,7 @@ public class MessagesActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()) {
-                    Toast.makeText(MessagesActivity.this, "Exists", Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(MessagesActivity.this, "Exists", Toast.LENGTH_SHORT).show();
                     binding.sendBtnCard.setVisibility(View.VISIBLE);
                     binding.sendBtnCard2.setVisibility(View.GONE);
                 } else {
@@ -551,4 +574,11 @@ public class MessagesActivity extends AppCompatActivity {
 //        startActivity(new Intent(MessagesActivity.this, FindJobsActivity.class));
 //        finishAffinity();
 //    }
+
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
+    }
 }

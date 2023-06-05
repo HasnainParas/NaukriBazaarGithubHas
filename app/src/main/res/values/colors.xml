@@ -23,6 +23,10 @@
     <color name="grey4txtbg">#D2D1D8</color>
     <color name="instantservicebtnColor">#0091EA</color>
 
+    <color name="proposaljobcolor">#02A88A</color>
+
+
+
 
     <color name="overlay_dark_10">#1A000000</color>
     <color name="overlay_dark_20">#33000000</color>
@@ -57,6 +61,10 @@
     <color name="green">#6EDB47</color>
     <color name="greytextcolor">#697A83</color>
     <color name="companytitlecolor">#AAA6B9</color>
+
+    <color name="offerBidcolor">#5BC0EB</color>
+    <color name="redOfferChat">#FD0808</color>
+    <color name="greenOfferChat">#05B016</color>
 
 
 </resources>

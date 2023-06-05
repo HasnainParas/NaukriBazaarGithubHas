@@ -33,6 +33,10 @@
         tools:ignore="HardcodedDebugMode"
         tools:targetApi="m">
         <activity
+            android:name=".ChatActivities.OfferActivity"
+            android:exported="false"
+            android:theme="@style/noactiondisplay" />
+        <activity
             android:name=".NewActivities.JobStatusActivies.ProposalsActivity"
             android:exported="false"
             android:theme="@style/noactiondisplay" />
