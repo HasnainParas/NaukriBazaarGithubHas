@@ -27,6 +27,7 @@ import com.appstacks.indiannaukribazaar.profile.appreciation.Appreciation;
 
 import com.appstacks.indiannaukribazaar.profile.resume.Resume;
 
+import com.appstacks.indiannaukribazaar.utils.ShareUtil;
 import com.bumptech.glide.Glide;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -92,6 +93,10 @@ fetchFollowing();
         binding.btnSettingProfile.setOnClickListener(view -> {
             startActivity(new Intent(UserProfileActivity.this, SettingActivity.class));
         });
+
+        binding.btnShareeditprofile.setOnClickListener(view -> {
+            ShareUtil.shareApp(this);
+        });
     }
 
 
@@ -117,8 +122,8 @@ fetchFollowing();
         userRef.child(userId).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if (snapshot.child("Hourly Charges").exists()) {
-                    String data = snapshot.child("Hourly Charges").getValue(String.class);
+                if (snapshot.child("HourlyCharges").exists()) {
+                    String data = snapshot.child("HourlyCharges").getValue(String.class);
                     binding.txtHourlyChargesInfo.setText(data + "$ Per Hour");
                     binding.txtHourlyRate.setText("$ "+data + ".00");
                 } else {
