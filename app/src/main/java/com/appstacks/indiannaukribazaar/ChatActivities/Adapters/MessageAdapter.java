@@ -94,19 +94,29 @@ public class MessageAdapter extends RecyclerView.Adapter {
                 viewHolder.binding.offerDescriptionTxt.setText(message.getOfferDescription());
                 viewHolder.binding.offerLayoutsent.setVisibility(View.VISIBLE);
                 viewHolder.binding.constraintLayout14.setVisibility(View.GONE);
-                if (message.getSenderId().equals(currentUID)) {
-                    viewHolder.binding.acceptOfferbtn.setVisibility(View.VISIBLE);
-                    viewHolder.binding.offerDetails.setVisibility(View.VISIBLE);
-                    viewHolder.binding.offerDetails.setText("Offer Sent");
-                    viewHolder.binding.acceptndRejectContraintlayout.setVisibility(View.GONE);
-                    viewHolder.binding.paymentLayout.setVisibility(View.GONE);
-                }
+
+////                if (message.getSenderId().equals(currentUID)) {
+//                    viewHolder.binding.acceptOfferbtn.setVisibility(View.VISIBLE);
+//                    viewHolder.binding.offerDetails.setVisibility(View.VISIBLE);
+//                    viewHolder.binding.offerDetails.setText("Offer Sent");
+//                    viewHolder.binding.acceptndRejectContraintlayout.setVisibility(View.GONE);
+//                    viewHolder.binding.paymentLayout.setVisibility(View.GONE);
+////                }
             } else {
                 viewHolder.binding.constraintLayout14.setVisibility(View.VISIBLE);
                 viewHolder.binding.senderText.setText(message.getMessage());
             }
 
-            viewHolder.binding.acceptOfferbtn.setOnClickListener(v -> offerAccept(message, senderRoom, receiverRoom));
+//
+//            if (message.getOfferStatus().equals("none")){
+//                viewHolder.binding.offerDescriptionTxt.setText("offer sent");
+//            }else if (message.getOfferStatus().equals("paymentPending")){
+//                viewHolder.binding.offerDescriptionTxt.setText("Your offer was accepted");
+//            } else if (message.getOfferStatus().equals("")) {
+//
+//            }
+
+//            viewHolder.binding.acceptOfferbtn.setOnClickListener(v -> offerAccept(message, senderRoom, receiverRoom));
 //            viewHolder.binding.offerRejectBtn.setOnClickListener(v -> offerAccept(message, senderRoom, receiverRoom));
 
             retriveOfferStatus(message, viewHolder);
@@ -233,19 +243,19 @@ public class MessageAdapter extends RecyclerView.Adapter {
                             assert offerStatusSent != null;
                             if ("paymentPending".equals(offerStatusSent)) {
                                 viewHolder.binding.acceptndRejectBtnLayout.setVisibility(View.VISIBLE);
-                                viewHolder.binding.acceptndRejectContraintlayout.setVisibility(View.GONE);
+//                                viewHolder.binding.acceptndRejectContraintlayout.setVisibility(View.GONE);
                                 viewHolder.binding.offerDetails.setVisibility(View.VISIBLE);
                                 viewHolder.binding.offerDetails.setText("Your offer was accepted, Payment Pending");
-                                viewHolder.binding.paymentLayout.setVisibility(View.GONE);
+//                                viewHolder.binding.paymentLayout.setVisibility(View.GONE);
                             } else if (offerStatusSent.equals("offerRejected")) {
                                 viewHolder.binding.dealStatusLayout.setVisibility(View.VISIBLE);
                                 viewHolder.binding.offerDescriptionTxt.setVisibility(View.GONE);
                                 viewHolder.binding.acceptndRejectBtnLayout.setVisibility(View.GONE);
-                                viewHolder.binding.paymentLayout.setVisibility(View.GONE);
+//                                viewHolder.binding.paymentLayout.setVisibility(View.GONE);
 
                             } else {
                                 viewHolder.binding.acceptndRejectBtnLayout.setVisibility(View.VISIBLE);
-                                viewHolder.binding.paymentLayout.setVisibility(View.GONE);
+//                                viewHolder.binding.paymentLayout.setVisibility(View.GONE);
                             }
                         }
                     }
