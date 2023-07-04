@@ -37,6 +37,7 @@ import com.appstacks.indiannaukribazaar.profile.hourlycharges.AddHourlyChargesAc
 import com.appstacks.indiannaukribazaar.profile.resume.AddResmueActivity;
 import com.appstacks.indiannaukribazaar.profile.resume.Resume;
 import com.appstacks.indiannaukribazaar.profile.skills.SkillsActivity;
+import com.appstacks.indiannaukribazaar.utils.ShareUtil;
 import com.bumptech.glide.Glide;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.firebase.auth.FirebaseAuth;
@@ -54,7 +55,7 @@ import java.util.ArrayList;
 public class ProfileEditActivity extends AppCompatActivity {
     private ActivityProfileEditBinding binding;
     private ProfileUtils profileUtils;
-    private DatabaseReference userRef,allUser;
+    private DatabaseReference userRef, allUser;
     private String userId;
     private ArrayAdapter<String> adapter;
     private ArrayList<String> list;
@@ -64,6 +65,7 @@ public class ProfileEditActivity extends AppCompatActivity {
     private Resume resume;
     private Resume resumeData;
     private final int PICK_IMAGE_REQUEST = 71;
+
     private Uri filePath;
     private StorageReference imageRef;
     private String downloadUrl;
@@ -92,8 +94,6 @@ public class ProfileEditActivity extends AppCompatActivity {
         fetchNameAddress();
         fetchFollowers();
         fetchFollowing();
-
-
 
 
         //
@@ -181,6 +181,10 @@ public class ProfileEditActivity extends AppCompatActivity {
             else
                 openDialog();
         });
+
+        binding.btnShareeditprofile.setOnClickListener(view -> {
+            ShareUtil.shareApp(this);
+        });
     }
 
     private void openDialog() {
@@ -195,8 +199,8 @@ public class ProfileEditActivity extends AppCompatActivity {
 
 //        AppCompatImageView cancel = findViewById(R.id.addProfilePicCancelBtn);
         ImageView userImage = bottomsheetView.findViewById(R.id.imageOfUser);
-        Button btnCancel =bottomsheetView. findViewById(R.id.btnCancle);
-        Button btnYes =bottomsheetView. findViewById(R.id.btnYes);
+        Button btnCancel = bottomsheetView.findViewById(R.id.btnCancle);
+        Button btnYes = bottomsheetView.findViewById(R.id.btnYes);
 
 
         Glide.with(this).load(profileUtils.fetchUserImage()).placeholder(R.drawable.userimg).into(userImage);
@@ -220,6 +224,7 @@ public class ProfileEditActivity extends AppCompatActivity {
         startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE_REQUEST);
 
     }
+
     private void fetchFollowing() {
         userRef.child(userId).child("Following").addValueEventListener(new ValueEventListener() {
             @Override
@@ -227,7 +232,7 @@ public class ProfileEditActivity extends AppCompatActivity {
                 if (snapshot.exists()) {
                     int follower = (int) (snapshot.getChildrenCount());
                     binding.txtFollowingProfile.setText(follower + " Following");
-                }else{
+                } else {
                     binding.txtFollowingProfile.setText(0 + " Following");
                 }
             }
@@ -238,6 +243,7 @@ public class ProfileEditActivity extends AppCompatActivity {
             }
         });
     }
+
     private void fetchFollowers() {
         userRef.child(userId).child("Followers").addValueEventListener(new ValueEventListener() {
             @Override
@@ -245,7 +251,7 @@ public class ProfileEditActivity extends AppCompatActivity {
                 if (snapshot.exists()) {
                     int follower = (int) (snapshot.getChildrenCount());
                     binding.txtFollowerProfile.setText(follower + " Follower");
-                }else{
+                } else {
                     binding.txtFollowerProfile.setText(0 + " Follower");
                 }
             }
@@ -256,6 +262,7 @@ public class ProfileEditActivity extends AppCompatActivity {
             }
         });
     }
+
     private void fetchNameAddress() {
         allUser.child(userId).addValueEventListener(new ValueEventListener() {
             @Override
@@ -263,7 +270,7 @@ public class ProfileEditActivity extends AppCompatActivity {
                 if (snapshot.exists()) {
                     PersonalInformationModel model = snapshot.getValue(PersonalInformationModel.class);
 
-                    binding.txtNameeditProfile.setText(model.getFirstName()+ " " +model.getLastName());
+                    binding.txtNameeditProfile.setText(model.getFirstName() + " " + model.getLastName());
                     binding.txtLocationProfile.setText(model.getCity());
                 }
             }
@@ -274,6 +281,7 @@ public class ProfileEditActivity extends AppCompatActivity {
             }
         });
     }
+
     private void fetchHourlyCharges() {
         userRef.child(userId).addValueEventListener(new ValueEventListener() {
             @Override
@@ -497,10 +505,12 @@ public class ProfileEditActivity extends AppCompatActivity {
                     assert education != null;
                     binding.txtEducation.setText(education.getLevelOfEducation());
                     binding.txtEducationInstitue.setText(education.getInstituteName());
+                    try {
+                        binding.txtEducationDate.setText(education.getStartDate() + " - " + education.getEndDate());
+                        binding.txtEducationTimePeriod.setText(Integer.parseInt(education.getEndDate()) - Integer.parseInt(education.getStartDate()) + " years");
+                    } catch (Exception e) {
 
-                    binding.txtEducationDate.setText(education.getStartDate() + " - " + education.getEndDate());
-                    binding.txtEducationTimePeriod.setText(Integer.parseInt(education.getEndDate()) - Integer.parseInt(education.getStartDate()) + " years");
-
+                    }
 
                 } else {
                     binding.btnEducationAdd.setVisibility(View.VISIBLE);
@@ -573,7 +583,6 @@ public class ProfileEditActivity extends AppCompatActivity {
             Toast.makeText(this, "" + e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
         });
 
-        
 
     }
 
